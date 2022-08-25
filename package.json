@@ -1,0 +1,29 @@
+{
+  "name": "asd-seller",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ui && eslint api",
+    "lint:fix": "eslint ui --fix && eslint api --fix",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "ASD team",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "husky": "^8.0.1",
+    "install": "^0.13.0",
+    "npm": "^8.18.0"
+  },
+  "husky": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run lint",
+      "git add"
+    ]
+  }
+}
