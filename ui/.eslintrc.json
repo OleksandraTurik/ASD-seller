@@ -11,6 +11,8 @@
       {
         "extensions": [".js", ".jsx"]
       }
-    ]
+    ],
+    "linebreak-style": ["error", "windows"],
+    "import/prefer-default-export": "off"
   }
 }
