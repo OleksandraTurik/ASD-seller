@@ -10,7 +10,7 @@ const advertSchema = new Schema({
   images: [String],
   subcategory: String,
   address: { type: String, required: true },
-});
+}, { timestamps: true });
 
 const Advert = model('Advert', advertSchema);
 

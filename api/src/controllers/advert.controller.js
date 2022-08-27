@@ -1,8 +1,8 @@
 const { Advert } = require('../models');
 
-async function getAdvertList(req, res) {
+function getAdvertList(req, res) {
   try {
-    const list = await Advert.find();
+    const list = req.paginatedResults;
     res.status(200).json(list);
   } catch (error) {
     res.status(500).json(error.message);
