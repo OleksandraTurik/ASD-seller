@@ -9,12 +9,11 @@ const {
     getAdvertItemProperty,
   },
 } = require('../controllers');
-const { paginationMiddleware } = require('../middlewares');
-const { Advert } = require('../models');
+const { paginationMiddleware, advertFilterSortMiddleware } = require('../middlewares');
 
 const advertRouter = Router();
 
-advertRouter.get('/', paginationMiddleware(Advert), getAdvertList);
+advertRouter.get('/', advertFilterSortMiddleware, paginationMiddleware, getAdvertList);
 advertRouter.post('/', postAdvert);
 advertRouter.get('/:id', getAdvertItem);
 advertRouter.get('/:id/:prop', getAdvertItemProperty);
