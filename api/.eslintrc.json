@@ -1,15 +1,31 @@
 {
     "env": {
-        "browser": false,
-        "commonjs": true,
-        "es2021": true
+        "browser": true,
+        "node": true,
+        "es6": true
     },
-    "extends": "airbnb-base",
-    "overrides": [
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
+    "extends": ["eslint:recommended"],
     "rules": {
+        "semi": ["error", "always", { "omitLastInOneLineBlock": true }], // This rule enforces consistent use of semicolons.
+        "no-plusplus": "off", // This rule is disallow the unary operators ++ and --.
+        "no-unused-vars": "warn", // This rule is disallow unused variables.
+        "arrow-body-style": ["error", "as-needed"], // This rule can enforce or disallow the use of braces around arrow function body.
+        "no-alert": "off", // This rule is disallow the use of alert, confirm, and prompt.
+        "linebreak-style": "off", // This rule is enforce consistent linebreak style.
+        "prefer-destructuring": ["warn", {"object": true, "array": true}], // This rule is require destructuring from arrays and/or objects.
+        "comma-dangle": ["error", "always-multiline"], // This rule enforces consistent use of trailing commas in object and array literals.
+        // "always-multiline" requires trailing commas when the last element or property is in a different line than the closing ] or } and disallows trailing commas when the last element or property is on the same line as the closing ] or }.
+        "comma-spacing": ["error", { "before": false, "after": true }], // This rule enforces consistent spacing before and after commas.
+        "eol-last": ["error", "always"], // This rule is require or disallow newline at the end of files.
+        "no-multiple-empty-lines": ["error"], // This rule is disallow multiple empty lines.
+        "no-trailing-spaces": ["error"], // This rule is disallow trailing whitespace at the end of lines.
+        "object-curly-spacing": ["error", "always"], // This rule is enforce consistent spacing inside braces.
+        "object-shorthand": "warn", // This rule is require or disallow method and property shorthand syntax for object literals.
+        "prefer-const": ["error", {
+            "destructuring": "any",
+            "ignoreReadBeforeAssign": false
+        }], // Require const declarations for variables that are never reassigned after declared
+        "consistent-return": ["off"], // Require return statements to either always or never specify values
+        "max-len": ["off"] // Enforce a maximum line length
     }
 }

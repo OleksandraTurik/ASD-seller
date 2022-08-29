@@ -1,4 +1,6 @@
 const { Advert } = require('../models');
+const StatusError = require('../exceptions/StatusError')
+const errorHandler = require('../helpers/errorHandler')
 
 function getAdvertList(req, res) {
   try {
@@ -35,17 +37,17 @@ function postAdvert(req, res) {
       address,
     } = req.body;
 
-    if (!title || !price || !sellerId || !description || !address) return res.status(400).json('Wrong body structure');
+    if (!title || !price || !sellerId || !description || !address) throw new StatusError(400, 'Wrong body structure')
 
     const item = new Advert({
       title, price, sellerId, description, address,
     });
     item.save((error) => {
-      if (error) throw new Error(error);
+      if (error) throw new Error( error);
     });
     res.status(201).json(item);
   } catch (error) {
-    res.status(500).json(error.message);
+    errorHandler(res, error)
   }
 }
 

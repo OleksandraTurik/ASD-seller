@@ -1,25 +1,26 @@
-const ApiError = require('../exceptions/Api.error');
 const tokenService = require('../service/Token.service');
+const StatusError = require('../exceptions/StatusError');
+const errorHandler = require('../helpers/errorHandler');
 
 module.exports = function (req, res, next) {
   try {
-    console.log(req.headers.authorization)
+    console.log(req.headers.authorization);
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-      return next(ApiError.UnauthorizedError());
+      throw new StatusError(401, 'User is unauthorized');
     }
     const accessToken = authHeader.split(' ')[1];
     if (!accessToken) {
-      return next(ApiError.UnauthorizedError());
+      throw new StatusError(401, 'User is unauthorized');
     }
 
     const userData = tokenService.validateAccessToken(accessToken);
     if (!userData) {
-      return next(ApiError.UnauthorizedError());
+      throw new StatusError(401, 'User is unauthorized');
     }
     req.user = userData;
     next();
   } catch (e) {
-    return next(ApiError.UnauthorizedError());
+    errorHandler(res, e);
   }
 };

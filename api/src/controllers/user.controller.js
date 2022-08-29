@@ -1,21 +1,21 @@
 const { validationResult } = require('express-validator');
 const userService = require('../service/User.service');
-const ApiError = require('../exceptions/Api.error');
+const StatusError = require('../exceptions/StatusError');
+const errorHandler = require('../helpers/errorHandler');
 
 class UserController {
-  // eslint-disable-next-line consistent-return
   async registration(req, res, next) {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return next(ApiError.BadRequest('Не коректні данні при авторизації', errors.array()));
+        throw new StatusError (400, 'Invalid authorisation data')
       }
       const { email, password } = req.body;
       const userData = await userService.registration(email, password);
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
       return res.json(userData);
     } catch (e) {
-      next(e);
+      errorHandler(res, e)
     }
   }
 
@@ -26,7 +26,7 @@ class UserController {
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
       return res.json(userData);
     } catch (e) {
-      next(e);
+      errorHandler(res, e)
     }
   }
 
@@ -37,7 +37,7 @@ class UserController {
       res.clearCookie('refreshToken');
       return res.json(token);
     } catch (e) {
-      next(e);
+      errorHandler(res, e)
     }
   }
 
@@ -47,7 +47,7 @@ class UserController {
       await userService.activate(activationLink);
       return res.redirect(process.env.CLIENT_URL);
     } catch (e) {
-      next(e);
+      errorHandler(res, e)
     }
   }
 
@@ -58,7 +58,7 @@ class UserController {
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
       return res.json(userData);
     } catch (e) {
-      next(e);
+      errorHandler(res, e)
     }
   }
 
@@ -67,7 +67,7 @@ class UserController {
       const users = await userService.getAllUsers();
       return res.json(users);
     } catch (e) {
-      next(e);
+      errorHandler(res, e)
     }
   }
 
@@ -78,7 +78,7 @@ class UserController {
       const user = await userService.modifyUser(id, updates);
       return res.json(user);
     } catch (e) {
-      next(e);
+      errorHandler(res, e)
     }
   }
 
@@ -88,7 +88,7 @@ class UserController {
       const user = await userService.uploadAvatarUser(id, req.files.file);
       return res.json(user);
     } catch (e) {
-      next(e);
+      errorHandler(res, e)
     }
   }
 }
