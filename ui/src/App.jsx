@@ -5,7 +5,7 @@ import MainRoutes from './routes/MainRoutes';
 import './styles.css';
 
 const App = () => (
-  <div className="container">
+  <div>
     <BrowserRouter>
       <MainRoutes />
     </BrowserRouter>
