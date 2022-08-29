@@ -17,7 +17,7 @@ router.post('/logout', userController.logout);
 router.post('/avatar/:id', userController.uploadAvatar);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
-router.get('/', authMiddleware, userController.getUser);
+router.get('/', userController.getUser);
 router.patch('/:id', authMiddleware, userController.modifyUser);
 /// verify message
 
