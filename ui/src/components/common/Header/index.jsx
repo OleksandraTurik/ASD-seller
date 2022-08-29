@@ -8,14 +8,18 @@ import {
   Li,
   A,
   Container,
+  NavLink,
+  NavLinkHeader,
 } from './styled';
 
 const Header = () => (
   <Container>
     <Nav>
-      <Logo>
-        logo
-      </Logo>
+      <NavLinkHeader to="/">
+        <Logo>
+          ASD.seller
+        </Logo>
+      </NavLinkHeader>
       <Ul>
         <Li>
           <A href="*"><Like /></A>
@@ -24,7 +28,7 @@ const Header = () => (
           <Button>Додати оголошення</Button>
         </Li>
         <Li>
-          <A href="*">login</A>
+          <NavLink to="/login">Login</NavLink>
         </Li>
       </Ul>
     </Nav>

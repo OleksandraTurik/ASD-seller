@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LogoStyle } from './style';
 
-const Logo = () => (
+const Logo = ({ children }) => (
   <LogoStyle>
-    ASD.seller
+    {children}
   </LogoStyle>
 );
+
+Logo.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Logo;

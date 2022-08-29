@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const Container = styled.div`
+export const Container = styled.header`
   width: 100%;
   background: #003034;
   height: 68px;
@@ -32,6 +33,16 @@ export const Li = styled.li`
 
 export const A = styled.a`
   text-decoration: none;
-  color: #000;
   color: #fff;
+`;
+
+export const NavLink = styled(Link)`
+  text-decoration: none;
+  color: #fff;
+`;
+
+export const NavLinkHeader = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 `;
