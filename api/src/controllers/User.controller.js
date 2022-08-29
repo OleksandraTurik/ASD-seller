@@ -64,7 +64,29 @@ class UserController {
 
   async getUser(req, res, next) {
     try {
-      res.json(['123', '456']);
+      const users = await userService.getAllUsers();
+      return res.json(users);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async modifyUser(req, res, next) {
+    try {
+      const { id } = req.params;
+      const updates = req.body;
+      const user = await userService.modifyUser(id, updates);
+      return res.json(user);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async uploadAvatar(req, res, next) {
+    try {
+      const { id } = req.params;
+      const user = await userService.uploadAvatarUser(id, req.files.file);
+      return res.json(user);
     } catch (e) {
       next(e);
     }

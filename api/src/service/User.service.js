@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const config = require('config');
 const UserModel = require('../models/User.modal');
 const mailService = require('./Mail.service');
 const tokenService = require('./Token.service');
@@ -75,6 +76,27 @@ class UserService {
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
     return { ...tokens, userDto };
+  }
+
+  async modifyUser(id, updates) {
+    const user = await UserModel.updateOne({ _id: id }, updates);
+    if (!user) {
+      throw ApiError.BadRequest('NOT FOUND');
+    }
+    return user;
+  }
+
+  async getAllUsers() {
+    const users = await UserModel.find();
+    return users;
+  }
+
+  async uploadAvatarUser(id, file) {
+    const user = await UserModel.findById(id);
+    const avatarName = `${uuid.v4()}.jpg`;
+    file.mv('/static');
+    user.avatar = avatarName;
+    await user.save();
   }
 }
 
