@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 // Pages
-import AdvertPage from 'pages/AdvertPage';
+import AdvertPage from 'pages/Advert';
 
 const MainRoutes = () => (
   <Routes>

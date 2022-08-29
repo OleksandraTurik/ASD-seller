@@ -25,9 +25,7 @@ const User = () => (
         <h2>Руслан</h2>
         <RegistrationDate>
           на asd-seller з
-          <p>
-            червень 2012 р.
-          </p>
+          <p>червень 2012 р.</p>
         </RegistrationDate>
       </UserInfo>
     </Container>

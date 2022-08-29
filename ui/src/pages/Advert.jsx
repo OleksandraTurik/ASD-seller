@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Components
-import Slider from 'components/AdvertPage/Slider';
-import User from 'components/AdvertPage/User';
-import Location from 'components/AdvertPage/Location';
-import Description from 'components/AdvertPage/Description';
+import Slider from 'components/Advert/Slider';
+import User from 'components/Advert/User';
+import Location from 'components/Advert/Location';
+import Description from 'components/Advert/Description';
 
 // Styles
 const Wrapper = styled.div`
