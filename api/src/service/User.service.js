@@ -4,13 +4,13 @@ const UserModel = require('../models/User.model');
 const mailService = require('./Mail.service');
 const tokenService = require('./Token.service');
 const UserDto = require('../dtos/User.dtos');
-const StatusError = require('../exceptions/StatusError')
+const StatusError = require('../exceptions/StatusError');
 
 class UserService {
   async registration(email, password) {
     const candidate = await UserModel.findOne({ email });
     if (candidate) {
-      throw new StatusError(400, `User with email:${email} already exists`)
+      throw new StatusError(400, `User with email:${email} already exists`);
     }
 
     const hashPassword = await bcrypt.hash(password, 3);
@@ -31,7 +31,7 @@ class UserService {
   async activate(activationLink) {
     const user = await UserModel.findOne({ activationLink });
     if (!user) {
-      throw new StatusError(400, 'Invalid activation link')
+      throw new StatusError(400, 'Invalid activation link');
     }
     user.isActivated = true;
     await user.save();
@@ -40,13 +40,13 @@ class UserService {
   async login(email, password) {
     const user = await UserModel.findOne({ email });
     if (!user) {
-      throw new StatusError(404, 'User with this email not found')
+      throw new StatusError(404, 'User with this email not found');
     }
 
     const isPassEquals = await bcrypt.compare(password, user.password);
 
     if (!isPassEquals) {
-      throw new StatusError(400, 'Invalid password')
+      throw new StatusError(400, 'Invalid password');
     }
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
@@ -62,12 +62,12 @@ class UserService {
 
   async refresh(refreshToken) {
     if (!refreshToken) {
-      throw ApiError.UnauthorizedError();
+      throw new StatusError(401, 'User is unauthorized');
     }
     const userData = tokenService.validateRefreshToken(refreshToken);
     const tokenFromDb = await tokenService.findToken(refreshToken);
     if (!userData || !tokenFromDb) {
-      throw new StatusError(401, 'User is unauthorized')
+      throw new StatusError(401, 'User is unauthorized');
     }
     const user = await UserModel.findById(userData.id);
     const userDto = new UserDto(user);
@@ -80,7 +80,7 @@ class UserService {
   async modifyUser(id, updates) {
     const user = await UserModel.updateOne({ _id: id }, updates);
     if (!user) {
-      throw new StatusError(404, 'User not found')
+      throw new StatusError(404, 'User not found');
     }
     return user;
   }
