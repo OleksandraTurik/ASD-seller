@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const router = require('./routes/index');
 const errorMiddleware = require('./middlewares/Error-middleware');
 
+const { advertRouter } = require('./routes');
+
 const { PORT } = process.env || 4000;
 const app = express();
 
@@ -17,6 +19,8 @@ app.use(cors());
 app.use('/api', router);
 app.use(express.static('static'));
 app.use(errorMiddleware);
+
+app.use('/adverts', advertRouter);
 
 const start = async () => {
   try {
