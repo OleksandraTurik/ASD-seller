@@ -13,4 +13,19 @@ const UserSchema = new Schema({
   adverts: [{ type: mongoose.Types.ObjectId, ref: 'Advert' }],
 }, { timestamps: true });
 
+UserSchema.statics.findWithFilterAndSort = function (search, sort) {
+  const query = this.find({
+    fullName: {
+      $regex: search ? `\\b${search.replaceAll(' ', '|')}\\b` : '.*',
+      $options: 'gmi',
+    },
+  });
+  if (sort === 'ascName') return query.sort('fullName');
+  if (sort === 'dscName') return query.sort('-fullName');
+  if (sort === 'ascDate') return query.sort('createdAt');
+  if (sort === 'dscDate') return query.sort('-createdAt');
+
+  return query;
+};
+
 module.exports = model('User', UserSchema);
