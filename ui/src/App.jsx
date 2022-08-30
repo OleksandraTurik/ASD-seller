@@ -12,5 +12,5 @@ const App = () => (
     <MainRoutes />
   </BrowserRouter>
 );
-// comment
+
 export default App;
