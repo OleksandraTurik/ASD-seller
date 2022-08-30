@@ -17,3 +17,9 @@ export const ButtonStyle = styled.button`
     transition: all 200ms linear;
   }
 `;
+
+export const ArrowButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+`;

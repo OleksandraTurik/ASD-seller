@@ -4,6 +4,7 @@ import MainPage from 'pages/MainPage';
 import AdvertPage from 'pages/Advert';
 import LoginPage from '../pages/LoginPage';
 import RegistrationPage from '../pages/RegistrationPage';
+import SettingsPage from '../pages/SettingsPage';
 
 const MainRoutes = () => (
   <Routes>
@@ -14,6 +15,7 @@ const MainRoutes = () => (
     <Route path="/add" element={<h1>Add new advert form</h1>} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/register" element={<RegistrationPage />} />
+    <Route path="/settings" element={<SettingsPage />} />
     <Route path="*" element={<h1>404 Not Found</h1>} />
   </Routes>
 );
