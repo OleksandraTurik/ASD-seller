@@ -20,14 +20,12 @@ export const Nav = styled.nav`
 export const HeaderContainer = styled.div`
   display: flex;
   text-align: center;
-  /* margin-left: 500px; */
 `;
 
 export const Ul = styled.ul`
   display: flex;
   flex-direction: row;
   align-items:center;
-  /* margin-right: 500px; */
 `;
 
 export const Li = styled.li`
