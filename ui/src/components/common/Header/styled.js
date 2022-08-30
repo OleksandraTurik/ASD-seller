@@ -1,31 +1,36 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Container = styled.header`
+export const Container = styled.div`
   width: 100%;
   background: #003034;
-  height: 68px;
-  display: flex;
-  justify-content: center;
 `;
 
 export const Nav = styled.nav`
   display: flex;
   flex-direction: row;
-  padding: 0;
   width: 60%;
   justify-content: space-between;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+`;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  text-align: center;
+  /* margin-left: 500px; */
 `;
 
 export const Ul = styled.ul`
   display: flex;
   flex-direction: row;
   align-items:center;
-  width: 30%;
+  /* margin-right: 500px; */
 `;
 
 export const Li = styled.li`
-  margin-right: 3%;
   list-style-type: none;
   font-size: 20px;
   margin-left: 20px;

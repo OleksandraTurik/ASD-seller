@@ -10,16 +10,19 @@ import {
   Container,
   NavLink,
   NavLinkHeader,
+  HeaderContainer,
 } from './styled';
 
 const Header = () => (
   <Container>
     <Nav>
-      <NavLinkHeader to="/">
-        <Logo>
-          ASD.seller
-        </Logo>
-      </NavLinkHeader>
+      <HeaderContainer>
+        <NavLinkHeader to="/">
+          <Logo>
+            ASD.seller
+          </Logo>
+        </NavLinkHeader>
+      </HeaderContainer>
       <Ul>
         <Li>
           <A href="*"><Like /></A>
