@@ -5,7 +5,6 @@ const mailService = require('./Mail.service');
 const tokenService = require('./Token.service');
 const UserDto = require('../dtos/User.dtos');
 const StatusError = require('../exceptions/StatusError');
-const config  = require('config');
 
 class UserService {
   async registration(email, password) {

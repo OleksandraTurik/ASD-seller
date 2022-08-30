@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 
-const { apiRouter } = require('./routes');
+const { apiRouter, picRouter } = require('./routes');
 
 const { PORT } = process.env || 4000;
 const app = express();
@@ -19,6 +19,7 @@ app.use(cors());
 app.use(express.static('./src/'));
 
 app.use('/api', apiRouter);
+app.use('/pic', picRouter);
 
 const start = async () => {
   try {
