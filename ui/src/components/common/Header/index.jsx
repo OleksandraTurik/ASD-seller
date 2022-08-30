@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../Button';
 import Like from './Like';
 import Logo from './Logo';
 import {
@@ -9,6 +8,7 @@ import {
   A,
   Container,
   NavLink,
+  NavLinkAdverts,
   NavLinkHeader,
   HeaderContainer,
 } from './styled';
@@ -28,7 +28,7 @@ const Header = () => (
           <A href="*"><Like /></A>
         </Li>
         <Li>
-          <Button>Додати оголошення</Button>
+          <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
         </Li>
         <Li>
           <NavLink to="/login">Login</NavLink>
