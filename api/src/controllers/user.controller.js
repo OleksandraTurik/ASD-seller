@@ -2,6 +2,8 @@ const { validationResult } = require('express-validator');
 const userService = require('../service/User.service');
 const StatusError = require('../exceptions/StatusError');
 const errorHandler = require('../helpers/errorHandler');
+const UserModel = require('../models/User.model');
+const uuid = require('uuid');
 
 class UserController {
   async registration(req, res) {
@@ -83,10 +85,22 @@ class UserController {
   }
 
   async uploadAvatar(req, res) {
-    try {
-      const { id } = req.params;
-      const user = await userService.uploadAvatarUser(id, req.files.file);
-      return res.json(user);
+    try{
+      if (!req.files) {
+        return res.status(400).send("No files were uploaded.");
+      }
+      const { file } = req.files;
+      const fileName = `${uuid.v4()}.jpg`;
+      await file.mv('src/static/' + fileName, (err) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+
+        return res.send({ status: "success" });
+      });
+
+      const user = await UserModel.updateOne({ _id:req.params.id }, { avatar:fileName });
+      await user.save();
     } catch (e) {
       errorHandler(res, e);
     }
