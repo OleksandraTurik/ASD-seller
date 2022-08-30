@@ -15,7 +15,6 @@ const advertSchema = new Schema({
 advertSchema
   .statics
   .findWithFilterAndSort = function (search, maxPrice, minPrice, sellerId, sort) {
-    console.log(search);
     let query = this.find({
       title: {
         $regex: search ? `\\b${search.replaceAll(' ', '|')}\\b` : '.*',

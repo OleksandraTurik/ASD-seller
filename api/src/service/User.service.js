@@ -5,6 +5,7 @@ const mailService = require('./Mail.service');
 const tokenService = require('./Token.service');
 const UserDto = require('../dtos/User.dtos');
 const StatusError = require('../exceptions/StatusError');
+const config  = require('config');
 
 class UserService {
   async registration(email, password) {
@@ -90,13 +91,6 @@ class UserService {
     return users;
   }
 
-  async uploadAvatarUser(id, file) {
-    const user = await UserModel.findById(id);
-    const avatarName = `${uuid.v4()}.jpg`;
-    file.mv('/static');
-    user.avatar = avatarName;
-    await user.save();
-  }
 }
 
 module.exports = new UserService();

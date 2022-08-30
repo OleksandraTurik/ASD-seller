@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
 const userController = require('../controllers/user.controller');
-const authMiddleware = require('../middlewares/auth.middleware');
+const { authMiddleware, userFilterSortMiddleware, paginationMiddleware } = require('../middlewares');
 
 const router = Router();
 
@@ -17,7 +17,7 @@ router.post('/logout', userController.logout);
 router.post('/avatar/:id', userController.uploadAvatar);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
-router.get('/', userController.getUser);
+router.get('/', userFilterSortMiddleware, paginationMiddleware, userController.getUser);
 router.patch('/:id', authMiddleware, userController.modifyUser);
 /// verify message
 
