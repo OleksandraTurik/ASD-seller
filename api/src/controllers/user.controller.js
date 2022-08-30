@@ -62,9 +62,9 @@ class UserController {
     }
   }
 
-  async getUser(req, res) {
+  getUser(req, res) {
     try {
-      const users = await userService.getAllUsers();
+      const users = req.paginatedResults;
       return res.json(users);
     } catch (e) {
       errorHandler(res, e);
