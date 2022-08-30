@@ -13,7 +13,9 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "styled-components": "^5.3.5",
+    "web-vitals": "^2.1.4",
+    "react-hook-form": "^7.34.2"
   },
   "scripts": {
     "start": "react-scripts start",
