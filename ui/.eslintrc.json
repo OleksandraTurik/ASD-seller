@@ -22,6 +22,7 @@
     "no-confusing-arrow": "off", // This rule is disallow arrow functions where they could be confused with comparisons.
     "arrow-parens": "off", // This option is require parentheses around arrow function arguments.
     "import/no-extraneous-dependencies": "off", // Forbid the import of external modules that are not declared in the package.json's dependencies, devDependencies, optionalDependencies, peerDependencies, or bundledDependencies.
+
     "import/extensions": "off", // Some file resolve algorithms allow you to omit the file extension within the import source path. 
     "import/no-unresolved": "off", // This option ensures an imported module can be resolved to a module on the local filesystem, as defined by standard Node require.resolve behavior.
     "import/no-webpack-loader-syntax": "off", // This option is forbid Webpack loader syntax in imports.
