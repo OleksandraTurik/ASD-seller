@@ -25,5 +25,8 @@
       "npm run lint",
       "git add"
     ]
+  },
+  "dependencies": {
+    "react-hook-form": "^7.34.2"
   }
 }
