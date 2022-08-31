@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Container = styled.div`
+export const Container = styled.header`
   width: 100%;
   background: #003034;
 `;
@@ -9,12 +9,9 @@ export const Container = styled.div`
 export const Nav = styled.nav`
   display: flex;
   flex-direction: row;
-  width: 60%;
+  max-width: 1238px;
   justify-content: space-between;
-  margin-top: 0px;
-  margin-right: auto;
-  margin-bottom: 0px;
-  margin-left: auto;
+  margin: 0 auto;
 `;
 
 export const HeaderContainer = styled.div`
