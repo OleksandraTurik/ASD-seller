@@ -18,7 +18,7 @@ router.post('/avatar/:id', userController.uploadAvatar);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 router.get('/', userFilterSortMiddleware, paginationMiddleware, userController.getUser);
-router.patch('/:id', authMiddleware, userController.modifyUser);
+router.patch('/:id', userController.modifyUser);
 /// verify message
 
 module.exports = router;

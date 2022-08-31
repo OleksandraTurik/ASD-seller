@@ -79,7 +79,18 @@ class UserService {
   }
 
   async modifyUser(id, updates) {
-    const user = await UserModel.updateOne({ _id: id }, updates);
+    const { email, password, fullName, address, phoneNumber } = updates;
+    const hashPassword = await bcrypt.hash(password, 3);
+    const user = await UserModel.updateOne({ _id: id }, {
+      email,
+      password:hashPassword,
+      fullName,
+      address,
+      phoneNumber,
+    });
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
     if (!user) {
       throw new StatusError(404, 'User not found');
     }
