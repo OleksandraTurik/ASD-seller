@@ -123,7 +123,7 @@ class UserController {
     try {
       const { id } = req.params;
       const user = await UserModel.deleteOne({ _id:id });
-      await Advert.deleteMany({ _id:user.adverts });
+      await Advert.deleteMany({ sellerId:id });
       return res.json(user);
     }catch (e) {
       errorHandler(res, e);
