@@ -2,7 +2,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import apiUserService from 'sevices/authServices';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
 } from './styled';
@@ -18,8 +17,6 @@ const Form = ({ textButton, emailField, passwordField }) => {
   });
 
   const onSubmit = (data) => {
-    apiUserService.login('danbas2@gmail.com', 'lugansk')
-      .then((res) => console.log(res));
     console.log(JSON.stringify(data));
     reset();
   };
