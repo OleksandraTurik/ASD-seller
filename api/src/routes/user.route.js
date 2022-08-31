@@ -12,13 +12,17 @@ router.post(
   body('password').isLength({ min: 3, max: 32 }),
   userController.registration,
 );
+//post user
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
-router.post('/avatar/:id', userController.uploadAvatar);
+router.post('/:id/avatar', userController.uploadAvatar);
+//get user
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
-router.get('/', userFilterSortMiddleware, paginationMiddleware, userController.getUser);
+router.get('/', userFilterSortMiddleware, paginationMiddleware, userController.getUsers);
 router.patch('/:id', authMiddleware, userController.modifyUser);
+router.get('/:id', userController.getUser);
+router.delete('/:id', userController.deleteUser );
 /// verify message
 
 module.exports = router;
