@@ -10,11 +10,13 @@ const { apiRouter } = require('./routes');
 const { PORT } = process.env || 4000;
 const app = express();
 
-app.use(fileUpload({}));
+app.use(fileUpload({
+  createParentPath: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-app.use(express.static('static'));
+app.use(express.static('./src/'));
 
 app.use('/api', apiRouter);
 
