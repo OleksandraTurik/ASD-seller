@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from 'pages/MainPage';
 import AdvertPage from 'pages/Advert';
+import NotFound from 'pages/NotFound';
 import LoginPage from '../pages/LoginPage';
 import RegistrationPage from '../pages/RegistrationPage';
 
@@ -14,7 +15,7 @@ const MainRoutes = () => (
     <Route path="/add" element={<h1>Add new advert form</h1>} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/register" element={<RegistrationPage />} />
-    <Route path="*" element={<h1>404 Not Found</h1>} />
+    <Route path="*" element={<NotFound />} />
   </Routes>
 );
 export default MainRoutes;
