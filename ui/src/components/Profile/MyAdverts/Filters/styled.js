@@ -57,9 +57,9 @@ export const SearchInput = styled.input`
   border: none;
   background: #fff;
   border: 1px solid #fff;
-  width: 282px;
-  height: 48px;
-  padding: 13px 48px;
+  width: 200px;
+  height: 26px;
+  padding: 10px 40px;
   border-radius: ${({ primary }) => primary ? '5px 0 0 5px' : '5px'};
 
   &::placeholder {

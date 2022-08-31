@@ -34,7 +34,7 @@ export const AddAdvertLink = styled(Link)`
   display: flex;
   align-items: center;
   margin: 0px 8px;
-  height: 40px;
+  height: 26px;
   text-decoration: none;
   font-weight: 700;
   font-size: 14px;
