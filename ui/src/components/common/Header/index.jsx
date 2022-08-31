@@ -1,6 +1,5 @@
 import React from 'react';
 import Like from './Like';
-import Logo from './Logo';
 import {
   Nav,
   Ul,
@@ -12,17 +11,18 @@ import {
   NavLinkHeader,
   HeaderContainer,
 } from './styled';
+import Logo from '../../../assets/icons/Logo';
 
 const Header = () => (
   <Container>
     <Nav>
-      <HeaderContainer>
-        <NavLinkHeader to="/">
-          <Logo>
-            ASD.seller
-          </Logo>
-        </NavLinkHeader>
-      </HeaderContainer>
+      <NavLinkHeader to="/">
+        <Logo
+          width={250}
+          height={70}
+          fill="white"
+        />
+      </NavLinkHeader>
       <Ul>
         <Li>
           <A href="*"><Like /></A>
