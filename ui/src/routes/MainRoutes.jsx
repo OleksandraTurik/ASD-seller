@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from 'pages/MainPage';
 import AdvertPage from 'pages/Advert';
+import MyAdverts from 'components/Profile/MyAdverts';
 import Profile from 'pages/Profile';
 import LoginPage from '../pages/LoginPage';
 import RegistrationPage from '../pages/RegistrationPage';
@@ -12,7 +13,7 @@ const MainRoutes = () => (
     <Route path="/adverts" element={<h1>Advert list</h1>} />
     <Route path="/adverts/:id" element={<AdvertPage />} />
     <Route path="/profiles/:id" element={<Profile />}>
-      <Route path="adverts" element={<h1>P adverts</h1>} />
+      <Route path="adverts" element={<MyAdverts />} />
       <Route path="settings" element={<h1>P settings</h1>} />
     </Route>
     <Route path="/add" element={<h1>Add new advert form</h1>} />

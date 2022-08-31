@@ -5,7 +5,8 @@ export const Container = styled.div`
   height: 56px;
   display: flex;
   align-items: center;
-  height: 325px;
+  margin-bottom: 25px;
+  padding: 48px 0 0 125px;
 `;
 
 export const Link = styled(NavLink)`

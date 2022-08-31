@@ -7,7 +7,6 @@ import Tabs from 'components/Profile/Tabs';
 
 // Styles
 const Wrapper = styled.div`
-  padding: 48px 125px;
   display: flex;
   flex-direction: column;
 
@@ -15,7 +14,7 @@ const Wrapper = styled.div`
     font-size: 32px;
     font-weight: 700;
     color: rgb(0, 47, 52);
-    margin: 0px 0px 12px;
+    margin: 48px 0 0 125px;
   }
 `;
 
