@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -12,97 +13,137 @@ export const Container = styled.div`
   border-radius: 4px;
 `;
 
-export const EditBtn = styled.button`
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
+export const EditLink = styled(Link)`
+  display: flex;
   justify-content: center;
+  align-items: center;
   box-sizing: border-box;
+  cursor: pointer;
   height: 40px;
-  position: relative;
   text-decoration: none;
   font-weight: 700;
+  font-size: 14px;
   background-color: transparent;
-  border: 2px solid rgb(0, 47, 52);
+  border: 2px solid #102e33;
   border-radius: 4px;
+  color: #102e33;
   padding: 6px 22px;
-  color: rgb(0, 47, 52);
 
-  &.active {
-    border: 2px solid rgb(0, 47, 52);
+  &:hover {
+    background-color: #102e33;
+    color: #fff;
+  }
+  `;
+
+export const TopWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const BottomWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  & span {
+    align-self: flex-start;
+    font-size: 12px;
+    color: rgb(64, 99, 103);
   }
 `;
 
-export const Card = styled.article`
-  height: 380px;
-  background-color: white;
+export const ListWrap = styled.div`
+  & ul {
+    display: flex;
+    font-size: 14px;
+    color: rgb(64, 99, 103);
+
+    & li {
+      margin-left: 25px;
+
+      &:first-child {
+        margin-left: 0;
+        list-style: none;
+      }
+    }
+  }
+`;
+
+export const LocationWrap = styled.div`
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-size: 14px;
+    color: rgb(64, 99, 103);
+  }
+`;
+
+export const DataWrap = styled.div`
+  display: flex;
+  align-items: center;
+
+  & span {
+    font-size: 14px;
+    color: rgb(64, 99, 103);
+  }
+`;
+
+export const Icon = styled.img`
+  width: 12px;
+  margin-right: 5px;
+`;
+
+export const AdvertBodyWrap = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 15px;
-  position: relative;
-  box-sizing: border-box;
-  border-radius: 4px;
-  width: calc(25% - 15px);
-  float: left;
-  margin-left: 15px;
-  margin-top: 20px;
+  justify-content: space-evenly;
+  height: 110px;
+  align-items: flex-start;
+`;
+
+export const AdvertHeaderWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0 8px 0;
+  height: 25px;
+
+  & span {
+    font-size: 20px;
+    line-height: 22px;
+    font-weight: 500;
+    color: rgb(0, 47, 52);
+    margin: 0px 8px 0px 0px;
+    white-space: nowrap;
+  }
+`;
+
+export const AdvertTitleLink = styled(Link)`
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(0, 47, 52);
+
+  &:hover {
+    border-bottom: 2px solid rgb(0, 47, 52);
+  }
+`;
+
+export const AdvertInfoWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(216, 223, 224);
+  margin-left: 16px;
 `;
 
 export const ImgInCard = styled.img`
   height: 156px;
   object-fit: cover;
-`;
-
-export const NameOfProduct = styled.h4`
-  margin: 15px 0;
-  margin-bottom: auto;
-  font-size: 18px;
-  font-style: normal;
-  line-height: 1.25;
-  color: #002f34;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #002f34;
-    color: white;
-  }
-`;
-
-export const Info = styled.div`
-  position: absolute;
-  bottom: 45px;
-  display: flex;
-  padding: 0;
-  list-style: none;
-  font-size: 14px;
-  color: #406367;
-  line-height: 1.17;
-  margin-bottom: 10px;
-`;
-
-export const Price = styled.div`
-  position: absolute;
-  bottom: 15px;
-  font-size: 19px;
-  font-weight: 600;
-  margin-bottom: 5px;
-  padding-right: 40px;
-  color: #002f34;
-`;
-
-export const ToFavoriteButton = styled.img`
-  position: absolute;
-  bottom: 25px;
-  right: 20px;
-  cursor: pointer;
-  opacity: 0.4;
-
-  &:hover {
-    opacity: 1;
-  }
 `;

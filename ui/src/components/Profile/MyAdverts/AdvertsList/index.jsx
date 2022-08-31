@@ -25,12 +25,15 @@ const AdvertsList = () => {
       {isAdvert
         ? (
           <AdvertCardList
-            link="https://www.google.com.ua/"
+            link="/"
             img={bmw}
-            name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-            location="Івано-Франківськ"
-            date="Сьогодні 11:22"
-            price="56 грн."
+            name="Книга для розвитку"
+            location="Чернівці, Чернівецька область"
+            date="31.08.2022 - 31.08.2022"
+            price="200 грн."
+            category="Хобі, відпочинок і спорт"
+            subcategory="Книги / журнали"
+            id="ID 761665035"
           />
         )
         : (
