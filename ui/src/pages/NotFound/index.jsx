@@ -7,17 +7,17 @@ import cat from 'assets/icons/cat.svg';
 import {
   Wrapper,
   Icon,
-  Button,
+  GoHomeLink,
   Container,
 } from './styled';
 
 const NotFound = () => (
   <Wrapper>
     <Container>
-      <Icon src={cat} />
+      <Icon src={cat} alt="cat icon" />
       <h1>Сторінку не знайдено</h1>
       <p>Сторінку не знайдено</p>
-      <Button type="button">На головну</Button>
+      <GoHomeLink to="/">На головну</GoHomeLink>
     </Container>
   </Wrapper>
 );
