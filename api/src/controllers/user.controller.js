@@ -4,6 +4,7 @@ const StatusError = require('../exceptions/StatusError');
 const errorHandler = require('../helpers/errorHandler');
 const UserModel = require('../models/User.model');
 const uuid = require('uuid');
+const { Advert } = require('../models');
 
 class UserController {
   async registration(req, res) {
@@ -64,7 +65,7 @@ class UserController {
     }
   }
 
-  getUser(req, res) {
+  getUsers(req, res) {
     try {
       const users = req.paginatedResults;
       return res.json(users);
@@ -102,6 +103,29 @@ class UserController {
       const user = await UserModel.updateOne({ _id:req.params.id }, { avatar:fileName });
       await user.save();
     } catch (e) {
+      errorHandler(res, e);
+    }
+  }
+
+  async getUser(req, res){
+    try {
+      const user = await UserModel.findById(req.params.id);
+      if(!user){
+        throw new StatusError (404, 'user not found');
+      }
+      res.status(200).json(user);
+    }catch (e) {
+      errorHandler(res, e);
+    }
+  }
+
+  async deleteUser(req, res){
+    try {
+      const { id } = req.params;
+      const user = await UserModel.deleteOne({ _id:id });
+      await Advert.deleteMany({ sellerId:id });
+      return res.json(user);
+    }catch (e) {
       errorHandler(res, e);
     }
   }

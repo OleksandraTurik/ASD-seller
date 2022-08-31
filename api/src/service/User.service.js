@@ -5,7 +5,6 @@ const mailService = require('./Mail.service');
 const tokenService = require('./Token.service');
 const UserDto = require('../dtos/User.dtos');
 const StatusError = require('../exceptions/StatusError');
-const config  = require('config');
 
 class UserService {
   async registration(email, password) {
@@ -95,11 +94,6 @@ class UserService {
       throw new StatusError(404, 'User not found');
     }
     return user;
-  }
-
-  async getAllUsers() {
-    const users = await UserModel.find();
-    return users;
   }
 
 }
