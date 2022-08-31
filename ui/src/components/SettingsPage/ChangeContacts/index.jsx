@@ -1,29 +1,38 @@
+import Button from 'components/common/Button';
 import Checkbox from 'components/common/Checkbox';
 import Input from 'components/common/Input';
-import React from 'react';
-import { Container, SubContainer, P } from './styled';
+import React, { useState } from 'react';
+import ButtonContainer from '../ButtonContainer';
+import MainContainer from '../MainContainer';
+import SubContainer from '../SubContainer';
+import SubText from '../SubText';
+import { CheckboxContainer } from './styled';
 
-const ChangeContacts = () => (
-  <Container>
-    <SubContainer>
-      <P>Вибрати місто</P>
-      <div>
+const ChangeContacts = () => {
+  const [checked, setChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
+  };
+
+  return (
+    <MainContainer>
+      <SubContainer>
+        <SubText>Вибрати місто</SubText>
         <Input />
-      </div>
-      <div>
-        <Checkbox checked />
-      </div>
-    </SubContainer>
-    <SubContainer>
-      <P>Контактна особа</P>
-      <div>
+      </SubContainer>
+      <SubContainer>
+        <SubText>Контактна особа</SubText>
         <Input />
-      </div>
-      <div>
-        <Checkbox />
-      </div>
-    </SubContainer>
-  </Container>
-);
+      </SubContainer>
+      <CheckboxContainer>
+        <Checkbox checked={checked} onChange={handleCheckboxChange} />
+      </CheckboxContainer>
+      <ButtonContainer>
+        <Button>Зберегти</Button>
+      </ButtonContainer>
+    </MainContainer>
+  );
+};
 
 export default ChangeContacts;

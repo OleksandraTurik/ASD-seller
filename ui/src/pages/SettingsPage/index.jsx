@@ -48,7 +48,6 @@ const SettingsPage = () => {
 
   return (
     <Container>
-      <h1>Settings</h1>
       {
         data.map((item) => (
           <ItemContainer
