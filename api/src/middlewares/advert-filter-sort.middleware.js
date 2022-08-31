@@ -1,4 +1,5 @@
 const { Advert } = require('../models');
+const errorHandler = require('../helpers/errorHandler');
 
 const advertFilterSortMiddleware = async (req, res, next) => {
   try {
@@ -13,7 +14,7 @@ const advertFilterSortMiddleware = async (req, res, next) => {
     req.items = query;
     next();
   } catch (err) {
-    res.status(500).json(err);
+    errorHandler(res, err);
   }
 };
 
