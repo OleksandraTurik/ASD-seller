@@ -19,7 +19,6 @@ const Header = () => (
       <NavLinkHeader to="/">
         <Logo
           width={250}
-          height={70}
           fill="white"
         />
       </NavLinkHeader>

@@ -9,6 +9,7 @@ export const Container = styled.header`
 export const Nav = styled.nav`
   display: flex;
   flex-direction: row;
+  height: 68px;
   max-width: 1238px;
   justify-content: space-between;
   margin: 0 auto;
