@@ -7,26 +7,28 @@ function getAdvertList(req, res) {
   try {
     const list = req.paginatedResults;
     res.status(200).json(list);
-  } catch (error) {
-    res.status(500).json(error.message);
+  } catch (err) {
+    errorHandler(res, err);
   }
 }
 async function getAdvertItem(req, res) {
   try {
     const { id } = req.params;
     const item = await Advert.findById(id);
+    if (!item) throw new StatusError(404, 'This advert does not exist');
     return res.status(200).json(item);
   } catch (err) {
-    res.status(500).json(err.message);
+    errorHandler(res, err);
   }
 }
 async function getAdvertItemProperty(req, res) {
   try {
     const { id, prop } = req.params;
     const item = await Advert.findById(id, `${prop}`);
+    if (!item) throw new StatusError(404, 'This advert does not exist');
     res.json(item);
   } catch (err) {
-    res.status(500).json(err);
+    errorHandler(res, err);
   }
 }
 async function postAdvert(req, res) {
@@ -57,6 +59,7 @@ async function deleteAdvertItem(req, res) {
   try {
     const { id } = req.params;
     const item = await Advert.findById(id);
+    if (!item) throw new StatusError(404, 'This advert does not exist');
     await User.updateOne({ _id: item.sellerId }, { $pullAll: { adverts: [id] } });
     const response = await Advert.deleteOne({ _id: id });
     res.json(response);
@@ -70,6 +73,9 @@ async function patchAdvertItem(req, res) {
     const {
       title, description, price, address,
     } = req.body;
+
+    if (Advert.exists({ _id: id }))
+      throw new StatusError(404, 'This advert does not exist');
 
     const item = await Advert.updateOne({ _id: id }, {
       title, description, price, address,
