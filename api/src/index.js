@@ -6,6 +6,9 @@ const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 
 const { apiRouter, picRouter } = require('./routes');
+const { errorHandlerMiddleWare } = require('./middlewares');
+
+const StatusError = require('./exceptions/StatusError');
 
 const { PORT } = process.env || 4000;
 const app = express();
@@ -20,6 +23,12 @@ app.use(express.static('./src/'));
 
 app.use('/api', apiRouter);
 app.use('/pic', picRouter);
+
+app.all('*', () => {
+  throw new StatusError(400, 'Bad request');
+});
+
+app.use(errorHandlerMiddleWare);
 
 const start = async () => {
   try {
