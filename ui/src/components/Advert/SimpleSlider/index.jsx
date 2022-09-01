@@ -10,35 +10,28 @@ import dog2 from 'assets/img/2.avif';
 import dog3 from 'assets/img/3.avif';
 
 // Styles
-import { Image, Wrapper } from './styled';
+import {
+  SampleNextArrow1,
+  SamplePrevArrow1,
+  Image,
+  Wrapper,
+} from './styled';
 
 const SampleNextArrow = (props) => {
-  const { className, style, onClick } = props;
+  const { style, onClick } = props;
   return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: 'block',
-        backgroundColor: 'purple',
-        borderRadius: '60%',
-      }}
+    <SampleNextArrow1
+      style={style}
       onClick={onClick}
     />
   );
 };
 
 const SamplePrevArrow = (props) => {
-  const { className, style, onClick } = props;
+  const { style, onClick } = props;
   return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: 'block',
-        backgroundColor: 'purple',
-        borderRadius: '50%',
-      }}
+    <SamplePrevArrow1
+      style={style}
       onClick={onClick}
     />
   );
@@ -50,8 +43,6 @@ class SimpleSlider extends Component {
     const settings = {
       centerMode: false,
       draggable: true,
-      autoplay: true,
-      autoplaySpeed: 2000,
       slidesToShow: 1,
       slidesToScroll: 1,
       dots: true,
