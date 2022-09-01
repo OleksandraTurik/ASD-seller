@@ -35,6 +35,28 @@ input[type="search"]::-webkit-search-cancel-button {
 input[type="search"]:focus::-webkit-search-cancel-button {
   pointer-events: all;
 }
+
+[type="file"] {
+  color: #878787;
+}
+[type="file"]::-webkit-file-upload-button {
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+  background-color: rgb(0, 47, 52);
+  border: 3px solid rgb(0, 47, 52);
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  padding: 5px 13px 5px;
+  transition: all 0.1s ease;
+}
+
+[type="file"]::-webkit-file-upload-button:hover {
+  color: rgb(0, 47, 52);
+  background-color: white;
+}
 `;
 
 export default GlobalStyle;
