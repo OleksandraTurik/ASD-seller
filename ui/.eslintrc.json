@@ -13,7 +13,7 @@
   "rules": {
     "no-param-reassign": 0,
     "jsx-a11y/anchor-is-valid": "off", // The HTML <a> element, with a valid href attribute, is formally defined as representing a hyperlink.
-    "jsx-a11y/click-events-have-key-events": "off", // This rule is enforce onClick is accompanied by at least one of the following: onKeyUp, onKeyDown, onKeyPress. 
+    "jsx-a11y/click-events-have-key-events": "off", // This rule is enforce onClick is accompanied by at least one of the following: onKeyUp, onKeyDown, onKeyPress.
     "jsx-a11y/no-autofocus": "off", // This rule is enforce that autoFocus prop is not used on elements.
     "jsx-a11y/no-noninteractive-element-to-interactive-role": "off", // Interactive HTML elements indicate controls in the user interface. Interactive elements include <a href>, <button>, <input>, <select>, <textarea>.
     "jsx-a11y/control-has-associated-label": "off", // This oprion is enforce that a control (an interactive element) has a text label.
@@ -23,7 +23,7 @@
     "no-confusing-arrow": "off", // This rule is disallow arrow functions where they could be confused with comparisons.
     "arrow-parens": "off", // This option is require parentheses around arrow function arguments.
     "import/no-extraneous-dependencies": "off", // Forbid the import of external modules that are not declared in the package.json's dependencies, devDependencies, optionalDependencies, peerDependencies, or bundledDependencies.
-    "import/extensions": "off", // Some file resolve algorithms allow you to omit the file extension within the import source path. 
+    "import/extensions": "off", // Some file resolve algorithms allow you to omit the file extension within the import source path.
     "import/no-unresolved": "off", // This option ensures an imported module can be resolved to a module on the local filesystem, as defined by standard Node require.resolve behavior.
     "import/no-webpack-loader-syntax": "off", // This option is forbid Webpack loader syntax in imports.
     "max-len": "off", //This rule enforces a maximum line length to increase code readability and maintainability.

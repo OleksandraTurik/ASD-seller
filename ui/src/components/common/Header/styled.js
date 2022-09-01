@@ -13,7 +13,7 @@ export const Nav = styled.nav`
   display: flex;
   flex-direction: row;
   padding: 0;
-  width: 60%;
+  width: 100%;
   justify-content: space-between;
 `;
 
