@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   background-color: #fff;
   height: 660px;
-  width: 798px;
+  width: 692px;
   border-radius: 5px;
   padding: 24px;
   margin-bottom: 24px;

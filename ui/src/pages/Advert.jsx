@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 // Components
-import Slider from 'components/Advert/Slider';
+import SimpleSlider from 'components/Advert/SimpleSlider';
 import User from 'components/Advert/User';
 import Location from 'components/Advert/Location';
 import Description from 'components/Advert/Description';
@@ -20,12 +22,16 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+const Test1 = styled.div`
+  width: 50%;
+`;
+
 const AdvertPage = () => (
   <Wrapper>
-    <Container>
-      <Slider />
+    <Test1>
+      <SimpleSlider />
       <Description />
-    </Container>
+    </Test1>
     <Container>
       <User />
       <Location />
