@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Search from 'components/common/Search';
 import AdvertCard from 'components/common/AdvertCard';
 import {
@@ -26,16 +25,36 @@ import hobiImg from 'assets/img/rubryky/hobi.png';
 import bmw from 'assets/img/bmw.webp';
 import renault from 'assets/img/renault.webp';
 import { getAdvertsThunk } from 'redux/slice/getAdverts';
+import useFetchAdvert from 'components/hooks/useFetchAdverts';
 
 const MainPage = () => {
-  const adverts = useSelector(state => state.getAdverts);
-  const dispatch = useDispatch();
+  const { advertInfo, loading, error } = useFetchAdvert();
 
-  useEffect(() => {
-    dispatch(getAdvertsThunk());
-  }, [dispatch]);
+  console.log(advertInfo);
 
-  console.log(adverts);
+  const advertsCard = () => {
+    if (error) {
+      return 'error';
+    }
+
+    if (loading) {
+      return 'Loading';
+    }
+
+    return advertInfo.map((item) => (
+      <AdvertCard
+        key={item._id}
+        link="https://www.google.com.ua/"
+        img={bmw}
+        name={item.title}
+        location={item.address}
+        date={item.createdAt}
+        price={`${item.price} грн`}
+      />
+    ));
+  };
+
+  console.log(advertInfo);
 
   return (
     <>
@@ -137,28 +156,8 @@ const MainPage = () => {
         <Wrapper>
           <Title>Останні оголошення</Title>
           <CategoriesList>
-            <AdvertCard
-              link="https://www.google.com.ua/"
-              img={bmw}
-              name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-              location="Івано-Франківськ"
-              date="Сьогодні 11:22"
-              price="56 грн."
-            />
             {
-              adverts.loading
-                ? 'Loading'
-                : adverts.advertInfo.map((item) => (
-                  <AdvertCard
-                    key={item._id}
-                    link="https://www.google.com.ua/"
-                    img={bmw}
-                    name={item.title}
-                    location={item.address}
-                    date={item.createdAt}
-                    price={`${item.price} грн`}
-                  />
-                ))
+              advertsCard()
             }
           </CategoriesList>
         </Wrapper>

@@ -10,14 +10,9 @@ const initialState = {
 export const getAdvertsThunk = createAsyncThunk(
   'getAdvert/getAdvertsThunk',
   async () => {
-    try {
-      const result = await advertServices.getAdverts();
-      const data = await result.data.results;
-      return data;
-    } catch {
-      const result = await advertServices.getAdverts();
-      return result;
-    }
+    const result = await advertServices.getAdverts();
+    const data = await result.data.results;
+    return data;
   },
 );
 
@@ -34,7 +29,7 @@ const getAdvertsReducer = createSlice({
     },
     [getAdvertsThunk.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = action.error.message && 'Something went wrong';
     },
   },
 });
