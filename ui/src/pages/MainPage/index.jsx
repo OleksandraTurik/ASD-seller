@@ -54,8 +54,6 @@ const MainPage = () => {
     ));
   };
 
-  console.log(advertInfo);
-
   return (
     <>
       <Search />
