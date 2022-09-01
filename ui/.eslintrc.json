@@ -11,6 +11,7 @@
     "browser": true
   },
   "rules": {
+    "no-param-reassign": 0,
     "jsx-a11y/anchor-is-valid": "off", // The HTML <a> element, with a valid href attribute, is formally defined as representing a hyperlink.
     "jsx-a11y/click-events-have-key-events": "off", // This rule is enforce onClick is accompanied by at least one of the following: onKeyUp, onKeyDown, onKeyPress. 
     "jsx-a11y/no-autofocus": "off", // This rule is enforce that autoFocus prop is not used on elements.
