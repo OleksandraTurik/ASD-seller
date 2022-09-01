@@ -1,12 +1,11 @@
 const path = require('path');
 
-// const StatusError = require('../exceptions/StatusError');
 const errorHandler = require('../helpers/errorHandler');
 
 function getAdvertImg(req, res) {
     try {
         const { file } = req.params;
-        res.sendfile(path.join(__dirname, '..', 'static', file));
+        res.sendfile(path.join(__dirname, '..', '..', 'uploads', file));
     } catch (err) {
         errorHandler(res, err);
     }
