@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   margin: 24px 0;
@@ -7,7 +8,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  height: 300px;
+  height: 215px;
   width: 390px;
   border-radius: 5px;
   padding: 24px;
@@ -79,7 +80,7 @@ export const Button = styled.button`
   }
 `;
 
-export const LinkWrap = styled.div`
+export const AllAdvertsLink = styled(Link)`
   display: flex;
   font-size: 14px;
   line-height: 18px;

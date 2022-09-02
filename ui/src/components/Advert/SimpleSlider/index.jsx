@@ -11,8 +11,8 @@ import dog3 from 'assets/img/3.avif';
 
 // Styles
 import {
-  SampleNextArrow1,
-  SamplePrevArrow1,
+  ArrowNext,
+  ArrowPrev,
   Image,
   Wrapper,
 } from './styled';
@@ -20,7 +20,7 @@ import {
 const SampleNextArrow = (props) => {
   const { style, onClick } = props;
   return (
-    <SampleNextArrow1
+    <ArrowNext
       style={style}
       onClick={onClick}
     />
@@ -30,7 +30,7 @@ const SampleNextArrow = (props) => {
 const SamplePrevArrow = (props) => {
   const { style, onClick } = props;
   return (
-    <SamplePrevArrow1
+    <ArrowPrev
       style={style}
       onClick={onClick}
     />
