@@ -1,6 +1,6 @@
 const Category = require('../models/Category.model');
 const slugify = require('slugify');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
 const StatusError = require('../exceptions/StatusError');
 
 class CategoryController {

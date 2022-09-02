@@ -104,7 +104,7 @@ async function patchAdvertPhoto(req, res) {
     console.log(keys);
     await Advert.updateOne({ _id: id }, { images: keys });
 
-    res.status(201).json({ status: 'Files have been successfully uploaded' });
+    res.status(201).json({ status: 'Files have been successfully uploaded', keys });
   } catch (err) {
     errorHandler(res, err);
   }

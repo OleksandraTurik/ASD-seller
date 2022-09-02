@@ -95,7 +95,7 @@ class UserController {
 
       await User.updateOne({ _id: id }, { avatar: key });
 
-      res.status(201).json({ status: 'Avatar has been successfully uploaded' });
+      res.status(201).json({ status: 'Avatar has been successfully uploaded', key });
     } catch (e) {
       errorHandler(res, e);
     }
