@@ -18,8 +18,6 @@ const Form = ({ textButton, emailField, passwordField }) => {
   });
 
   const onSubmit = (data) => {
-    apiUserService.login('danbas2@gmail.com', 'lugansk')
-      .then((res) => console.log(res));
     console.log(JSON.stringify(data));
     reset();
   };
