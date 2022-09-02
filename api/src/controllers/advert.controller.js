@@ -1,32 +1,36 @@
+const { Types } = require('mongoose');
+
 const { Advert, User } = require('../models');
 const StatusError = require('../exceptions/StatusError');
-const errorHandler = require('../helpers/errorHandler');
-const { Types } = require('mongoose');
+const errorHandler = require('../helpers/error-handler');
+const AWS = require('../service/AWS.service');
 
 function getAdvertList(req, res) {
   try {
     const list = req.paginatedResults;
     res.status(200).json(list);
-  } catch (error) {
-    res.status(500).json(error.message);
+  } catch (err) {
+    errorHandler(res, err);
   }
 }
 async function getAdvertItem(req, res) {
   try {
     const { id } = req.params;
     const item = await Advert.findById(id);
+    if (!item) throw new StatusError(404, 'This advert does not exist');
     return res.status(200).json(item);
   } catch (err) {
-    res.status(500).json(err.message);
+    errorHandler(res, err);
   }
 }
 async function getAdvertItemProperty(req, res) {
   try {
     const { id, prop } = req.params;
     const item = await Advert.findById(id, `${prop}`);
+    if (!item) throw new StatusError(404, 'This advert does not exist');
     res.json(item);
   } catch (err) {
-    res.status(500).json(err);
+    errorHandler(res, err);
   }
 }
 async function postAdvert(req, res) {
@@ -37,6 +41,7 @@ async function postAdvert(req, res) {
     } = req.body;
 
     if (!title || !price || !sellerId || !description || !address) throw new StatusError(400, 'Wrong body structure');
+    if (!(await User.findById(sellerId))) throw new StatusError(404, 'This user does not exist');
 
     const item = new Advert({
       title, price, sellerId: new Types.ObjectId(sellerId), description, address,
@@ -57,6 +62,7 @@ async function deleteAdvertItem(req, res) {
   try {
     const { id } = req.params;
     const item = await Advert.findById(id);
+    if (!item) throw new StatusError(404, 'This advert does not exist');
     await User.updateOne({ _id: item.sellerId }, { $pullAll: { adverts: [id] } });
     const response = await Advert.deleteOne({ _id: id });
     res.json(response);
@@ -64,12 +70,16 @@ async function deleteAdvertItem(req, res) {
     errorHandler(res, err);
   }
 }
+
 async function patchAdvertItem(req, res) {
   try {
     const { id } = req.params;
     const {
       title, description, price, address,
     } = req.body;
+
+    if (Advert.exists({ _id: id }))
+      throw new StatusError(404, 'This advert does not exist');
 
     const item = await Advert.updateOne({ _id: id }, {
       title, description, price, address,
@@ -80,9 +90,30 @@ async function patchAdvertItem(req, res) {
   }
 }
 
+async function patchAdvertPhoto(req, res) {
+  try {
+    // console.log(req.files);
+    if (req.files.length <= 0) throw new StatusError(400, 'No file has been uploaded');
+
+    const { id } = req.params;
+    if (!(await Advert.findById(id))) throw new StatusError(404, 'This advert does not exist');
+
+    const keyObjects = await Promise.all(req.files.map(f => AWS.uploadPhoto(f)));
+    console.log(keyObjects);
+    const keys = keyObjects.map(e => e.key);
+    console.log(keys);
+    await Advert.updateOne({ _id: id }, { images: keys });
+
+    res.status(201).json({ status: 'Files have been successfully uploaded', keys });
+  } catch (err) {
+    errorHandler(res, err);
+  }
+}
+
 module.exports = {
   getAdvertList,
   postAdvert,
+  patchAdvertPhoto,
   getAdvertItem,
   deleteAdvertItem,
   patchAdvertItem,
