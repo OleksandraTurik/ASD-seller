@@ -5,15 +5,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background-color: #fff;
-  height: 660px;
-  width: 798px;
+  max-height: 800px;
+  width: 692px;
   border-radius: 5px;
-  padding: 24px;
   margin-bottom: 24px;
-
-  & h1 {
-    font-size: 32px;
-  }
+  padding: 24px;
 
   & h2 {
     font-size: 40px;
@@ -30,11 +26,11 @@ export const Wrapper = styled.div`
     font-size: 16px;
     color: #002F34;
   }
+`;
 
-  & span {
-    font-size: 12px;
-    color: #406367;
-  }
+export const Span = styled.span`
+  font-size: ${({ primary }) => primary ? '32px' : '12px'};
+  color: ${({ primary }) => primary ? '#000' : '#406367'};
 `;
 
 export const Container = styled.div`
