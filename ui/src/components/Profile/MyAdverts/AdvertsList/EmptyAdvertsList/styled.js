@@ -50,10 +50,3 @@ export const AddAdvertLink = styled(Link)`
     color: #102e33;
   }
 `;
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-`;

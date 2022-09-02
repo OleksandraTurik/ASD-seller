@@ -21,14 +21,6 @@ import {
 const Filters = () => (
   <Wrapper>
     <MainContainer>
-      <div>
-        <AddFilterBtn type="button">
-          <IconWrap>
-            <IconSettings />
-            Додати фільтр
-          </IconWrap>
-        </AddFilterBtn>
-      </div>
       <Container>
         <IconContainer>
           <IconSearch />
