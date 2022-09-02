@@ -24,10 +24,12 @@ router.post('/logout', express.json(), userController.logout);
 router.patch('/:id/avatar', idValidationMiddleware, singleUploadMiddleware('avatar'), userController.uploadAvatar);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
+
 router.get('/', userFilterSortMiddleware, paginationMiddleware, userController.getUsers);
 router.patch('/:id', express.json(), idValidationMiddleware, authMiddleware, userController.modifyUser);
 router.get('/:id', idValidationMiddleware, userController.getUser);
 router.delete('/:id', idValidationMiddleware, userController.deleteUser );
+
 /// verify message
 
 module.exports = router;
