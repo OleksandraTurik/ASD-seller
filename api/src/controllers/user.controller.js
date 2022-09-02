@@ -1,7 +1,8 @@
 const { validationResult } = require('express-validator');
 const userService = require('../service/User.service');
+const AWS = require('../service/AWS.service');
 const StatusError = require('../exceptions/StatusError');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
 const { Advert, User } = require('../models');
 
 class UserController {
@@ -88,11 +89,13 @@ class UserController {
       if (!req.file) throw new StatusError(400, 'No file has been uploaded');
       const { id } = req.params;
 
-      if (!(await User.findById(id))) throw new StatusError (400, 'This user does not exist');
+      if (!(await User.findById(id))) throw new StatusError (404, 'This user does not exist');
+
+      const { key } = await AWS.uploadPhoto(req.file);
+
+      await User.updateOne({ _id: id }, { avatar: key });
 
       res.status(201).json({ status: 'Avatar has been successfully uploaded' });
-
-      await User.updateOne({ _id: id }, { avatar: req.file.originalname });
     } catch (e) {
       errorHandler(res, e);
     }

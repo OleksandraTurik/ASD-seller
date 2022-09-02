@@ -2,7 +2,8 @@ const { Types } = require('mongoose');
 
 const { Advert, User } = require('../models');
 const StatusError = require('../exceptions/StatusError');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
+const AWS = require('../service/AWS.service');
 
 function getAdvertList(req, res) {
   try {
@@ -91,14 +92,17 @@ async function patchAdvertItem(req, res) {
 
 async function patchAdvertPhoto(req, res) {
   try {
-    console.log(req.files);
+    // console.log(req.files);
     if (req.files.length <= 0) throw new StatusError(400, 'No file has been uploaded');
 
     const { id } = req.params;
-
     if (!(await Advert.findById(id))) throw new StatusError(404, 'This advert does not exist');
 
-    await Advert.updateOne({ _id: id }, { images: req.files.map(e => e.originalname) });
+    const keyObjects = await Promise.all(req.files.map(f => AWS.uploadPhoto(f)));
+    console.log(keyObjects);
+    const keys = keyObjects.map(e => e.key);
+    console.log(keys);
+    await Advert.updateOne({ _id: id }, { images: keys });
 
     res.status(201).json({ status: 'Files have been successfully uploaded' });
   } catch (err) {

@@ -1,11 +1,13 @@
 const path = require('path');
 
-const errorHandler = require('../helpers/errorHandler');
+const AWS = require('../service/AWS.service');
+const errorHandler = require('../helpers/error-handler');
 
 function getAdvertImg(req, res) {
     try {
-        const { file } = req.params;
-        res.sendfile(path.join(__dirname, '..', '..', 'uploads', file));
+        const { key } = req.params;
+        const readStream = AWS.getFileStream(key);
+        readStream.pipe(res);
     } catch (err) {
         errorHandler(res, err);
     }

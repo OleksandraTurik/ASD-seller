@@ -1,25 +1,32 @@
-const s3 = require('../config');
-const StatusError = require('../exceptions/StatusError');
-const uuid = require('uuid');
+const fs = require('fs');
+const S3 = require('aws-sdk/clients/s3');
+
+const s3 =  new S3({
+    region: process.env.AWS_S3_REGION,
+    accessKeyId: process.env.AWS_S3_KEY_ID,
+    secretAccessKey: process.env.AWS_S3_SECRET_KEY,
+});
+
 
 class AWSService {
-    params(file, fileTag) {
-        return {
+     uploadPhoto(file) {
+        const fileStream = fs.createReadStream(file.path);
+        const uploadParams = {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
-            Key: fileTag + new Date() + uuid.v4(),
-            Body: file,
+            Body: fileStream,
+            Key: file.filename,
         };
+
+        return s3.upload(uploadParams).promise() ;
     }
 
-    async postPhoto(file, fileTag) {
-        try {
-            const params = new this.params(file, fileTag);
-            console.log(params);
-            const data = await s3.putObject(params).promise();
-            console.log(data);
-        } catch (err) {
-            throw new StatusError(500, err.message);
-        }
+    getFileStream(fileKey) {
+         const downloadParams = {
+             Key: fileKey,
+             Bucket: process.env.AWS_S3_BUCKET_NAME,
+         };
+
+         return s3.getObject(downloadParams).createReadStream();
     }
 }
 
