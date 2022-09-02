@@ -12,11 +12,7 @@ export const Title = styled.h3`
 export const Wrapper = styled.div`
   width: 1238px;
   margin: 0 auto;
-
-  // height of block for "main categories" section
-  &:nth-child(2) {
-    height: 535px;
-  }
+  padding-bottom: 45px;
 `;
 
 export const CategoriesList = styled.div`
@@ -59,5 +55,5 @@ export const ImgWrap = styled.img`
 
 export const LatestAdsSection = styled.section`
   background-color: #f2f4f5;
-  padding-bottom: 100px;
+  padding-bottom: 55px;
 `;
