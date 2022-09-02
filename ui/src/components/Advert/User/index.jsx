@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Icons
 import avatar from 'assets/icons/avatar.svg';
@@ -11,30 +12,46 @@ import {
   UserIcon,
   UserInfo,
   RegistrationDate,
-  LinkWrap,
+  AllAdvertsLink,
   ArrowIcon,
   Button,
 } from './styled';
 
-const User = () => (
+const User = ({
+  name,
+  date,
+  link,
+}) => (
   <Wrapper>
     <h1>Користувач</h1>
     <Container>
       <UserIcon src={avatar} alt="user avatar" />
       <UserInfo>
-        <h2>Руслан</h2>
+        <h2>{name}</h2>
         <RegistrationDate>
           на asd-seller з
-          <p>червень 2012 р.</p>
+          <p>{date}</p>
         </RegistrationDate>
       </UserInfo>
     </Container>
     <Button type="button">Показати телефон</Button>
-    <LinkWrap>
+    <AllAdvertsLink to={link}>
       Усі оголошення автора
       <ArrowIcon src={angleRight} alt="right arrow icon" />
-    </LinkWrap>
+    </AllAdvertsLink>
   </Wrapper>
 );
+
+User.propTypes = {
+  name: PropTypes.string,
+  date: PropTypes.string,
+  link: PropTypes.string,
+};
+
+User.defaultProps = {
+  name: '',
+  date: '',
+  link: '',
+};
 
 export default User;
