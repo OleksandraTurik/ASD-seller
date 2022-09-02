@@ -8,8 +8,8 @@ export const Wrapper = styled.div`
   max-height: 800px;
   width: 692px;
   border-radius: 5px;
-  padding: 24px;
   margin-bottom: 24px;
+  padding: 24px;
 
   & h2 {
     font-size: 40px;
