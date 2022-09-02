@@ -169,3 +169,26 @@ export const PublishButton = styled.button`
       background-color: white;
     }
 `;
+
+export const InputFile = styled.input`
+    color: #878787;
+
+  &::-webkit-file-upload-button {
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 18px;
+    background-color: rgb(0, 47, 52);
+    border: 2px solid rgb(0, 47, 52);
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    padding: 5px 11px 5px;
+    transition: all 0.1s ease;
+  }
+
+  &::-webkit-file-upload-button:hover {
+    color: rgb(0, 47, 52);
+    background-color: white;
+  }
+`;

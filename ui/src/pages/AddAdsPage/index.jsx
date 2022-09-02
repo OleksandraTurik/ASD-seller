@@ -18,6 +18,7 @@ import {
   PInPickCategory,
   ContactInput,
   PublishButton,
+  InputFile,
 } from './styled';
 
 const AddAdsPage = () => {
@@ -70,7 +71,7 @@ const AddAdsPage = () => {
           <WhiteBlock>
             <WidthEquation>
               <WhiteBlockTitle>Фото</WhiteBlockTitle>
-              <input
+              <InputFile
                 id="photos"
                 name="photos"
                 type="file"

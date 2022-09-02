@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import IconSearch from 'assets/icons/search-icon.svg';
 import IconSearchWhite from 'assets/icons/search-white.png';
+import iconClose from 'assets/icons/close-icon.svg';
 
 export const StyledForm = styled.form`
   padding: 40px 0;
@@ -46,6 +47,23 @@ export const StyledInput = styled.input`
 
   &::placeholder {
     font-weight: 400;
+  }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1.9em;
+    width: 1.9em;
+    border-radius: 50em;
+    background: url(${iconClose}) no-repeat 50% 50%;
+    background-size: contain;
+    pointer-events: none;
+    cursor: pointer;
+    position: relative;
+    left: -10px;
+  }
+
+  &:focus::-webkit-search-cancel-button {
+    pointer-events: all;
   }
 `;
 

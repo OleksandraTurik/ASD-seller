@@ -26,7 +26,7 @@ const Header = () => (
           <A href="*"><Like /></A>
         </Li>
         <Li>
-          <Button>Додати оголошення</Button>
+          <Button to="/add">Додати оголошення</Button>
         </Li>
         <Li>
           <NavLink to="/login">Login</NavLink>
