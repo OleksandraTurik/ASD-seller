@@ -1,5 +1,5 @@
 const { Advert } = require('../models');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
 
 const advertFilterSortMiddleware = async (req, res, next) => {
   try {
