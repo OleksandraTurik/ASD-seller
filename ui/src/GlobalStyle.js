@@ -46,10 +46,10 @@ input[type="search"]:focus::-webkit-search-cancel-button {
   font-size: 13px;
   line-height: 18px;
   background-color: rgb(0, 47, 52);
-  border: 3px solid rgb(0, 47, 52);
+  border: 2px solid rgb(0, 47, 52);
   border-radius: 4px;
   color: rgb(255, 255, 255);
-  padding: 5px 13px 5px;
+  padding: 5px 11px 5px;
   transition: all 0.1s ease;
 }
 

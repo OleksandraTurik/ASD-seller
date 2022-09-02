@@ -16,35 +16,21 @@ import {
   CategoryWidthEquation,
   PickCategory,
   PInPickCategory,
-  // DescriptionProgress,
   ContactInput,
   PublishButton,
 } from './styled';
 
 const AddAdsPage = () => {
-  // const [value, setValue] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onBlur',
   });
   const onSubmit = data => console.log(data);
   console.log(errors);
 
-  // const descriptionHandler = (event) => {
-  //   setValue(event.target.value);
-  // };
-
   const handleKeyDown = (e) => {
     e.target.style.height = 'inherit';
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
-
-  // const uploadMultipleFiles = (e) => {
-  //   if (e.files.length > 3) {
-  //     // eslint-disable-next-line no-alert
-  //     alert('Only 5 files accepted.');
-  //     e.preventDefault();
-  //   }
-  // };
 
   return (
     <Main>
@@ -103,8 +89,6 @@ const AddAdsPage = () => {
                 required
                 rows="13"
                 placeholder="Подумайте, що ви хотіли би дізнатися з оголошення. І додайте це в опис"
-                // value={value}
-                // onChange={(e) => console.log(e.target.value)}
                 {...register('Description', {
                   required: 'Опис повинен бути не коротшим за 80 знаків',
                   minLength: {
