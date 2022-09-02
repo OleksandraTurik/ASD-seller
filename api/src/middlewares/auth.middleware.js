@@ -1,6 +1,6 @@
 const tokenService = require('../service/Token.service');
 const StatusError = require('../exceptions/StatusError');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
 
 module.exports = function (req, res, next) {
   try {

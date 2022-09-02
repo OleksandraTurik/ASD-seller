@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const express = require('express');
 const {
   advertController: {
     getAdvertList,
@@ -7,16 +7,23 @@ const {
     deleteAdvertItem,
     patchAdvertItem,
     getAdvertItemProperty,
+    patchAdvertPhoto,
   },
 } = require('../controllers');
-const { paginationMiddleware, advertFilterSortMiddleware, idValidationMiddleware } = require('../middlewares');
+const {
+  paginationMiddleware,
+  advertFilterSortMiddleware,
+  idValidationMiddleware,
+  multipleUploadMiddleware,
+} = require('../middlewares');
 
-const advertRouter = Router();
+const advertRouter = express.Router();
 
 advertRouter.get('/', advertFilterSortMiddleware, paginationMiddleware, getAdvertList);
-advertRouter.post('/', postAdvert);
+advertRouter.post('/', express.json(), postAdvert);
 advertRouter.get('/:id', idValidationMiddleware, getAdvertItem);
 advertRouter.get('/:id/:prop', idValidationMiddleware, getAdvertItemProperty);
 advertRouter.delete('/:id', idValidationMiddleware, deleteAdvertItem);
-advertRouter.patch('/:id', idValidationMiddleware, patchAdvertItem);
+advertRouter.patch('/:id', express.json(), idValidationMiddleware, patchAdvertItem);
+advertRouter.patch('/:id/photos', idValidationMiddleware, multipleUploadMiddleware('images', 10), patchAdvertPhoto);
 module.exports = advertRouter;

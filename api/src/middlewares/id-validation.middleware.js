@@ -1,6 +1,6 @@
 const isIdValid = require('../helpers/is-id-valid');
 const StatusError = require('../exceptions/StatusError');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
 
 function idValidationMiddleware(req, res, next) {
     try {

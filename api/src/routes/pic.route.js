@@ -4,7 +4,7 @@ const { picController: { getAdvertImg, getCategoryImg } } = require('../controll
 
 const picRouter = express.Router();
 
-picRouter.get('/:file', getAdvertImg);
+picRouter.get('/:key', getAdvertImg);
 picRouter.get('/category/:file', getCategoryImg);
 
 module.exports = picRouter;

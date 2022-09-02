@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
 
 const userFilterSortMiddleware = async (req, res, next) => {
     try {
