@@ -8,6 +8,7 @@ const Logo = (props) => (
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 -40 500.000000 500.000000"
       preserveAspectRatio="xMidYMid meet"
+      style={{ overflow: 'hidden' }}
       {...props}
     >
 
