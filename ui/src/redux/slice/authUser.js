@@ -20,6 +20,7 @@ export const login = createAsyncThunk(
       email: userData.email,
       password: userData.password,
     });
+    localStorage.setItem('token', res.data.accessToken);
     return res;
   },
 );

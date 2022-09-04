@@ -10,7 +10,7 @@ class UserController {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        throw new StatusError (400, 'Invalid authorisation data');
+        throw new StatusError (400, 'Invalid authorization data');
       }
       const { email, password } = req.body;
       const userData = await userService.registration(email, password);
