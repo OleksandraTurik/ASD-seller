@@ -1,7 +1,11 @@
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ArrowDownIcon from 'assets/icons/ArrowDown';
+import Modal from 'components/Modal/Modal';
+import { getCategories } from 'redux/slice/getCategories';
+import { useDispatch, useSelector } from 'react-redux';
+import avtoImg from 'assets/img/rubryky/avto.png';
 import {
   Main,
   Wrapper,
@@ -18,20 +22,62 @@ import {
   PInPickCategory,
   ContactInput,
   PublishButton,
-  InputFile,
+  InputFile, CategoryItems, CategoryContent,
+  CategoryListItem, CategoryList,
 } from './styled';
 
+// eslint-disable-next-line react/prop-types
+const Items = ({ categories, id }) => (
+  <>
+    {/* eslint-disable-next-line react/prop-types */}
+    {categories.map((items) => (
+      // eslint-disable-next-line no-underscore-dangle
+      <CategoryListItem key={items._id}>
+        <h3>
+          {items.name}
+          {' '}
+          {items.children.length ? '>' : null}
+        </h3>
+        {/* eslint-disable-next-line no-underscore-dangle */}
+        {items.children && items._id === id ? items.children.map((i) => (
+          <li>{i.name}</li>
+        )) : null}
+      </CategoryListItem>
+    ))}
+  </>
+);
 const AddAdsPage = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [id, setId] = useState(null);
+  const [showInfo, setShowInfo] = useState(true);
+  const dispatch = useDispatch();
+  const categories = useSelector(state => state.categoryReducer.data);
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onBlur',
   });
+
   const onSubmit = data => console.log(data);
-  console.log(errors);
 
   const handleKeyDown = (e) => {
     e.target.style.height = 'inherit';
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+  if (categories.loading) {
+    return <div>Loading...</div>;
+  }
+
+  useEffect(() => {
+    setShowInfo(true);
+  }, [isOpen]);
+
+  const handleClick = (id) => {
+    setShowInfo(false);
+    setId(id);
+  };
+  // eslint-disable-next-line react/no-unstable-nested-components
 
   return (
     <Main>
@@ -62,10 +108,25 @@ const AddAdsPage = () => {
             </WidthEquation>
             <Category>Категорія*</Category>
             <CategoryWidthEquation>
-              <PickCategory role="button">
+              <PickCategory role="button" type="button" onClick={() => setIsOpen(true)}>
                 <PInPickCategory>Виберіть категорію</PInPickCategory>
                 <ArrowDownIcon style={{ color: 'rgb(0, 47, 52)' }} height="24px" width="24px" />
               </PickCategory>
+              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                <CategoryContent>
+                  {showInfo ? categories.map((item) => (
+                    // eslint-disable-next-line no-underscore-dangle
+                    <CategoryItems key={item._id} onClick={() => handleClick(item._id)}>
+                      <img style={{ width: '48px' }} src={avtoImg} alt="avto" />
+                      {item.name}
+                    </CategoryItems>
+                  )) : (
+                    <CategoryList>
+                      <Items categories={categories} id={id} />
+                    </CategoryList>
+                  )}
+                </CategoryContent>
+              </Modal>
             </CategoryWidthEquation>
           </WhiteBlock>
           <WhiteBlock>
