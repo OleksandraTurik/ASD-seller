@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
   }
 
   & h3 {
-    color: props.theme.mainGreenColor;
+    color: ${props => props.theme.mainGreenColor};
     text-transform: uppercase;
     font-size: 24px;
     margin: 16px 0 4px 0;
@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 
   & p {
     font-size: 16px;
-    color: props.theme.mainGreenColor;
+    color: ${props => props.theme.mainGreenColor};
   }
 `;
 
