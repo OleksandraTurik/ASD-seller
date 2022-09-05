@@ -19,17 +19,6 @@ export const MainContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-export const AddFilterBtn = styled.button`
-  width: 242px;
-  height: 48px;
-  border: 1px solid #d9dfe0;
-  color: #849698;
-  border-radius: 5px;
-  padding: 12px 46px;
-  margin-right: 8px;
-  cursor: pointer;
-`;
-
 export const IconWrap = styled.div`
   display: flex;
   align-items: center;
@@ -84,6 +73,20 @@ export const DropDownBtn = styled.button`
   cursor: pointer;
 `;
 
+export const Test = styled.div`
+  width: 284px;
+  color: #002F34;
+  font-size: 16px;
+
+  .css-319lph-ValueContainer {
+    height: 46px;
+  }
+
+  .css-1s2u09g-control {
+    border-color: transparent;
+  }
+`;
+
 export const Button = styled.button`
   border: none;
   text-align: left;
@@ -98,3 +101,8 @@ export const Button = styled.button`
   font-family: 'Roboto', sans-serif;
   cursor: pointer;
 `;
+
+// export const Test = styled.div`
+//   width: 284px;
+//   height: 48px;
+// `;

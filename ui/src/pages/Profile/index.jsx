@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Components
 import Tabs from 'components/Profile/Tabs';
@@ -18,16 +19,21 @@ const Wrapper = styled.div`
   }
 `;
 
-const Profile = () => (
-  <Wrapper>
-    <h1>Ваші оголошення</h1>
-    <Tabs list={[
-      { title: 'Оголошення', link: 'adverts' },
-      { title: 'Налаштування', link: 'settings' },
-    ]}
-    />
-    <Outlet />
-  </Wrapper>
-);
+const Profile = () => {
+  const { id, loading, error } = useSelector((state) => state.getUserIdReducer);
+  const dispatch = useDispatch();
+
+  return (
+    <Wrapper>
+      <h1>Ваші оголошення</h1>
+      <Tabs list={[
+        { title: 'Оголошення', link: 'adverts' },
+        { title: 'Налаштування', link: 'settings' },
+      ]}
+      />
+      <Outlet />
+    </Wrapper>
+  );
+};
 
 export default Profile;
