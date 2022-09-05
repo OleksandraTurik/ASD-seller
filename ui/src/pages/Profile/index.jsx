@@ -19,21 +19,16 @@ const Wrapper = styled.div`
   }
 `;
 
-const Profile = () => {
-  const { id, loading, error } = useSelector((state) => state.getUserIdReducer);
-  const dispatch = useDispatch();
-
-  return (
-    <Wrapper>
-      <h1>Ваші оголошення</h1>
-      <Tabs list={[
-        { title: 'Оголошення', link: 'adverts' },
-        { title: 'Налаштування', link: 'settings' },
-      ]}
-      />
-      <Outlet />
-    </Wrapper>
-  );
-};
+const Profile = () => (
+  <Wrapper>
+    <h1>Ваші оголошення</h1>
+    <Tabs list={[
+      { title: 'Оголошення', link: 'adverts' },
+      { title: 'Налаштування', link: 'settings' },
+    ]}
+    />
+    <Outlet />
+  </Wrapper>
+);
 
 export default Profile;

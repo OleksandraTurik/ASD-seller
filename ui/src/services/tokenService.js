@@ -1,7 +1,7 @@
 const TOKENS_LS_NAME = 'tokens';
 
 export const tokenService = {
-  getTokens: () => JSON.parse(localStorage.getItem(TOKENS_LS_NAME)),
+  getTokens: () => localStorage.getItem(TOKENS_LS_NAME) ?? JSON.parse(localStorage.getItem(TOKENS_LS_NAME)),
   getRefreshToken: () => {
     const tokens = tokenService.getTokens();
     return tokens?.refreshToken;

@@ -10,10 +10,10 @@ const userServices = {
       throw new ServerException(e.response);
     }
   },
-  getUserId: async (id) => {
+  getAdvertsListUser: async (id) => {
     try {
-      const userId = await API.get(`/users/${id}`);
-      return userId;
+      const userAdverts = await API.get(`/adverts/${id}`);
+      return userAdverts;
     } catch (e) {
       throw new ServerException(e.response);
     }
