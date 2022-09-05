@@ -125,13 +125,13 @@ export const CategoryListItem = styled.li`
   color: rgb(0, 47, 52);
   cursor: pointer;
   font-size: 16px;
-  width: 100%;
   align-items: center;
-  display: flex;
-  justify-content: space-between;
   min-height: 56px;
+  background-color: ${({ selected }) => selected ? 'red' : 'transparent'};
   padding: 16px 16px 16px 0px;
   text-decoration: none;
+  display: flex;
+  justify-content: space-between;
 `;
 export const CategoryContent = styled.ul`
   padding-left: 0px;
