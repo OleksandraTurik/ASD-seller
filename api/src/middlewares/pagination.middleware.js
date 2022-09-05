@@ -1,6 +1,6 @@
 const queryLinkWithPagesMaker = require('../helpers/query-link-with-pages-maker');
 const StatusError = require('../exceptions/StatusError');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
 
 // eslint-disable-next-line consistent-return
 const paginationMiddleware = (req, res, next) => {
