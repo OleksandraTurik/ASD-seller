@@ -5,7 +5,7 @@ import iconClose from 'assets/icons/close-icon.svg';
 
 export const StyledForm = styled.form`
   padding: 40px 0;
-  background-color: #f2f4f5;
+  background-color: ${props => props.theme.greyBackground};
 `;
 
 export const SearchDiv = styled.div`
@@ -41,9 +41,9 @@ export const StyledInput = styled.input`
   margin: 0 0 0 65px;
   font-size: 16px;
   font-weight: 600;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
   font-family: inherit;
-  border-right: 1px solid #f2f4f5;
+  border-right: 1px solid ${props => props.theme.greyBackground};
 
   &::placeholder {
     font-weight: 400;
@@ -75,7 +75,7 @@ export const SubmitSearchButton = styled.button`
   height: 70px;
   border: none;
   background-color: white;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
   cursor: pointer;
   padding-left: 28px;
   background: no-repeat right/20% url(${IconSearch});

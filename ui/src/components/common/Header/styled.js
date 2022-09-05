@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.header`
   width: 100%;
-  background: #003034;
+  background: ${props => props.theme.mainGreenColor};
 `;
 
 export const Nav = styled.nav`
@@ -52,14 +52,14 @@ export const NavLinkAdverts = styled(Link)`
   cursor: pointer;
   background: #fff;
   border-radius: 5px;
-  color: #003034;
+  color: ${props => props.theme.mainGreenColor};
   font-weight: 600;
   font-size: 14px;
   border: 5px solid #fff;
   transition: all 200ms linear;
   height: 25px;
   &:hover {
-    background: #003034;
+    background: ${props => props.theme.mainGreenColor};
     color: #fff;
     transition: all 200ms linear;
   }

@@ -26,7 +26,7 @@ export const NameOfProduct = styled.h4`
   font-size: 18px;
   font-style: normal;
   line-height: 1.25;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -35,7 +35,7 @@ export const NameOfProduct = styled.h4`
   cursor: pointer;
 
   &:hover {
-    background-color: #002f34;
+    background-color: ${props => props.theme.mainGreenColor};
     color: white;
   }
 `;
@@ -59,7 +59,7 @@ export const Price = styled.div`
   font-weight: 600;
   margin-bottom: 5px;
   padding-right: 40px;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
 `;
 
 export const ToFavoriteButton = styled.img`
