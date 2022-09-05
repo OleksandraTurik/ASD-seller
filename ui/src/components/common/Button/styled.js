@@ -17,3 +17,8 @@ export const ButtonStyle = styled.button`
     transition: all 200ms linear;
   }
 `;
+
+export const ButtonAdvertCard = styled.button`
+  background: none;
+  border: none;
+`;
