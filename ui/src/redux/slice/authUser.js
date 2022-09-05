@@ -1,14 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import api from 'services/authServices';
+import { tokenService } from 'services/tokenService';
 
 const initialState = {
-  user: {
-    email: '',
-    id: '',
-    isActivated: false,
-  },
+  user: tokenService.getUserInfo(),
   loading: false,
   error: false,
+  registrationSuccess: false,
 };
 
 const modulePrefix = 'user';
@@ -20,7 +18,19 @@ export const login = createAsyncThunk(
       email: userData.email,
       password: userData.password,
     });
-    localStorage.setItem('token', res.data.accessToken);
+    console.log(res);
+    return res;
+  },
+);
+
+export const registration = createAsyncThunk(
+  `${modulePrefix}/registration`,
+  async (userData) => {
+    const res = await api.registration({
+      email: userData.email,
+      password: userData.password,
+    });
+    console.log(res);
     return res;
   },
 );
@@ -51,30 +61,32 @@ const userSlice = createSlice({
           state.error = true;
           state.loading = false;
         },
+      )
+      .addCase(
+        registration.fulfilled,
+        (state) => {
+          state.loading = false;
+          state.error = false;
+          state.registrationSuccess = true;
+        },
+      )
+      .addCase(
+        registration.pending,
+        (state) => {
+          state.loading = true;
+          state.error = false;
+        },
+      )
+      .addCase(
+        registration.rejected,
+        (state) => {
+          state.loading = false;
+          state.error = true;
+        },
       );
-    // .addCase(logout.fulfilled, (state) => {
-    //   localStorage.removeItem('user');
-    //   state.user = null;
-    //   state.username = '';
-    //   state.password = '';
-    //   state.success = false;
-    //   state.error = false;
-    // })
-    // .addCase(deleteUser.pending, (state) => {
-    //   state.success = false;
-    //   state.error = false;
-    // })
-    // .addCase(deleteUser.fulfilled, (state) => {
-    //   state.success = true;
-    // })
-    // .addCase(deleteUser.rejected, (state) => {
-    //   state.error = true;
-    // })
-    // .addCase(refreshToken.fulfilled, (state, action) => {
-    //   localStorage.setItem('user', JSON.stringify(action.payload));
-    //   state.user = action.payload;
-    // });
   },
 });
 
 export default userSlice.reducer;
+
+// state = initialState
