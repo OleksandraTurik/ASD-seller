@@ -26,6 +26,7 @@ import bmw from 'assets/img/bmw.webp';
 import renault from 'assets/img/renault.webp';
 
 const MainPage = () => (
+
   <>
     <Search />
     <Wrapper>
