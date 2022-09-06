@@ -17,3 +17,11 @@ export const ButtonStyle = styled.button`
     transition: all 200ms linear;
   }
 `;
+
+export const SubCategoryButton = styled.button`
+  background: none;
+  color: #003034;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+`;

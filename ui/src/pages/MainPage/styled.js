@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Title = styled.h3`
@@ -20,12 +21,13 @@ export const CategoriesList = styled.div`
   flex-wrap: wrap;
 `;
 
-export const ItemLink = styled.a`
+export const ItemLink = styled.button`
   width: 120px;
   height: 120px;
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
   color: #002f34;
   font-size: 15px;
   font-weight: 600;
@@ -33,7 +35,9 @@ export const ItemLink = styled.a`
   text-decoration: none;
   margin-left: 16px;
   margin-bottom: 50px;
-  
+  border: none;
+  background: none;
+
   & p {
     padding: 1px;
     margin-top: 23px;
@@ -57,3 +61,5 @@ export const LatestAdsSection = styled.section`
   background-color: #f2f4f5;
   padding-bottom: 55px;
 `;
+
+export const P = styled.p``;
