@@ -2,52 +2,11 @@ const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
 
-const citySchema = new Schema({
-    // name: {
-    //     en: {
-    //         type: String,
-    //     },
-    //     ru: {
-    //         type: String,
-    //     },
-    //     ua: {
-    //         type: String,
-    //         required: true,
-    //     },
-    // },
-    // public_name: {
-    //     en: {
-    //         type: String,
-    //     },
-    //     ru: {
-    //         type: String,
-    //     },
-    //     ua: {
-    //         type: String,
-    //         required: true,
-    //     },
-    // },
-    // post_code: {
-    //     type: [Number],
-    // },
-    // type: { type: String, required: true },
-    // meta: {
-    //     osm_id: {
-    //         type: String,
-    //     },
-    //     google_maps_place_id: {
-    //         type: String,
-    //     },
-    // },
-}, { strict: false });
+const citySchema = new Schema({}, { strict: false });
+citySchema.index({ object_name: 'text', region: 'text' });
 
-citySchema.statics.findFiltered = function (search) {
-    const query = this.find({
-        'name.en': {
-            $regex: search ? `\\b${search.replaceAll(' ', '|')}` : '.',
-            $options: 'gmi',
-        },
-    });
+citySchema.statics.findFiltered = function (search, region) {
+    const query = this.find(region ? { $text: { $search: region } } : {});
 
     return query;
 };
