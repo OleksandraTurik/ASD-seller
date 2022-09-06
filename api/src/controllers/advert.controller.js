@@ -35,16 +35,36 @@ async function getAdvertItemProperty(req, res) {
 }
 async function postAdvert(req, res) {
   try {
+    console.log(req.body);
     const {
-      title, price, sellerId, description,
+      title,
+      price,
+      sellerId,
+      description,
       address,
+      contactName,
+      contactPhone,
     } = req.body;
+    if (!title || !price || !sellerId || !description || !address || !contactName || !contactPhone)
+        throw new StatusError(400, 'Wrong body structure');
+    if (req.file.length < 1)
+        throw new StatusError(400, 'At least 1 photo is required');
+    if (!(await User.findById(sellerId)))
+        throw new StatusError(404, 'This seller does not exist');
+    if (title.length < 16 || title.length > 200)
+        throw new StatusError(400, 'Title must have 16-200 symbols');
+    if (description.length < 80 || description.length > 9000)
+        throw new StatusError(400, 'Description must have 80-9000 symbols');
+    if (price <= 0)
+        throw new StatusError(400, 'Price must be larger than 0');
 
-    if (!title || !price || !sellerId || !description || !address) throw new StatusError(400, 'Wrong body structure');
-    if (!(await User.findById(sellerId))) throw new StatusError(404, 'This user does not exist');
+    const fileObjects = await Promise.all(req.files.map(f => AWS.uploadPhoto(f)));
+    console.log(fileObjects);
+    const images = fileObjects.map(e => e.key);
+    console.log(images);
 
     const item = new Advert({
-      title, price, sellerId: new Types.ObjectId(sellerId), description, address,
+      title, price, sellerId: new Types.ObjectId(sellerId), description, address, images, contactPhone, contactName,
     });
 
     item.save((error) => {
@@ -97,8 +117,10 @@ async function patchAdvertPhoto(req, res) {
 
     const { id } = req.params;
     if (!(await Advert.findById(id))) throw new StatusError(404, 'This advert does not exist');
+    const item = await Advert.findById(id);
+    if (item.images) await Promise.all(item.images.map(file => AWS.deletePhoto(file)));
 
-    const keyObjects = await Promise.all(req.files.map(f => AWS.uploadPhoto(f)));
+    const keyObjects = await Promise.all(req.files.map(file => AWS.uploadPhoto(file)));
     console.log(keyObjects);
     const keys = keyObjects.map(e => e.key);
     console.log(keys);

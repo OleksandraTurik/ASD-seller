@@ -3,13 +3,15 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const advertSchema = new Schema({
-  title: { type: String, required: true },
-  sellerId: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
-  description: { type: String, required: true },
-  price: { type: Number, required: true },
-  images: [String],
-  subcategory: String,
-  address: { type: String, required: true },
+    title: { type: String, required: true },
+    sellerId: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+    images: { type: [String], required: true },
+    subcategory: String,
+    address: { type: String, required: true },
+    contactName: { type:String, required: true },
+    contactPhone: { type: String, required: true },
 }, { timestamps: true });
 
 advertSchema
