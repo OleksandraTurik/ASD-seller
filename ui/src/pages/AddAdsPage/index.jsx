@@ -27,28 +27,10 @@ import {
 } from './styled';
 
 // eslint-disable-next-line react/prop-types
-const Items = ({ categories, id }) => (
-  <>
-    {/* eslint-disable-next-line react/prop-types */}
-    {categories.map((items) => (
-      // eslint-disable-next-line no-underscore-dangle
-      <CategoryListItem key={items._id}>
-        <h3>
-          {items.name}
-          {' '}
-          {items.children.length ? '>' : null}
-        </h3>
-        {/* eslint-disable-next-line no-underscore-dangle */}
-        {items.children && items._id === id ? items.children.map((i) => (
-          <li>{i.name}</li>
-        )) : null}
-      </CategoryListItem>
-    ))}
-  </>
-);
 const AddAdsPage = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [id, setId] = useState(null);
+  const [isOpen, setModalOpen] = useState(false);
+  const [subcategory, setSubcategory] = useState(null);
+  const [selected, setSelected] = useState(null);
   const [showInfo, setShowInfo] = useState(true);
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
@@ -73,11 +55,22 @@ const AddAdsPage = () => {
     setShowInfo(true);
   }, [isOpen]);
 
-  const handleClick = (id) => {
-    setShowInfo(false);
-    setId(id);
+  const toggleModal = () => setModalOpen((prevState) => !prevState);
+
+  // const handleClick = (id) => {
+  //   setShowInfo(false);
+  //   setId(id);
+  // };
+  const handleClick = (category) => () => {
+    if (category.children?.length) {
+      setShowInfo(false);
+      setSubcategory(category);
+    } else {
+      setSelected(category);
+      setModalOpen(false);
+    }
   };
-  // eslint-disable-next-line react/no-unstable-nested-components
+  const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
 
   return (
     <Main>
@@ -108,22 +101,39 @@ const AddAdsPage = () => {
             </WidthEquation>
             <Category>Категорія*</Category>
             <CategoryWidthEquation>
-              <PickCategory role="button" type="button" onClick={() => setIsOpen(true)}>
-                <PInPickCategory>Виберіть категорію</PInPickCategory>
+              <PickCategory role="button" type="button" onClick={toggleModal}>
+                <PInPickCategory>{pickCategoryName}</PInPickCategory>
                 <ArrowDownIcon style={{ color: 'rgb(0, 47, 52)' }} height="24px" width="24px" />
               </PickCategory>
-              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+              <Modal open={isOpen} onClose={toggleModal}>
                 <CategoryContent>
                   {showInfo ? categories.map((item) => (
-                    // eslint-disable-next-line no-underscore-dangle
-                    <CategoryItems key={item._id} onClick={() => handleClick(item._id)}>
+                    <CategoryItems key={item._id} onClick={handleClick(item)}>
                       <img style={{ width: '48px' }} src={avtoImg} alt="avto" />
                       {item.name}
                     </CategoryItems>
                   )) : (
-                    <CategoryList>
-                      <Items categories={categories} id={id} />
-                    </CategoryList>
+                    <div style={{ display: 'flex' }}>
+                      <CategoryList>
+                        {categories.map((item) => (
+                          <CategoryListItem selected={item._id === subcategory?._id} key={item._id} onClick={handleClick(item)}>
+                            <div>
+                              {item.name}
+                            </div>
+                            <div>
+                              {item.children.length ? '>' : null}
+                            </div>
+                          </CategoryListItem>
+                        ))}
+                      </CategoryList>
+                      {(subcategory && subcategory.children?.length) && (
+                        <CategoryList>
+                          {subcategory.children.map((item) => (
+                            <CategoryListItem selected={item._id === subcategory?._id} onClick={handleClick(item)}>{item.name}</CategoryListItem>
+                          ))}
+                        </CategoryList>
+                      )}
+                    </div>
                   )}
                 </CategoryContent>
               </Modal>
