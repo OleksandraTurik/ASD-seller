@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Loader from 'components/common/Loader';
-import SharedLayout from './SharedLayout';
 
 const MainPage = lazy(() => import('pages/MainPage'));
 const AdvertPage = lazy(() => import('pages/Advert'));
@@ -15,19 +14,17 @@ const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
 const MainRoutes = () => (
   <Suspense fallback={<Loader />}>
     <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route index element={<MainPage />} />
-        <Route path="/adverts" element={<h1>Advert list</h1>} />
-        <Route path="/adverts/:id" element={<AdvertPage />} />
-        <Route path="/profiles/:id" element={<Profile />}>
-          <Route path="adverts" element={<MyAdverts />} />
-          <Route path="settings" element={<h1>P settings</h1>} />
-        </Route>
-        <Route path="/add" element={<AddAdsPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegistrationPage />} />
-        <Route path="*" element={<NotFound />} />
+      <Route index element={<MainPage />} />
+      <Route path="/adverts" element={<h1>Advert list</h1>} />
+      <Route path="/adverts/:id" element={<AdvertPage />} />
+      <Route path="/profiles/:id" element={<Profile />}>
+        <Route path="adverts" element={<MyAdverts />} />
+        <Route path="settings" element={<h1>P settings</h1>} />
       </Route>
+      <Route path="/add" element={<AddAdsPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegistrationPage />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   </Suspense>
 );
