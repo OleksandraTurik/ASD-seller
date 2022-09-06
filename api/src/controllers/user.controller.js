@@ -10,7 +10,7 @@ class UserController {
     try {
       console.log(req.body);
       const errors = validationResult(req);
-      if (errors.isEmpty()) {
+      if (!errors.isEmpty()) {
         throw new StatusError (400, 'Invalid authorization data');
       }
       const { email, password } = req.body;

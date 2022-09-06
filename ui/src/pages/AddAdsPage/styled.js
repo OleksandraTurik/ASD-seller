@@ -97,7 +97,50 @@ export const Category = styled.p`
   margin: 8px 0px;
 `;
 
-export const PickCategory = styled.div`
+export const CategoryItems = styled.button`
+  align-items: center;
+  background-color: rgb(255, 251, 219);
+  border: none;
+  border-radius: 4px;
+  color: rgb(0, 47, 52);
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 8px;
+  padding: 16px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s ease 0s;
+  width: 100%;
+`;
+export const CategoryList = styled.ul`
+  padding-left: 0px;
+  margin-top: 0px;
+  max-height: 559px;
+  overflow-y: auto;
+  padding-right: 8px;
+`;
+export const CategoryListItem = styled.li`
+  border-bottom: 1px solid rgb(216, 223, 224);
+  box-sizing: border-box;
+  color: rgb(0, 47, 52);
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: 16px 16px 16px 0px;
+  text-decoration: none;
+`;
+export const CategoryContent = styled.ul`
+  padding-left: 0px;
+  margin-top: 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 16px;
+`;
+export const PickCategory = styled.button`
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -105,6 +148,9 @@ export const PickCategory = styled.div`
   border-radius: 4px;
   padding: 16px;
   cursor: pointer;
+  border: none;
+  text-align: center;
+  align-items: center;
 `;
 
 export const PInPickCategory = styled.p`
