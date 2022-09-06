@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
@@ -42,8 +42,17 @@ const AdvertPage = () => {
   } = advert.advertInfo;
 
   const { loading, error } = advert;
+  const [advertState, setAdvertState] = useState({});
 
   console.log(advert);
+
+  const advertLocation = useLocation();
+
+  console.log('advert', advertState);
+
+  useEffect(() => {
+    setAdvertState(advertLocation);
+  }, [advertLocation]);
 
   const advertPage = () => {
     if (error) {

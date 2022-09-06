@@ -30,7 +30,7 @@ const AdvertCard = ({
 
   const handleNavigate = async () => {
     await dispatch(getAdvertThunk(id));
-    navigate(`${link}`);
+    navigate(`${link}`, { state: advert });
   };
 
   return (

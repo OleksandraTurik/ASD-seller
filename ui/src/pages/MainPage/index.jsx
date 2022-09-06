@@ -140,9 +140,6 @@ const MainPage = () => {
     },
   ];
 
-  const dispatch = useDispatch();
-  const advert = useSelector(state => state.getAdvert);
-
   return (
     <>
       <Search />
