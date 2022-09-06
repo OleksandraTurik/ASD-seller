@@ -7,7 +7,7 @@ import Filters from './Filters';
 
 // Styles
 const Wrapper = styled.div`
-  background-color: #f2f4f5;
+  background-color: ${props => props.theme.greyBackground};
   height: 100vh;
   padding: 35px 125px 0 125px;
 `;

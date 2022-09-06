@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Main = styled.main`
-  background-color: #f2f4f5;
+  background-color: ${props => props.theme.greyBackground};
   width: 100%;
 `;
 
@@ -15,7 +15,7 @@ export const Title = styled.h2`
   font-size: 32px;
   line-height: 34px;
   font-weight: 700;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   padding: 48px 0px 30px;
 `;
 
@@ -42,7 +42,7 @@ export const WhiteBlockTitle = styled.div`
   font-size: 20px;
   line-height: 22px;
   font-weight: 500;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   margin: 0px 0px 16px;
 `;
 
@@ -53,7 +53,7 @@ export const LabelForInut = styled.label`
   width: 100%;
   font-size: 14px;
   line-height: 18px;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
 
   &:nth-child(5),
   &:nth-child(8),
@@ -67,7 +67,7 @@ export const TitleTextArea = styled.input`
   background-color: rgb(242, 244, 245);
   border: 2px solid rgb(242, 244, 245);
   border-radius: 4px;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   font-family: sans-serif;
   font-size: 17px;
   line-height: 20px;
@@ -77,7 +77,7 @@ export const TitleTextArea = styled.input`
   width: 100%;
 
   &:focus {
-    border-bottom-color: rgb(0, 47, 52);
+    border-bottom-color: ${props => props.theme.mainGreenColor};
   }
 `;
 
@@ -93,7 +93,7 @@ export const ErrorTitle = styled.p`
 export const Category = styled.p`
   line-height: 20px;
   font-size: 14px;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   margin: 8px 0px;
 `;
 
@@ -156,7 +156,7 @@ export const PickCategory = styled.button`
 export const PInPickCategory = styled.p`
   font-size: 16px;
   line-height: 20px;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   margin: 0px;
   padding: 0px;
 `;
@@ -179,7 +179,7 @@ export const PInPickCategory = styled.p`
 
 export const ContactInput = styled.input`
     font-size: 16px;
-    color: rgb(0, 47, 52);
+    color: ${props => props.theme.mainGreenColor};
     background-color: rgb(242, 244, 245);
     border: none;
     border-right: none;
@@ -193,7 +193,7 @@ export const ContactInput = styled.input`
     width: 100%;
 
     &:focus {
-    border-bottom-color: rgb(0, 47, 52);
+    border-bottom-color: ${props => props.theme.mainGreenColor};
   }
 `;
 
@@ -203,15 +203,15 @@ export const PublishButton = styled.button`
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
-    background-color: rgb(0, 47, 52);
-    border: 5px solid rgb(0, 47, 52);
+    background-color: ${props => props.theme.mainGreenColor};
+    border: 5px solid ${props => props.theme.mainGreenColor};
     border-radius: 4px;
     color: rgb(255, 255, 255);
     padding: 10px 30px 8px;
     transition: all 0.1s ease;
 
     &:hover {
-      color: rgb(0, 47, 52);
+      color: ${props => props.theme.mainGreenColor};
       background-color: white;
     }
 `;
@@ -225,8 +225,8 @@ export const InputFile = styled.input`
     font-weight: 700;
     font-size: 13px;
     line-height: 18px;
-    background-color: rgb(0, 47, 52);
-    border: 2px solid rgb(0, 47, 52);
+    background-color: ${props => props.theme.mainGreenColor};
+    border: 2px solid ${props => props.theme.mainGreenColor};
     border-radius: 4px;
     color: rgb(255, 255, 255);
     padding: 5px 11px 5px;
@@ -234,7 +234,7 @@ export const InputFile = styled.input`
   }
 
   &::-webkit-file-upload-button:hover {
-    color: rgb(0, 47, 52);
+    color: ${props => props.theme.mainGreenColor};
     background-color: white;
   }
 `;

@@ -44,7 +44,7 @@ export const WrapperLink = styled.div`
   }
 
   & .link.active {
-    border-bottom: 3px solid #002f34;
+    border-bottom: 3px solid ${props => props.theme.mainGreenColor};
   }
 `;
 export const ErrorContainer = styled.div``;
@@ -56,7 +56,7 @@ export const Input = styled.input`
   box-sizing: border-box;
   padding: 14px 16px;
   border-radius: 4px;
-  background: #f2f4f5;
+  background: ${props => props.theme.greyBackground};
   padding: 14px 16px;
   border-radius: 4px;
   font-size: 16px;
@@ -79,8 +79,8 @@ export const Button = styled.button`
   color: #fff;
   font-size: 16px;
   font-weight: 500;
-  background: #002f34;
-  box-shadow: 0 0 0 2px #002f34;
+  background: ${props => props.theme.mainGreenColor};
+  box-shadow: 0 0 0 2px ${props => props.theme.mainGreenColor};
   border: none;
   padding: 10px 16px;
   align-items: center;
