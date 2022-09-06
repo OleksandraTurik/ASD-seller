@@ -1,15 +1,13 @@
 import React from 'react';
 
 // Icons
-import { ReactComponent as IconSettings } from 'assets/icons/settings.svg';
-import { ReactComponent as IconSearch } from 'assets/icons/search-icon.svg';
-import { ReactComponent as IconArrowDown } from 'assets/icons/angleDown.svg';
+import IconSearch from 'assets/icons/MagnifyingGlass';
+import IconArrowDown from 'assets/icons/ArrowDown';
 
 // Styles
 import {
   Wrapper,
   MainContainer,
-  AddFilterBtn,
   IconWrap,
   Container,
   SearchInput,
@@ -21,17 +19,13 @@ import {
 const Filters = () => (
   <Wrapper>
     <MainContainer>
-      <div>
-        <AddFilterBtn type="button">
-          <IconWrap>
-            <IconSettings />
-            Додати фільтр
-          </IconWrap>
-        </AddFilterBtn>
-      </div>
       <Container>
         <IconContainer>
-          <IconSearch />
+          <IconSearch
+            width="20px"
+            height="20px"
+            fill="#002F34"
+          />
         </IconContainer>
         <SearchInput
           type="text"

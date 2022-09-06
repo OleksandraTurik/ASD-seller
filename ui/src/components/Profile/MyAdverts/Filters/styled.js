@@ -19,17 +19,6 @@ export const MainContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-export const AddFilterBtn = styled.button`
-  width: 242px;
-  height: 48px;
-  border: 1px solid #d9dfe0;
-  color: #849698;
-  border-radius: 5px;
-  padding: 12px 46px;
-  margin-right: 8px;
-  cursor: pointer;
-`;
-
 export const IconWrap = styled.div`
   display: flex;
   align-items: center;
@@ -47,7 +36,7 @@ export const IconWrap = styled.div`
   }
 `;
 
-export const IconContainer = styled(IconWrap)`
+export const IconContainer = styled.div`
   position: absolute;
   top: 12px;
   left: 15px;

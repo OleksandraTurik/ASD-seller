@@ -38,11 +38,6 @@ export const LocationInfo = styled.div`
   }
 `;
 
-export const Icon = styled.img`
-  align-self: flex-start;
-  width: 17px;
-`;
-
 export const MapImage = styled.img`
   width: 145px;
   height: 105px;

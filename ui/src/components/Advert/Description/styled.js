@@ -35,7 +35,9 @@ export const Span = styled.span`
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 
   & span {
     display: block;
@@ -70,6 +72,18 @@ export const Line = styled.div`
   border-bottom: 1px solid #000;
 `;
 
-export const Icon = styled.img`
-  width: 20px;
+export const FavoriteBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  bottom: 12px;
+  right: 20px;
+  cursor: pointer;
+
+  & svg {
+    opacity: 0.4;
+  }
+
+  &:hover svg {
+    opacity: 1;
+  }
 `;
