@@ -25,6 +25,7 @@ import {
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
 } from './styled';
+import advertServices from '../../services/advertServices';
 
 // eslint-disable-next-line react/prop-types
 const AddAdsPage = () => {
@@ -34,11 +35,28 @@ const AddAdsPage = () => {
   const [showInfo, setShowInfo] = useState(true);
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    mode: 'onBlur',
+  const {
+    register, handleSubmit, getValues, formState: { errors },
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      title: '',
+      price: '2000',
+      sellerId: '63170b8de86d98b1d83edee1',
+      description: '',
+      address: '',
+    },
   });
-
-  const onSubmit = data => console.log(data);
+  const onSubmit = async (v) => {
+    const send = await advertServices.createAdverts({
+      title: v.title,
+      price: v.price,
+      sellerId: v.sellerId,
+      description: v.description,
+      address: v.address,
+    });
+    console.log(send);
+  };
 
   const handleKeyDown = (e) => {
     e.target.style.height = 'inherit';
@@ -57,10 +75,6 @@ const AddAdsPage = () => {
 
   const toggleModal = () => setModalOpen((prevState) => !prevState);
 
-  // const handleClick = (id) => {
-  //   setShowInfo(false);
-  //   setId(id);
-  // };
   const handleClick = (category) => () => {
     if (category.children?.length) {
       setShowInfo(false);
@@ -86,13 +100,12 @@ const AddAdsPage = () => {
                 name="title"
                 type="text"
                 rows="1"
-                required
                 onKeyDown={handleKeyDown}
                 placeholder="Наприклад, iPhone 8"
-                {...register('Title', {
+                {...register('title', {
                   required: 'Заголовок відіграє важливу роль, не забудьте додати його',
                   minLength: {
-                    value: 16,
+                    value: 3,
                     message: 'У заголовку має бути не менше 16 символів',
                   },
                 })}
@@ -158,33 +171,11 @@ const AddAdsPage = () => {
               <TitleTextArea
                 id="description"
                 name="description"
-                required
-                rows="13"
+                type="text"
                 placeholder="Подумайте, що ви хотіли би дізнатися з оголошення. І додайте це в опис"
-                {...register('Description', {
-                  required: 'Опис повинен бути не коротшим за 80 знаків',
-                  minLength: {
-                    value: 80,
-                    message: 'Опис повинен бути не коротшим за 80 знаків',
-                  },
-                })}
+                {...register('description')}
               />
               <div>{errors.Description && <ErrorTitle>{errors.Description.message || 'Опис повинен бути не коротшим за 80 знаків'}</ErrorTitle>}</div>
-              {/* <DescriptionProgress>
-                <span style={{ float: 'left' }}>
-                  {value.length < 80
-                    && (
-                      <span>
-                        Напишіть ще&nbsp;
-                        {80 - value.length}
-                        &nbsp;символів
-                      </span>
-                    )}
-                </span>
-                <span style={{ float: 'right' }}>
-                  {`${value.length}/9000 `}
-                </span>
-              </DescriptionProgress> */}
             </WidthEquation>
           </WhiteBlock>
           <WhiteBlock>
@@ -192,12 +183,11 @@ const AddAdsPage = () => {
               <WhiteBlockTitle>Ваші контактні дані</WhiteBlockTitle>
               <LabelForInut for="location">Місцезнаходження*</LabelForInut>
               <ContactInput
-                id="location"
-                name="location"
+                id="address"
+                name="address"
                 placeholder="Назва міста"
                 type="text"
-                required
-                {...register('Location', {
+                {...register('address', {
                   required: 'Невірне місцезнаходження',
                   minLength: {
                     value: 1,
@@ -212,7 +202,6 @@ const AddAdsPage = () => {
                 name="author"
                 placeholder="Ім'я"
                 type="text"
-                required
                 {...register('Author', {
                   required: "Будь ласка, вкажіть ім'я контактної особи",
                   minLength: {

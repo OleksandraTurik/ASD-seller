@@ -10,7 +10,7 @@ const advertServices = {
       throw new ServerException(e.response);
     }
   },
-  createAdverts: async (id, {
+  createAdverts: async ({
     title,
     price,
     sellerId,
