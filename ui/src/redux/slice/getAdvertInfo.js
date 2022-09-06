@@ -7,10 +7,8 @@ const initialState = {
   error: null,
 };
 
-const modulePrefix = 'users/adverts';
-
 export const getAdvertsInfo = createAsyncThunk(
-  `${modulePrefix}/getAdvertsInfo`,
+  'advertsList/getAdvertsInfo',
   async () => {
     const result = await userServices.getAdvertsListUser();
     return result;
@@ -18,7 +16,7 @@ export const getAdvertsInfo = createAsyncThunk(
 );
 
 const avdertsInfoSlice = createSlice({
-  name: 'user adverts list',
+  name: 'advertsList',
   initialState,
   extraReducers: (builder) => {
     builder
