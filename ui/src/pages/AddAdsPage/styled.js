@@ -62,7 +62,7 @@ export const LabelForInut = styled.label`
   }
 `;
 
-export const TitleTextArea = styled.textarea`
+export const TitleTextArea = styled.input`
   background-clip: padding-box;
   background-color: rgb(242, 244, 245);
   border: 2px solid rgb(242, 244, 245);
