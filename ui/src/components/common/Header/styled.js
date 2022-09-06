@@ -15,23 +15,16 @@ export const Nav = styled.nav`
   margin: 0 auto;
 `;
 
-export const HeaderContainer = styled.div`
-  display: flex;
-  text-align: center;
-`;
-
 export const Ul = styled.ul`
+  width: 25%;
   display: flex;
-  flex-direction: row;
-  align-items:center;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const Li = styled.li`
   list-style-type: none;
   font-size: 20px;
-  margin-left: 20px;
-  display: flex;
-  align-self: center;
 `;
 
 export const A = styled.a`

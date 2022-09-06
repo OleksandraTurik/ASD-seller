@@ -15,18 +15,13 @@ export const Wrapper = styled.div`
   & h2 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin: 48px 0 16px 0;
   }
 
   & p {
     font-size: 16px;
     margin-bottom: 32px;
   }
-`;
-
-export const Icon = styled.img`
-  width: 180px;
-  margin-bottom: 48px;
 `;
 
 export const AddAdvertLink = styled(Link)`
