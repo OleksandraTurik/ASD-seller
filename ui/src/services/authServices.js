@@ -8,15 +8,11 @@ export const apiUserService = {
     return data;
   },
 
-  registration: async (email, password) => {
-    const { data } = API.post('/users/registration', { email, password });
-    tokenService.updateTokens(data);
-    return data;
-  },
-
   logout: async () => {
+    await API.post('/users/logout');
     localStorage.removeItem('tokens');
   },
+
   refreshToken: async () => {
     const { data } = API.get('/users/refresh');
     tokenService.updateTokens(data);

@@ -21,4 +21,12 @@ export const tokenService = {
   removeTokens: () => {
     localStorage.removeItem(TOKENS_LS_NAME);
   },
+  getUserInfo: () => {
+    const tokens = tokenService.getTokens();
+    return tokens?.userDto ?? {
+      email: '',
+      id: '',
+      isActivated: false,
+    };
+  },
 };
