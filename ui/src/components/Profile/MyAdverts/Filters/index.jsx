@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 
 // Icons
 import IconSearch from 'assets/icons/MagnifyingGlass';
@@ -14,7 +15,39 @@ import {
   DropDownBtn,
   Button,
   IconContainer,
+  Test,
 } from './styled';
+
+const options = [
+  { value: 'заголовок: а-я', label: 'Заголовок: А-Я' },
+  { value: 'заголовок: я-а', label: 'Заголовок: Я-А' },
+  { value: 'ціна: найнижча', label: 'Ціна: Найнижча' },
+  { value: 'ціна: найвища', label: 'Ціна: Найвища' },
+];
+
+const customStyles = {
+  menu: (provided, state) => ({
+    ...provided,
+    color: state.selectProps.menuColor ? '' : '#002F34',
+    padding: 5,
+  }),
+
+  control: (base, state) => ({
+    ...base,
+    border: state.isFocused ? 0 : 0,
+    boxShadow: state.isFocused ? 0 : 0,
+    '&:hover': {
+      border: state.isFocused ? 0 : 0,
+    },
+  }),
+
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
+
+    return { ...provided, opacity, transition };
+  },
+};
 
 const Filters = () => (
   <Wrapper>
@@ -29,7 +62,7 @@ const Filters = () => (
         </IconContainer>
         <SearchInput
           type="text"
-          placeholder="Заголовком або ID"
+          placeholder="Заголовок"
         />
       </Container>
       <Container>
@@ -43,14 +76,21 @@ const Filters = () => (
         </DropDownBtn>
       </Container>
       <Container>
-        <Button type="button">
-          Сортувати
-        </Button>
-        <DropDownBtn>
-          <IconWrap>
-            <IconArrowDown />
-          </IconWrap>
-        </DropDownBtn>
+        <Test>
+          <Select
+            styles={customStyles}
+            options={options}
+            placeholder="Сортувати"
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary25: '#e6fcff',
+                primary: '#002F34',
+              },
+            })}
+          />
+        </Test>
       </Container>
     </MainContainer>
     <span>Всього оголошень: 0</span>

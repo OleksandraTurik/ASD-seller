@@ -73,6 +73,20 @@ export const DropDownBtn = styled.button`
   cursor: pointer;
 `;
 
+export const Test = styled.div`
+  width: 284px;
+  color: #002F34;
+  font-size: 16px;
+
+  .css-319lph-ValueContainer {
+    height: 46px;
+  }
+
+  .css-1s2u09g-control {
+    border-color: transparent;
+  }
+`;
+
 export const Button = styled.button`
   border: none;
   text-align: left;
