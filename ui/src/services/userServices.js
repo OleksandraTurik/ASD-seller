@@ -12,7 +12,7 @@ const userServices = {
   },
   getAdvertsListUser: async (id) => {
     try {
-      const userAdverts = await API.get(`/adverts/${id}`);
+      const userAdverts = await API.get(`/users/adverts/${id}`);
       return userAdverts;
     } catch (e) {
       throw new ServerException(e.response);

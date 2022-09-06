@@ -2,12 +2,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import userServices from 'sevices/userServices';
 
 const initialState = {
-  title: null,
+  data: {},
   loading: false,
   error: null,
 };
 
-const modulePrefix = 'user';
+const modulePrefix = 'users/adverts';
 
 export const getAdvertsInfo = createAsyncThunk(
   `${modulePrefix}/getAdvertsInfo`,
@@ -17,8 +17,8 @@ export const getAdvertsInfo = createAsyncThunk(
   },
 );
 
-const getUserIdReducer = createSlice({
-  name: 'adverts list',
+const avdertsInfoSlice = createSlice({
+  name: 'user adverts list',
   initialState,
   extraReducers: (builder) => {
     builder
@@ -46,4 +46,4 @@ const getUserIdReducer = createSlice({
   },
 });
 
-export default getAdvertsInfo.reducer;
+export default avdertsInfoSlice.reducer;
