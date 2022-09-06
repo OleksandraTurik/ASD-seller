@@ -54,11 +54,6 @@ export const UserIcon = styled.img`
   width: 45px;
 `;
 
-export const ArrowIcon = styled.img`
-  width: 10px;
-  margin: 0 5px;
-`;
-
 export const Button = styled.button`
   width: 165px;
   min-height: 48px;
@@ -82,11 +77,13 @@ export const Button = styled.button`
 
 export const AllAdvertsLink = styled(Link)`
   display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 14px;
   line-height: 18px;
   color: #002F34;
   cursor: pointer;
- 
+
   &:hover {
     text-decoration: underline;
   }

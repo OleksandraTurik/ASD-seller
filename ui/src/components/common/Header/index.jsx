@@ -1,5 +1,10 @@
 import React from 'react';
-import Like from './Like';
+
+// Icons
+import Logo from 'assets/icons/Logo';
+import Like from 'assets/icons/Like';
+
+// Styles
 import {
   Nav,
   Ul,
@@ -9,22 +14,26 @@ import {
   NavLink,
   NavLinkAdverts,
   NavLinkHeader,
-  HeaderContainer,
 } from './styled';
-import Logo from '../../../assets/icons/Logo';
 
 const Header = () => (
   <Container>
     <Nav>
       <NavLinkHeader to="/">
         <Logo
-          width={250}
-          fill="white"
+          width="250px"
+          fill="#fff"
         />
       </NavLinkHeader>
       <Ul>
         <Li>
-          <A href="*"><Like /></A>
+          <A href="*">
+            <Like
+              width="25px"
+              height="25px"
+              fill="#fff"
+            />
+          </A>
         </Li>
         <Li>
           <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // Icons
 import avatar from 'assets/icons/avatar.svg';
-import angleRight from 'assets/icons/angleRight.svg';
+import IconArrowRight from 'assets/icons/ArrowRight';
 
 // Styles
 import {
@@ -13,7 +13,6 @@ import {
   UserInfo,
   RegistrationDate,
   AllAdvertsLink,
-  ArrowIcon,
   Button,
 } from './styled';
 
@@ -37,7 +36,11 @@ const User = ({
     <Button type="button">Показати телефон</Button>
     <AllAdvertsLink to={link}>
       Усі оголошення автора
-      <ArrowIcon src={angleRight} alt="right arrow icon" />
+      <IconArrowRight
+        width="20px"
+        height="20px"
+        fill="#002F34"
+      />
     </AllAdvertsLink>
   </Wrapper>
 );

@@ -62,9 +62,11 @@ export const Price = styled.div`
   color: #002f34;
 `;
 
-export const ToFavoriteButton = styled.img`
+export const ToFavoriteButton = styled.button`
+  background-color: transparent;
+  border: none;
   position: absolute;
-  bottom: 25px;
+  bottom: 12px;
   right: 20px;
   cursor: pointer;
   opacity: 0.4;

@@ -1,14 +1,17 @@
 import React from 'react';
 
 // Icons
-import notFound from 'assets/icons/notFoundIcon.svg';
+import IconNotFound from 'assets/icons/NotFoundAdverts';
 
 // Styles
-import { Wrapper, Icon, AddAdvertLink } from './styled';
+import { Wrapper, AddAdvertLink } from './styled';
 
 const AdvertsList = () => (
   <Wrapper>
-    <Icon src={notFound} />
+    <IconNotFound
+      width="180px"
+      height="180px"
+    />
     <h2>Наразі тут немає оголошень</h2>
     <p>Тут будуть з&apos;являтися ваші нові оголошення</p>
     <AddAdvertLink to="/add">

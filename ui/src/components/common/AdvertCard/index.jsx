@@ -1,5 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Icons
+import Like from 'assets/icons/Like';
+
+// Styles
 import {
   Card,
   ImgInCard,
@@ -8,8 +13,6 @@ import {
   Price,
   ToFavoriteButton,
 } from 'components/common/AdvertCard/styled';
-
-import favButtonIcon from 'assets/icons/toFavoriteButton.svg';
 
 const AdvertCard = ({
   link,
@@ -32,7 +35,12 @@ const AdvertCard = ({
       <span>{date}</span>
     </Info>
     <Price>{price}</Price>
-    <ToFavoriteButton src={favButtonIcon} alt="To Favorite Button" width="29px" />
+    <ToFavoriteButton>
+      <Like
+        width="29px"
+        fill="#c6c6c6"
+      />
+    </ToFavoriteButton>
   </Card>
 );
 
