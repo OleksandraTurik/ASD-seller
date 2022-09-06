@@ -1,7 +1,11 @@
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ArrowDownIcon from 'assets/icons/ArrowDown';
+import Modal from 'components/Modal/Modal';
+import { getCategories } from 'redux/slice/getCategories';
+import { useDispatch, useSelector } from 'react-redux';
+import avtoImg from 'assets/img/rubryky/avto.png';
 import {
   Main,
   Wrapper,
@@ -18,20 +22,55 @@ import {
   PInPickCategory,
   ContactInput,
   PublishButton,
-  InputFile,
+  InputFile, CategoryItems, CategoryContent,
+  CategoryListItem, CategoryList,
 } from './styled';
 
+// eslint-disable-next-line react/prop-types
 const AddAdsPage = () => {
+  const [isOpen, setModalOpen] = useState(false);
+  const [subcategory, setSubcategory] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [showInfo, setShowInfo] = useState(true);
+  const dispatch = useDispatch();
+  const categories = useSelector(state => state.categoryReducer.data);
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onBlur',
   });
+
   const onSubmit = data => console.log(data);
-  console.log(errors);
 
   const handleKeyDown = (e) => {
     e.target.style.height = 'inherit';
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+  if (categories.loading) {
+    return <div>Loading...</div>;
+  }
+
+  useEffect(() => {
+    setShowInfo(true);
+  }, [isOpen]);
+
+  const toggleModal = () => setModalOpen((prevState) => !prevState);
+
+  // const handleClick = (id) => {
+  //   setShowInfo(false);
+  //   setId(id);
+  // };
+  const handleClick = (category) => () => {
+    if (category.children?.length) {
+      setShowInfo(false);
+      setSubcategory(category);
+    } else {
+      setSelected(category);
+      setModalOpen(false);
+    }
+  };
+  const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
 
   return (
     <Main>
@@ -62,10 +101,42 @@ const AddAdsPage = () => {
             </WidthEquation>
             <Category>Категорія*</Category>
             <CategoryWidthEquation>
-              <PickCategory role="button">
-                <PInPickCategory>Виберіть категорію</PInPickCategory>
+              <PickCategory role="button" type="button" onClick={toggleModal}>
+                <PInPickCategory>{pickCategoryName}</PInPickCategory>
                 <ArrowDownIcon style={{ color: 'rgb(0, 47, 52)' }} height="24px" width="24px" />
               </PickCategory>
+              <Modal open={isOpen} onClose={toggleModal}>
+                <CategoryContent>
+                  {showInfo ? categories.map((item) => (
+                    <CategoryItems key={item._id} onClick={handleClick(item)}>
+                      <img style={{ width: '48px' }} src={avtoImg} alt="avto" />
+                      {item.name}
+                    </CategoryItems>
+                  )) : (
+                    <div style={{ display: 'flex' }}>
+                      <CategoryList>
+                        {categories.map((item) => (
+                          <CategoryListItem selected={item._id === subcategory?._id} key={item._id} onClick={handleClick(item)}>
+                            <div>
+                              {item.name}
+                            </div>
+                            <div>
+                              {item.children.length ? '>' : null}
+                            </div>
+                          </CategoryListItem>
+                        ))}
+                      </CategoryList>
+                      {(subcategory && subcategory.children?.length) && (
+                        <CategoryList>
+                          {subcategory.children.map((item) => (
+                            <CategoryListItem selected={item._id === subcategory?._id} onClick={handleClick(item)}>{item.name}</CategoryListItem>
+                          ))}
+                        </CategoryList>
+                      )}
+                    </div>
+                  )}
+                </CategoryContent>
+              </Modal>
             </CategoryWidthEquation>
           </WhiteBlock>
           <WhiteBlock>
