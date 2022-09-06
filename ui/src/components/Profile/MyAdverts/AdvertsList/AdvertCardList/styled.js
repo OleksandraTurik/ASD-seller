@@ -44,7 +44,7 @@ export const TopWrap = styled.div`
 export const BottomWrap = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-top: 10px;
 
   & span {
@@ -76,6 +76,7 @@ export const LocationWrap = styled.div`
   align-items: center;
 
   & p {
+    margin-left: 5px;
     font-size: 14px;
     color: rgb(64, 99, 103);
   }
@@ -86,14 +87,10 @@ export const DataWrap = styled.div`
   align-items: center;
 
   & span {
+    margin-left: 5px;
     font-size: 14px;
     color: rgb(64, 99, 103);
   }
-`;
-
-export const Icon = styled.img`
-  width: 12px;
-  margin-right: 5px;
 `;
 
 export const AdvertBodyWrap = styled.div`

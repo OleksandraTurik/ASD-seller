@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 
 // Icons
-import mapMarker from 'assets/icons/mapMarker.svg';
-import calendar from 'assets/icons/calendar.svg';
+import IconLocation from 'assets/icons/Location';
+import IconCalendar from 'assets/icons/Calendar';
 
 // Styles
 import {
@@ -18,7 +17,6 @@ import {
   AdvertBodyWrap,
   ListWrap,
   LocationWrap,
-  Icon,
   DataWrap,
   BottomWrap,
   EditLink,
@@ -33,7 +31,6 @@ const AdvertCardList = ({
   price,
   category,
   subcategory,
-  id,
 }) => {
   const userId = JSON.parse(localStorage.getItem('tokens'));
   console.log(userId.userDto.id);
@@ -55,18 +52,25 @@ const AdvertCardList = ({
                 </ul>
               </ListWrap>
               <LocationWrap>
-                <Icon src={mapMarker} alt="map icon" />
+                <IconLocation
+                  width="20px"
+                  height="20px"
+                  fill="#002F34"
+                />
                 <p>{location}</p>
               </LocationWrap>
               <DataWrap>
-                <Icon src={calendar} alt="calendar icon" />
+                <IconCalendar
+                  width="20px"
+                  height="20px"
+                  fill="#002F34"
+                />
                 <span>{date}</span>
               </DataWrap>
             </AdvertBodyWrap>
           </AdvertInfoWrap>
         </TopWrap>
         <BottomWrap>
-          <span>{id}</span>
           <EditLink to="/adverts">Редагувати</EditLink>
         </BottomWrap>
       </Container>
@@ -83,7 +87,6 @@ AdvertCardList.propTypes = {
   price: PropTypes.string,
   category: PropTypes.string,
   subcategory: PropTypes.string,
-  id: PropTypes.string,
 };
 
 AdvertCardList.defaultProps = {
@@ -95,7 +98,6 @@ AdvertCardList.defaultProps = {
   price: '',
   category: '',
   subcategory: '',
-  id: '',
 };
 
 export default AdvertCardList;

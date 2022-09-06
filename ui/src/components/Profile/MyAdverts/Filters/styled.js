@@ -36,7 +36,7 @@ export const IconWrap = styled.div`
   }
 `;
 
-export const IconContainer = styled(IconWrap)`
+export const IconContainer = styled.div`
   position: absolute;
   top: 12px;
   left: 15px;
@@ -101,8 +101,3 @@ export const Button = styled.button`
   font-family: 'Roboto', sans-serif;
   cursor: pointer;
 `;
-
-// export const Test = styled.div`
-//   width: 284px;
-//   height: 48px;
-// `;

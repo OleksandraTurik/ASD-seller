@@ -2,8 +2,8 @@ import React from 'react';
 import Select from 'react-select';
 
 // Icons
-import { ReactComponent as IconSearch } from 'assets/icons/search-icon.svg';
-import { ReactComponent as IconArrowDown } from 'assets/icons/angleDown.svg';
+import IconSearch from 'assets/icons/MagnifyingGlass';
+import IconArrowDown from 'assets/icons/ArrowDown';
 
 // Styles
 import {
@@ -54,11 +54,15 @@ const Filters = () => (
     <MainContainer>
       <Container>
         <IconContainer>
-          <IconSearch />
+          <IconSearch
+            width="20px"
+            height="20px"
+            fill="#002F34"
+          />
         </IconContainer>
         <SearchInput
           type="text"
-          placeholder="Заголовком або ID"
+          placeholder="Заголовок"
         />
       </Container>
       <Container>
