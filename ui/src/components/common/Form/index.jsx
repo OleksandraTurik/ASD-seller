@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
@@ -22,16 +22,29 @@ const Form = ({
   });
 
   const { registrationSuccess } = useSelector((state) => state.userReducer);
+  const user = useSelector(state => state.userReducer);
+
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
     if (type === 'login') {
-      dispatch(login(data));
+      if (user.error) {
+        console.log('error');
+      } else {
+        await dispatch(login(data));
+        console.log('work');
+        /* navigate('/'); */
+      }
     } else {
       dispatch(registration(data));
     }
+
     reset();
   };
+
+  console.log('user', user.error);
 
   return (
     <Container>
