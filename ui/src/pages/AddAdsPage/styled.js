@@ -250,7 +250,7 @@ export const CategoryListItem = styled.li`
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  width: 330px;
+  width: 480px;
   height: 56px;
 
   &:hover {
@@ -286,22 +286,6 @@ export const PInPickCategory = styled.p`
   width: 392px;
   text-align: left;
 `;
-
-// export const DescriptionProgress = styled.div`
-//   font-size: 14px;
-//   color: rgb(127, 151, 153);
-//   display: flex;
-//   -webkit-box-pack: justify;
-//   justify-content: space-between;
-//   width: 100%;
-//   margin-top: auto;
-//   padding-top: 16px;
-
-//   & span:nth-child(2) {
-//     position: relative;
-//     left: 60px;
-//   }
-// `;
 
 export const ContactInput = styled.input`
     font-size: 16px;
