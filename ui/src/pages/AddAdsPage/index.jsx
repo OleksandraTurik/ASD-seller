@@ -118,16 +118,17 @@ const AddAdsPage = () => {
                 type="text"
                 rows="1"
                 onKeyDown={handleKeyDown}
+                required
                 placeholder="Наприклад, iPhone 8"
                 {...register('title', {
                   required: 'Заголовок відіграє важливу роль, не забудьте додати його',
                   minLength: {
-                    value: 3,
+                    value: 16,
                     message: 'У заголовку має бути не менше 16 символів',
                   },
                 })}
               />
-              <div>{errors.Title && <ErrorTitle>{errors.Title.message || 'У заголовку має бути не менше 16 символів'}</ErrorTitle>}</div>
+              <div>{errors.title && <ErrorTitle>{errors.title.message || 'У заголовку має бути не менше 16 символів'}</ErrorTitle>}</div>
             </WidthEquation>
             <Category style={colorCategory}>Категорія*</Category>
             <CategoryWidthEquation>
@@ -224,7 +225,7 @@ const AddAdsPage = () => {
                   },
                 })}
               />
-              <div>{errors.Description && <ErrorTitle>{errors.Description.message || 'Опис повинен бути не коротшим за 80 знаків'}</ErrorTitle>}</div>
+              <div>{errors.description && <ErrorTitle>{errors.description.message || 'Опис повинен бути не коротшим за 80 знаків'}</ErrorTitle>}</div>
             </WidthEquation>
           </WhiteBlock>
           <WhiteBlock>
