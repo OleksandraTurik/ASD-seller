@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import userServices from 'sevices/userServices';
+import userServices from 'services/userServices';
 
 const initialState = {
   data: {},
@@ -9,21 +9,26 @@ const initialState = {
 
 export const getAdvertsInfo = createAsyncThunk(
   'advertsList/getAdvertsInfo',
-  async () => {
-    const result = await userServices.getAdvertsListUser();
-    return result;
+  async (id, { rejectWithValue }) => {
+    try {
+      const result = await userServices.getAdvertsListUser(id);
+      return result;
+    } catch (e) {
+      return rejectWithValue(e.response.data);
+    }
   },
 );
 
 const avdertsInfoSlice = createSlice({
   name: 'advertsList',
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(
         getAdvertsInfo.fulfilled,
         (state, action) => {
-          state.user = action.payload;
+          state.data = action.payload;
           state.loading = false;
         },
       )

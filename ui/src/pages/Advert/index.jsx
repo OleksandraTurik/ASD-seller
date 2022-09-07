@@ -33,6 +33,7 @@ const SliderWrap = styled.div`
 
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
+  const getAdvertStorage = JSON.parse(localStorage.getItem('advert'));
   const {
     title,
     createdAt,
@@ -41,7 +42,7 @@ const AdvertPage = () => {
     description,
     _id,
     address,
-  } = advert.advertInfo;
+  } = getAdvertStorage.advertInfo;
 
   const { loading, error } = advert;
 
@@ -60,7 +61,7 @@ const AdvertPage = () => {
           <SimpleSlider />
           <Description
             title={title}
-            date={updatedAt}
+            date={createdAt}
             price={price}
             status="Приватна особа"
             state="Стан: Б/в"
