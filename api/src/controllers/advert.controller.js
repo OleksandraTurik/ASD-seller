@@ -42,9 +42,9 @@ async function postAdvert(req, res) {
 
     if (!title || !price || !sellerId || !description || !address) throw new StatusError(400, 'Wrong body structure');
     if (!(await User.findById(sellerId))) throw new StatusError(400, 'User with this ID does not exist');
-    if (!(await City.findById(address))) throw new StatusError(400, 'City with this ID does not exist');
 
     const addressItem = await City.findById(address);
+    if (!addressItem) throw new StatusError(400, 'City with this ID does not exist');
 
     const item = new Advert({
       title,
@@ -58,7 +58,7 @@ async function postAdvert(req, res) {
       if (error) throw new Error(error);
     });
 
-    const user = await User.updateOne({ _id: sellerId }, { $push: { adverts: [new Types.ObjectId(item._id)] } });
+    const user = await User.updateOne({ _id: sellerId }, { $push: { adverts: item } });
     res.status(201).json({ item, user });
   } catch (error) {
     errorHandler(res, error);
