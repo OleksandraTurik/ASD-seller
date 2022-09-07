@@ -13,7 +13,6 @@ const API = axios.create({
     'Access-Control-Allow-Origin': '*',
   },
 });
-
 const onRequestSuccess = async (config) => {
   const tokens = tokenService.getTokens();
   const currentDate = new Date();

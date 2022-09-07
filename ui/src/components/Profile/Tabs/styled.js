@@ -21,10 +21,10 @@ export const Link = styled(NavLink)`
   &:hover,
   &.active {
     text-decoration: none;
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
   }
   
   &.active {
-    border-bottom: 2px solid rgb(0, 47, 52);
+    border-bottom: 2px solid ${props => props.theme.mainGreenColor};
   }
 `;

@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
   }
 
   & h3 {
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
     text-transform: uppercase;
     font-size: 24px;
     margin: 16px 0 4px 0;
@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 
   & p {
     font-size: 16px;
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
   }
 `;
 
@@ -35,7 +35,9 @@ export const Span = styled.span`
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 
   & span {
     display: block;
@@ -59,7 +61,7 @@ export const Container = styled.div`
 
       & p, span {
         font-size: 14px;
-        color: #002F34;
+        color: ${props => props.theme.mainGreenColor};
       }
     }
   }
@@ -70,6 +72,18 @@ export const Line = styled.div`
   border-bottom: 1px solid #000;
 `;
 
-export const Icon = styled.img`
-  width: 20px;
+export const FavoriteBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  bottom: 12px;
+  right: 20px;
+  cursor: pointer;
+
+  & svg {
+    opacity: 0.4;
+  }
+
+  &:hover svg {
+    opacity: 1;
+  }
 `;
