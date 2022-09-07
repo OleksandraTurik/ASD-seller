@@ -11,6 +11,7 @@ export const Container = styled.div`
   padding: 16px;
   background: rgb(255, 255, 255);
   border-radius: 4px;
+  margin: 5px 0;
 `;
 
 export const EditLink = styled(Link)`
