@@ -8,7 +8,6 @@ const {
     deleteAdvertItem,
     patchAdvertItem,
     getAdvertItemProperty,
-    patchAdvertPhoto,
   },
 } = require('../controllers');
 const {
@@ -25,12 +24,12 @@ advertRouter.post('/', bodyParser.urlencoded({ extended: true }), multipleUpload
 advertRouter.get('/:id', idValidationMiddleware, getAdvertItem);
 advertRouter.get('/:id/:prop', idValidationMiddleware, getAdvertItemProperty);
 advertRouter.delete('/:id', idValidationMiddleware, deleteAdvertItem);
-advertRouter.patch('/:id', express.json(), idValidationMiddleware, patchAdvertItem);
 advertRouter.patch(
-    '/:id/images',
-    idValidationMiddleware,
+    '/:id',
     bodyParser.urlencoded({ extended: true }),
     multipleUploadMiddleware('images', 10),
-    patchAdvertPhoto,
+    idValidationMiddleware,
+    patchAdvertItem,
 );
+
 module.exports = advertRouter;

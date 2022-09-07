@@ -35,7 +35,6 @@ async function getAdvertItemProperty(req, res) {
 }
 async function postAdvert(req, res) {
   try {
-    console.log(req.body);
     const {
       title,
       price,
@@ -51,7 +50,6 @@ async function postAdvert(req, res) {
         throw new StatusError(400, 'At least 1 photo is required');
     if (!(await User.findById(sellerId)))
         throw new StatusError(404, 'This seller does not exist');
-    console.log(title.length);
     if (title.length < 16 || title.length > 200)
         throw new StatusError(400, 'Title must have 16-200 symbols');
     if (description.length < 80 || description.length > 9000)
@@ -60,9 +58,7 @@ async function postAdvert(req, res) {
         throw new StatusError(400, 'Price must be larger than 0');
 
     const fileObjects = await Promise.all(req.files.map(f => AWS.uploadPhoto(f)));
-    console.log(fileObjects);
     const images = fileObjects.map(e => e.key);
-    console.log(images);
 
     const item = new Advert({
       title, price, sellerId: new Types.ObjectId(sellerId), description, address, images, contactPhone, contactName,
@@ -96,36 +92,35 @@ async function patchAdvertItem(req, res) {
   try {
     const { id } = req.params;
     const {
-      title, description, price, address,
+      title, description, price, address, contactPhone, contactName,
     } = req.body;
+    // console.log({ body: req.body, files: req.files });
 
-    if (Advert.exists({ _id: id }))
+    if (!(await Advert.find({ _id: id })))
       throw new StatusError(404, 'This advert does not exist');
+    if (title && (title.length < 16 || title.length > 200))
+      throw new StatusError(400, 'Title must have 16-200 symbols');
+    if (description && (description.length < 80 || description.length > 9000))
+      throw new StatusError(400, 'Description must have 80-9000 symbols');
+    if (price && +price <= 0)
+      throw new StatusError(400, 'Price must be > 0');
 
-    const item = await Advert.updateOne({ _id: id }, {
-      title, description, price, address,
-    });
-    res.json(item);
-  } catch (err) {
-    errorHandler(res, err);
-  }
-}
+    if (req.files.length > 0) {
+      const keyObjects = await Promise.all(req.files.map(file => AWS.uploadPhoto(file)));
+      const images = keyObjects.map(e => e.key);
+      const item = await Advert.updateOne({ _id: id }, {
+        title, description, price, address, contactPhone, contactName, images,
+      });
+      res.json(item);
+    } else {
+      const advertItem = await Advert.findById(id);
+      const { images } = advertItem;
+      const item = await Advert.updateOne({ _id: id }, {
+        title, description, price, address, contactPhone, contactName, images,
+      });
+      res.json(item);
+    }
 
-async function patchAdvertPhoto(req, res) {
-  try {
-    console.log(req.files);
-    if (req.files.length <= 0) throw new StatusError(400, 'No file has been uploaded');
-
-    const { id } = req.params;
-    if (!(await Advert.findById(id))) throw new StatusError(404, 'This advert does not exist');
-    const item = await Advert.findById(id);
-    if (item.images) await Promise.all(item.images.map(file => AWS.deletePhoto(file)));
-
-    const keyObjects = await Promise.all(req.files.map(file => AWS.uploadPhoto(file)));
-    const keys = keyObjects.map(e => e.key);
-    await Advert.updateOne({ _id: id }, { images: keys });
-
-    res.status(201).json({ status: 'Files have been successfully uploaded', keys });
   } catch (err) {
     errorHandler(res, err);
   }
@@ -134,7 +129,6 @@ async function patchAdvertPhoto(req, res) {
 module.exports = {
   getAdvertList,
   postAdvert,
-  patchAdvertPhoto,
   getAdvertItem,
   deleteAdvertItem,
   patchAdvertItem,
