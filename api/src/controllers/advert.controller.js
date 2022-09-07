@@ -47,10 +47,11 @@ async function postAdvert(req, res) {
     } = req.body;
     if (!title || !price || !sellerId || !description || !address || !contactName || !contactPhone)
         throw new StatusError(400, 'Wrong body structure');
-    if (req.file.length < 1)
+    if (req.files.length < 1)
         throw new StatusError(400, 'At least 1 photo is required');
     if (!(await User.findById(sellerId)))
         throw new StatusError(404, 'This seller does not exist');
+    console.log(title.length);
     if (title.length < 16 || title.length > 200)
         throw new StatusError(400, 'Title must have 16-200 symbols');
     if (description.length < 80 || description.length > 9000)
@@ -112,7 +113,7 @@ async function patchAdvertItem(req, res) {
 
 async function patchAdvertPhoto(req, res) {
   try {
-    // console.log(req.files);
+    console.log(req.files);
     if (req.files.length <= 0) throw new StatusError(400, 'No file has been uploaded');
 
     const { id } = req.params;
@@ -121,9 +122,7 @@ async function patchAdvertPhoto(req, res) {
     if (item.images) await Promise.all(item.images.map(file => AWS.deletePhoto(file)));
 
     const keyObjects = await Promise.all(req.files.map(file => AWS.uploadPhoto(file)));
-    console.log(keyObjects);
     const keys = keyObjects.map(e => e.key);
-    console.log(keys);
     await Advert.updateOne({ _id: id }, { images: keys });
 
     res.status(201).json({ status: 'Files have been successfully uploaded', keys });

@@ -26,5 +26,11 @@ advertRouter.get('/:id', idValidationMiddleware, getAdvertItem);
 advertRouter.get('/:id/:prop', idValidationMiddleware, getAdvertItemProperty);
 advertRouter.delete('/:id', idValidationMiddleware, deleteAdvertItem);
 advertRouter.patch('/:id', express.json(), idValidationMiddleware, patchAdvertItem);
-advertRouter.patch('/:id/photos', idValidationMiddleware, multipleUploadMiddleware('images', 10), patchAdvertPhoto);
+advertRouter.patch(
+    '/:id/images',
+    idValidationMiddleware,
+    bodyParser.urlencoded({ extended: true }),
+    multipleUploadMiddleware('images', 10),
+    patchAdvertPhoto,
+);
 module.exports = advertRouter;
