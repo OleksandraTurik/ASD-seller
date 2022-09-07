@@ -119,17 +119,23 @@ async function patchAdvertItem(req, res) {
       throw new StatusError(400, 'Description must have 80-9000 symbols');
     if (price && +price <= 0)
       throw new StatusError(400, 'Price must be > 0');
-    const addressItem = await City.findById(address);
-    if (address && !addressItem)
+    if (address && !(await City.findById(address)))
       throw new StatusError(400, `City with ID: ${address} does not exist`);
 
-    const { sellerId } = await Advert.findById(id);
+    const addressItem = await City.findById(address);
+    const { sellerId, address: originalAddress } = await Advert.findById(id);
 
     if (req.files.length > 0) {
       const keyObjects = await Promise.all(req.files.map(file => AWS.uploadPhoto(file)));
       const images = keyObjects.map(e => `pic/${e.key}`);
       await Advert.updateOne({ _id: id }, {
-        title, description, price, address: addressItem, contactPhone, contactName, images,
+        title,
+        description,
+        price,
+        address: addressItem || originalAddress,
+        contactPhone,
+        contactName,
+        images,
       });
       await User.updateOne(
           { _id: sellerId },
@@ -142,7 +148,13 @@ async function patchAdvertItem(req, res) {
       const advertItem = await Advert.findById(id);
       const { images } = advertItem;
       await Advert.updateOne({ _id: id }, {
-        title, description, price, address: addressItem, contactPhone, contactName, images,
+        title,
+        description,
+        price,
+        address: addressItem || originalAddress,
+        contactPhone,
+        contactName,
+        images,
       });
       await User.updateOne(
           { _id: sellerId },
