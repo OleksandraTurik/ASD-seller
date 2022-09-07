@@ -16,10 +16,11 @@ import dytiachyiSvitImg from 'assets/img/rubryky/dytiachyi-svit.png';
 import bmw from 'assets/img/bmw.webp';
 import renault from 'assets/img/renault.webp';
 import useFetchCategories from 'components/hooks/useFetchCategories';
-import Subcategories from 'components/MainPage/Subcategories';
+import Subcategories from 'components/Main/Subcategories';
 
 const MainPage = () => {
   const [subcategories, setSubcategories] = useState('id');
+  const [isOpen, setIsOpen] = useState(false);
   const [childrenCategory, setChildrenCategory] = useState([]);
   const { data, loading, error } = useFetchCategories();
   const colors = [
@@ -38,8 +39,10 @@ const MainPage = () => {
 
   const showSubcategories = (id) => {
     if (id === subcategories) {
-      setSubcategories('hide');
+      setSubcategories('id');
+      setIsOpen(false);
     } else {
+      setIsOpen(true);
       setSubcategories(id);
     }
 
@@ -50,6 +53,27 @@ const MainPage = () => {
     });
   };
 
+  const categoriesList = () => {
+    if (error) {
+      return 'error';
+    }
+
+    if (loading) {
+      return 'loading';
+    }
+
+    return data.map((item, index) => (
+      <ItemLink key={item._id} onClick={() => showSubcategories(item._id)}>
+        <ImgWrap
+          src={dytiachyiSvitImg}
+          alt={item.slug}
+          backgroundColor={colors[index]}
+        />
+        <P>{item.name}</P>
+      </ItemLink>
+    ));
+  };
+
   return (
     <>
       <Search />
@@ -57,20 +81,11 @@ const MainPage = () => {
         <Title>Головні рубрики</Title>
         <CategoriesList>
           {
-            data.map((item, index) => (
-              <ItemLink key={item._id} onClick={() => showSubcategories(item._id)}>
-                <ImgWrap
-                  src={dytiachyiSvitImg}
-                  alt={item.slug}
-                  backgroundColor={colors[index]}
-                />
-                <P>{item.name}</P>
-              </ItemLink>
-            ))
+            categoriesList()
           }
         </CategoriesList>
       </Wrapper>
-      {subcategories !== 'hide' && (
+      {isOpen && (
         <Subcategories
           childrenId={childrenCategory._id}
           childrenCategory={childrenCategory.children}
