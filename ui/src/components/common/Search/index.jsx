@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+
+// Icons
+import IconSearch from 'assets/icons/MagnifyingGlass';
+import IconLocation from 'assets/icons/Location';
+
+// Styles
 import {
   StyledForm,
   StyledInput,
   SearchDiv,
-  SearchIcon,
-  LocationIcon,
+  SearchIconWrap,
+  LocationIconWrap,
   SubmitSearchButton,
-} from 'components/common/Search/styled';
-
-import IconSearch from 'assets/icons/search-icon.svg';
-import IconLocation from 'assets/icons/location-icon.svg';
+} from './styled';
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -26,7 +29,13 @@ const Search = () => {
     <section>
       <StyledForm>
         <SearchDiv>
-          <SearchIcon src={IconSearch} alt="search icon" />
+          <SearchIconWrap>
+            <IconSearch
+              width="25px"
+              height="25px"
+              fill="#002f34"
+            />
+          </SearchIconWrap>
           <StyledInput
             width="675px"
             type="search"
@@ -34,7 +43,13 @@ const Search = () => {
             value={searchValue}
             onChange={searchValueHandler}
           />
-          <LocationIcon src={IconLocation} alt="location icon" />
+          <LocationIconWrap>
+            <IconLocation
+              width="25px"
+              height="25px"
+              fill="#002f34"
+            />
+          </LocationIconWrap>
           <StyledInput
             width="295px"
             type="search"
@@ -42,7 +57,14 @@ const Search = () => {
             value={regionValue}
             onChange={regionValueHandler}
           />
-          <SubmitSearchButton type="submit">Пошук</SubmitSearchButton>
+          <SubmitSearchButton type="submit">
+            Пошук
+            <IconSearch
+              width="25px"
+              height="25px"
+              fill="#002f34"
+            />
+          </SubmitSearchButton>
         </SearchDiv>
       </StyledForm>
     </section>

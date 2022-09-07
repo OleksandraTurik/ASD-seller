@@ -3,32 +3,28 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.header`
   width: 100%;
-  background: #003034;
-  height: 68px;
-  display: flex;
-  justify-content: center;
+  background: ${props => props.theme.mainGreenColor};
 `;
 
 export const Nav = styled.nav`
   display: flex;
   flex-direction: row;
-  padding: 0;
-  width: 100%;
+  height: 68px;
+  max-width: 1238px;
   justify-content: space-between;
+  margin: 0 auto;
 `;
 
 export const Ul = styled.ul`
+  width: 25%;
   display: flex;
-  flex-direction: row;
-  align-items:center;
-  width: 30%;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const Li = styled.li`
-  margin-right: 3%;
   list-style-type: none;
   font-size: 20px;
-  margin-left: 20px;
 `;
 
 export const A = styled.a`
@@ -39,6 +35,27 @@ export const A = styled.a`
 export const NavLink = styled(Link)`
   text-decoration: none;
   color: #fff;
+`;
+
+export const NavLinkAdverts = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 5px;
+  color: ${props => props.theme.mainGreenColor};
+  font-weight: 600;
+  font-size: 14px;
+  border: 5px solid #fff;
+  transition: all 200ms linear;
+  height: 25px;
+  &:hover {
+    background: ${props => props.theme.mainGreenColor};
+    color: #fff;
+    transition: all 200ms linear;
+  }
 `;
 
 export const NavLinkHeader = styled(Link)`

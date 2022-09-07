@@ -2,23 +2,33 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 
-const { apiRouter } = require('./routes');
+const { apiRouter, picRouter } = require('./routes');
+const { errorHandlerMiddleWare } = require('./middlewares');
+
+const StatusError = require('./exceptions/StatusError');
 
 const { PORT } = process.env || 4000;
 const app = express();
 
-app.use(fileUpload({
-  createParentPath: true,
-}));
-app.use(express.json());
+const corsOptions ={
+  origin:'http://localhost:3000',
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+};
+
 app.use(cookieParser());
-app.use(cors());
-app.use(express.static('./src/'));
+app.use(cors(corsOptions));
 
 app.use('/api', apiRouter);
+app.use('/pic', picRouter);
+
+app.all('*', () => {
+  throw new StatusError(400, 'Bad request');
+});
+
+app.use(errorHandlerMiddleWare);
 
 const start = async () => {
   try {

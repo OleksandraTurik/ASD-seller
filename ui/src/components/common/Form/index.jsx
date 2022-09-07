@@ -2,12 +2,16 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import apiUserService from 'sevices/authServices';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, registration } from 'redux/slice/authUser';
+import Notice from 'components/Notice';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
 } from './styled';
 
-const Form = ({ textButton, emailField, passwordField }) => {
+const Form = ({
+  textButton, emailField, passwordField, type,
+}) => {
   const {
     register,
     formState: { errors },
@@ -17,8 +21,15 @@ const Form = ({ textButton, emailField, passwordField }) => {
     mode: 'onBlur',
   });
 
+  const { registrationSuccess } = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
-    console.log(JSON.stringify(data));
+    if (type === 'login') {
+      dispatch(login(data));
+    } else {
+      dispatch(registration(data));
+    }
     reset();
   };
 
@@ -33,11 +44,12 @@ const Form = ({ textButton, emailField, passwordField }) => {
         </NavLink>
       </WrapperLink>
       <Wrapper>
+        {registrationSuccess && <Notice type="warning" message="Registration completed" />}
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="email"
             placeholder={emailField}
-            {...register('Email', {
+            {...register('email', {
               required: 'This field is required',
               minLength: {
                 value: 3,
@@ -45,15 +57,15 @@ const Form = ({ textButton, emailField, passwordField }) => {
               },
             })}
           />
-          <ErrorContainer>{errors.Email && <ErrorTitle>{errors.Email.message || 'Error! Must be more than 3 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>{errors.Email && <ErrorTitle>{errors.Email.message || 'Error! Must be more than 8 symbols'}</ErrorTitle>}</ErrorContainer>
           <Input
             type="password"
             placeholder={passwordField}
-            {...register('Password', {
+            {...register('password', {
               required: 'This field is required',
               minLength: {
-                value: 3,
-                message: 'Error! Must be more than 3 symbols',
+                value: 8,
+                message: 'Error! Must be more than 8 symbols',
               },
             })}
           />
@@ -71,4 +83,5 @@ Form.propTypes = {
   textButton: PropTypes.string.isRequired,
   passwordField: PropTypes.string.isRequired,
   emailField: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
