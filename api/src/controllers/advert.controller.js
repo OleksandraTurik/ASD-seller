@@ -120,7 +120,7 @@ async function patchAdvertItem(req, res) {
     if (price && +price <= 0)
       throw new StatusError(400, 'Price must be > 0');
     const addressItem = await City.findById(address);
-    if (!addressItem)
+    if (address && !addressItem)
       throw new StatusError(400, `City with ID: ${address} does not exist`);
 
     const { sellerId } = await Advert.findById(id);
