@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -13,7 +13,7 @@ import {
 // Icons
 import Like from 'assets/icons/Like';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
 import { ButtonAdvertCard } from '../Button/styled';
 
