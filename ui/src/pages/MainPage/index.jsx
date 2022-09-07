@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import Search from 'components/common/Search';
 import AdvertCard from 'components/common/AdvertCard';
 import {
@@ -25,7 +24,6 @@ import hobiImg from 'assets/img/rubryky/hobi.png';
 
 import bmw from 'assets/img/bmw.webp';
 import renault from 'assets/img/renault.webp';
-import getAdvert, { getAdvertThunk } from 'redux/slice/getAdvert';
 
 const MainPage = () => {
   const categories = [
