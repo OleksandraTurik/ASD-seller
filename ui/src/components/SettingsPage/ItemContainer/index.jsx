@@ -7,8 +7,8 @@ import {
   P,
   ButtonContainer,
 } from './styled';
-import ArrowDown from '../ArrowDown';
-import ArrowUp from '../ArrowUp';
+import ArrowDown from '../../../assets/icons/ArrowDown';
+import ArrowUp from '../../../assets/icons/ArrowUp';
 
 const ItemContainer = ({
   id,
@@ -17,7 +17,7 @@ const ItemContainer = ({
   Component,
   handleOpen,
 }) => {
-  const openContainer = isOpen ? <ArrowUp /> : <ArrowDown />;
+  const openContainer = isOpen ? <ArrowUp /> : <ArrowDown width="25px" height="25px" />;
   const email = name === 'Змінити email-адресу';
 
   return (
