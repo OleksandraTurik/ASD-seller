@@ -10,6 +10,7 @@ const Profile = lazy(() => import('pages/Profile'));
 const NotFound = lazy(() => import('pages/NotFound'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
 const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
+const SettingsPage = lazy(() => import('pages/SettingsPage'));
 
 const MainRoutes = () => (
   <Suspense fallback={<Loader />}>
@@ -19,7 +20,7 @@ const MainRoutes = () => (
       <Route path="/adverts/:id" element={<AdvertPage />} />
       <Route path="/profiles/:id" element={<Profile />}>
         <Route path="adverts" element={<MyAdverts />} />
-        <Route path="settings" element={<h1>P settings</h1>} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
       <Route path="/add" element={<AddAdsPage />} />
       <Route path="/login" element={<LoginPage />} />

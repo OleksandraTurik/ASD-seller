@@ -18,6 +18,11 @@ export const ButtonStyle = styled.button`
   }
 `;
 
+export const ButtonAdvertCard = styled.button`
+  background: none;
+  border: none;
+`;
+
 export const ArrowButton = styled.button`
   background: none;
   border: none;
