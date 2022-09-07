@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -30,9 +30,13 @@ const AdvertCard = ({
   const dispatch = useDispatch();
   const advert = useSelector(state => state.getAdvert);
 
+  useEffect(() => {
+    localStorage.setItem('advert', JSON.stringify(advert));
+  }, [advert]);
+
   const handleNavigate = async () => {
     await dispatch(getAdvertThunk(id));
-    navigate(`${link}`, { state: advert });
+    navigate(`${link}`);
   };
 
   return (
