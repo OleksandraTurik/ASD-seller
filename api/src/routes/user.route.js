@@ -27,7 +27,7 @@ router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 
 router.get('/', userFilterSortMiddleware, paginationMiddleware, userController.getUsers);
-router.patch('/:id', express.json(), idValidationMiddleware, authMiddleware, userController.modifyUser);
+router.patch('/:id', express.json(), idValidationMiddleware, userController.modifyUser);
 router.get('/:id', idValidationMiddleware, userController.getUser);
 router.delete('/:id', idValidationMiddleware, userController.deleteUser );
 

@@ -17,7 +17,7 @@ class AWSService {
             Key: file.filename,
         };
 
-        return s3.upload(uploadParams).promise() ;
+        return s3.upload(uploadParams).promise();
     }
 
     getFileStream(fileKey) {
@@ -27,6 +27,15 @@ class AWSService {
          };
 
          return s3.getObject(downloadParams).createReadStream();
+    }
+
+    deletePhoto(fileKey) {
+         const params = {
+             Key: fileKey,
+             Bucket: process.env.AWS_S3_BUCKET_NAME,
+         };
+
+         return s3.deleteObject(params).promise();
     }
 }
 

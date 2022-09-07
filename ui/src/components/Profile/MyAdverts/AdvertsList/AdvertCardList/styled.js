@@ -8,9 +8,10 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   background: rgb(255, 255, 255);
   border-radius: 4px;
+  margin: 5px 0;
 `;
 
 export const EditLink = styled(Link)`

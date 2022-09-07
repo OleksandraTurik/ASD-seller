@@ -31,52 +31,48 @@ const AdvertCardList = ({
   price,
   category,
   subcategory,
-}) => {
-  const userId = JSON.parse(localStorage.getItem('tokens'));
-  console.log(userId.userDto.id);
-  return (
-    <Wrapper>
-      <Container>
-        <TopWrap>
-          <ImgInCard src={img} alt="bmw car" />
-          <AdvertInfoWrap>
-            <AdvertHeaderWrap>
-              <AdvertTitleLink to={link}>{name}</AdvertTitleLink>
-              <span>{price}</span>
-            </AdvertHeaderWrap>
-            <AdvertBodyWrap>
-              <ListWrap>
-                <ul>
-                  <li>{category}</li>
-                  <li>{subcategory}</li>
-                </ul>
-              </ListWrap>
-              <LocationWrap>
-                <IconLocation
-                  width="20px"
-                  height="20px"
-                  fill="#002F34"
-                />
-                <p>{location}</p>
-              </LocationWrap>
-              <DataWrap>
-                <IconCalendar
-                  width="20px"
-                  height="20px"
-                  fill="#002F34"
-                />
-                <span>{date}</span>
-              </DataWrap>
-            </AdvertBodyWrap>
-          </AdvertInfoWrap>
-        </TopWrap>
-        <BottomWrap>
-          <EditLink to="/adverts">Редагувати</EditLink>
-        </BottomWrap>
-      </Container>
-    </Wrapper>
-  );
-};
+}) => (
+  <Wrapper>
+    <Container>
+      <TopWrap>
+        <ImgInCard src={img} alt="bmw car" />
+        <AdvertInfoWrap>
+          <AdvertHeaderWrap>
+            <AdvertTitleLink to={link}>{name}</AdvertTitleLink>
+            <span>{price}</span>
+          </AdvertHeaderWrap>
+          <AdvertBodyWrap>
+            <ListWrap>
+              <ul>
+                <li>{category}</li>
+                <li>{subcategory}</li>
+              </ul>
+            </ListWrap>
+            <LocationWrap>
+              <IconLocation
+                width="20px"
+                height="20px"
+                fill="#002F34"
+              />
+              <p>{location}</p>
+            </LocationWrap>
+            <DataWrap>
+              <IconCalendar
+                width="20px"
+                height="20px"
+                fill="#002F34"
+              />
+              <span>{date}</span>
+            </DataWrap>
+          </AdvertBodyWrap>
+        </AdvertInfoWrap>
+      </TopWrap>
+      <BottomWrap>
+        <EditLink to="/adverts">Редагувати</EditLink>
+      </BottomWrap>
+    </Container>
+  </Wrapper>
+);
 
 AdvertCardList.propTypes = {
   link: PropTypes.string,

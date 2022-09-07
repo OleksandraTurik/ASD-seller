@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAdvertsInfo } from 'redux/slice/getAdvertInfo';
 import Select from 'react-select';
 
 // Icons
@@ -49,52 +51,71 @@ const customStyles = {
   },
 };
 
-const Filters = () => (
-  <Wrapper>
-    <MainContainer>
-      <Container>
-        <IconContainer>
-          <IconSearch
-            width="20px"
-            height="20px"
-            fill="#002F34"
+const Filters = () => {
+  const { data } = useSelector((state) => state.userAdvertInfoReducer);
+  const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('tokens'));
+
+  useEffect(() => {
+    dispatch(getAdvertsInfo(user.userDto.id));
+  }, []);
+
+  console.log(data.length);
+  return (
+    <Wrapper>
+      <MainContainer>
+        <Container>
+          <IconContainer>
+            <IconSearch
+              width="20px"
+              height="20px"
+              fill="#002F34"
+            />
+          </IconContainer>
+          <SearchInput
+            type="text"
+            placeholder="Заголовок"
           />
-        </IconContainer>
-        <SearchInput
-          type="text"
-          placeholder="Заголовок"
-        />
-      </Container>
-      <Container>
-        <Button type="button">
-          Будь-яка категорія
-        </Button>
-        <DropDownBtn>
-          <IconWrap>
-            <IconArrowDown />
-          </IconWrap>
-        </DropDownBtn>
-      </Container>
-      <Container>
-        <Test>
-          <Select
-            styles={customStyles}
-            options={options}
-            placeholder="Сортувати"
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                primary25: '#e6fcff',
-                primary: '#002F34',
-              },
-            })}
-          />
-        </Test>
-      </Container>
-    </MainContainer>
-    <span>Всього оголошень: 0</span>
-  </Wrapper>
-);
+        </Container>
+        <Container>
+          <Button type="button">
+            Будь-яка категорія
+          </Button>
+          <DropDownBtn>
+            <IconWrap>
+              <IconArrowDown />
+            </IconWrap>
+          </DropDownBtn>
+        </Container>
+        <Container>
+          <Test>
+            <Select
+              styles={customStyles}
+              options={options}
+              placeholder="Сортувати"
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary25: '#e6fcff',
+                  primary: '#002F34',
+                },
+              })}
+            />
+          </Test>
+        </Container>
+      </MainContainer>
+      <span>
+        Всього оголошень:
+        {' '}
+        {
+          data.length
+            ? data.length
+            : 0
+        }
+      </span>
+    </Wrapper>
+  );
+};
 
 export default Filters;
