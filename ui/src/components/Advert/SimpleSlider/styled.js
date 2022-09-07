@@ -5,14 +5,12 @@ export const Wrapper = styled(Slider)`
   position: relative;
   background-color: #fff;
   border-radius: 5px;
-  padding: 29px;
-  margin: 24px 24px 24px 0;
   cursor: grabbing;
 
   & ul {
     position: absolute;
     z-index: 999;
-    bottom: -5px;
+    bottom: 2px;
 
     li.slick-active button:before {
       color: #003034;
@@ -62,5 +60,5 @@ export const ArrowPrev = styled.div`
 
 export const Image = styled.img`
   height: 580px;
-  padding-left: 140px;
+  margin: auto;
 `;
