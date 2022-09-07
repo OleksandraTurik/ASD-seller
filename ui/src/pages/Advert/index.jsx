@@ -20,10 +20,14 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 24px;
 `;
 
 const SliderWrap = styled.div`
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 24px 24px 0 24px;
 `;
 
 const AdvertPage = () => (

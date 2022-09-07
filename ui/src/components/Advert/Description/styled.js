@@ -6,9 +6,8 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   background-color: #fff;
   max-height: 800px;
-  width: 692px;
   border-radius: 5px;
-  margin-bottom: 24px;
+  margin: 24px 0;
   padding: 24px;
 
   & h2 {
