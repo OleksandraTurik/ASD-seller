@@ -6,6 +6,7 @@ import Modal from 'components/Modal/Modal';
 import { getCategories } from 'redux/slice/getCategories';
 import { useDispatch, useSelector } from 'react-redux';
 import avtoImg from 'assets/img/rubryky/avto.png';
+import ThinArrowRight from 'assets/icons/ThinArrowRight';
 import {
   Main,
   Wrapper,
@@ -24,6 +25,7 @@ import {
   PublishButton,
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
+  ImgCirle,
 } from './styled';
 import advertServices from '../../services/advertServices';
 
@@ -114,27 +116,43 @@ const AddAdsPage = () => {
             </WidthEquation>
             <Category>Категорія*</Category>
             <CategoryWidthEquation>
-              <PickCategory role="button" type="button" onClick={toggleModal}>
+              <PickCategory
+                role="button"
+                type="button"
+                onClick={toggleModal}
+              >
                 <PInPickCategory>{pickCategoryName}</PInPickCategory>
-                <ArrowDownIcon style={{ color: 'rgb(0, 47, 52)' }} height="24px" width="24px" />
+                <ArrowDownIcon
+                  style={{ color: 'rgb(0, 47, 52)' }}
+                  height="24px"
+                />
               </PickCategory>
               <Modal open={isOpen} onClose={toggleModal}>
+                <Title>Виберіть категорію</Title>
                 <CategoryContent>
                   {showInfo ? categories.map((item) => (
-                    <CategoryItems key={item._id} onClick={handleClick(item)}>
-                      <img style={{ width: '48px' }} src={avtoImg} alt="avto" />
+                    <CategoryItems
+                      key={item._id}
+                      onClick={handleClick(item)}
+                    >
+                      <ImgCirle src={avtoImg} alt="category picture" />
                       {item.name}
                     </CategoryItems>
                   )) : (
                     <div style={{ display: 'flex' }}>
                       <CategoryList>
                         {categories.map((item) => (
-                          <CategoryListItem selected={item._id === subcategory?._id} key={item._id} onClick={handleClick(item)}>
+                          <CategoryListItem
+                            selected={item._id === subcategory?._id}
+                            key={item._id}
+                            onClick={handleClick(item)}
+                          >
                             <div>
                               {item.name}
                             </div>
                             <div>
-                              {item.children.length ? '>' : null}
+                              {item.children.length
+                                ? <ThinArrowRight width="25px" /> : null}
                             </div>
                           </CategoryListItem>
                         ))}
@@ -142,7 +160,16 @@ const AddAdsPage = () => {
                       {(subcategory && subcategory.children?.length) && (
                         <CategoryList>
                           {subcategory.children.map((item) => (
-                            <CategoryListItem selected={item._id === subcategory?._id} onClick={handleClick(item)}>{item.name}</CategoryListItem>
+                            <CategoryListItem
+                              selected={item._id === subcategory?._id}
+                              onClick={handleClick(item)}
+                            >
+                              {item.name}
+                              <div>
+                                {item.children.length
+                                  ? <ThinArrowRight width="25px" /> : null}
+                              </div>
+                            </CategoryListItem>
                           ))}
                         </CategoryList>
                       )}
@@ -173,6 +200,7 @@ const AddAdsPage = () => {
                 name="description"
                 type="text"
                 placeholder="Подумайте, що ви хотіли би дізнатися з оголошення. І додайте це в опис"
+                rows="10"
                 {...register('description')}
               />
               <div>{errors.Description && <ErrorTitle>{errors.Description.message || 'Опис повинен бути не коротшим за 80 знаків'}</ErrorTitle>}</div>

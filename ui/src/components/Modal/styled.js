@@ -6,9 +6,9 @@ export const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 50px;
+  padding: 25px 40px 50px 40px;
   z-index: 1000;
-  max-width: 1200px;
+  max-width: 1000px;
   width: 100%;
 `;
 
