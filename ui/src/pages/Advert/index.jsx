@@ -8,6 +8,7 @@ import SimpleSlider from 'components/Advert/SimpleSlider';
 import User from 'components/Advert/User';
 import Location from 'components/Advert/Location';
 import Description from 'components/Advert/Description';
+import { useSelector } from 'react-redux';
 
 // Styles
 const Wrapper = styled.div`
@@ -30,35 +31,59 @@ const SliderWrap = styled.div`
   margin: 24px 24px 0 24px;
 `;
 
-const AdvertPage = () => (
-  <Wrapper>
-    <SliderWrap>
-      <SimpleSlider />
-      <Description
-        title="Продам свой Fender Jazz bass USA 2006"
-        date="Опубліковано 25 серпня 2022 р."
-        price="39 000 грн"
-        status="Приватна особа"
-        state="Стан: Б/в"
-        description="апд - є варіант оплатою частинами через приват
-        Продаю свій American Jazz bass, ювілейна серія, дуже рідкісна модель 2006 року.
-        Причина продажу банальна - не вистачає грошей на ліки і їжу, такі часи..
-        Дека ясенева, із двох шматків."
-        id="ID: 752000902"
-      />
-    </SliderWrap>
-    <Container>
-      <User
-        name="Руслан"
-        date="23 червень 2022р."
-        link="/"
-      />
-      <Location
-        city="Київ, Солом&apos;янський"
-        region="Київська область"
-      />
-    </Container>
-  </Wrapper>
-);
+const AdvertPage = () => {
+  const advert = useSelector(state => state.getAdvert);
+  const {
+    title,
+    createdAt,
+    updatedAt,
+    price,
+    description,
+    _id,
+    address,
+  } = advert.advertInfo;
+
+  const { loading, error } = advert;
+
+  const advertPage = () => {
+    if (error) {
+      return 'error';
+    }
+
+    if (loading) {
+      return 'Loading';
+    }
+
+    return (
+      <Wrapper>
+        <SliderWrap>
+          <SimpleSlider />
+          <Description
+            title={title}
+            date={updatedAt}
+            price={price}
+            status="Приватна особа"
+            state="Стан: Б/в"
+            description={description}
+            id={_id}
+          />
+        </SliderWrap>
+        <Container>
+          <User
+            name="Руслан"
+            date={createdAt}
+            link="/"
+          />
+          <Location
+            city="Київ, Солом&apos;янський"
+            region={address}
+          />
+        </Container>
+      </Wrapper>
+    );
+  };
+
+  return (advertPage());
+};
 
 export default AdvertPage;
