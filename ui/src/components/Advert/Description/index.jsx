@@ -59,7 +59,7 @@ const Description = ({
 Description.propTypes = {
   title: PropTypes.string,
   date: PropTypes.string,
-  price: PropTypes.string,
+  price: PropTypes.number,
   status: PropTypes.string,
   state: PropTypes.string,
   description: PropTypes.string,
