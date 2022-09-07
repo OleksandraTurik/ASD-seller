@@ -23,14 +23,3 @@ export const ArrowButton = styled.button`
   border: none;
   cursor: pointer;
 `;
-
-export const AddPhotoButton = styled.button`
-  cursor: pointer;
-  background: #003034;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  width: 120px;
-  height: 120px;
-  font-size: 100px;
-`;

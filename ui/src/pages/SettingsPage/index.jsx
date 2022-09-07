@@ -2,7 +2,7 @@ import ChangeContacts from 'components/SettingsPage/ChangeContacts';
 import ChangeEmail from 'components/SettingsPage/ChangeEmail';
 import ChangeNumber from 'components/SettingsPage/ChangeNumber';
 import ItemContainer from 'components/SettingsPage/ItemContainer';
-import LogoAndBanner from 'components/SettingsPage/LogoAndBanner';
+import ChangePhoto from 'components/SettingsPage/ChangePhoto';
 import React, { useState } from 'react';
 import { Container } from './styled';
 
@@ -27,9 +27,9 @@ const initialData = [
   },
   {
     id: 4,
-    name: 'Логотип та банер',
+    name: 'Змінити фото профілю',
     isOpen: false,
-    Component: LogoAndBanner,
+    Component: ChangePhoto,
   },
 ];
 
