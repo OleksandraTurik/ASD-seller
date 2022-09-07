@@ -42,17 +42,6 @@ const AdvertPage = () => {
   } = advert.advertInfo;
 
   const { loading, error } = advert;
-  const [advertState, setAdvertState] = useState({});
-
-  console.log(advert);
-
-  const advertLocation = useLocation();
-
-  console.log('advert', advertState);
-
-  useEffect(() => {
-    setAdvertState(advertLocation);
-  }, [advertLocation]);
 
   const advertPage = () => {
     if (error) {
