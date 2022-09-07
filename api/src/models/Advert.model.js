@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const City = require('./City.model');
 const { Schema, model } = mongoose;
 
 const advertSchema = new Schema({
@@ -9,7 +9,7 @@ const advertSchema = new Schema({
   price: { type: Number, required: true },
   images: [String],
   subcategory: String,
-  address: { type: String, required: true },
+  address: { type: City.schema, required: true },
 }, { timestamps: true });
 
 advertSchema

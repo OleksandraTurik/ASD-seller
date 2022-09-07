@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
 
-const citySchema = new Schema({}, { strict: false });
-citySchema.index({ object_name: 'text', region: 'text' });
+const citySchema = new Schema({
+    city: String,
+}, { strict: false });
 
-citySchema.statics.findFiltered = function (search, region) {
-    const query = this.find(region ? { $text: { $search: region } } : {});
+citySchema.statics.findFiltered = function (search) {
+    const query = this.find(search ? { $text: { $search: search } } : {});
 
     return query;
 };

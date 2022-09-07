@@ -1,6 +1,6 @@
 const { Types } = require('mongoose');
 
-const { Advert, User } = require('../models');
+const { Advert, User, City } = require('../models');
 const StatusError = require('../exceptions/StatusError');
 const errorHandler = require('../helpers/error-handler');
 const AWS = require('../service/AWS.service');
@@ -41,10 +41,17 @@ async function postAdvert(req, res) {
     } = req.body;
 
     if (!title || !price || !sellerId || !description || !address) throw new StatusError(400, 'Wrong body structure');
-    if (!(await User.findById(sellerId))) throw new StatusError(404, 'This user does not exist');
+    if (!(await User.findById(sellerId))) throw new StatusError(400, 'User with this ID does not exist');
+    if (!(await City.findById(address))) throw new StatusError(400, 'City with this ID does not exist');
+
+    const addressItem = await City.findById(address);
 
     const item = new Advert({
-      title, price, sellerId: new Types.ObjectId(sellerId), description, address,
+      title,
+      price,
+      sellerId: new Types.ObjectId(sellerId),
+      description,
+      address: addressItem,
     });
 
     item.save((error) => {
