@@ -1,16 +1,16 @@
 const { Schema, model } = require('mongoose');
-const mongoose = require('mongoose');
+const City = require('./City.model');
 
 const UserSchema = new Schema({
   email: { type: String, unique: true, require: true },
   password: { type: String, unique: true, req: true },
   isActivated: { type: Boolean, default: false },
   activationLink: { type: String },
-  fullName: { type: String, default: 'Vasya Pypkin' },
-  address: { type: String, default: 'Chernivstis' },
+  fullName: { type: String },
+  address: { type: City.schema },
   avatar: { type: String },
-  phoneNumber: { type: String, default: '3800000' },
-  adverts: [{ type: mongoose.Types.ObjectId, ref: 'Advert' }],
+  phoneNumber: { type: String },
+  adverts: { type: String, default: null },
 }, { timestamps: true });
 
 UserSchema.statics.findWithFilterAndSort = function (search, sort) {

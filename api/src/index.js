@@ -21,8 +21,6 @@ const corsOptions ={
 app.use(cookieParser());
 app.use(cors(corsOptions));
 
-app.use(express.static('./src/'));
-
 app.use('/api', apiRouter);
 app.use('/pic', picRouter);
 
