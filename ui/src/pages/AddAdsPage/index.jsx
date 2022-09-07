@@ -5,7 +5,9 @@ import ArrowDownIcon from 'assets/icons/ArrowDown';
 import Modal from 'components/Modal/Modal';
 import { getCategories } from 'redux/slice/getCategories';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import avtoImg from 'assets/img/rubryky/avto.png';
+import advertServices from '../../services/advertServices';
 import {
   Main,
   Wrapper,
@@ -25,7 +27,6 @@ import {
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
 } from './styled';
-import advertServices from '../../services/advertServices';
 
 // eslint-disable-next-line react/prop-types
 const AddAdsPage = () => {
@@ -33,34 +34,43 @@ const AddAdsPage = () => {
   const [subcategory, setSubcategory] = useState(null);
   const [selected, setSelected] = useState(null);
   const [showInfo, setShowInfo] = useState(true);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
+  const userId = useSelector(state => state.userReducer.user.id);
   const {
-    register, handleSubmit, getValues, formState: { errors },
+    register, handleSubmit, reset, formState: { errors },
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      title: '',
-      price: '2000',
-      sellerId: '63170b8de86d98b1d83edee1',
-      description: '',
-      address: '',
+      title: 'I love donezk and luganskI love donezk and lugansk',
+      price: '200',
+      sellerId: userId,
+      description: 'I love donezk and luganskI love donezk and lugansk',
+      address: 'I love donezk and luganskI love donezk and lugansk',
     },
   });
-  const onSubmit = async (v) => {
-    const send = await advertServices.createAdverts({
-      title: v.title,
-      price: v.price,
-      sellerId: v.sellerId,
-      description: v.description,
-      address: v.address,
-    });
-    console.log(send);
+  const colorCategory = {
+    color: selected ? 'black' : 'red',
   };
-
-  const handleKeyDown = (e) => {
-    e.target.style.height = 'inherit';
-    e.target.style.height = `${e.target.scrollHeight}px`;
+  const onSubmit = async (v) => {
+    if (!selected) {
+      alert('Введіть категорію');
+    }
+    try {
+      const send = await advertServices.createAdverts({
+        title: v.title,
+        price: v.price,
+        sellerId: v.sellerId,
+        category: selected._id,
+        description: v.description,
+        address: v.address,
+      });
+      reset();
+      navigate(`/profiles/${userId}/adverts`);
+    } catch (e) {
+      console.log('error');
+    }
   };
   useEffect(() => {
     dispatch(getCategories());
@@ -100,19 +110,19 @@ const AddAdsPage = () => {
                 name="title"
                 type="text"
                 rows="1"
-                onKeyDown={handleKeyDown}
+                required
                 placeholder="Наприклад, iPhone 8"
                 {...register('title', {
                   required: 'Заголовок відіграє важливу роль, не забудьте додати його',
                   minLength: {
-                    value: 3,
+                    value: 16,
                     message: 'У заголовку має бути не менше 16 символів',
                   },
                 })}
               />
-              <div>{errors.Title && <ErrorTitle>{errors.Title.message || 'У заголовку має бути не менше 16 символів'}</ErrorTitle>}</div>
+              <div>{errors.title && <ErrorTitle>{errors.title.message || 'У заголовку має бути не менше 16 символів'}</ErrorTitle>}</div>
             </WidthEquation>
-            <Category>Категорія*</Category>
+            <Category style={colorCategory}>Категорія*</Category>
             <CategoryWidthEquation>
               <PickCategory role="button" type="button" onClick={toggleModal}>
                 <PInPickCategory>{pickCategoryName}</PInPickCategory>
@@ -172,10 +182,17 @@ const AddAdsPage = () => {
                 id="description"
                 name="description"
                 type="text"
+                required
                 placeholder="Подумайте, що ви хотіли би дізнатися з оголошення. І додайте це в опис"
-                {...register('description')}
+                {...register('description', {
+                  required: 'Заголовок відіграє важливу роль, не забудьте додати його',
+                  minLength: {
+                    value: 20,
+                    message: 'У заголовку має бути не менше 20 символів',
+                  },
+                })}
               />
-              <div>{errors.Description && <ErrorTitle>{errors.Description.message || 'Опис повинен бути не коротшим за 80 знаків'}</ErrorTitle>}</div>
+              <div>{errors.description && <ErrorTitle>{errors.description.message || 'Опис повинен бути не коротшим за 80 знаків'}</ErrorTitle>}</div>
             </WidthEquation>
           </WhiteBlock>
           <WhiteBlock>
@@ -211,15 +228,17 @@ const AddAdsPage = () => {
                 })}
               />
               <div>{errors.Author && <ErrorTitle>{errors.Author.message || "Ім'я контактної особи повинно складатись як мінімум з 3 символів"}</ErrorTitle>}</div>
-              <LabelForInut for="email">Email-адреса</LabelForInut>
+              <LabelForInut for="price">Ціна оголошення</LabelForInut>
               <ContactInput
-                id="email"
-                name="email"
-                placeholder="your@email.com"
-                type="email"
-                {...register('Email')}
+                id="price"
+                name="price"
+                placeholder="Ціна оголошення"
+                type="number"
+                {...register('price', {
+                  valueAsNumber: true,
+                })}
               />
-              <div>{errors.Email && <ErrorTitle>{errors.Email.message}</ErrorTitle>}</div>
+              <div>{errors.price && <ErrorTitle>{errors.price.message}</ErrorTitle>}</div>
               <LabelForInut for="number">Номер телефону</LabelForInut>
               <ContactInput
                 id="number"
