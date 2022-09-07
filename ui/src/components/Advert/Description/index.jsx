@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Icons
-import heart from 'assets/icons/toFavoriteButton.svg';
+import Like from 'assets/icons/Like';
 
 // Styles
 import {
   Wrapper,
-  Icon,
   Container,
   Line,
   Span,
+  FavoriteBtn,
 } from './styled';
 
 const Description = ({
@@ -25,7 +25,13 @@ const Description = ({
   <Wrapper>
     <Container>
       <span>{date}</span>
-      <Icon src={heart} alt="heart icon" />
+      <FavoriteBtn>
+        <Like
+          width="25px"
+          height="25px"
+          fill="#c6c6c6"
+        />
+      </FavoriteBtn>
     </Container>
     <Span primary>{title}</Span>
     <h2>{price}</h2>

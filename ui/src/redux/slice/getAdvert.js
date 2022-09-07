@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import advertServices from 'sevices/advertServices';
+import advertServices from 'services/advertServices';
 
 const initialState = {
   advertInfo: null,

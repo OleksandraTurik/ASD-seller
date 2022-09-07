@@ -1,16 +1,17 @@
 const { validationResult } = require('express-validator');
 const userService = require('../service/User.service');
+const AWS = require('../service/AWS.service');
 const StatusError = require('../exceptions/StatusError');
-const errorHandler = require('../helpers/errorHandler');
-const UserModel = require('../models/User.model');
-const uuid = require('uuid');
+const errorHandler = require('../helpers/error-handler');
+const { Advert, User } = require('../models');
 
 class UserController {
   async registration(req, res) {
     try {
+      console.log(req.body);
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        throw new StatusError (400, 'Invalid authorisation data');
+        throw new StatusError (400, 'Invalid authorization data');
       }
       const { email, password } = req.body;
       const userData = await userService.registration(email, password);
@@ -64,7 +65,7 @@ class UserController {
     }
   }
 
-  getUser(req, res) {
+  getUsers(req, res) {
     try {
       const users = req.paginatedResults;
       return res.json(users);
@@ -76,8 +77,8 @@ class UserController {
   async modifyUser(req, res) {
     try {
       const { id } = req.params;
-      const updates = req.body;
-      const user = await userService.modifyUser(id, updates);
+      const { email, password, fullName, address, phoneNumber } = req.body;
+      const user = await userService.modifyUser(id, { email, password, fullName, address, phoneNumber });
       return res.json(user);
     } catch (e) {
       errorHandler(res, e);
@@ -86,22 +87,39 @@ class UserController {
 
   async uploadAvatar(req, res) {
     try{
-      if (!req.files) {
-        return res.status(400).send("No files were uploaded.");
-      }
-      const { file } = req.files;
-      const fileName = `${uuid.v4()}.jpg`;
-      await file.mv('src/static/' + fileName, (err) => {
-        if (err) {
-          return res.status(500).send(err);
-        }
+      if (!req.file) throw new StatusError(400, 'No file has been uploaded');
+      const { id } = req.params;
 
-        return res.send({ status: "success" });
-      });
+      if (!(await User.findById(id))) throw new StatusError (404, 'This user does not exist');
 
-      const user = await UserModel.updateOne({ _id:req.params.id }, { avatar:fileName });
-      await user.save();
+      const { key } = await AWS.uploadPhoto(req.file);
+
+      await User.updateOne({ _id: id }, { avatar: key });
+
+      res.status(201).json({ status: 'Avatar has been successfully uploaded', key });
     } catch (e) {
+      errorHandler(res, e);
+    }
+  }
+
+  async getUser(req, res){
+    try {
+      const user = await User.findById(req.params.id);
+      if(!user) throw new StatusError (404, 'user not found');
+
+      res.status(200).json(user);
+    }catch (e) {
+      errorHandler(res, e);
+    }
+  }
+
+  async deleteUser(req, res){
+    try {
+      const { id } = req.params;
+      const user = await User.deleteOne({ _id:id });
+      await Advert.deleteMany({ sellerId:id });
+      return res.json(user);
+    }catch (e) {
       errorHandler(res, e);
     }
   }

@@ -4,7 +4,7 @@ export const Title = styled.h3`
   font-size: 32px;
   font-weight: 500;
   line-height: 24px;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
   text-align: center;
   padding: 55px 0;
 `;
@@ -12,11 +12,7 @@ export const Title = styled.h3`
 export const Wrapper = styled.div`
   width: 1238px;
   margin: 0 auto;
-
-  // height of block for "main categories" section
-  &:nth-child(2) {
-    height: 535px;
-  }
+  padding-bottom: 45px;
 `;
 
 export const CategoriesList = styled.div`
@@ -30,7 +26,7 @@ export const ItemLink = styled.a`
   display: flex;
   flex-direction: column;
   text-align: center;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -44,7 +40,7 @@ export const ItemLink = styled.a`
   }
 
   &:hover p {
-    background-color: #002f34;
+    background-color: ${props => props.theme.mainGreenColor};
     color: white;
   }
 `;
@@ -58,6 +54,6 @@ export const ImgWrap = styled.img`
 `;
 
 export const LatestAdsSection = styled.section`
-  background-color: #f2f4f5;
-  padding-bottom: 100px;
+  background-color: ${props => props.theme.greyBackground};
+  padding-bottom: 55px;
 `;

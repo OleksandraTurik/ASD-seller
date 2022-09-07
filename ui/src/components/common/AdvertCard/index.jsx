@@ -10,7 +10,9 @@ import {
   ToFavoriteButton,
 } from 'components/common/AdvertCard/styled';
 
-import favButtonIcon from 'assets/icons/toFavoriteButton.svg';
+// Icons
+import Like from 'assets/icons/Like';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
 import { ButtonAdvertCard } from '../Button/styled';
@@ -47,7 +49,12 @@ const AdvertCard = ({
         <span>{date}</span>
       </Info>
       <Price>{price}</Price>
-      <ToFavoriteButton src={favButtonIcon} alt="To Favorite Button" width="29px" />
+      <ToFavoriteButton>
+        <Like
+          width="29px"
+          fill="#c6c6c6"
+        />
+      </ToFavoriteButton>
     </Card>
   );
 };

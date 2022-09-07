@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: #f2f4f5;
+  background-color: ${props => props.theme.greyBackground};
 `;
 
 const Container = styled.div`
