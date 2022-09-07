@@ -16,7 +16,7 @@ const MainRoutes = () => (
     <Route path="/adverts/:id" element={<AdvertPage />} />
     <Route path="/profiles/:id" element={<Profile />}>
       <Route path="adverts" element={<MyAdverts />} />
-      <Route path="settings" element={<h1>P settings</h1>} />
+      <Route path="settings" element={<SettingsPage />} />
     </Route>
     <Route path="/add" element={<h1>Add new advert form</h1>} />
     <Route path="/login" element={<LoginPage />} />
