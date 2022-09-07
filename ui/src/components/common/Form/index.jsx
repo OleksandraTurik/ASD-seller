@@ -8,6 +8,7 @@ import Notice from 'components/Notice';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
 } from './styled';
+import { noticeMessages } from './helper';
 
 const Form = ({
   textButton, emailField, passwordField, type,
@@ -18,10 +19,10 @@ const Form = ({
     handleSubmit,
     reset,
   } = useForm({
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
-  const { registrationSuccess } = useSelector((state) => state.userReducer);
+  const { registrationSuccess, error } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
@@ -44,8 +45,9 @@ const Form = ({
         </NavLink>
       </WrapperLink>
       <Wrapper>
-        {registrationSuccess && <Notice type="warning" message="Registration completed" />}
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+          {error && <Notice type="error" messages={noticeMessages[type]} />}
+          {registrationSuccess && <Notice type="warning" messages={noticeMessages[type]} />}
           <Input
             type="email"
             placeholder={emailField}
@@ -83,5 +85,5 @@ Form.propTypes = {
   textButton: PropTypes.string.isRequired,
   passwordField: PropTypes.string.isRequired,
   emailField: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['login', 'registration']).isRequired,
 };
