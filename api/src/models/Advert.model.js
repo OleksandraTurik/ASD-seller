@@ -25,7 +25,7 @@ advertSchema
     if (maxPrice) query = query.where('price').lte(maxPrice);
     if (minPrice) query = query.where('price').gte(minPrice);
 
-    if (sort === 'acsDate') return query.sort('createdAt');
+    if (sort === 'asсDate') return query.sort('createdAt');
     if (sort === 'dscDate') return query.sort('-createdAt');
     if (sort === 'ascTitle') return query.sort('title');
     if (sort === 'dscTitle') return query.sort('-title');
