@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Search from 'components/common/Search';
 import AdvertCard from 'components/common/AdvertCard';
 import {
