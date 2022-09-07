@@ -8,6 +8,7 @@ const { Advert, User, City } = require('../models');
 class UserController {
   async registration(req, res) {
     try {
+      console.log(req.body);
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         throw new StatusError (400, 'Invalid authorization data');

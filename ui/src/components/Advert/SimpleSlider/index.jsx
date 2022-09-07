@@ -49,6 +49,7 @@ class SimpleSlider extends Component {
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
     };
+
     return (
       <Wrapper>
         <div>

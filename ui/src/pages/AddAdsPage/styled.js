@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Main = styled.main`
-  background-color: #f2f4f5;
+  background-color: ${props => props.theme.greyBackground};
   width: 100%;
 `;
 
@@ -15,7 +15,7 @@ export const Title = styled.h2`
   font-size: 32px;
   line-height: 34px;
   font-weight: 700;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   padding: 48px 0px 30px;
 `;
 
@@ -42,7 +42,7 @@ export const WhiteBlockTitle = styled.div`
   font-size: 20px;
   line-height: 22px;
   font-weight: 500;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   margin: 0px 0px 16px;
 `;
 
@@ -53,7 +53,7 @@ export const LabelForInut = styled.label`
   width: 100%;
   font-size: 14px;
   line-height: 18px;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
 
   &:nth-child(5),
   &:nth-child(8),
@@ -62,12 +62,12 @@ export const LabelForInut = styled.label`
   }
 `;
 
-export const TitleTextArea = styled.textarea`
+export const TitleTextArea = styled.input`
   background-clip: padding-box;
   background-color: rgb(242, 244, 245);
   border: 2px solid rgb(242, 244, 245);
   border-radius: 4px;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   font-family: sans-serif;
   font-size: 17px;
   line-height: 20px;
@@ -77,7 +77,7 @@ export const TitleTextArea = styled.textarea`
   width: 100%;
 
   &:focus {
-    border-bottom-color: rgb(0, 47, 52);
+    border-bottom-color: ${props => props.theme.mainGreenColor};
   }
 `;
 
@@ -93,11 +93,54 @@ export const ErrorTitle = styled.p`
 export const Category = styled.p`
   line-height: 20px;
   font-size: 14px;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   margin: 8px 0px;
 `;
 
-export const PickCategory = styled.div`
+export const CategoryItems = styled.button`
+  align-items: center;
+  background-color: rgb(255, 251, 219);
+  border: none;
+  border-radius: 4px;
+  color: rgb(0, 47, 52);
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 8px;
+  padding: 16px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s ease 0s;
+  width: 100%;
+`;
+export const CategoryList = styled.ul`
+  padding-left: 0px;
+  margin-top: 0px;
+  max-height: 559px;
+  overflow-y: auto;
+  padding-right: 8px;
+`;
+export const CategoryListItem = styled.li`
+  border-bottom: 1px solid rgb(216, 223, 224);
+  box-sizing: border-box;
+  color: rgb(0, 47, 52);
+  cursor: pointer;
+  font-size: 16px;
+  align-items: center;
+  min-height: 56px;
+  background-color: ${({ selected }) => selected ? 'red' : 'transparent'};
+  padding: 16px 16px 16px 0px;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+`;
+export const CategoryContent = styled.ul`
+  padding-left: 0px;
+  margin-top: 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 16px;
+`;
+export const PickCategory = styled.button`
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -105,12 +148,15 @@ export const PickCategory = styled.div`
   border-radius: 4px;
   padding: 16px;
   cursor: pointer;
+  border: none;
+  text-align: center;
+  align-items: center;
 `;
 
 export const PInPickCategory = styled.p`
   font-size: 16px;
   line-height: 20px;
-  color: rgb(0, 47, 52);
+  color: ${props => props.theme.mainGreenColor};
   margin: 0px;
   padding: 0px;
 `;
@@ -133,7 +179,7 @@ export const PInPickCategory = styled.p`
 
 export const ContactInput = styled.input`
     font-size: 16px;
-    color: rgb(0, 47, 52);
+    color: ${props => props.theme.mainGreenColor};
     background-color: rgb(242, 244, 245);
     border: none;
     border-right: none;
@@ -147,7 +193,7 @@ export const ContactInput = styled.input`
     width: 100%;
 
     &:focus {
-    border-bottom-color: rgb(0, 47, 52);
+    border-bottom-color: ${props => props.theme.mainGreenColor};
   }
 `;
 
@@ -157,15 +203,15 @@ export const PublishButton = styled.button`
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
-    background-color: rgb(0, 47, 52);
-    border: 5px solid rgb(0, 47, 52);
+    background-color: ${props => props.theme.mainGreenColor};
+    border: 5px solid ${props => props.theme.mainGreenColor};
     border-radius: 4px;
     color: rgb(255, 255, 255);
     padding: 10px 30px 8px;
     transition: all 0.1s ease;
 
     &:hover {
-      color: rgb(0, 47, 52);
+      color: ${props => props.theme.mainGreenColor};
       background-color: white;
     }
 `;
@@ -179,8 +225,8 @@ export const InputFile = styled.input`
     font-weight: 700;
     font-size: 13px;
     line-height: 18px;
-    background-color: rgb(0, 47, 52);
-    border: 2px solid rgb(0, 47, 52);
+    background-color: ${props => props.theme.mainGreenColor};
+    border: 2px solid ${props => props.theme.mainGreenColor};
     border-radius: 4px;
     color: rgb(255, 255, 255);
     padding: 5px 11px 5px;
@@ -188,7 +234,7 @@ export const InputFile = styled.input`
   }
 
   &::-webkit-file-upload-button:hover {
-    color: rgb(0, 47, 52);
+    color: ${props => props.theme.mainGreenColor};
     background-color: white;
   }
 `;

@@ -2,8 +2,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { login } from 'redux/slice/authUser';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, registration } from 'redux/slice/authUser';
+import Notice from 'components/Notice';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
 } from './styled';
@@ -19,11 +20,15 @@ const Form = ({
   } = useForm({
     mode: 'onBlur',
   });
+
+  const { registrationSuccess } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     if (type === 'login') {
       dispatch(login(data));
+    } else {
+      dispatch(registration(data));
     }
     reset();
   };
@@ -39,6 +44,7 @@ const Form = ({
         </NavLink>
       </WrapperLink>
       <Wrapper>
+        {registrationSuccess && <Notice type="warning" message="Registration completed" />}
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="email"

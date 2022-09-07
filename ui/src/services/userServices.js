@@ -10,6 +10,14 @@ const userServices = {
       throw new ServerException(e.response);
     }
   },
+  getAdvertsListUser: async (id) => {
+    try {
+      const { data: { results } } = await API.get(`/adverts?seller=${id}`);
+      return results;
+    } catch (e) {
+      throw new ServerException(e.response);
+    }
+  },
 };
 
 export default userServices;
