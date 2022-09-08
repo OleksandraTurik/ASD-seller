@@ -38,21 +38,21 @@ const AdvertsList = () => {
     if (error) {
       return 'error';
     }
-    if (loading) {
-      return <Loader />;
-    }
 
     return (
       <InfiniteScroll
+        scrollThreshold="200px"
         dataLength={list.length} // This is important field to render the next data
         next={fetchData}
         hasMore={hasMore}
         loader={<h4><Loader /></h4>}
-        endMessage={(
+        useWindow={false}
+        pullDownToRefreshThreshold={50}
+        endMessage={list.length > 10 ? (
           <p style={{ textAlign: 'center' }}>
             <b>Yay! You have seen it all</b>
           </p>
-        )}
+        ) : null}
         // below props only if you need pull down functionality
       >
         {list.length ? list?.map((item) => (
@@ -61,7 +61,7 @@ const AdvertsList = () => {
             link="/"
             img={bmw}
             name={item.title}
-            location={item.address}
+            location={item.address.city}
             date={item.createdAt}
             price={`${item.price} грн.`}
             category="Хобі, відпочинок і спорт"

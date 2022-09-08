@@ -14,12 +14,22 @@ export const useFetchAdverts = (id) => {
         const adverts = await advertServices.getAdvertsList(id, page);
         setList(adverts.data.results);
         setLoading(false);
+        if (!adverts.data.next) {
+          setMore(false);
+        }
       } catch (e) {
         setError(e.error);
       }
     },
     [],
   );
+
+  if (loading) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 
   useEffect(() => {
     getData();
