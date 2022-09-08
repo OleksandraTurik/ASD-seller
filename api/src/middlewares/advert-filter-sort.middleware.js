@@ -9,9 +9,9 @@ const advertFilterSortMiddleware = async (req, res, next) => {
       minPrice,
       maxPrice,
       sort,
+      category,
     } = req.query;
-    const query = await Advert.findWithFilterAndSort(search, maxPrice, minPrice, seller, sort);
-    req.items = query;
+    req.items = await Advert.findWithFilterAndSort(search, maxPrice, minPrice, seller, sort, category);
     next();
   } catch (err) {
     errorHandler(res, err);
