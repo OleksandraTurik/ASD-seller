@@ -29,6 +29,8 @@ import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
 const MainPage = () => {
   const { advertInfo, loading, error } = useFetchAdvertMainPage();
 
+  console.log(advertInfo);
+
   const advertsCard = () => {
     if (error) {
       return 'error';
@@ -41,7 +43,7 @@ const MainPage = () => {
     return advertInfo.map((item) => (
       <AdvertCard
         key={item._id}
-        link="https://www.google.com.ua/"
+        link="/adverts/6318caec9959b9a5c1e4a7ef"
         img={bmw}
         name={item.title}
         location={item.address}
@@ -126,94 +128,6 @@ const MainPage = () => {
       <Wrapper>
         <Title>Головні рубрики</Title>
         <CategoriesList>
-          <ItemLink href="#">
-            <ImgWrap
-              src={dytiachyiSvitImg}
-              alt="Рубрика Дитячий світ"
-              backgroundColor="rgb(255, 206, 50)"
-            />
-            <p>Дитячий світ</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={nerukhomistImg}
-              alt="Рубрика Нерухомість"
-              backgroundColor="rgb(58, 119, 255)"
-            />
-            <p>Нерухомість</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={avtoImg}
-              alt="Рубрика Авто"
-              backgroundColor="rgb(35, 229, 219)"
-            />
-            <p>Авто</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={zapchastynyImg}
-              alt="Рубрика Запчастини для транспорту"
-              backgroundColor="rgb(255, 86, 54)"
-            />
-            <p>Запчастини для транспорту</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={robotaImg}
-              alt="Рубрика Робота"
-              backgroundColor="rgb(255, 246, 217)"
-            />
-            <p>Робота</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={tvarynyImg}
-              alt="Рубрика Тварини"
-              backgroundColor="rgb(206, 221, 255)"
-            />
-            <p>Тварини</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={dimISadImg}
-              alt="Рубрика Дім і сад"
-              backgroundColor="rgb(200, 248, 246)"
-            />
-            <p>Дім і сад</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={elektronikaImg}
-              alt="Рубрика Електроніка"
-              backgroundColor="rgb(255, 214, 201)"
-            />
-            <p>Електроніка</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={biznesTaPosluhyImg}
-              alt="Рубрика Бізнес та послуги"
-              backgroundColor="rgb(255, 206, 50)"
-            />
-            <p>Бізнес та послуги</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={modaIStylImg}
-              alt="Рубрика Мода і стиль"
-              backgroundColor="rgb(206, 221, 255)"
-            />
-            <p>Мода і стиль</p>
-          </ItemLink>
-          <ItemLink href="#">
-            <ImgWrap
-              src={hobiImg}
-              alt="Рубрика Хобі, відпочинок і спорт"
-              backgroundColor="rgb(200, 248, 246)"
-            />
-            <p>Хобі, відпочинок і спорт</p>
-          </ItemLink>
           {
             categories.map((item) => (
               <ItemLink href="#" key={item.name}>
