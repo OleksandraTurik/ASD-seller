@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Search from 'components/common/Search';
 import AdvertCard from 'components/common/AdvertCard';
 import {
@@ -8,119 +8,81 @@ import {
   ItemLink,
   ImgWrap,
   LatestAdsSection,
+  P,
 } from 'pages/MainPage/styled';
 
 import dytiachyiSvitImg from 'assets/img/rubryky/dytiachyi-svit.png';
-import nerukhomistImg from 'assets/img/rubryky/nerukhomist.png';
-import avtoImg from 'assets/img/rubryky/avto.png';
-import zapchastynyImg from 'assets/img/rubryky/zapchastyny.png';
-import robotaImg from 'assets/img/rubryky/robota.png';
-import tvarynyImg from 'assets/img/rubryky/tvaryny.png';
-import dimISadImg from 'assets/img/rubryky/dim-i-sad.png';
-import elektronikaImg from 'assets/img/rubryky/elektronika.png';
-import biznesTaPosluhyImg from 'assets/img/rubryky/biznes-ta-posluhy.png';
-import modaIStylImg from 'assets/img/rubryky/moda-i-styl.png';
-import hobiImg from 'assets/img/rubryky/hobi.png';
 
 import bmw from 'assets/img/bmw.webp';
-import renault from 'assets/img/renault.webp';
+import useFetchCategories from 'components/hooks/useFetchCategories';
+import Subcategories from 'components/Main/Subcategories';
+import Loader from 'components/common/Loader';
 import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
 
 const MainPage = () => {
-  const { advertInfo, loading, error } = useFetchAdvertMainPage();
+  const [subcategories, setSubcategories] = useState('id');
+  const [isOpen, setIsOpen] = useState(false);
+  const [childrenCategory, setChildrenCategory] = useState([]);
+  const { data, loading, error } = useFetchCategories();
+  const { advertInfo, loadingAdvert, errorAdvert } = useFetchAdvertMainPage();
 
-  console.log(advertInfo);
+  const showSubcategories = (id) => {
+    if (id === subcategories) {
+      setSubcategories('id');
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+      setSubcategories(id);
+    }
 
-  const advertsCard = () => {
+    data.forEach((item) => {
+      if (item._id === id) {
+        setChildrenCategory(item);
+      }
+    });
+  };
+
+  const categoriesList = () => {
     if (error) {
       return 'error';
     }
 
     if (loading) {
-      return 'Loading';
+      return <Loader />;
+    }
+
+    return data.map((item) => (
+      <ItemLink key={item._id} onClick={() => showSubcategories(item._id)}>
+        <ImgWrap
+          src={dytiachyiSvitImg}
+          alt={item.slug}
+        />
+        <P>{item.name}</P>
+      </ItemLink>
+    ));
+  };
+
+  const advertsCard = () => {
+    if (errorAdvert) {
+      return 'error';
+    }
+
+    if (loadingAdvert) {
+      return <Loader />;
     }
 
     return advertInfo.map((item) => (
       <AdvertCard
         key={item._id}
-        link="/adverts/6318caec9959b9a5c1e4a7ef"
+        link={`/adverts/${item._id}`}
         img={bmw}
         name={item.title}
-        location={item.address}
+        location="no data address"
         date={item.createdAt}
         price={`${item.price} грн`}
       />
     ));
   };
-
-  const categories = [
-    {
-      src: dytiachyiSvitImg,
-      alt: 'Рубрика Дитячий світ',
-      backgroundColor: 'rgb(255, 206, 50)',
-      name: 'Дитячий світ',
-    },
-    {
-      src: nerukhomistImg,
-      alt: 'Рубрика Нерухомість',
-      backgroundColor: 'rgb(58, 119, 255)',
-      name: 'Нерухомість',
-    },
-    {
-      src: avtoImg,
-      alt: 'Рубрика Авто',
-      backgroundColor: 'rgb(35, 229, 219)',
-      name: 'Авто',
-    },
-    {
-      src: zapchastynyImg,
-      alt: 'Рубрика Запчастини для транспорту',
-      backgroundColor: 'rgb(255, 86, 54)',
-      name: 'Запчастини для транспорту',
-    },
-    {
-      src: robotaImg,
-      alt: 'Рубрика Робота',
-      backgroundColor: 'rgb(255, 246, 217)',
-      name: 'Робота',
-    },
-    {
-      src: tvarynyImg,
-      alt: 'Рубрика Тварини',
-      backgroundColor: 'rgb(206, 221, 255)',
-      name: 'Тварини',
-    },
-    {
-      src: dimISadImg,
-      alt: 'Рубрика Дім і сад',
-      backgroundColor: 'rgb(200, 248, 246)',
-      name: 'Дім і сад',
-    },
-    {
-      src: elektronikaImg,
-      alt: 'Рубрика Електроніка',
-      backgroundColor: 'rgb(255, 214, 201)',
-      name: 'Електроніка',
-    },
-    {
-      src: biznesTaPosluhyImg,
-      alt: 'Рубрика Бізнес та послуги',
-      backgroundColor: 'rgb(255, 206, 50)',
-      name: 'Бізнес та послуги',
-    },
-    {
-      src: modaIStylImg,
-      alt: 'Рубрика Мода і стиль',
-      backgroundColor: 'rgb(206, 221, 255)',
-      name: 'Мода і стиль',
-    },
-    {
-      src: hobiImg,
-      alt: 'Рубрика Хобі, відпочинок і спорт',
-      backgroundColor: 'rgb(200, 248, 246)',
-      name: 'Хобі, відпочинок і спорт',
-    },
-  ];
 
   return (
     <>
@@ -129,19 +91,16 @@ const MainPage = () => {
         <Title>Головні рубрики</Title>
         <CategoriesList>
           {
-            categories.map((item) => (
-              <ItemLink href="#" key={item.name}>
-                <ImgWrap
-                  src={item.src}
-                  alt={item.alt}
-                  backgroundColor={item.backgroundColor}
-                />
-                <p>{item.name}</p>
-              </ItemLink>
-            ))
+            categoriesList()
           }
         </CategoriesList>
       </Wrapper>
+      {isOpen && (
+        <Subcategories
+          childrenId={childrenCategory._id}
+          childrenCategory={childrenCategory.children}
+        />
+      )}
       <LatestAdsSection>
         <Wrapper>
           <Title>Останні оголошення</Title>

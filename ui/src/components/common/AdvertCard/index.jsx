@@ -30,6 +30,8 @@ const AdvertCard = ({
   const dispatch = useDispatch();
   const advert = useSelector(state => state.getAdvert);
 
+  console.log(advert);
+
   useEffect(() => {
     localStorage.setItem('advert', JSON.stringify(advert));
   }, [advert]);

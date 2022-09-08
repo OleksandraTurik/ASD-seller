@@ -45,6 +45,8 @@ const AdvertPage = () => {
     contactName,
   } = getAdvertStorage.advertInfo;
 
+  console.log('advert', getAdvertStorage.advertInfo);
+
   const { loading, error } = advert;
 
   const advertPage = () => {
@@ -77,7 +79,7 @@ const AdvertPage = () => {
             link="/"
           />
           <Location
-            city={address.city}
+            city="city"
             region="no region in data"
           />
         </Container>
