@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
-
+const City = require('./City.model');
 const { Schema, model } = mongoose;
 
 const advertSchema = new Schema({
-  title: { type: String, required: true },
-  sellerId: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
-  description: { type: String, required: true },
-  price: { type: Number, required: true },
-  images: [String],
-  subcategory: String,
-  address: { type: String, required: true },
+    title: { type: String, required: true },
+    sellerId: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+    images: { type: [String], required: true },
+    subcategory: String,
+    address: { type: City.schema, required: true },
+    contactName: { type:String, required: true },
+    contactPhone: { type: String, required: true },
 }, { timestamps: true });
 
 advertSchema
@@ -25,7 +27,7 @@ advertSchema
     if (maxPrice) query = query.where('price').lte(maxPrice);
     if (minPrice) query = query.where('price').gte(minPrice);
 
-    if (sort === 'acsDate') return query.sort('createdAt');
+    if (sort === 'asсDate') return query.sort('createdAt');
     if (sort === 'dscDate') return query.sort('-createdAt');
     if (sort === 'ascTitle') return query.sort('title');
     if (sort === 'dscTitle') return query.sort('-title');

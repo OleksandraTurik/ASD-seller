@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Components
 import Tabs from 'components/Profile/Tabs';

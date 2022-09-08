@@ -3,11 +3,12 @@ const userService = require('../service/User.service');
 const AWS = require('../service/AWS.service');
 const StatusError = require('../exceptions/StatusError');
 const errorHandler = require('../helpers/error-handler');
-const { Advert, User } = require('../models');
+const { Advert, User, City } = require('../models');
 
 class UserController {
   async registration(req, res) {
     try {
+      console.log(req.body);
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         throw new StatusError (400, 'Invalid authorization data');
@@ -77,7 +78,9 @@ class UserController {
     try {
       const { id } = req.params;
       const { email, password, fullName, address, phoneNumber } = req.body;
-      const user = await userService.modifyUser(id, { email, password, fullName, address, phoneNumber });
+      if (address && !(await City.findById(address))) throw new StatusError(400, `City with ID: ${address} does not exist`);
+      const addressItem = await City.findById(address);
+      const user = await userService.modifyUser(id, { email, password, fullName, address: addressItem, phoneNumber });
       return res.json(user);
     } catch (e) {
       errorHandler(res, e);

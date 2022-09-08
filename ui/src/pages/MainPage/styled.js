@@ -5,7 +5,7 @@ export const Title = styled.h3`
   font-size: 32px;
   font-weight: 500;
   line-height: 24px;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
   text-align: center;
   padding: 55px 0;
 `;
@@ -44,7 +44,7 @@ export const ItemLink = styled.button`
   }
 
   &:hover p {
-    background-color: #002f34;
+    background-color: ${props => props.theme.mainGreenColor};
     color: white;
   }
 `;
@@ -58,7 +58,7 @@ export const ImgWrap = styled.img`
 `;
 
 export const LatestAdsSection = styled.section`
-  background-color: #f2f4f5;
+  background-color: ${props => props.theme.greyBackground};
   padding-bottom: 55px;
 `;
 

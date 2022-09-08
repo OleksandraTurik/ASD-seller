@@ -4,7 +4,7 @@ export const Container = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ccf7ee;
+  background: ${props => props.theme.turquoiseColor};
   bottom: 0;
   left: 0;
   right: 0;

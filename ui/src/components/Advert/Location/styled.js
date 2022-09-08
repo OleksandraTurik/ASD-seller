@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
     align-self: flex-start;
     font-size: 14px;
     text-transform: uppercase;
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
   }
 `;
 
@@ -34,13 +34,8 @@ export const LocationInfo = styled.div`
 
   & h2 {
     font-size: 20px;
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
   }
-`;
-
-export const Icon = styled.img`
-  align-self: flex-start;
-  width: 17px;
 `;
 
 export const MapImage = styled.img`
@@ -58,7 +53,7 @@ export const Container = styled.div`
 
   & p {
     font-size: 16px;
-    color: rgb(0, 47, 52);
+    color: ${props => props.theme.mainGreenColor};
     margin: 0px;
     font-weight: 700;
     line-height: 18px;
