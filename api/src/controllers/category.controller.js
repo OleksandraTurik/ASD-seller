@@ -6,8 +6,6 @@ const StatusError = require('../exceptions/StatusError');
   async function createCategory(req, res){
     try {
       const { name, parentId } = req.body;
-      console.log({ body: req.body, file: req.file });
-
       if (!name)
         throw new StatusError(400, 'Category name is required');
       if (parentId && !(await Category.findById(parentId)))

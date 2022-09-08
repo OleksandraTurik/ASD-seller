@@ -4,7 +4,6 @@ const errorHandler = require('../helpers/error-handler');
 
 module.exports = function (req, res, next) {
   try {
-    console.log(req.headers.authorization);
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       throw new StatusError(401, 'User is unauthorized');
