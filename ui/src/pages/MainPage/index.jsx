@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Search from 'components/common/Search';
 import AdvertCard from 'components/common/AdvertCard';
 import {
@@ -23,19 +23,6 @@ const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [childrenCategory, setChildrenCategory] = useState([]);
   const { data, loading, error } = useFetchCategories();
-  const colors = [
-    'rgb(255, 206, 50)',
-    'rgb(58, 119, 255)',
-    'rgb(35, 229, 219)',
-    'rgb(255, 86, 54)',
-    'rgb(255, 246, 217)',
-    'rgb(206, 221, 255)',
-    'rgb(200, 248, 246)',
-    'rgb(255, 214, 201)',
-    'rgb(255, 206, 50)',
-    'rgb(206, 221, 255)',
-    'rgb(200, 248, 246)',
-  ];
 
   const showSubcategories = (id) => {
     if (id === subcategories) {
@@ -62,12 +49,11 @@ const MainPage = () => {
       return 'loading';
     }
 
-    return data.map((item, index) => (
+    return data.map((item) => (
       <ItemLink key={item._id} onClick={() => showSubcategories(item._id)}>
         <ImgWrap
           src={dytiachyiSvitImg}
           alt={item.slug}
-          backgroundColor={colors[index]}
         />
         <P>{item.name}</P>
       </ItemLink>
