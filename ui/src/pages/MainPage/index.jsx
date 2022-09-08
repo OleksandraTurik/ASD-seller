@@ -74,7 +74,7 @@ const MainPage = () => {
     return advertInfo.map((item) => (
       <AdvertCard
         key={item._id}
-        link={`/adverts/${item._id}`}
+        itemId={item._id}
         img={bmw}
         name={item.title}
         location="no data address"

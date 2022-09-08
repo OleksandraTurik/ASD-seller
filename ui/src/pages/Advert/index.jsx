@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -8,7 +8,10 @@ import SimpleSlider from 'components/Advert/SimpleSlider';
 import User from 'components/Advert/User';
 import Location from 'components/Advert/Location';
 import Description from 'components/Advert/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import Loader from 'components/common/Loader';
+import { getAdvertThunk } from 'redux/slice/getAdvert';
 
 // Styles
 const Wrapper = styled.div`
@@ -33,7 +36,7 @@ const SliderWrap = styled.div`
 
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
-  const getAdvertStorage = JSON.parse(localStorage.getItem('advert'));
+  /* const getAdvertStorage = JSON.parse(localStorage.getItem('advert')); */
   const {
     title,
     createdAt,
@@ -43,9 +46,18 @@ const AdvertPage = () => {
     _id,
     address,
     contactName,
-  } = getAdvertStorage.advertInfo;
+  } = advert.advertInfo;
 
-  console.log('advert', getAdvertStorage.advertInfo);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAdvertThunk(id));
+  }, [id]);
+
+  console.log(id);
+
+  console.log('advert', advert.advertInfo);
 
   const { loading, error } = advert;
 
@@ -55,7 +67,7 @@ const AdvertPage = () => {
     }
 
     if (loading) {
-      return 'Loading';
+      return <Loader />;
     }
 
     return (
