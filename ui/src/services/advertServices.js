@@ -18,25 +18,19 @@ const advertServices = {
       throw new ServerException(e.response);
     }
   },
-  createAdverts: async ({
-    title,
-    price,
-    sellerId,
-    category,
-    description,
-    address,
-  }) => {
+  createAdverts: async (advertData) => {
     try {
-      const body = {
-        title,
-        price,
-        sellerId,
-        category,
-        description,
-        address,
-      };
-      console.log(body);
-      const createAdverts = await API.post('/adverts', body);
+      const formData = new FormData();
+      formData.append('title', advertData.title);
+      formData.append('description', advertData.description);
+      formData.append('price', advertData.price);
+      formData.append('sellerId', advertData.sellerId);
+      formData.append('contactName', advertData.contactName);
+      formData.append('contactPhone', advertData.contactPhone);
+      formData.append('address', advertData.address);
+      formData.append('images', advertData.images[0]);
+      const settings = { headers: { 'Content-Type': 'multipart/form-data' } };
+      const createAdverts = await API.post('/adverts', formData, settings);
       return createAdverts;
     } catch (e) {
       throw new ServerException(e.response);
