@@ -42,7 +42,10 @@ const AdvertPage = () => {
     description,
     _id,
     address,
+    contactName,
   } = getAdvertStorage.advertInfo;
+
+  console.log(getAdvertStorage.advertInfo);
 
   const { loading, error } = advert;
 
@@ -61,9 +64,9 @@ const AdvertPage = () => {
           <SimpleSlider />
           <Description
             title={title}
-            date={createdAt}
+            date={updatedAt}
             price={price}
-            status="Приватна особа"
+            status="no status in data"
             state="Стан: Б/в"
             description={description}
             id={_id}
@@ -71,13 +74,13 @@ const AdvertPage = () => {
         </SliderWrap>
         <Container>
           <User
-            name="Руслан"
-            date={createdAt}
+            name={contactName}
+            date={updatedAt}
             link="/"
           />
           <Location
-            city="Київ, Солом&apos;янський"
-            region={address}
+            city={address.city}
+            region="no region in data"
           />
         </Container>
       </Wrapper>

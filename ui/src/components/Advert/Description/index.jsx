@@ -41,14 +41,14 @@ const Description = ({
 Description.propTypes = {
   title: PropTypes.string,
   date: PropTypes.string,
-  price: PropTypes.string,
+  price: PropTypes.number,
   description: PropTypes.string,
 };
 
 Description.defaultProps = {
   title: '',
   date: '',
-  price: '',
+  price: 0,
   description: '',
 };
 
