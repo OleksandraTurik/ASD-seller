@@ -18,6 +18,14 @@ export const ButtonStyle = styled.button`
   }
 `;
 
+export const SubCategoryButton = styled.button`
+  background: none;
+  color: #003034;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+`;
+
 export const ButtonAdvertCard = styled.button`
   background: none;
   border: none;
