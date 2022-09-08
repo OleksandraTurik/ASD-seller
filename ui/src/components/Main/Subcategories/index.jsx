@@ -10,7 +10,7 @@ import {
   P,
   LinkName,
 } from './styled';
-import ArrowRight from '../ArrowRight';
+import ArrowRight from '../../../assets/icons/ArrowRight';
 
 const Subcategories = ({ childrenCategory, childrenId }) => {
   const [subcategory, setSubcategory] = useState(false);
@@ -48,7 +48,7 @@ const Subcategories = ({ childrenCategory, childrenId }) => {
                     onClick={() => showSubcategory(item._id)}
                   >
                     <NameButtonContainer>
-                      <ArrowRight />
+                      <ArrowRight width="18px" height="18px" />
                       <P>{item.name}</P>
                     </NameButtonContainer>
                   </SubCategoryButton>
