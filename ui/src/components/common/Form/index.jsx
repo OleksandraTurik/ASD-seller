@@ -1,14 +1,15 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
+import { LoaderForm } from './LoaderContainer';
+import { noticeMessages } from './helper';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
 } from './styled';
-import { noticeMessages } from './helper';
 
 const Form = ({
   textButton, emailField, passwordField, type,
@@ -22,7 +23,7 @@ const Form = ({
     mode: 'onChange',
   });
 
-  const { registrationSuccess, error } = useSelector((state) => state.userReducer);
+  const { registrationSuccess, error, loading } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
@@ -36,6 +37,7 @@ const Form = ({
 
   return (
     <Container>
+      {loading && <LoaderForm />}
       <WrapperLink>
         <NavLink className="link" to="/register" activeClassName="selected">
           Зареєструватися
