@@ -1,11 +1,14 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
+import Select from 'react-select';
+import { useForm, Controller } from 'react-hook-form';
 import ArrowDownIcon from 'assets/icons/ArrowDown';
 import Modal from 'components/Modal/Modal';
 import { getCategories } from 'redux/slice/getCategories';
 import { useDispatch, useSelector } from 'react-redux';
 import avtoImg from 'assets/img/rubryky/avto.png';
+import ThinArrowRight from 'assets/icons/ThinArrowRight';
 import {
   Main,
   Wrapper,
@@ -24,7 +27,10 @@ import {
   PublishButton,
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
+  ImgCirle,
 } from './styled';
+import advertServices from '../../services/advertServices';
+import { useFetchCities } from '../../components/hooks/useFetchCities';
 
 // eslint-disable-next-line react/prop-types
 const AddAdsPage = () => {
@@ -32,13 +38,52 @@ const AddAdsPage = () => {
   const [subcategory, setSubcategory] = useState(null);
   const [selected, setSelected] = useState(null);
   const [showInfo, setShowInfo] = useState(true);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    mode: 'onBlur',
+  const user = JSON.parse(localStorage.getItem('tokens'));
+  const { cities, loading, error } = useFetchCities();
+  const {
+    register, handleSubmit, control, reset, formState: { errors },
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      title: 'I love donezk and luganskI love donezk and lugansk',
+      description: 'I love donezk and luganskI love donezk and lugansk',
+      price: '200',
+      sellerId: user.userDto.id,
+      contactName: 'НАДЯ ТУРИК',
+      contactPhone: '3809123123123',
+      address: 'I love donezk and luganskI love donezk and lugansk',
+      images: '',
+    },
   });
-
-  const onSubmit = data => console.log(data);
+  const colorCategory = {
+    color: selected ? 'black' : 'red',
+  };
+  const onSubmit = async (v) => {
+    console.log(v);
+    // if (!selected) {
+    //   alert('Введіть категорію');
+    // }
+    try {
+      const send = await advertServices.createAdverts({
+        title: v.title,
+        description: v.description,
+        price: v.price,
+        sellerId: v.sellerId,
+        contactName: v.contactName,
+        contactPhone: v.contactPhone,
+        address: v.address,
+        images: v.images,
+        // category: selected._id,
+      });
+      // reset();
+      navigate(`/profiles/${user.userDto.id}/adverts`);
+    } catch (e) {
+      console.log('error');
+    }
+  };
 
   const handleKeyDown = (e) => {
     e.target.style.height = 'inherit';
@@ -57,10 +102,6 @@ const AddAdsPage = () => {
 
   const toggleModal = () => setModalOpen((prevState) => !prevState);
 
-  // const handleClick = (id) => {
-  //   setShowInfo(false);
-  //   setId(id);
-  // };
   const handleClick = (category) => () => {
     if (category.children?.length) {
       setShowInfo(false);
@@ -86,10 +127,10 @@ const AddAdsPage = () => {
                 name="title"
                 type="text"
                 rows="1"
-                required
                 onKeyDown={handleKeyDown}
+                required
                 placeholder="Наприклад, iPhone 8"
-                {...register('Title', {
+                {...register('title', {
                   required: 'Заголовок відіграє важливу роль, не забудьте додати його',
                   minLength: {
                     value: 16,
@@ -97,31 +138,47 @@ const AddAdsPage = () => {
                   },
                 })}
               />
-              <div>{errors.Title && <ErrorTitle>{errors.Title.message || 'У заголовку має бути не менше 16 символів'}</ErrorTitle>}</div>
+              <div>{errors.title && <ErrorTitle>{errors.title.message || 'У заголовку має бути не менше 16 символів'}</ErrorTitle>}</div>
             </WidthEquation>
-            <Category>Категорія*</Category>
+            <Category style={colorCategory}>Категорія*</Category>
             <CategoryWidthEquation>
-              <PickCategory role="button" type="button" onClick={toggleModal}>
+              <PickCategory
+                role="button"
+                type="button"
+                onClick={toggleModal}
+              >
                 <PInPickCategory>{pickCategoryName}</PInPickCategory>
-                <ArrowDownIcon style={{ color: 'rgb(0, 47, 52)' }} height="24px" width="24px" />
+                <ArrowDownIcon
+                  style={{ color: 'rgb(0, 47, 52)' }}
+                  height="24px"
+                />
               </PickCategory>
               <Modal open={isOpen} onClose={toggleModal}>
+                <Title>Виберіть категорію</Title>
                 <CategoryContent>
                   {showInfo ? categories.map((item) => (
-                    <CategoryItems key={item._id} onClick={handleClick(item)}>
-                      <img style={{ width: '48px' }} src={avtoImg} alt="avto" />
+                    <CategoryItems
+                      key={item._id}
+                      onClick={handleClick(item)}
+                    >
+                      <ImgCirle src={avtoImg} alt="category picture" />
                       {item.name}
                     </CategoryItems>
                   )) : (
                     <div style={{ display: 'flex' }}>
                       <CategoryList>
                         {categories.map((item) => (
-                          <CategoryListItem selected={item._id === subcategory?._id} key={item._id} onClick={handleClick(item)}>
+                          <CategoryListItem
+                            selected={item._id === subcategory?._id}
+                            key={item._id}
+                            onClick={handleClick(item)}
+                          >
                             <div>
                               {item.name}
                             </div>
                             <div>
-                              {item.children.length ? '>' : null}
+                              {item.children.length
+                                ? <ThinArrowRight width="25px" /> : null}
                             </div>
                           </CategoryListItem>
                         ))}
@@ -129,7 +186,16 @@ const AddAdsPage = () => {
                       {(subcategory && subcategory.children?.length) && (
                         <CategoryList>
                           {subcategory.children.map((item) => (
-                            <CategoryListItem selected={item._id === subcategory?._id} onClick={handleClick(item)}>{item.name}</CategoryListItem>
+                            <CategoryListItem
+                              selected={item._id === subcategory?._id}
+                              onClick={handleClick(item)}
+                            >
+                              {item.name}
+                              <div>
+                                {item.children.length
+                                  ? <ThinArrowRight width="25px" /> : null}
+                              </div>
+                            </CategoryListItem>
                           ))}
                         </CategoryList>
                       )}
@@ -143,12 +209,12 @@ const AddAdsPage = () => {
             <WidthEquation>
               <WhiteBlockTitle>Фото</WhiteBlockTitle>
               <InputFile
-                id="photos"
-                name="photos"
+                id="images"
+                name="images"
                 type="file"
                 accept="image/heic, image/png, image/jpeg, image/webp"
                 multiple
-                {...register('Photos')}
+                {...register('images')}
               />
             </WidthEquation>
           </WhiteBlock>
@@ -158,62 +224,44 @@ const AddAdsPage = () => {
               <TitleTextArea
                 id="description"
                 name="description"
-                required
-                rows="13"
+                type="text"
                 placeholder="Подумайте, що ви хотіли би дізнатися з оголошення. І додайте це в опис"
-                {...register('Description', {
-                  required: 'Опис повинен бути не коротшим за 80 знаків',
+                rows="10"
+                {...register('description', {
+                  required: 'Заголовок відіграє важливу роль, не забудьте додати його',
                   minLength: {
-                    value: 80,
-                    message: 'Опис повинен бути не коротшим за 80 знаків',
+                    value: 20,
+                    message: 'У заголовку має бути не менше 20 символів',
                   },
                 })}
               />
-              <div>{errors.Description && <ErrorTitle>{errors.Description.message || 'Опис повинен бути не коротшим за 80 знаків'}</ErrorTitle>}</div>
-              {/* <DescriptionProgress>
-                <span style={{ float: 'left' }}>
-                  {value.length < 80
-                    && (
-                      <span>
-                        Напишіть ще&nbsp;
-                        {80 - value.length}
-                        &nbsp;символів
-                      </span>
-                    )}
-                </span>
-                <span style={{ float: 'right' }}>
-                  {`${value.length}/9000 `}
-                </span>
-              </DescriptionProgress> */}
+              <div>{errors.description && <ErrorTitle>{errors.description.message || 'Опис повинен бути не коротшим за 80 знаків'}</ErrorTitle>}</div>
             </WidthEquation>
           </WhiteBlock>
           <WhiteBlock>
             <CategoryWidthEquation>
               <WhiteBlockTitle>Ваші контактні дані</WhiteBlockTitle>
-              <LabelForInut for="location">Місцезнаходження*</LabelForInut>
-              <ContactInput
-                id="location"
-                name="location"
-                placeholder="Назва міста"
-                type="text"
-                required
-                {...register('Location', {
-                  required: 'Невірне місцезнаходження',
-                  minLength: {
-                    value: 1,
-                    message: 'Невірне місцезнаходження',
-                  },
-                })}
+              <LabelForInut for="address">Місцезнаходження*</LabelForInut>
+              <Controller
+                control={control}
+                name="address"
+                render={({ field: { onChange, value, ref } }) => (
+                  <Select
+                    inputRef={ref}
+                    value={cities?.find((c) => c.value === value)}
+                    onChange={(val) => onChange(val.value)}
+                    options={cities}
+                  />
+                )}
               />
               <div>{errors.Location && <ErrorTitle>{errors.Location.message || 'Невірне місцезнаходження'}</ErrorTitle>}</div>
-              <LabelForInut for="author">Контактна особа*</LabelForInut>
+              <LabelForInut for="contactName">Контактна особа*</LabelForInut>
               <ContactInput
-                id="author"
-                name="author"
+                id="contactName"
+                name="contactName"
                 placeholder="Ім'я"
                 type="text"
-                required
-                {...register('Author', {
+                {...register('contactName', {
                   required: "Будь ласка, вкажіть ім'я контактної особи",
                   minLength: {
                     value: 3,
@@ -222,22 +270,24 @@ const AddAdsPage = () => {
                 })}
               />
               <div>{errors.Author && <ErrorTitle>{errors.Author.message || "Ім'я контактної особи повинно складатись як мінімум з 3 символів"}</ErrorTitle>}</div>
-              <LabelForInut for="email">Email-адреса</LabelForInut>
+              <LabelForInut for="price">Ціна оголошення</LabelForInut>
               <ContactInput
-                id="email"
-                name="email"
-                placeholder="your@email.com"
-                type="email"
-                {...register('Email')}
+                id="price"
+                name="price"
+                placeholder="Ціна оголошення"
+                type="number"
+                {...register('price', {
+                  valueAsNumber: true,
+                })}
               />
-              <div>{errors.Email && <ErrorTitle>{errors.Email.message}</ErrorTitle>}</div>
-              <LabelForInut for="number">Номер телефону</LabelForInut>
+              <div>{errors.price && <ErrorTitle>{errors.price.message}</ErrorTitle>}</div>
+              <LabelForInut for="contactPhone">Номер телефону</LabelForInut>
               <ContactInput
-                id="number"
-                name="number"
+                id="contactPhone"
+                name="contactPhone"
                 placeholder="Номер телефону"
                 type="tel"
-                {...register('Number')}
+                {...register('contactPhone')}
               />
               <div>{errors.Number && <ErrorTitle>{errors.Number.message}</ErrorTitle>}</div>
             </CategoryWidthEquation>

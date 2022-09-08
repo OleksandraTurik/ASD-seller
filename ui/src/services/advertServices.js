@@ -2,6 +2,14 @@ import API from '../API';
 import ServerException from '../exceptions/serverException';
 
 const advertServices = {
+  getAdvertsList: async (id, page) => {
+    try {
+      const adverts = API.get(`http://localhost:4000/api/adverts?seller=${id}&page=${page}`);
+      return adverts;
+    } catch (e) {
+      throw new ServerException(e.response);
+    }
+  },
   getAdverts: async () => {
     try {
       const adverts = API.get('/adverts');
@@ -10,22 +18,19 @@ const advertServices = {
       throw new ServerException(e.response);
     }
   },
-  createAdverts: async (id, {
-    title,
-    price,
-    sellerId,
-    description,
-    address,
-  }) => {
+  createAdverts: async (advertData) => {
     try {
-      const body = {
-        title,
-        price,
-        sellerId,
-        description,
-        address,
-      };
-      const createAdverts = await API.post('/adverts', body);
+      const formData = new FormData();
+      formData.append('title', advertData.title);
+      formData.append('description', advertData.description);
+      formData.append('price', advertData.price);
+      formData.append('sellerId', advertData.sellerId);
+      formData.append('contactName', advertData.contactName);
+      formData.append('contactPhone', advertData.contactPhone);
+      formData.append('address', advertData.address);
+      formData.append('images', advertData.images[0]);
+      const settings = { headers: { 'Content-Type': 'multipart/form-data' } };
+      const createAdverts = await API.post('/adverts', formData, settings);
       return createAdverts;
     } catch (e) {
       throw new ServerException(e.response);

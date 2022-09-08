@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import Search from 'components/common/Search';
 import AdvertCard from 'components/common/AdvertCard';
 import {
@@ -8,168 +8,142 @@ import {
   ItemLink,
   ImgWrap,
   LatestAdsSection,
+  P,
 } from 'pages/MainPage/styled';
 
 import dytiachyiSvitImg from 'assets/img/rubryky/dytiachyi-svit.png';
-import nerukhomistImg from 'assets/img/rubryky/nerukhomist.png';
-import avtoImg from 'assets/img/rubryky/avto.png';
-import zapchastynyImg from 'assets/img/rubryky/zapchastyny.png';
-import robotaImg from 'assets/img/rubryky/robota.png';
-import tvarynyImg from 'assets/img/rubryky/tvaryny.png';
-import dimISadImg from 'assets/img/rubryky/dim-i-sad.png';
-import elektronikaImg from 'assets/img/rubryky/elektronika.png';
-import biznesTaPosluhyImg from 'assets/img/rubryky/biznes-ta-posluhy.png';
-import modaIStylImg from 'assets/img/rubryky/moda-i-styl.png';
-import hobiImg from 'assets/img/rubryky/hobi.png';
 
 import bmw from 'assets/img/bmw.webp';
 import renault from 'assets/img/renault.webp';
+import useFetchCategories from 'components/hooks/useFetchCategories';
+import Subcategories from 'components/Main/Subcategories';
+import Loader from 'components/common/Loader';
 
-const MainPage = () => (
+const MainPage = () => {
+  const [subcategories, setSubcategories] = useState('id');
+  const [isOpen, setIsOpen] = useState(false);
+  const [childrenCategory, setChildrenCategory] = useState([]);
+  const { data, loading, error } = useFetchCategories();
 
-  <>
-    <Search />
-    <Wrapper>
-      <Title>Головні рубрики</Title>
-      <CategoriesList>
-        <ItemLink href="#">
-          <ImgWrap
-            src={dytiachyiSvitImg}
-            alt="Рубрика Дитячий світ"
-            backgroundColor="rgb(255, 206, 50)"
-          />
-          <p>Дитячий світ</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={nerukhomistImg}
-            alt="Рубрика Нерухомість"
-            backgroundColor="rgb(58, 119, 255)"
-          />
-          <p>Нерухомість</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={avtoImg}
-            alt="Рубрика Авто"
-            backgroundColor="rgb(35, 229, 219)"
-          />
-          <p>Авто</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={zapchastynyImg}
-            alt="Рубрика Запчастини для транспорту"
-            backgroundColor="rgb(255, 86, 54)"
-          />
-          <p>Запчастини для транспорту</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={robotaImg}
-            alt="Рубрика Робота"
-            backgroundColor="rgb(255, 246, 217)"
-          />
-          <p>Робота</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={tvarynyImg}
-            alt="Рубрика Тварини"
-            backgroundColor="rgb(206, 221, 255)"
-          />
-          <p>Тварини</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={dimISadImg}
-            alt="Рубрика Дім і сад"
-            backgroundColor="rgb(200, 248, 246)"
-          />
-          <p>Дім і сад</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={elektronikaImg}
-            alt="Рубрика Електроніка"
-            backgroundColor="rgb(255, 214, 201)"
-          />
-          <p>Електроніка</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={biznesTaPosluhyImg}
-            alt="Рубрика Бізнес та послуги"
-            backgroundColor="rgb(255, 206, 50)"
-          />
-          <p>Бізнес та послуги</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={modaIStylImg}
-            alt="Рубрика Мода і стиль"
-            backgroundColor="rgb(206, 221, 255)"
-          />
-          <p>Мода і стиль</p>
-        </ItemLink>
-        <ItemLink href="#">
-          <ImgWrap
-            src={hobiImg}
-            alt="Рубрика Хобі, відпочинок і спорт"
-            backgroundColor="rgb(200, 248, 246)"
-          />
-          <p>Хобі, відпочинок і спорт</p>
-        </ItemLink>
-      </CategoriesList>
-    </Wrapper>
-    <LatestAdsSection>
+  const showSubcategories = (id) => {
+    if (id === subcategories) {
+      setSubcategories('id');
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+      setSubcategories(id);
+    }
+
+    data.forEach((item) => {
+      if (item._id === id) {
+        setChildrenCategory(item);
+      }
+    });
+  };
+
+  const categoriesList = () => {
+    if (error) {
+      return 'error';
+    }
+
+    if (loading) {
+      return <Loader />;
+    }
+
+    return data.map((item) => (
+      <ItemLink key={item._id} onClick={() => showSubcategories(item._id)}>
+        <ImgWrap
+          src={`http://localhost:4000/${item.image}`}
+          alt={item.slug}
+        />
+        <P>{item.name}</P>
+      </ItemLink>
+    ));
+  };
+
+  const adverts = [
+    {
+      id: '6318caec9959b9a5c1e4a7ef',
+      img: bmw,
+      name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
+      location: 'Івано-Франківськ',
+      date: 'Сьогодні 11:22',
+      price: 56,
+    },
+    {
+      id: '630f3cc90f80e291183f2def',
+      img: renault,
+      name: "Doctor's Best Vitam D3 2000iu 50mcg 180softgels до 02.2023",
+      location: "Харків, Основ'янський",
+      date: 'Сьогодні 18:05',
+      price: 200,
+    },
+    {
+      id: '630f3d320f80e291183f2df2',
+      img: bmw,
+      name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
+      location: 'Івано-Франківськ',
+      date: 'Сьогодні 11:22',
+      price: 56,
+    },
+    {
+      id: '631091191c4a15e6ef7d626f',
+      img: bmw,
+      name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
+      location: 'Івано-Франківськ',
+      date: 'Сьогодні 11:22',
+      price: 56,
+    },
+    {
+      id: '6310911b1c4a15e6ef7d6272',
+      img: bmw,
+      name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
+      location: 'Івано-Франківськ',
+      date: 'Сьогодні 11:22',
+      price: 56,
+    },
+  ];
+
+  return (
+    <>
+      <Search />
       <Wrapper>
-        <Title>Останні оголошення</Title>
+        <Title>Головні рубрики</Title>
         <CategoriesList>
-          <AdvertCard
-            link="https://www.google.com.ua/"
-            img={bmw}
-            name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-            location="Івано-Франківськ"
-            date="Сьогодні 11:22"
-            price="56 грн."
-          />
-          <AdvertCard
-            link="https://www.google.com.ua/"
-            img={renault}
-            name="Doctor's Best Vitam D3 2000iu 50mcg 180softgels до 02.2023"
-            location="Харків, Основ'янський"
-            date="Сьогодні 18:05"
-            price="200 грн."
-          />
-          <AdvertCard
-            link="https://www.google.com.ua/"
-            img={bmw}
-            name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-            location="Івано-Франківськ"
-            date="Сьогодні 11:22"
-            price="56 грн."
-          />
-          <AdvertCard
-            link="https://www.google.com.ua/"
-            img={bmw}
-            name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-            location="Івано-Франківськ"
-            date="Сьогодні 11:22"
-            price="56 грн."
-          />
-          <AdvertCard
-            link="https://www.google.com.ua/"
-            img={bmw}
-            name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-            location="Івано-Франківськ"
-            date="Сьогодні 11:22"
-            price="56 грн."
-          />
+          {
+            categoriesList()
+          }
         </CategoriesList>
       </Wrapper>
-    </LatestAdsSection>
-  </>
-);
+      {isOpen && (
+        <Subcategories
+          childrenId={childrenCategory._id}
+          childrenCategory={childrenCategory.children}
+        />
+      )}
+      <LatestAdsSection>
+        <Wrapper>
+          <Title>Останні оголошення</Title>
+          <CategoriesList>
+            {
+              adverts.map((item) => (
+                <AdvertCard
+                  key={item.id}
+                  id={item.id}
+                  link={`/adverts/${item.id}`}
+                  img={item.img}
+                  name={item.name}
+                  location={item.location}
+                  date={item.date}
+                  price={item.price}
+                />
+              ))
+            }
+          </CategoriesList>
+        </Wrapper>
+      </LatestAdsSection>
+    </>
+  );
+};
 
 export default MainPage;

@@ -79,10 +79,10 @@ class UserService {
 
   async modifyUser(id, updates) {
     const { email, password, fullName, address, phoneNumber } = updates;
-    const hashPassword = await bcrypt.hash(password, 3);
+    const hashPassword = password ? await bcrypt.hash(password, 3) : password;
     const user = await UserModel.updateOne({ _id: id }, {
       email,
-      password:hashPassword,
+      password: hashPassword,
       fullName,
       address,
       phoneNumber,

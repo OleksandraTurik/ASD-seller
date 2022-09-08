@@ -20,9 +20,9 @@ export const apiUserService = {
   },
 
   refreshToken: async () => {
-    const user = API.get('/users/refresh');
-    tokenService.updateTokens(user);
-    return user;
+    const { data } = API.get('/users/refresh');
+    tokenService.updateTokens(data);
+    return data;
   },
 };
 

@@ -6,6 +6,7 @@ const errorHandlerMiddleWare = require('./error-handler.middleware');
 const idValidationMiddleware = require('./id-validation.middleware');
 const multipleUploadMiddleware = require('./multiple.upload.middleware');
 const singleUploadMiddleware = require('./single-upload.middleware');
+const cityFilterSortMiddleware = require('./city-filter-sort.middleware');
 
 module.exports = {
     paginationMiddleware,
@@ -16,4 +17,5 @@ module.exports = {
     idValidationMiddleware,
     multipleUploadMiddleware,
     singleUploadMiddleware,
+    cityFilterSortMiddleware,
 };
