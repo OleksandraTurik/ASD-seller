@@ -2,6 +2,14 @@ import API from '../API';
 import ServerException from '../exceptions/serverException';
 
 const advertServices = {
+  getAdvertsList: async (id, page) => {
+    try {
+      const adverts = API.get(`http://localhost:4000/api/adverts?seller=${id}&page=${page}`);
+      return adverts;
+    } catch (e) {
+      throw new ServerException(e.response);
+    }
+  },
   getAdverts: async () => {
     try {
       const adverts = API.get('/adverts');
