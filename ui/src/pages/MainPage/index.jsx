@@ -97,7 +97,7 @@ const MainPage = () => {
 
   const adverts = [
     {
-      id: '630f3c510f80e291183f2dec',
+      id: '6318caec9959b9a5c1e4a7ef',
       img: bmw,
       name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
       location: 'Івано-Франківськ',
