@@ -11,8 +11,8 @@ export const getCategories = createAsyncThunk(
   'categories/getCategories',
   async (_, { rejectWithValue }) => {
     try {
-      const { data: { categoryList } } = await categoriesServices.getCategories();
-      return categoryList;
+      const { data } = await categoriesServices.getCategories();
+      return data;
     } catch (e) {
       return rejectWithValue(e.response.data);
     }

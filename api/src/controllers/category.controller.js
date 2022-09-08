@@ -1,67 +1,87 @@
-const Category = require('../models/Category.model');
-const slugify = require('slugify');
+const { Category } = require('../models');
+const AWS = require('../service/AWS.service');
 const errorHandler = require('../helpers/error-handler');
 const StatusError = require('../exceptions/StatusError');
 
-class CategoryController {
-  async create(req, res){
+  async function createCategory(req, res){
     try {
-      const categoryObj ={
-        name:req.body.name,
-        slug: slugify(req.body.name),
-      };
+      const { name, parentId } = req.body;
+      if (!name)
+        throw new StatusError(400, 'Category name is required');
+      if (parentId && !(await Category.findById(parentId)))
+        throw new StatusError(400, `Category with ID: ${parentId} does not exist`);
+      if (!parentId && !req.file)
+        throw new StatusError(400, 'Image with \'image\' key is required');
 
-      if(req.body.parentId){
-        categoryObj.parentId = req.body.parentId;
+      if (!parentId && req.file) {
+        const { key } = await AWS.uploadPhoto(req.file);
+        const item = await Category.create({
+          name, image: `pic/${key}`,
+        });
+        res.json(item);
+      } else {
+        const item = await Category.create({ name, parentId });
+        if (parentId)
+          await Category.updateOne({ _id: parentId }, { $push: { children: item } });
+        res.json(item);
       }
-      const category = new Category(categoryObj);
-      category.save((error, category) => {
-        if(error) return res.status(400).json({ error });
-        if(category){
-          return res.status(201).json({ category });
-        }
-      });
+
     } catch (e) {
       errorHandler(res, e);
     }
   }
 
-  async getCategory(req, res){
+  async function getCategories(req, res){
     try {
-      Category.find({})
-        .exec((error, categories) => {
-          if(error){
-            throw new StatusError(404, 'category does not exist');
-          }
-          function createCategories(categories, parentId = null){
-            const categoryList = [];
-            let category;
-            if(parentId == null){
-              category = categories.filter(cat => cat.parentId == undefined);
-            } else {
-              category = categories.filter(cat => cat.parentId === parentId);
-            }
-
-            for(const cate of category){
-              categoryList.push({
-                _id:cate._id,
-                name: cate.name,
-                slug: cate.slug,
-                children: createCategories(categories, cate.id),
-              });
-            }
-            return categoryList;
-          }
-          if(categories){
-            const categoryList = createCategories(categories);
-
-            res.status(200).json({ categoryList });
-          }
-        });
-    }catch (e) {
+      const items = await Category.find({ parentId: null });
+      res.json(items);
+    } catch (e) {
       errorHandler(res, e);
     }
   }
-}
 
-module.exports=  new CategoryController();
+  async function getCategoryById(req, res) {
+    try {
+      const { id } = req.params;
+      if (!(await Category.findById(id)))
+        throw new StatusError(400, `Category with ID: ${id} does not exist`);
+      res.json(await Category.findById(id));
+    } catch (err) {
+      errorHandler(res, err);
+    }
+  }
+
+  async function deleteCategory(req, res) {
+    try {
+      const { id } = req.params;
+      if (!(await Category.findById(id)))
+        throw new StatusError(400, `Category with ID: ${id} does not exist`);
+      const response = await Promise.all([
+          Category.deleteOne({ _id: id }),
+          Category.deleteMany({ parentId: id }),
+      ]);
+      res.json(response);
+    } catch (err) {
+      errorHandler(res, err);
+
+    }
+  }
+  //
+  // async function patchCategory(req, res) {
+  //   try {
+  //     const { id } = req.params;
+  //     const { name } = req.body;
+  //     if (!(await Category.findById(id)))
+  //       throw new StatusError(400, `Category with ID: ${id} does not exist`);
+  //
+  //   } catch (err) {
+  //     errorHandler(res, err);
+  //   }
+  // }
+
+module.exports = {
+    createCategory,
+    getCategories,
+    deleteCategory,
+    getCategoryById,
+};

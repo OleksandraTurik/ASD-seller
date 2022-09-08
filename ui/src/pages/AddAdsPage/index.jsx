@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useForm } from 'react-hook-form';
+import Select from 'react-select';
+import { useForm, Controller } from 'react-hook-form';
 import ArrowDownIcon from 'assets/icons/ArrowDown';
 import Modal from 'components/Modal/Modal';
 import { getCategories } from 'redux/slice/getCategories';
@@ -29,6 +30,7 @@ import {
   ImgCirle,
 } from './styled';
 import advertServices from '../../services/advertServices';
+import { useFetchCities } from '../../components/hooks/useFetchCities';
 
 // eslint-disable-next-line react/prop-types
 const AddAdsPage = () => {
@@ -40,37 +42,44 @@ const AddAdsPage = () => {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
   const user = JSON.parse(localStorage.getItem('tokens'));
+  const { cities, loading, error } = useFetchCities();
   const {
-    register, handleSubmit, reset, getValues, formState: { errors },
+    register, handleSubmit, control, reset, formState: { errors },
   } = useForm({
     mode: 'onChange',
     defaultValues: {
       title: 'I love donezk and luganskI love donezk and lugansk',
+      description: 'I love donezk and luganskI love donezk and lugansk',
       price: '200',
       sellerId: user.userDto.id,
-      description: 'I love donezk and luganskI love donezk and lugansk',
+      contactName: 'НАДЯ ТУРИК',
+      contactPhone: '3809123123123',
       address: 'I love donezk and luganskI love donezk and lugansk',
+      images: '',
     },
   });
   const colorCategory = {
     color: selected ? 'black' : 'red',
   };
   const onSubmit = async (v) => {
-    if (!selected) {
-      alert('Введіть категорію');
-    }
+    console.log(v);
+    // if (!selected) {
+    //   alert('Введіть категорію');
+    // }
     try {
       const send = await advertServices.createAdverts({
         title: v.title,
+        description: v.description,
         price: v.price,
         sellerId: v.sellerId,
-        category: selected._id,
-        description: v.description,
+        contactName: v.contactName,
+        contactPhone: v.contactPhone,
         address: v.address,
+        images: v.images,
+        // category: selected._id,
       });
-      reset();
+      // reset();
       navigate(`/profiles/${user.userDto.id}/adverts`);
-      console.log(send);
     } catch (e) {
       console.log('error');
     }
@@ -200,12 +209,12 @@ const AddAdsPage = () => {
             <WidthEquation>
               <WhiteBlockTitle>Фото</WhiteBlockTitle>
               <InputFile
-                id="photos"
-                name="photos"
+                id="images"
+                name="images"
                 type="file"
                 accept="image/heic, image/png, image/jpeg, image/webp"
                 multiple
-                {...register('Photos')}
+                {...register('images')}
               />
             </WidthEquation>
           </WhiteBlock>
@@ -232,28 +241,27 @@ const AddAdsPage = () => {
           <WhiteBlock>
             <CategoryWidthEquation>
               <WhiteBlockTitle>Ваші контактні дані</WhiteBlockTitle>
-              <LabelForInut for="location">Місцезнаходження*</LabelForInut>
-              <ContactInput
-                id="address"
+              <LabelForInut for="address">Місцезнаходження*</LabelForInut>
+              <Controller
+                control={control}
                 name="address"
-                placeholder="Назва міста"
-                type="text"
-                {...register('address', {
-                  required: 'Невірне місцезнаходження',
-                  minLength: {
-                    value: 1,
-                    message: 'Невірне місцезнаходження',
-                  },
-                })}
+                render={({ field: { onChange, value, ref } }) => (
+                  <Select
+                    inputRef={ref}
+                    value={cities?.find((c) => c.value === value)}
+                    onChange={(val) => onChange(val.value)}
+                    options={cities}
+                  />
+                )}
               />
               <div>{errors.Location && <ErrorTitle>{errors.Location.message || 'Невірне місцезнаходження'}</ErrorTitle>}</div>
-              <LabelForInut for="author">Контактна особа*</LabelForInut>
+              <LabelForInut for="contactName">Контактна особа*</LabelForInut>
               <ContactInput
-                id="author"
-                name="author"
+                id="contactName"
+                name="contactName"
                 placeholder="Ім'я"
                 type="text"
-                {...register('Author', {
+                {...register('contactName', {
                   required: "Будь ласка, вкажіть ім'я контактної особи",
                   minLength: {
                     value: 3,
@@ -273,13 +281,13 @@ const AddAdsPage = () => {
                 })}
               />
               <div>{errors.price && <ErrorTitle>{errors.price.message}</ErrorTitle>}</div>
-              <LabelForInut for="number">Номер телефону</LabelForInut>
+              <LabelForInut for="contactPhone">Номер телефону</LabelForInut>
               <ContactInput
-                id="number"
-                name="number"
+                id="contactPhone"
+                name="contactPhone"
                 placeholder="Номер телефону"
                 type="tel"
-                {...register('Number')}
+                {...register('contactPhone')}
               />
               <div>{errors.Number && <ErrorTitle>{errors.Number.message}</ErrorTitle>}</div>
             </CategoryWidthEquation>

@@ -54,7 +54,7 @@ const MainPage = () => {
     return data.map((item) => (
       <ItemLink key={item._id} onClick={() => showSubcategories(item._id)}>
         <ImgWrap
-          src={dytiachyiSvitImg}
+          src={`http://localhost:4000/${item.image}`}
           alt={item.slug}
         />
         <P>{item.name}</P>
