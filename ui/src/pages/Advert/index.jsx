@@ -45,8 +45,6 @@ const AdvertPage = () => {
     contactName,
   } = getAdvertStorage.advertInfo;
 
-  console.log(getAdvertStorage.advertInfo);
-
   const { loading, error } = advert;
 
   const advertPage = () => {
