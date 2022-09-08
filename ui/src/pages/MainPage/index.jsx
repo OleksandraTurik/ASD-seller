@@ -74,6 +74,49 @@ const MainPage = () => {
     ));
   };
 
+  const adverts = [
+    {
+      id: '6318caec9959b9a5c1e4a7ef',
+      img: bmw,
+      name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
+      location: 'Івано-Франківськ',
+      date: 'Сьогодні 11:22',
+      price: 56,
+    },
+    {
+      id: '630f3cc90f80e291183f2def',
+      img: renault,
+      name: "Doctor's Best Vitam D3 2000iu 50mcg 180softgels до 02.2023",
+      location: "Харків, Основ'янський",
+      date: 'Сьогодні 18:05',
+      price: 200,
+    },
+    {
+      id: '630f3d320f80e291183f2df2',
+      img: bmw,
+      name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
+      location: 'Івано-Франківськ',
+      date: 'Сьогодні 11:22',
+      price: 56,
+    },
+    {
+      id: '631091191c4a15e6ef7d626f',
+      img: bmw,
+      name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
+      location: 'Івано-Франківськ',
+      date: 'Сьогодні 11:22',
+      price: 56,
+    },
+    {
+      id: '6310911b1c4a15e6ef7d6272',
+      img: bmw,
+      name: 'столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні',
+      location: 'Івано-Франківськ',
+      date: 'Сьогодні 11:22',
+      price: 56,
+    },
+  ];
+
   return (
     <>
       <Search />
@@ -95,46 +138,20 @@ const MainPage = () => {
         <Wrapper>
           <Title>Останні оголошення</Title>
           <CategoriesList>
-            <AdvertCard
-              link="https://www.google.com.ua/"
-              img={bmw}
-              name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-              location="Івано-Франківськ"
-              date="Сьогодні 11:22"
-              price="56 грн."
-            />
-            <AdvertCard
-              link="https://www.google.com.ua/"
-              img={renault}
-              name="Doctor's Best Vitam D3 2000iu 50mcg 180softgels до 02.2023"
-              location="Харків, Основ'янський"
-              date="Сьогодні 18:05"
-              price="200 грн."
-            />
-            <AdvertCard
-              link="https://www.google.com.ua/"
-              img={bmw}
-              name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-              location="Івано-Франківськ"
-              date="Сьогодні 11:22"
-              price="56 грн."
-            />
-            <AdvertCard
-              link="https://www.google.com.ua/"
-              img={bmw}
-              name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-              location="Івано-Франківськ"
-              date="Сьогодні 11:22"
-              price="56 грн."
-            />
-            <AdvertCard
-              link="https://www.google.com.ua/"
-              img={bmw}
-              name="столбики б.у стовпчики сітка рябиця Відбірні з Доставкою по Україні"
-              location="Івано-Франківськ"
-              date="Сьогодні 11:22"
-              price="56 грн."
-            />
+            {
+              adverts.map((item) => (
+                <AdvertCard
+                  key={item.id}
+                  id={item.id}
+                  link={`/adverts/${item.id}`}
+                  img={item.img}
+                  name={item.name}
+                  location={item.location}
+                  date={item.date}
+                  price={item.price}
+                />
+              ))
+            }
           </CategoriesList>
         </Wrapper>
       </LatestAdsSection>

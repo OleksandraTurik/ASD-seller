@@ -19,6 +19,7 @@ import {
   IconContainer,
   Test,
 } from './styled';
+import Loader from '../../../common/Loader';
 
 const options = [
   { value: 'заголовок: а-я', label: 'Заголовок: А-Я' },
@@ -52,7 +53,7 @@ const customStyles = {
 };
 
 const Filters = () => {
-  const { data } = useSelector((state) => state.userAdvertInfoReducer);
+  const { data, loading, error } = useSelector((state) => state.userAdvertInfoReducer);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('tokens'));
 
@@ -60,7 +61,9 @@ const Filters = () => {
     dispatch(getAdvertsInfo(user.userDto.id));
   }, []);
 
-  console.log(data.length);
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <Wrapper>
       <MainContainer>
@@ -109,8 +112,8 @@ const Filters = () => {
         Всього оголошень:
         {' '}
         {
-          data.length
-            ? data.length
+          data?.itemsAmount
+            ? data.itemsAmount
             : 0
         }
       </span>

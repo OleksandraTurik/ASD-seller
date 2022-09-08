@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAdvertsInfo } from 'redux/slice/getAdvertInfo';
+import React from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
 
 // Components
@@ -9,6 +8,10 @@ import EmptyAdvertsList from 'components/Profile/MyAdverts/AdvertsList/EmptyAdve
 
 // Images
 import bmw from 'assets/img/bmw.webp';
+import { useParams } from 'react-router-dom';
+
+import Loader from '../../../common/Loader';
+import { useFetchAdverts } from '../../../hooks/useFetchAdverts';
 
 // Styles
 const Container = styled.div`
@@ -21,41 +24,53 @@ const Container = styled.div`
 
 const AdvertsList = () => {
   const isAdvert = true;
-  const { data, loading, error } = useSelector((state) => state.userAdvertInfoReducer);
-  const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('tokens'));
 
-  useEffect(() => {
-    dispatch(getAdvertsInfo(user.userDto.id));
-  }, []);
+  const { id } = useParams();
+  const {
+    list,
+    loading,
+    error,
+    fetchData,
+    hasMore,
+  } = useFetchAdverts(id);
 
   const advertsCard = () => {
     if (error) {
       return 'error';
     }
-
     if (loading) {
-      return 'loading';
+      return <Loader />;
     }
 
-    return data.length
-      ? data.map((item) => (
-        <AdvertCardList
-          key={item._id}
-          link="/"
-          img={bmw}
-          name={item.title}
-          location={item.address}
-          date={item.createdAt}
-          price={`${item.price} грн.`}
-          category="Хобі, відпочинок і спорт"
-          subcategory="Книги / журнали"
-        />
-      ))
-      : null;
+    return (
+      <InfiniteScroll
+        dataLength={list.length} // This is important field to render the next data
+        next={fetchData}
+        hasMore={hasMore}
+        loader={<h4><Loader /></h4>}
+        endMessage={(
+          <p style={{ textAlign: 'center' }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        )}
+        // below props only if you need pull down functionality
+      >
+        {list.length ? list?.map((item) => (
+          <AdvertCardList
+            key={item._id}
+            link="/"
+            img={bmw}
+            name={item.title}
+            location={item.address}
+            date={item.createdAt}
+            price={`${item.price} грн.`}
+            category="Хобі, відпочинок і спорт"
+            subcategory="Книги / журнали"
+          />
+        )) : null}
+      </InfiniteScroll>
+    );
   };
-
-  console.log(data);
 
   return (
     <div>

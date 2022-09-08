@@ -12,8 +12,12 @@ const userServices = {
   },
   getAdvertsListUser: async (id) => {
     try {
-      const { data: { results } } = await API.get(`/adverts?seller=${id}`);
-      return results;
+      const { data: { itemsAmount, results, next } } = await API.get(`/adverts?seller=${id}`);
+      return {
+        itemsAmount,
+        results,
+        next,
+      };
     } catch (e) {
       throw new ServerException(e.response);
     }
