@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Provider } from 'react-redux';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -8,12 +9,19 @@ import Footer from 'components/common/Footer';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from './redux';
 
+const Container = styled.div`
+  position: relative;
+  min-height: 100%;
+`;
+
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <Header />
-      <MainRoutes />
-      <Footer />
+      <Container>
+        <Header />
+        <MainRoutes />
+        <Footer />
+      </Container>
     </BrowserRouter>
   </Provider>
 
