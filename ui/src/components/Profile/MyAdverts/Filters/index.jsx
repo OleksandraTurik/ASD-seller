@@ -100,7 +100,7 @@ const Filters = () => {
                 ...theme,
                 colors: {
                   ...theme.colors,
-                  primary25: '#e6fcff',
+                  primary25: '#cbf7ee',
                   primary: '#002F34',
                 },
               })}
