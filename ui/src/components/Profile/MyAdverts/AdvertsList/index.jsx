@@ -74,6 +74,7 @@ const AdvertsList = () => {
 
     return (
       <InfiniteScroll
+        scrollThreshold="200px"
         dataLength={list.length} // This is important field to render the next data
         next={fetchData}
         hasMore={hasMore}
@@ -107,7 +108,7 @@ const AdvertsList = () => {
             link="/"
             img={bmw}
             name={item.title}
-            location={item.address.city}
+            location={item.address.city.city}
             date={item.createdAt}
             price={`${item.price} грн.`}
             category="Хобі, відпочинок і спорт"

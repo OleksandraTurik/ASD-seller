@@ -1,6 +1,6 @@
 const { Types } = require('mongoose');
 
-const { Advert, User, City } = require('../models');
+const { Advert, User, City, Category } = require('../models');
 const StatusError = require('../exceptions/StatusError');
 const errorHandler = require('../helpers/error-handler');
 const AWS = require('../service/AWS.service');
@@ -43,13 +43,16 @@ async function postAdvert(req, res) {
       address,
       contactName,
       contactPhone,
+      category,
     } = req.body;
-    if (!title || !price || !sellerId || !description || !address || !contactName || !contactPhone)
+    if (!title || !price || !sellerId || !description || !address || !contactName || !contactPhone || !category)
         throw new StatusError(400, 'Wrong body structure');
     if (req.files.length < 1)
         throw new StatusError(400, 'At least 1 photo is required');
     if (!(await User.findById(sellerId)))
-        throw new StatusError(404, 'This seller does not exist');
+        throw new StatusError(404, `Seller with ID: ${sellerId} does not exist`);
+    if (!(await  Category.findById(category)))
+        throw new StatusError(400, `Category with ID: ${category} does not exist`);
     if (title.length < 16 || title.length > 200)
         throw new StatusError(400, 'Title must have 16-200 symbols');
     if (description.length < 80 || description.length > 9000)
@@ -60,10 +63,11 @@ async function postAdvert(req, res) {
     const addressItem = await City.findById(address);
     if (!addressItem) throw new StatusError(400, 'City with this ID does not exist');
 
+    const categoryItem = await Category.findById(category);
     const fileObjects = await Promise.all(req.files.map(f => AWS.uploadPhoto(f)));
     const images = fileObjects.map(e => `pic/${e.key}`);
 
-    const item = new Advert({
+    const item = await Advert.create({
       title,
       price,
       sellerId: new Types.ObjectId(sellerId),
@@ -72,11 +76,9 @@ async function postAdvert(req, res) {
       images,
       contactPhone,
       contactName,
+      category: categoryItem,
     });
 
-    item.save((error) => {
-      if (error) throw new Error(error);
-    });
     await User.updateOne(
         { _id: sellerId },
         { adverts: `/api/adverts?seller=${ sellerId }`  },
@@ -91,7 +93,7 @@ async function deleteAdvertItem(req, res) {
   try {
     const { id } = req.params;
     const item = await Advert.findById(id);
-    if (!item) throw new StatusError(404, 'This advert does not exist');
+    if (!item) throw new StatusError(400, `Advert with ID: ${id} does not exist`);
     const response = await Advert.deleteOne({ _id: id });
 
     const sellerAdverts = await Advert.find({ sellerId: item.sellerId });
@@ -107,12 +109,12 @@ async function patchAdvertItem(req, res) {
   try {
     const { id } = req.params;
     const {
-      title, description, price, address, contactPhone, contactName,
+      title, description, price, address, contactPhone, contactName, category,
     } = req.body;
-    // console.log({ body: req.body, files: req.files });
-
     if (!(await Advert.findById(id)))
-      throw new StatusError(404, 'This advert does not exist');
+      throw new StatusError(400, `Advert with ID: ${id} does not exist`);
+    if (category && !(await  Category.findById(category)))
+      throw new StatusError(400, `Category with ID: ${category} does not exist`);
     if (title && (title.length < 16 || title.length > 200))
       throw new StatusError(400, 'Title must have 16-200 symbols');
     if (description && (description.length < 80 || description.length > 9000))
@@ -123,47 +125,35 @@ async function patchAdvertItem(req, res) {
       throw new StatusError(400, `City with ID: ${address} does not exist`);
 
     const addressItem = await City.findById(address);
-    const { sellerId, address: originalAddress } = await Advert.findById(id);
+    const categoryItem = await Category.findById(category);
+    const { sellerId, address: originalAddress, category: originalCategory } = await Advert.findById(id);
+    let images;
 
     if (req.files.length > 0) {
       const keyObjects = await Promise.all(req.files.map(file => AWS.uploadPhoto(file)));
-      const images = keyObjects.map(e => `pic/${e.key}`);
-      await Advert.updateOne({ _id: id }, {
-        title,
-        description,
-        price,
-        address: addressItem || originalAddress,
-        contactPhone,
-        contactName,
-        images,
-      });
-      await User.updateOne(
-          { _id: sellerId },
-          { adverts: `/api/adverts?seller=${ sellerId }`  },
-      );
-      const item = await Advert.findById(id);
-
-      res.json(item);
+      images = keyObjects.map(e => `pic/${e.key}`);
     } else {
       const advertItem = await Advert.findById(id);
-      const { images } = advertItem;
-      await Advert.updateOne({ _id: id }, {
-        title,
-        description,
-        price,
-        address: addressItem || originalAddress,
-        contactPhone,
-        contactName,
-        images,
-      });
-      await User.updateOne(
-          { _id: sellerId },
-          { adverts: `/api/adverts?seller=${ sellerId }`  },
-      );
-      const item = await Advert.findById(id);
-
-      res.json(item);
+      images = advertItem.images;
     }
+
+    await Advert.updateOne({ _id: id }, {
+      title,
+      description,
+      price,
+      address: addressItem || originalAddress,
+      contactPhone,
+      contactName,
+      images,
+      category: categoryItem || originalCategory,
+    });
+    await User.updateOne(
+        { _id: sellerId },
+        { adverts: `/api/adverts?seller=${ sellerId }`  },
+    );
+    const item = await Advert.findById(id);
+
+    res.json(item);
 
   } catch (err) {
     errorHandler(res, err);
