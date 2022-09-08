@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import Search from 'components/common/Search';
 import AdvertCard from 'components/common/AdvertCard';
 import {
@@ -24,13 +24,10 @@ import hobiImg from 'assets/img/rubryky/hobi.png';
 
 import bmw from 'assets/img/bmw.webp';
 import renault from 'assets/img/renault.webp';
-import { getAdvertsThunk } from 'redux/slice/getAdverts';
-import useFetchAdvert from 'components/hooks/useFetchAdverts';
+import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
 
 const MainPage = () => {
-  const { advertInfo, loading, error } = useFetchAdvert();
-
-  console.log(advertInfo);
+  const { advertInfo, loading, error } = useFetchAdvertMainPage();
 
   const advertsCard = () => {
     if (error) {
@@ -53,6 +50,75 @@ const MainPage = () => {
       />
     ));
   };
+
+  const categories = [
+    {
+      src: dytiachyiSvitImg,
+      alt: 'Рубрика Дитячий світ',
+      backgroundColor: 'rgb(255, 206, 50)',
+      name: 'Дитячий світ',
+    },
+    {
+      src: nerukhomistImg,
+      alt: 'Рубрика Нерухомість',
+      backgroundColor: 'rgb(58, 119, 255)',
+      name: 'Нерухомість',
+    },
+    {
+      src: avtoImg,
+      alt: 'Рубрика Авто',
+      backgroundColor: 'rgb(35, 229, 219)',
+      name: 'Авто',
+    },
+    {
+      src: zapchastynyImg,
+      alt: 'Рубрика Запчастини для транспорту',
+      backgroundColor: 'rgb(255, 86, 54)',
+      name: 'Запчастини для транспорту',
+    },
+    {
+      src: robotaImg,
+      alt: 'Рубрика Робота',
+      backgroundColor: 'rgb(255, 246, 217)',
+      name: 'Робота',
+    },
+    {
+      src: tvarynyImg,
+      alt: 'Рубрика Тварини',
+      backgroundColor: 'rgb(206, 221, 255)',
+      name: 'Тварини',
+    },
+    {
+      src: dimISadImg,
+      alt: 'Рубрика Дім і сад',
+      backgroundColor: 'rgb(200, 248, 246)',
+      name: 'Дім і сад',
+    },
+    {
+      src: elektronikaImg,
+      alt: 'Рубрика Електроніка',
+      backgroundColor: 'rgb(255, 214, 201)',
+      name: 'Електроніка',
+    },
+    {
+      src: biznesTaPosluhyImg,
+      alt: 'Рубрика Бізнес та послуги',
+      backgroundColor: 'rgb(255, 206, 50)',
+      name: 'Бізнес та послуги',
+    },
+    {
+      src: modaIStylImg,
+      alt: 'Рубрика Мода і стиль',
+      backgroundColor: 'rgb(206, 221, 255)',
+      name: 'Мода і стиль',
+    },
+    {
+      src: hobiImg,
+      alt: 'Рубрика Хобі, відпочинок і спорт',
+      backgroundColor: 'rgb(200, 248, 246)',
+      name: 'Хобі, відпочинок і спорт',
+    },
+  ];
 
   return (
     <>
@@ -148,6 +214,18 @@ const MainPage = () => {
             />
             <p>Хобі, відпочинок і спорт</p>
           </ItemLink>
+          {
+            categories.map((item) => (
+              <ItemLink href="#" key={item.name}>
+                <ImgWrap
+                  src={item.src}
+                  alt={item.alt}
+                  backgroundColor={item.backgroundColor}
+                />
+                <p>{item.name}</p>
+              </ItemLink>
+            ))
+          }
         </CategoriesList>
       </Wrapper>
       <LatestAdsSection>

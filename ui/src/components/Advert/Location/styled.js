@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  height: 225px;
+  height: 160px;
   width: 390px;
   border-radius: 5px;
   padding: 24px;
@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
     align-self: flex-start;
     font-size: 14px;
     text-transform: uppercase;
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
   }
 `;
 
@@ -24,7 +24,7 @@ export const LocationWrap = styled.div`
   width: 100%;
   display: flex;
   align-self: flex-start;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 export const LocationInfo = styled.div`
@@ -34,13 +34,8 @@ export const LocationInfo = styled.div`
 
   & h2 {
     font-size: 20px;
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
   }
-`;
-
-export const Icon = styled.img`
-  align-self: flex-start;
-  width: 17px;
 `;
 
 export const MapImage = styled.img`
@@ -50,13 +45,15 @@ export const MapImage = styled.img`
 `;
 
 export const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
 
   & p {
     font-size: 16px;
-    color: rgb(0, 47, 52);
+    color: ${props => props.theme.mainGreenColor};
     margin: 0px;
     font-weight: 700;
     line-height: 18px;

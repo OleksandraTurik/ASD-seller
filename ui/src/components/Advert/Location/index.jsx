@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Icons
-import mapMarker from 'assets/icons/mapMarker.svg';
+import IconLocation from 'assets/icons/Location';
 
 // Images
 import map from 'assets/img/map.webp';
@@ -11,30 +12,41 @@ import {
   Wrapper,
   Container,
   LocationInfo,
-  Icon,
   MapImage,
   LocationWrap,
 } from './styled';
 
-const Location = () => (
+const Location = ({
+  city,
+  region,
+}) => (
   <Wrapper>
     <h1>Місце знаходження</h1>
     <Container>
       <LocationWrap>
-        <Icon src={mapMarker} alt="map icon" />
+        <IconLocation
+          width="25px"
+          height="25px"
+          fill="#002F34"
+        />
         <LocationInfo>
-          <p>
-            Київ,
-            Солом&apos;янський
-          </p>
-          <span>
-            Київська область
-          </span>
+          <p>{city}</p>
+          <span>{region}</span>
         </LocationInfo>
       </LocationWrap>
       <MapImage src={map} alt="map" />
     </Container>
   </Wrapper>
 );
+
+Location.propTypes = {
+  city: PropTypes.string,
+  region: PropTypes.string,
+};
+
+Location.defaultProps = {
+  city: '',
+  region: '',
+};
 
 export default Location;

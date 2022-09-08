@@ -37,6 +37,6 @@
         "unnamedComponents": "arrow-function"
     }], // This option enforces a specific function type for function components.
     "import/prefer-default-export": "off",
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+    "no-underscore-dangle":  ["error", { "allow": ["_id"] }]
   }
 }

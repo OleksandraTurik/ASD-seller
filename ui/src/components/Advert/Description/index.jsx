@@ -1,71 +1,55 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Icons
-import heart from 'assets/icons/heart.svg';
+import Like from 'assets/icons/Like';
 
 // Styles
 import {
   Wrapper,
-  Icon,
   Container,
   Line,
+  Span,
+  FavoriteBtn,
 } from './styled';
 
-const Description = () => (
+const Description = ({
+  title,
+  date,
+  price,
+  description,
+}) => (
   <Wrapper>
     <Container>
-      <span>Опубліковано 25 серпня 2022 р.</span>
-      <Icon src={heart} alt="heart icon" />
+      <span>{date}</span>
+      <FavoriteBtn>
+        <Like
+          width="25px"
+          height="25px"
+          fill="#c6c6c6"
+        />
+      </FavoriteBtn>
     </Container>
-    <h1>Продам свой Fender Jazz bass USA 2006</h1>
-    <h2>39 000 грн</h2>
-    <Container>
-      <ul>
-        <li>
-          <p>
-            <span>Приватна особа</span>
-          </p>
-        </li>
-        <li>
-          <p>
-            <span>Стан: Б/в</span>
-          </p>
-        </li>
-        <li>
-          <p>
-            <span>Марка: Fender</span>
-          </p>
-        </li>
-      </ul>
-    </Container>
+    <Span primary>{title}</Span>
+    <h2>{price}</h2>
     <h3>Опис</h3>
-    <p>
-      апд - є варіант оплатою частинами через приват
-      Продаю свій American Jazz bass, ювілейна серія, дуже рідкісна модель 2006 року.
-      Причина продажу банальна - не вистачає грошей на ліки і їжу, такі часи..
-      Дека ясенева, із двох шматків.
-      Є кришка і підставка під палець, я використовував і з ними і без. Звукачі кастом шоп,
-      на кожному є голографічний напис.
-      Зовнішній стан на фото - інструмент відіграв тисячі концертів по всій країні та за кордоном,
-      від маленьких клубів до Палаців спорту та великих фестивалів і площ.
-      Звучить на купі записів від попси до хардкору і денс панку. Приклади накидаю за запитом
-      Технічний стан на 4з плюсом
-      Останній раз була на налаштуванні у майстра Льоши Макайди узимку.
-      По звуку це класичний джаз бас з ясеневим відтінком. Можна грати
-      все від Пасторіуса до ню металу.
-      Комплект - жорсткий кейс, мякий чохол, ремінь із локами Фендер, дісторшн Ибанез
-      (в купі з інструментом дає шикарний плотний саунд),
-      тюнер Тісі, пара патчів.
-      Ціна за все 1000 usd (купувався за 1500 баксів, але враховуючи стан і
-      кількість бонусів гадаю ціна більше ніж адекватна)
-      Також розгляну варіанти з обміном. Цікавить макбук на м1
-      Тільки бас у мякому чохлі 900 usd
-      Пересилки немає, тільки особиста зустріч у Києві. Є студія де можна все послухати і перевірити
-      Торгу немає. За ці гроші американський джаз бас купити не реально)
-    </p>
+    <p>{description}</p>
     <Line />
-    <span>ID: 752000902</span>
   </Wrapper>
 );
+
+Description.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.string,
+  price: PropTypes.number,
+  description: PropTypes.string,
+};
+
+Description.defaultProps = {
+  title: '',
+  date: '',
+  price: 0,
+  description: '',
+};
 
 export default Description;

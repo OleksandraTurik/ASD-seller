@@ -5,22 +5,17 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background-color: #fff;
-  height: 660px;
-  width: 798px;
+  max-height: 800px;
   border-radius: 5px;
+  margin: 24px 0;
   padding: 24px;
-  margin-bottom: 24px;
-
-  & h1 {
-    font-size: 32px;
-  }
 
   & h2 {
     font-size: 40px;
   }
 
   & h3 {
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
     text-transform: uppercase;
     font-size: 24px;
     margin: 16px 0 4px 0;
@@ -28,18 +23,20 @@ export const Wrapper = styled.div`
 
   & p {
     font-size: 16px;
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
   }
+`;
 
-  & span {
-    font-size: 12px;
-    color: #406367;
-  }
+export const Span = styled.span`
+  font-size: ${({ primary }) => primary ? '32px' : '12px'};
+  color: ${({ primary }) => primary ? '#000' : '#406367'};
 `;
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 
   & span {
     display: block;
@@ -63,7 +60,7 @@ export const Container = styled.div`
 
       & p, span {
         font-size: 14px;
-        color: #002F34;
+        color: ${props => props.theme.mainGreenColor};
       }
     }
   }
@@ -74,6 +71,18 @@ export const Line = styled.div`
   border-bottom: 1px solid #000;
 `;
 
-export const Icon = styled.img`
-  width: 20px;
+export const FavoriteBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  bottom: 12px;
+  right: 20px;
+  cursor: pointer;
+
+  & svg {
+    opacity: 0.4;
+  }
+
+  &:hover svg {
+    opacity: 1;
+  }
 `;
