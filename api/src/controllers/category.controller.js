@@ -20,13 +20,9 @@ const StatusError = require('../exceptions/StatusError');
         const item = await Category.create({
           name, image: `pic/${key}`,
         });
-        if (parentId)
-          await Category.updateOne({ _id: parentId }, { $push: { children: item } });
         res.json(item);
       } else {
-        const item = await Category.create({
-          name, parentId,
-        });
+        const item = await Category.create({ name, parentId });
         if (parentId)
           await Category.updateOne({ _id: parentId }, { $push: { children: item } });
         res.json(item);

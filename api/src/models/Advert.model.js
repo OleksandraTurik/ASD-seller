@@ -8,7 +8,7 @@ const advertSchema = new Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     images: { type: [String], required: true },
-    subcategory: String,
+    category: String,
     address: { type: City.schema, required: true },
     contactName: { type:String, required: true },
     contactPhone: { type: String, required: true },
