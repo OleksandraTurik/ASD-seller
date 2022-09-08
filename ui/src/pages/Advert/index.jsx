@@ -36,7 +36,6 @@ const SliderWrap = styled.div`
 
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
-  /* const getAdvertStorage = JSON.parse(localStorage.getItem('advert')); */
   const {
     title,
     createdAt,
@@ -54,10 +53,6 @@ const AdvertPage = () => {
   useEffect(() => {
     dispatch(getAdvertThunk(id));
   }, [id]);
-
-  console.log(id);
-
-  console.log('advert', advert.advertInfo);
 
   const { loading, error } = advert;
 
