@@ -17,6 +17,7 @@ import bmw from 'assets/img/bmw.webp';
 import renault from 'assets/img/renault.webp';
 import useFetchCategories from 'components/hooks/useFetchCategories';
 import Subcategories from 'components/Main/Subcategories';
+import Loader from 'components/common/Loader';
 
 const MainPage = () => {
   const [subcategories, setSubcategories] = useState('id');
@@ -46,7 +47,7 @@ const MainPage = () => {
     }
 
     if (loading) {
-      return 'loading';
+      return <Loader />;
     }
 
     return data.map((item) => (
