@@ -37,7 +37,7 @@ const AddAdsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
-  const userId = useSelector(state => state.userReducer.user.id);
+  const user = JSON.parse(localStorage.getItem('tokens'));
   const {
     register, handleSubmit, reset, formState: { errors },
   } = useForm({
@@ -45,7 +45,7 @@ const AddAdsPage = () => {
     defaultValues: {
       title: 'I love donezk and luganskI love donezk and lugansk',
       price: '200',
-      sellerId: userId,
+      sellerId: user.userDto.id,
       description: 'I love donezk and luganskI love donezk and lugansk',
       address: 'I love donezk and luganskI love donezk and lugansk',
     },
@@ -67,7 +67,8 @@ const AddAdsPage = () => {
         address: v.address,
       });
       reset();
-      navigate(`/profiles/${userId}/adverts`);
+      navigate(`/profiles/${user.userDto.id}/adverts`);
+      console.log(send);
     } catch (e) {
       console.log('error');
     }
