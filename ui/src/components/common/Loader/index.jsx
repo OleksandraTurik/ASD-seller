@@ -8,15 +8,13 @@ const StyledSpinner = styled.div`
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-  position: relative;
+  /* position: relative; */
   left: 45%;
   margin: 250px 0;
-
   @keyframes spin {
     0% {
       transform: rotate(0deg);
     }
-
     100% {
       transform: rotate(360deg);
     }
