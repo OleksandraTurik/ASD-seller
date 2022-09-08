@@ -1,8 +1,20 @@
-const { Router } = require('express');
-const categoryController = require('../controllers/category.controller');
+const express  = require('express');
+const bodyParser = require('body-parser');
+const { categoryController:
+    { createCategory, getCategories, deleteCategory, getCategoryById },
+} = require('../controllers');
+const { singleUploadMiddleware, idValidationMiddleware } = require('../middlewares');
 
-const router = Router();
+const categoryRouter = express.Router();
 
-router.post('/', categoryController.create);
-router.get('/', categoryController.getCategory);
-module.exports = router;
+categoryRouter.get('/', getCategories);
+categoryRouter.get('/:id', idValidationMiddleware, getCategoryById);
+categoryRouter.post(
+    '/',
+    bodyParser.urlencoded({ extended: true }),
+    singleUploadMiddleware('image'),
+    createCategory,
+);
+categoryRouter.delete('/:id', idValidationMiddleware, deleteCategory);
+
+module.exports = categoryRouter;

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const City = require('./City.model');
+const Category = require('./Category.model');
 const { Schema, model } = mongoose;
 
 const advertSchema = new Schema({
@@ -8,7 +9,7 @@ const advertSchema = new Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     images: { type: [String], required: true },
-    subcategory: String,
+    category: { type: Category.schema, required: true },
     address: { type: City.schema, required: true },
     contactName: { type:String, required: true },
     contactPhone: { type: String, required: true },

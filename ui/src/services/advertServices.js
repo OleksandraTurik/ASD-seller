@@ -35,7 +35,6 @@ const advertServices = {
         description,
         address,
       };
-      console.log(body);
       const createAdverts = await API.post('/adverts', body);
       return createAdverts;
     } catch (e) {

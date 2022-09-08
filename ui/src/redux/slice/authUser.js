@@ -18,7 +18,6 @@ export const login = createAsyncThunk(
       email: userData.email,
       password: userData.password,
     });
-    console.log(res);
     return res;
   },
 );
@@ -30,7 +29,6 @@ export const registration = createAsyncThunk(
       email: userData.email,
       password: userData.password,
     });
-    console.log(res);
     return res;
   },
 );
