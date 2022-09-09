@@ -96,7 +96,7 @@ class UserController {
       if (!method || !advertId)
         throw new StatusError(400, 'Invalid body: method and advertId are required');
       if (method !== 'ADD' && method !== 'REMOVE')
-        throw new StatusError(400, 'Method must be "ADD" or "REMOVE"a');
+        throw new StatusError(400, 'Method must be "ADD" or "REMOVE"');
       if (!(await Advert.findById(advertId)))
         throw new StatusError(400, `Advert with ID: ${advertId} does not exist`);
 
