@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const City = require('./City.model');
 
 const UserSchema = new Schema({
@@ -11,6 +11,7 @@ const UserSchema = new Schema({
   avatar: { type: String },
   phoneNumber: { type: String },
   adverts: { type: String, default: null },
+  favorites: { type: [Types.ObjectId], ref: 'Advert' },
 }, { timestamps: true });
 
 UserSchema.statics.findWithFilterAndSort = function (search, sort) {
