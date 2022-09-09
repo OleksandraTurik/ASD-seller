@@ -2,13 +2,8 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
-
-// Images
-import dog1 from 'assets/img/1.avif';
-import dog2 from 'assets/img/2.avif';
-import dog3 from 'assets/img/3.avif';
 
 // Styles
 import {
