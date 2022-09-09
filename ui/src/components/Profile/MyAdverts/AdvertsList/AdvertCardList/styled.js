@@ -6,7 +6,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
   padding: 15px;
   background: rgb(255, 255, 255);
   border-radius: 4px;
@@ -97,17 +98,19 @@ export const AdvertBodyWrap = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  height: 110px;
+  justify-content: space-between;
+  height: 75px;
   align-items: flex-start;
+  margin-bottom: 10px;
 `;
 
 export const AdvertHeaderWrap = styled.div`
   width: 100%;
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   margin: 6px 0 8px 0;
-  height: 25px;
+  height: auto;
 
   & span {
     font-size: 20px;
@@ -131,7 +134,7 @@ export const AdvertTitleLink = styled(Link)`
 
 export const AdvertInfoWrap = styled.div`
   width: 100%;
-  height: 100%;
+  height: 165px;
   display: flex;
   flex-direction: column;
   align-items: center;

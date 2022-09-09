@@ -6,5 +6,4 @@ const AdvertsList = () => (
     <AdvertCard />
   </div>
 );
-
 export default AdvertsList;
