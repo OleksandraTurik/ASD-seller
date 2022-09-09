@@ -35,7 +35,7 @@ const AdvertCardList = ({
   <Wrapper>
     <Container>
       <TopWrap>
-        <ImgInCard src={img} alt="bmw car" />
+        <ImgInCard src={`http://localhost:4000/${img}`} alt="bmw car" />
         <AdvertInfoWrap>
           <AdvertHeaderWrap>
             <AdvertTitleLink to={link}>{name}</AdvertTitleLink>
