@@ -14,10 +14,6 @@ const AdvertsCard = () => {
     fetchData,
     hasMore,
   } = useFetchAdverts(id);
-  if (error) {
-    return 'error';
-  }
-
   return (
     <InfiniteScroll
       scrollThreshold="200px"
@@ -26,7 +22,6 @@ const AdvertsCard = () => {
       hasMore={hasMore}
       loader={error && <h4><Loader /></h4>}
       useWindow={false}
-      pullDownToRefreshThreshold={50}
       endMessage={list.length > 10 ? (
         <p style={{ textAlign: 'center' }}>
           <b>Yay! You have seen it all</b>
