@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 // Hooks
-import { useFetchAdverts } from 'components/hooks/useFetchAdverts';
+import useFetchAdvertsMainPage from 'components/hooks/useFetchAdvertsMainPage';
 
 // Components
 import Loader from 'components/common/Loader';
@@ -53,7 +53,7 @@ const AdvertsList = () => {
     error,
     fetchData,
     hasMore,
-  } = useFetchAdverts(id);
+  } = useFetchAdvertsMainPage(id);
 
   const advertsCard = () => {
     if (error) {

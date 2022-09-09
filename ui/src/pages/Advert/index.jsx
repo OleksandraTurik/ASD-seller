@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -8,7 +8,10 @@ import SimpleSlider from 'components/Advert/SimpleSlider';
 import User from 'components/Advert/User';
 import Location from 'components/Advert/Location';
 import Description from 'components/Advert/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import Loader from 'components/common/Loader';
+import { getAdvertThunk } from 'redux/slice/getAdvert';
 
 // Styles
 const Wrapper = styled.div`
@@ -33,8 +36,8 @@ const SliderWrap = styled.div`
 
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
-  const getAdvertStorage = JSON.parse(localStorage.getItem('advert'));
   const {
+    images,
     title,
     createdAt,
     updatedAt,
@@ -43,7 +46,14 @@ const AdvertPage = () => {
     _id,
     address,
     contactName,
-  } = getAdvertStorage.advertInfo;
+  } = advert.advertInfo;
+
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAdvertThunk(id));
+  }, [id]);
 
   const { loading, error } = advert;
 
@@ -53,18 +63,19 @@ const AdvertPage = () => {
     }
 
     if (loading) {
-      return 'Loading';
+      return <Loader />;
     }
 
     return (
       <Wrapper>
         <SliderWrap>
-          <SimpleSlider />
+          <SimpleSlider
+            images={images}
+          />
           <Description
             title={title}
             date={updatedAt}
-            price={price}
-            status="no status in data"
+            price={`${price} грн.`}
             state="Стан: Б/в"
             description={description}
             id={_id}
@@ -77,7 +88,7 @@ const AdvertPage = () => {
             link="/"
           />
           <Location
-            city={address.city}
+            city="city"
             region="no region in data"
           />
         </Container>
