@@ -35,6 +35,7 @@ const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
   const getAdvertStorage = JSON.parse(localStorage.getItem('advert'));
   const {
+    images,
     title,
     createdAt,
     updatedAt,
@@ -44,6 +45,8 @@ const AdvertPage = () => {
     address,
     contactName,
   } = getAdvertStorage.advertInfo;
+
+  console.log(address.admin_name);
 
   const { loading, error } = advert;
 
@@ -59,12 +62,13 @@ const AdvertPage = () => {
     return (
       <Wrapper>
         <SliderWrap>
-          <SimpleSlider />
+          <SimpleSlider
+            images={images}
+          />
           <Description
             title={title}
             date={updatedAt}
-            price={price}
-            status="no status in data"
+            price={`${price} грн.`}
             state="Стан: Б/в"
             description={description}
             id={_id}
@@ -78,7 +82,7 @@ const AdvertPage = () => {
           />
           <Location
             city={address.city}
-            region="no region in data"
+            region={address.admin_name}
           />
         </Container>
       </Wrapper>
