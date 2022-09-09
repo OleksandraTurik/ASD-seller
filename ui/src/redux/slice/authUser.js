@@ -73,6 +73,7 @@ const userSlice = createSlice({
         (state) => {
           state.loading = true;
           state.error = false;
+          state.registrationSuccess = false;
         },
       )
       .addCase(
@@ -80,6 +81,7 @@ const userSlice = createSlice({
         (state) => {
           state.loading = false;
           state.error = true;
+          state.registrationSuccess = false;
         },
       );
   },

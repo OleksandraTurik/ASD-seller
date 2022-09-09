@@ -11,8 +11,6 @@ import {
   P,
 } from 'pages/MainPage/styled';
 
-import dytiachyiSvitImg from 'assets/img/rubryky/dytiachyi-svit.png';
-
 import bmw from 'assets/img/bmw.webp';
 import useFetchCategories from 'components/hooks/useFetchCategories';
 import Subcategories from 'components/Main/Subcategories';

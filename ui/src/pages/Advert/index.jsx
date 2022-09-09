@@ -37,6 +37,7 @@ const SliderWrap = styled.div`
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
   const {
+    images,
     title,
     createdAt,
     updatedAt,
@@ -68,12 +69,13 @@ const AdvertPage = () => {
     return (
       <Wrapper>
         <SliderWrap>
-          <SimpleSlider />
+          <SimpleSlider
+            images={images}
+          />
           <Description
             title={title}
             date={updatedAt}
-            price={price}
-            status="no status in data"
+            price={`${price} грн.`}
             state="Стан: Б/в"
             description={description}
             id={_id}
