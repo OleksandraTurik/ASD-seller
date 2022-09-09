@@ -18,7 +18,7 @@ import { getAdvertThunk } from 'redux/slice/getAdvert';
 import { ButtonAdvertCard } from '../Button/styled';
 
 const AdvertCard = ({
-  id,
+  itemId,
   link,
   img,
   name,
@@ -27,16 +27,9 @@ const AdvertCard = ({
   price,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const advert = useSelector(state => state.getAdvert);
-
-  useEffect(() => {
-    localStorage.setItem('advert', JSON.stringify(advert));
-  }, [advert]);
 
   const handleNavigate = async () => {
-    await dispatch(getAdvertThunk(id));
-    navigate(`${link}`);
+    navigate(`/adverts/${itemId}`);
   };
 
   return (
@@ -64,23 +57,23 @@ const AdvertCard = ({
 };
 
 AdvertCard.propTypes = {
-  id: PropTypes.string,
+  itemId: PropTypes.string,
   link: PropTypes.string,
   img: PropTypes.string,
   name: PropTypes.string,
   location: PropTypes.string,
   date: PropTypes.string,
-  price: PropTypes.number,
+  price: PropTypes.string,
 };
 
 AdvertCard.defaultProps = {
-  id: '',
+  itemId: '',
   link: '',
   img: '',
   name: '',
   location: '',
   date: '',
-  price: 0,
+  price: '',
 };
 
 export default AdvertCard;

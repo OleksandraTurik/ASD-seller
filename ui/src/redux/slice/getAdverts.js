@@ -2,35 +2,36 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import advertServices from 'services/advertServices';
 
 const initialState = {
-  advertInfo: {},
+  advertInfo: [],
   loading: false,
   error: null,
 };
 
-export const getAdvertThunk = createAsyncThunk(
-  'getAdvert/getAdvertThunk',
-  async (id) => {
-    const result = await advertServices.getAdvert(id);
-    return result.data;
+export const getAdvertsThunk = createAsyncThunk(
+  'getAdvert/getAdvertsThunk',
+  async () => {
+    const result = await advertServices.getAdverts();
+    const data = await result.data.results;
+    return data;
   },
 );
 
-const getAdvertReducer = createSlice({
+const getAdvertsReducer = createSlice({
   name: 'getAdvert',
   initialState,
   extraReducers: {
-    [getAdvertThunk.pending]: (state) => {
+    [getAdvertsThunk.pending]: (state) => {
       state.loading = true;
     },
-    [getAdvertThunk.fulfilled]: (state, action) => {
+    [getAdvertsThunk.fulfilled]: (state, action) => {
       state.loading = false;
       state.advertInfo = action.payload;
     },
-    [getAdvertThunk.rejected]: (state, action) => {
+    [getAdvertsThunk.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error.message && 'Something went wrong';
     },
   },
 });
 
-export default getAdvertReducer.reducer;
+export default getAdvertsReducer.reducer;

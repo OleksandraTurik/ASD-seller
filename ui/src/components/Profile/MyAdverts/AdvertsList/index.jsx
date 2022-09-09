@@ -11,7 +11,7 @@ import bmw from 'assets/img/bmw.webp';
 import { useParams } from 'react-router-dom';
 
 import Loader from '../../../common/Loader';
-import { useFetchAdverts } from '../../../hooks/useFetchAdverts';
+import useFetchAdvertsMainPage from '../../../hooks/useFetchAdvertsMainPage';
 
 // Styles
 const Container = styled.div`
@@ -32,7 +32,7 @@ const AdvertsList = () => {
     error,
     fetchData,
     hasMore,
-  } = useFetchAdverts(id);
+  } = useFetchAdvertsMainPage(id);
 
   const advertsCard = () => {
     if (error) {
