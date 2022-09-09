@@ -1,10 +1,12 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
+import { LoaderForm } from './LoaderContainer';
+import { noticeMessages } from './helper';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
 } from './styled';
@@ -18,10 +20,10 @@ const Form = ({
     handleSubmit,
     reset,
   } = useForm({
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
-  const { registrationSuccess } = useSelector((state) => state.userReducer);
+  const { registrationSuccess, error, loading } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
@@ -35,6 +37,7 @@ const Form = ({
 
   return (
     <Container>
+      {loading && <LoaderForm />}
       <WrapperLink>
         <NavLink className="link" to="/register" activeClassName="selected">
           Зареєструватися
@@ -44,8 +47,9 @@ const Form = ({
         </NavLink>
       </WrapperLink>
       <Wrapper>
-        {registrationSuccess && <Notice type="warning" message="Registration completed" />}
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+          {error && <Notice type="error" messages={noticeMessages[type]} />}
+          {registrationSuccess && <Notice type="warning" messages={noticeMessages[type]} />}
           <Input
             type="email"
             placeholder={emailField}
@@ -83,5 +87,5 @@ Form.propTypes = {
   textButton: PropTypes.string.isRequired,
   passwordField: PropTypes.string.isRequired,
   emailField: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['login', 'registration']).isRequired,
 };

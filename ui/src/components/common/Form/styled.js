@@ -15,6 +15,7 @@ export const Container = styled.div`
   height: 100vh;
   padding: 0;
   justify-content: center;
+  position: relative;
 `;
 export const FormWrapper = styled.form`
   background-color: white;
@@ -74,7 +75,7 @@ export const Button = styled.button`
   width: 100%;
   margin-bottom: 10px;
   display: flex;
-  position: relative;
+  /* position: relative; */
   text-align: center;
   color: #fff;
   font-size: 16px;
@@ -88,4 +89,15 @@ export const Button = styled.button`
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
+`;
+
+export const WrapperLoader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+ 
 `;
