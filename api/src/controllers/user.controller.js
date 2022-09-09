@@ -86,6 +86,33 @@ class UserController {
     }
   }
 
+  async modifyFavorites(req, res) {
+    try {
+      const { id } = req.params;
+      const { method, advertId } = req.body;
+
+      if (!(await User.findById(id)))
+        throw new StatusError(400, `User with ID: ${id} does not exist`);
+      if (!method || !advertId)
+        throw new StatusError(400, 'Invalid body: method and advertId are required');
+      if (method !== 'ADD' && method !== 'REMOVE')
+        throw new StatusError(400, 'Method must be "ADD" or "REMOVE"a');
+      if (!(await Advert.findById(advertId)))
+        throw new StatusError(400, `Advert with ID: ${advertId} does not exist`);
+
+      if (method === 'ADD') {
+        if (!(await User.findById(id)).favorites.includes(advertId))
+          await User.updateOne({ _id: id }, { $push: { favorites: advertId } });
+      } else if (method === 'REMOVE') {
+        await User.updateOne({ _id: id }, { $pull: { favorites: advertId } });
+      }
+
+      res.json(await User.findById(id));
+    } catch (err) {
+      errorHandler(res, err);
+    }
+  }
+
   async uploadAvatar(req, res) {
     try{
       if (!req.file) throw new StatusError(400, 'No file has been uploaded');
