@@ -5,12 +5,12 @@ export const noticeColor = {
     height: '40px',
   },
   warning: {
-    primaryColor: '#faad14',
+    primaryColor: '#000',
     secondaryColor: '#ffe58f',
     height: '80px',
   },
   error: {
-    primaryColor: '#ff4d4f',
+    primaryColor: '#fff',
     secondaryColor: '#ff7875',
     height: '40px',
   },

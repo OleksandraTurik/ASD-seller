@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
 import { LoaderForm } from './LoaderContainer';
@@ -25,10 +25,33 @@ const Form = ({
 
   const { registrationSuccess, error, loading } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isSuccess, setIsSuccess] = useState('nothing');
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isNavigate, setIsNavigate] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      setIsSuccess('error');
+    } else if (loading) {
+      setIsSuccess('loading');
+      setIsNavigate(false);
+    } else if (error === false && loading === false) {
+      setIsSuccess('success');
+      setIsNavigate(false);
+    }
+    if (isSubmit && isSuccess === 'success') {
+      setIsNavigate(true);
+      if (isNavigate) {
+        navigate('/');
+      }
+    }
+  }, [error, loading, isSuccess, isNavigate]);
 
   const onSubmit = (data) => {
     if (type === 'login') {
       dispatch(login(data));
+      setIsSubmit(true);
     } else {
       dispatch(registration(data));
     }
