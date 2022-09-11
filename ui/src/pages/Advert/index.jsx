@@ -50,6 +50,8 @@ const AdvertPage = () => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
+  const city = address?.city ?? 'no city';
+  const region = address?.admin_name ?? 'no region';
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
@@ -88,8 +90,8 @@ const AdvertPage = () => {
             link="/"
           />
           <Location
-            city={address ? address.city : 'no city'}
-            region={address ? address.admin_name : 'no region'}
+            city={city}
+            region={region}
           />
         </Container>
       </Wrapper>
