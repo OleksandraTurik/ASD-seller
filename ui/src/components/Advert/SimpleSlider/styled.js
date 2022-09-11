@@ -6,6 +6,7 @@ export const Wrapper = styled(Slider)`
   background-color: #fff;
   border-radius: 5px;
   cursor: grabbing;
+  padding: 0 20px;
 
   & ul {
     position: absolute;
@@ -60,6 +61,6 @@ export const ArrowPrev = styled.div`
 
 export const Image = styled.img`
   height: 580px;
-  max-width: 580px;
+  max-width: 100%;
   margin: auto;
 `;

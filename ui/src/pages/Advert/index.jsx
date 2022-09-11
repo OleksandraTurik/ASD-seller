@@ -88,8 +88,8 @@ const AdvertPage = () => {
             link="/"
           />
           <Location
-            city="city"
-            region="no region in data"
+            city={address ? address.city : 'no city'}
+            region={address ? address.admin_name : 'no region'}
           />
         </Container>
       </Wrapper>
