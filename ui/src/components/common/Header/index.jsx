@@ -20,7 +20,6 @@ import {
 const Header = () => {
   const activated = useSelector(state => state.userReducer.user.id);
   const dispatch = useDispatch();
-  console.log(activated)
   return (
     <Container>
       <Nav>
