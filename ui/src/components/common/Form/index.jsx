@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
@@ -26,32 +26,18 @@ const Form = ({
   const { registrationSuccess, error, loading } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isSuccess, setIsSuccess] = useState('nothing');
-  const [isSubmit, setIsSubmit] = useState(false);
-  const [isNavigate, setIsNavigate] = useState(false);
 
   useEffect(() => {
-    if (error) {
-      setIsSuccess('error');
-    } else if (loading) {
-      setIsSuccess('loading');
-      setIsNavigate(false);
-    } else if (error === false && loading === false) {
-      setIsSuccess('success');
-      setIsNavigate(false);
+    if (loading === false && error === false) {
+      navigate('/');
+    } else {
+      console.log('error', error);
     }
-    if (isSubmit && isSuccess === 'success') {
-      setIsNavigate(true);
-      if (isNavigate) {
-        navigate('/');
-      }
-    }
-  }, [error, loading, isSuccess, isNavigate]);
+  }, [error, loading]);
 
   const onSubmit = (data) => {
     if (type === 'login') {
       dispatch(login(data));
-      setIsSubmit(true);
     } else {
       dispatch(registration(data));
     }

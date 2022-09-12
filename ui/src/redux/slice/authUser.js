@@ -5,7 +5,7 @@ import { tokenService } from 'services/tokenService';
 const initialState = {
   user: tokenService.getUserInfo(),
   loading: false,
-  error: false,
+  error: null,
   registrationSuccess: false,
 };
 
@@ -55,8 +55,8 @@ const userSlice = createSlice({
       )
       .addCase(
         login.rejected,
-        (state) => {
-          state.error = true;
+        (state, action) => {
+          state.error = action.error.message;
           state.loading = false;
         },
       )
