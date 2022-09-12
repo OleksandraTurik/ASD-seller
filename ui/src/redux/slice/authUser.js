@@ -22,6 +22,13 @@ export const login = createAsyncThunk(
   },
 );
 
+export const logout = createAsyncThunk(
+  `${modulePrefix}/logout`,
+  async (userData) => {
+    await api.logout();
+  },
+);
+
 export const registration = createAsyncThunk(
   `${modulePrefix}/registration`,
   async (userData) => {
@@ -78,6 +85,30 @@ const userSlice = createSlice({
       )
       .addCase(
         registration.rejected,
+        (state) => {
+          state.loading = false;
+          state.error = true;
+          state.registrationSuccess = false;
+        },
+      )
+      .addCase(
+        logout.fulfilled,
+        (state) => {
+          state.loading = false;
+          state.error = false;
+          state.registrationSuccess = true;
+        },
+      )
+      .addCase(
+        logout.pending,
+        (state) => {
+          state.loading = true;
+          state.error = false;
+          state.registrationSuccess = false;
+        },
+      )
+      .addCase(
+        logout.rejected,
         (state) => {
           state.loading = false;
           state.error = true;
