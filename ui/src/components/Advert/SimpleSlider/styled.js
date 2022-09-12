@@ -8,6 +8,11 @@ export const Wrapper = styled(Slider)`
   cursor: grabbing;
   padding: 0 20px;
 
+  .slick-track {
+    display: flex;
+    align-items: center;
+  }
+
   & ul {
     position: absolute;
     z-index: 999;
@@ -60,7 +65,7 @@ export const ArrowPrev = styled.div`
 `;
 
 export const Image = styled.img`
-  height: 580px;
+  max-height: 580px;
   max-width: 100%;
   margin: auto;
 `;
