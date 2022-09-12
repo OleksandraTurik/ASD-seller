@@ -47,15 +47,17 @@ const AdvertPage = () => {
     _id,
     address,
     contactName,
+    contactPhone,
   } = advert.advertInfo;
 
   const { id } = useParams();
   const dispatch = useDispatch();
+  const phone = contactPhone ?? 'no number phone';
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
-
-  const user = JSON.parse(localStorage.getItem('tokens'));
-  const userId = user?.length !== 0 ? user.userDto.id : 'guest';
+  const token = localStorage.getItem('tokens');
+  const user = JSON.parse(token);
+  const userId = user?.length !== 0 ? user?.userDto.id : 'guest';
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
@@ -82,9 +84,7 @@ const AdvertPage = () => {
             title={title}
             date={updatedAt}
             price={`${price} грн.`}
-            state="Стан: Б/в"
             description={description}
-            id={_id}
           />
         </SliderWrap>
         <Container>
@@ -92,6 +92,7 @@ const AdvertPage = () => {
             name={contactName}
             date={updatedAt}
             link={`/profiles/${userId}/adverts`}
+            phone={token ? phone : '(XXX) XXX XXXX'}
           />
           <Location
             city={city}
