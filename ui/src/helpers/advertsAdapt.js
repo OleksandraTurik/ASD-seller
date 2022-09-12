@@ -19,42 +19,18 @@ const advertsAdapt = (data) => {
     sellerId,
     updatedAt,
   }) => ({
-    id: {
-      value: _id,
-    },
-    title: {
-      value: title || '',
-    },
-    address: {
-      value: address || {},
-    },
-    category: {
-      value: category || {},
-    },
-    contactName: {
-      value: contactName || '',
-    },
-    contactPhone: {
-      value: contactPhone || '',
-    },
-    createdAt: {
-      value: moment(createdAt).format('MM-DD-YYYY') || '',
-    },
-    description: {
-      value: description || '',
-    },
-    images: {
-      value: images || [],
-    },
-    price: {
-      value: price || '',
-    },
-    sellerId: {
-      value: sellerId || '',
-    },
-    updatedAt: {
-      value: updatedAt || '',
-    },
+    id: _id,
+    title: title || '',
+    address: address || {},
+    category: category || {},
+    contactName: contactName || '',
+    contactPhone: contactPhone || '',
+    createdAt: moment(createdAt).format('MM-DD-YYYY') || '',
+    description: description || '',
+    images: images || [],
+    price: price || '',
+    sellerId: sellerId || '',
+    updatedAt: updatedAt || '',
   }));
 };
 

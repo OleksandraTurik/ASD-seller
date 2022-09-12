@@ -72,13 +72,13 @@ const MainPage = () => {
 
     return advertsAdapt(advertInfo).map((item) => (
       <AdvertCard
-        key={item.id.value}
-        itemId={item.id.value}
+        key={item.id}
+        itemId={item.id}
         img={bmw}
-        name={item.title.value}
+        name={item.title}
         location="no data address"
-        date={item.createdAt.value}
-        price={`${item.price.value} грн`}
+        date={item.createdAt}
+        price={`${item.price} грн`}
       />
     ));
   };
