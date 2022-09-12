@@ -57,7 +57,7 @@ const AdvertPage = () => {
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
   const user = JSON.parse(token);
-  const userId = user?.length !== 0 ? user?.userDto.id : 'guest';
+  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
