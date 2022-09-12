@@ -23,7 +23,7 @@ import {
 const Header = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('tokens'));
-  const userId = user ? user.userDto.id : null;
+  const userId = user ? user.userDto.id : 'guest';
   const test = localStorage.getItem('tokens');
 
   const logOut = () => {

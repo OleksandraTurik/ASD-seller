@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Loader from 'components/common/Loader';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
+import NotFound from 'pages/NotFound';
 
 // Styles
 const Wrapper = styled.div`
@@ -50,10 +51,11 @@ const AdvertPage = () => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('tokens'));
-  const userId = user?.length !== 0 ?? user.userDto.id;
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
+
+  const user = JSON.parse(localStorage.getItem('tokens'));
+  const userId = user?.length !== 0 ? user.userDto.id : 'guest';
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
@@ -63,7 +65,7 @@ const AdvertPage = () => {
 
   const advertPage = () => {
     if (error) {
-      return 'error';
+      return <NotFound />;
     }
 
     if (loading) {
