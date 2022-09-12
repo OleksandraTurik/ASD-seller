@@ -64,6 +64,9 @@ async function postAdvert(req, res) {
     if (!addressItem) throw new StatusError(400, 'City with this ID does not exist');
 
     const categoryItem = await Category.findById(category);
+    if (categoryItem.children.length !== 0)
+      throw new StatusError(400, 'This category can\'t be added to the advert');
+
     const fileObjects = await Promise.all(req.files.map(f => AWS.uploadPhoto(f)));
     const images = fileObjects.map(e => `pic/${e.key}`);
 
@@ -124,8 +127,12 @@ async function patchAdvertItem(req, res) {
     if (address && !(await City.findById(address)))
       throw new StatusError(400, `City with ID: ${address} does not exist`);
 
-    const addressItem = await City.findById(address);
     const categoryItem = await Category.findById(category);
+    if (categoryItem.children.length !== 0)
+      throw new StatusError(400, 'This category can\'t be added to the advert');
+
+    const addressItem = await City.findById(address);
+
     const { sellerId, address: originalAddress, category: originalCategory } = await Advert.findById(id);
     let images;
 

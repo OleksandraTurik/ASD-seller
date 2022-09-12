@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
 
   & h2 {
     font-size: 40px;
+    color: ${props => props.theme.mainGreenColor};
   }
 
   & h3 {
@@ -21,7 +22,9 @@ export const Wrapper = styled.div`
     margin: 16px 0 4px 0;
   }
 
-  & p {
+  & div {
+    display: wrap;
+    overflow-wrap: break-word;
     font-size: 16px;
     color: ${props => props.theme.mainGreenColor};
   }
@@ -29,7 +32,7 @@ export const Wrapper = styled.div`
 
 export const Span = styled.span`
   font-size: ${({ primary }) => primary ? '32px' : '12px'};
-  color: ${({ primary }) => primary ? '#000' : '#406367'};
+  color: ${({ primary }) => primary ? '#002f34' : '#406367'};
 `;
 
 export const Container = styled.div`
@@ -44,31 +47,11 @@ export const Container = styled.div`
     font-size: 12px;
     color: #406367;
   }
-
-  & ul {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-
-    & li {
-      display: flex;
-      align-items: center;
-      padding: 6px 16px;
-      margin: 16px 8px 0 0;
-      border-radius: 4px;
-      border: solid 1px #406367;
-
-      & p, span {
-        font-size: 14px;
-        color: ${props => props.theme.mainGreenColor};
-      }
-    }
-  }
 `;
 
 export const Line = styled.div`
   margin: 15px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #7f9799;
 `;
 
 export const FavoriteBtn = styled.button`
