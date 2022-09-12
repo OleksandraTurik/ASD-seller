@@ -26,6 +26,7 @@ export const ChildrenWrapper = styled.div`
 export const Child = styled.div`
   padding: 10px;
   color: black;
+  width: 150px;
   &:hover {
     background: #002f34;
     color: white;

@@ -28,10 +28,11 @@ export const OptionList = styled.div`
   left: 0;
   background: white;
   width: 100%;
+  z-index: 10;
 `;
 
 export const Option = styled.div`
-  padding: 19px 15px;
+  padding: 10px;
 
   &:hover {
     background: #002f34;

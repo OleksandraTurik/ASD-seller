@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ArrowUp from 'assets/icons/ArrowUp';
 import AdvancedOption from './AdvancedOption';
@@ -12,19 +12,32 @@ import {
 const Dropdown = ({ options, onSelect, defaultIndex }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(options[defaultIndex]);
+  const DropdownRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const clickEvent = (event) => {
+      if (!DropdownRef.current) return;
+      if (event.target !== DropdownRef.current && ![...DropdownRef.current.children].includes(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('click', clickEvent);
+
+    return () => window.removeEventListener('click', clickEvent);
+  }, [DropdownRef.current]);
 
   useLayoutEffect(() => {
     setSelected(options[defaultIndex]);
   }, [options]);
 
-  const selectHandler = value => {
+  const selectHandler = (value) => {
     setIsOpen(false);
     setSelected(value);
     onSelect(value);
   };
 
   return (
-    <Select onClick={() => setIsOpen((prev) => !prev)}>
+    <Select ref={DropdownRef} onClick={() => setIsOpen((prev) => !prev)}>
       <Value>{selected?.value}</Value>
       {isOpen && (
         <OptionList>
@@ -32,6 +45,7 @@ const Dropdown = ({ options, onSelect, defaultIndex }) => {
             <Option
               onClick={() => {
                 selectHandler(e);
+                setIsOpen(false);
               }}
               key={e.id}
             >

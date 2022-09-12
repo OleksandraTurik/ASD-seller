@@ -15,7 +15,6 @@ const CategoryFilter = ({ onSelect }) => {
         value: el.name,
         children: el.children.map((e) => ({ id: e._id, value: e.name })),
       }));
-      console.log(res.data, mapped);
       setCategories([{ id: 0, value: 'Будь-яка категорія' }, ...mapped]);
     })();
   }, []);

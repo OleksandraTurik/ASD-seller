@@ -10,13 +10,14 @@ export const FilterController = styled.div`
   gap: 7px;
   
   h5 {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: normal;
   }
 `;
 
 export const FilterWrapper = styled.div`
   display: flex;
+  gap: 10px;
 `;
 
 export const Wrapper = styled.div`
