@@ -1,6 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ArrowUp from 'assets/icons/ArrowUp';
+import AdvancedOption from './AdvancedOption';
 import {
   Select,
   Value,
@@ -10,27 +11,36 @@ import {
 
 const Dropdown = ({ options, onSelect, defaultIndex }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState(options[defaultIndex]);
+  const [selected, setSelected] = useState(options[defaultIndex]);
 
   useLayoutEffect(() => {
-    setValue(options[defaultIndex]);
+    setSelected(options[defaultIndex]);
   }, [options]);
+
+  const selectHandler = value => {
+    setIsOpen(false);
+    setSelected(value);
+    onSelect(value);
+  };
 
   return (
     <Select onClick={() => setIsOpen((prev) => !prev)}>
-      <Value>{value?.value}</Value>
+      <Value>{selected?.value}</Value>
       {isOpen && (
         <OptionList>
-          {options.map((e) => (
+          {options.map((e) => !e.children?.length ? (
             <Option
               onClick={() => {
-                setValue(e);
-                onSelect(e);
+                selectHandler(e);
               }}
               key={e.id}
             >
               {e.value}
             </Option>
+          ) : (
+            <AdvancedOption onSelect={selectHandler} value={e} key={e.id} subOptions={e.children}>
+              {e.value}
+            </AdvancedOption>
           ))}
         </OptionList>
       )}
@@ -44,6 +54,12 @@ Dropdown.propTypes = {
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       value: PropTypes.string,
+      children: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+          value: PropTypes.string,
+        }),
+      ),
     }),
   ).isRequired,
   onSelect: PropTypes.func.isRequired,
