@@ -22,16 +22,16 @@ import {
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('tokens'));
-  const userId = user ? user.userDto.id : 'guest';
-  const test = localStorage.getItem('tokens');
+  const token = localStorage.getItem('tokens');
+  const user = JSON.parse(token);
+  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
 
   const logOut = () => {
     localStorage.clear();
     navigate('/login', { replace: true });
   };
 
-  useEffect(() => console.log(test, userId), [test, userId]);
+  useEffect(() => console.log(token, userId), [token, userId]);
   return (
     <Container>
       <Nav>
@@ -51,7 +51,7 @@ const Header = () => {
               />
             </A>
           </Li>
-          {test
+          {token
             ? (
               <Li>
                 <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
@@ -71,7 +71,7 @@ const Header = () => {
               />
             </NavLink>
           </Li>
-          {!test
+          {!token
             ? (
               <Li>
                 <NavLink to="/login">
