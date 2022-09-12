@@ -40,6 +40,7 @@ export const NavLink = styled(Link)`
 export const NavLinkAdverts = styled(Link)`
   display: flex;
   align-items: center;
+  text-align: center;
   padding: 5px 10px 5px 10px;
   text-decoration: none;
   cursor: pointer;
@@ -51,6 +52,7 @@ export const NavLinkAdverts = styled(Link)`
   border: 5px solid #fff;
   transition: all 200ms linear;
   height: 25px;
+  
   &:hover {
     background: ${props => props.theme.mainGreenColor};
     color: #fff;
