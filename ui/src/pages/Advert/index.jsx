@@ -50,6 +50,8 @@ const AdvertPage = () => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('tokens'));
+  const userId = user?.length !== 0 ?? user.userDto.id;
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
 
@@ -87,7 +89,7 @@ const AdvertPage = () => {
           <User
             name={contactName}
             date={updatedAt}
-            link="/"
+            link={`/profiles/${userId}/adverts`}
           />
           <Location
             city={city}
