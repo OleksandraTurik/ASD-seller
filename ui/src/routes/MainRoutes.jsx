@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Loader from 'components/common/Loader';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 const MainPage = lazy(() => import('pages/MainPage'));
 const AdvertPage = lazy(() => import('pages/Advert'));
@@ -22,7 +23,14 @@ const MainRoutes = () => (
         <Route path="adverts" element={<MyAdverts />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
-      <Route path="/add" element={<AddAdsPage />} />
+      <Route
+        path="/add"
+        element={(
+          <PrivateRoute>
+            <AddAdsPage />
+          </PrivateRoute>
+)}
+      />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="*" element={<NotFound />} />

@@ -33,7 +33,7 @@ const Description = ({
     <Span primary>{title}</Span>
     <h2>{price}</h2>
     <h3>Опис</h3>
-    <p>{description}</p>
+    <div>{description}</div>
     <Line />
   </Wrapper>
 );

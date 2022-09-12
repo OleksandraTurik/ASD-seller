@@ -15,6 +15,9 @@ export const useFetchAdverts = (id) => {
         setList(adverts.data.results);
         setLoading(false);
         setPage(prevState => prevState + 1);
+        if (!adverts.data.next) {
+          setMore(false);
+        }
       } catch (e) {
         setError(e.error);
       }
@@ -32,6 +35,9 @@ export const useFetchAdverts = (id) => {
   }, []);
 
   const fetchData = async () => {
+    if (list.length < 10) {
+      return;
+    }
     const adverts = await advertServices.getAdvertsList(id, page);
     if (!adverts.data.next) {
       setMore(false);
