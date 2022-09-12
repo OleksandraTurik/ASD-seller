@@ -18,6 +18,7 @@ export const FilterController = styled.div`
 export const FilterWrapper = styled.div`
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 `;
 
 export const Wrapper = styled.div`

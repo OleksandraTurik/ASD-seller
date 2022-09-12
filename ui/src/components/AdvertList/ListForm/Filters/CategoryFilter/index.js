@@ -9,13 +9,17 @@ const CategoryFilter = ({ onSelect }) => {
 
   useEffect(() => {
     (async () => {
-      const res = await categoriesServices.getCategories();
-      const mapped = res.data.map((el) => ({
-        id: el._id,
-        value: el.name,
-        children: el.children.map((e) => ({ id: e._id, value: e.name })),
-      }));
-      setCategories([{ id: 0, value: 'Будь-яка категорія' }, ...mapped]);
+      try {
+        const res = await categoriesServices.getCategories();
+        const mapped = res.data.map((el) => ({
+          id: el._id,
+          value: el.name,
+          children: el.children.map((e) => ({ id: e._id, value: e.name })),
+        }));
+        setCategories([{ id: 0, value: 'Будь-яка категорія' }, ...mapped]);
+      } catch (err) {
+        console.error(err);
+      }
     })();
   }, []);
 

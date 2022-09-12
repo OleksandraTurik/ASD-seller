@@ -3,13 +3,19 @@ import styled, { css } from 'styled-components';
 export const FormController = styled.div`
   display: flex;
   height: 55px;
+  gap: 10px;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;
 
 const Input = css`
-  padding: 14px 48px 14px 16px;
+  padding: 14px;
   line-height: 20px;
   border: none;
-  width: 100%;
+  width: calc(100% - 28px);
   font-size: 16px;
 `;
 
@@ -18,7 +24,6 @@ export const SearchInput = styled.input.attrs({
   placeholder: 'Що шукаєте?',
 })`
   ${Input};
-  border-right: #F2F4F5 solid 3px;
 `;
 
 export const CityInput = styled.input.attrs({

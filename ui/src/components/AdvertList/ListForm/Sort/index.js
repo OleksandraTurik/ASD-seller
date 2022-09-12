@@ -21,7 +21,8 @@ const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-  
+  flex-wrap: wrap;
+
   h5 {
     font-size: 18px;
     font-weight: normal;

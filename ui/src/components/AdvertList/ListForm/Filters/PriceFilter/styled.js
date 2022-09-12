@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const InputWrapper = styled.div`
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 `;
 const Input = css`
   padding: 19px;
