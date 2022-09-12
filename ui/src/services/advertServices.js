@@ -19,6 +19,7 @@ const advertServices = {
     }
   },
   createAdverts: async (advertData) => {
+    console.log(advertData);
     try {
       const formData = new FormData();
       formData.append('title', advertData.title);
@@ -27,6 +28,7 @@ const advertServices = {
       formData.append('sellerId', advertData.sellerId);
       formData.append('contactName', advertData.contactName);
       formData.append('contactPhone', advertData.contactPhone);
+      formData.append('category', advertData.category);
       formData.append('address', advertData.address);
       formData.append('images', advertData.images[0]);
       const settings = { headers: { 'Content-Type': 'multipart/form-data' } };

@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAdvertsInfo } from 'redux/slice/getAdvertInfo';
+import React from 'react';
 import Select from 'react-select';
 
 // Icons
@@ -19,7 +17,6 @@ import {
   IconContainer,
   Test,
 } from './styled';
-import Loader from '../../../common/Loader';
 
 const options = [
   { value: 'заголовок: а-я', label: 'Заголовок: А-Я' },
@@ -52,73 +49,55 @@ const customStyles = {
   },
 };
 
-const Filters = () => {
-  const { data, loading, error } = useSelector((state) => state.userAdvertInfoReducer);
-  const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('tokens'));
-
-  useEffect(() => {
-    dispatch(getAdvertsInfo(user.userDto.id));
-  }, []);
-
-  if (loading) {
-    return <Loader />;
-  }
-  return (
-    <Wrapper>
-      <MainContainer>
-        <Container>
-          <IconContainer>
-            <IconSearch
-              width="20px"
-              height="20px"
-              fill="#002F34"
-            />
-          </IconContainer>
-          <SearchInput
-            type="text"
-            placeholder="Заголовок"
+const Filters = () => (
+  <Wrapper>
+    <MainContainer>
+      <Container>
+        <IconContainer>
+          <IconSearch
+            width="20px"
+            height="20px"
+            fill="#002F34"
           />
-        </Container>
-        <Container>
-          <Button type="button">
-            Будь-яка категорія
-          </Button>
-          <DropDownBtn>
-            <IconWrap>
-              <IconArrowDown />
-            </IconWrap>
-          </DropDownBtn>
-        </Container>
-        <Container>
-          <Test>
-            <Select
-              styles={customStyles}
-              options={options}
-              placeholder="Сортувати"
-              theme={(theme) => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#e6fcff',
-                  primary: '#002F34',
-                },
-              })}
-            />
-          </Test>
-        </Container>
-      </MainContainer>
-      <span>
-        Всього оголошень:
-        {' '}
-        {
-          data?.itemsAmount
-            ? data.itemsAmount
-            : 0
-        }
-      </span>
-    </Wrapper>
-  );
-};
+        </IconContainer>
+        <SearchInput
+          type="text"
+          placeholder="Заголовок"
+        />
+      </Container>
+      <Container>
+        <Button type="button">
+          Будь-яка категорія
+        </Button>
+        <DropDownBtn>
+          <IconWrap>
+            <IconArrowDown />
+          </IconWrap>
+        </DropDownBtn>
+      </Container>
+      <Container>
+        <Test>
+          <Select
+            styles={customStyles}
+            options={options}
+            placeholder="Сортувати"
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary25: '#cbf7ee',
+                primary: '#002F34',
+              },
+            })}
+          />
+        </Test>
+      </Container>
+    </MainContainer>
+    <span>
+      Всього оголошень:
+      {' '}
+    </span>
+  </Wrapper>
+);
 
 export default Filters;

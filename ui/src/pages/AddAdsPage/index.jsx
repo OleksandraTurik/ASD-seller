@@ -56,6 +56,7 @@ const AddAdsPage = () => {
       contactPhone: '3809123123123',
       address: 'I love donezk and luganskI love donezk and lugansk',
       images: '',
+      category: '',
     },
   });
   const colorCategory = {
@@ -76,7 +77,7 @@ const AddAdsPage = () => {
         contactPhone: v.contactPhone,
         address: v.address,
         images: v.images,
-        // category: selected._id,
+        category: selected._id,
       });
       // reset();
       navigate(`/profiles/${user.userDto.id}/adverts`);

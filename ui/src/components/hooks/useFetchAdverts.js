@@ -14,9 +14,7 @@ export const useFetchAdverts = (id) => {
         const adverts = await advertServices.getAdvertsList(id, page);
         setList(adverts.data.results);
         setLoading(false);
-        if (!adverts.data.next) {
-          setMore(false);
-        }
+        setPage(prevState => prevState + 1);
       } catch (e) {
         setError(e.error);
       }
@@ -24,25 +22,21 @@ export const useFetchAdverts = (id) => {
     [],
   );
 
-  if (loading) {
-    window.scrollTo({
+  useEffect(() => {
+    window.scroll({
       top: 0,
       behavior: 'smooth',
     });
-  }
-
-  useEffect(() => {
     getData();
+    return () => {};
   }, []);
 
-  useEffect(() => {});
   const fetchData = async () => {
-    setPage(prevState => prevState + 1);
     const adverts = await advertServices.getAdvertsList(id, page);
-    setList((prevState) => [...prevState, ...adverts.data.results]);
     if (!adverts.data.next) {
       setMore(false);
     }
+    setList((prevState) => [...prevState, ...adverts.data.results]);
   };
   return {
     list,
