@@ -15,7 +15,7 @@ export const Container = styled.footer`
 export const Logo = styled.p`
   color: #002f32;
   padding: 25px 0px 25px 0px;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 600;
 `;
 
@@ -23,7 +23,7 @@ export const AddInfo = styled.p`
   color: #002f32;
   padding-bottom: 20px;
   width: 30%;
-  font-size: 14px;
+  font-size: 13px;
 `;
 
 export const Copy = styled.p`

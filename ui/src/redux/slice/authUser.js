@@ -5,7 +5,7 @@ import { tokenService } from 'services/tokenService';
 const initialState = {
   user: tokenService.getUserInfo(),
   loading: false,
-  error: false,
+  error: null,
   registrationSuccess: false,
 };
 
@@ -19,6 +19,13 @@ export const login = createAsyncThunk(
       password: userData.password,
     });
     return res;
+  },
+);
+
+export const logout = createAsyncThunk(
+  `${modulePrefix}/logout`,
+  async (userData) => {
+    await api.logout();
   },
 );
 
@@ -55,8 +62,8 @@ const userSlice = createSlice({
       )
       .addCase(
         login.rejected,
-        (state) => {
-          state.error = true;
+        (state, action) => {
+          state.error = action.error;
           state.loading = false;
         },
       )
@@ -78,6 +85,30 @@ const userSlice = createSlice({
       )
       .addCase(
         registration.rejected,
+        (state) => {
+          state.loading = false;
+          state.error = true;
+          state.registrationSuccess = false;
+        },
+      )
+      .addCase(
+        logout.fulfilled,
+        (state) => {
+          state.loading = false;
+          state.error = false;
+          state.registrationSuccess = true;
+        },
+      )
+      .addCase(
+        logout.pending,
+        (state) => {
+          state.loading = true;
+          state.error = false;
+          state.registrationSuccess = false;
+        },
+      )
+      .addCase(
+        logout.rejected,
         (state) => {
           state.loading = false;
           state.error = true;

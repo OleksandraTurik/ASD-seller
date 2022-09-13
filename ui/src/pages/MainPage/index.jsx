@@ -17,6 +17,7 @@ import useFetchCategories from 'components/hooks/useFetchCategories';
 import Subcategories from 'components/Main/Subcategories';
 import Loader from 'components/common/Loader';
 import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
+import advertsAdapt from 'helpers/advertsAdapt';
 
 const MainPage = () => {
   const [subcategories, setSubcategories] = useState('id');
@@ -72,10 +73,10 @@ const MainPage = () => {
       return <Loader />;
     }
 
-    return advertInfo.map((item) => (
+    return advertsAdapt(advertInfo).map((item) => (
       <AdvertCard
-        key={item._id}
-        itemId={item._id}
+        key={item.id}
+        itemId={item.id}
         img={bmw}
         name={item.title}
         location="no data address"
