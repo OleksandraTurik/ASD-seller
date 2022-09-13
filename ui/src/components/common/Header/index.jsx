@@ -30,7 +30,6 @@ const Header = () => {
     localStorage.clear();
     navigate('/login', { replace: true });
   };
-  console.log(userId);
 
   return (
     <Container>
