@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useParams } from 'react-router-dom';
@@ -30,7 +31,7 @@ const ScrollEnd = styled.p`
   background-color: #d3f8f1;
 `;
 
-const AdvertsCard = () => {
+const AdvertsCard = ({ setAmount }) => {
   const { id } = useParams();
   const {
     list,
@@ -38,6 +39,11 @@ const AdvertsCard = () => {
     fetchData,
     hasMore,
   } = useFetchAdverts(id);
+
+  useEffect(() => {
+    setAmount(list.length);
+  }, [list]);
+
   return (
     <InfiniteScroll
       dataLength={list.length} // This is important field to render the next data
@@ -85,4 +91,9 @@ const AdvertsCard = () => {
     </InfiniteScroll>
   );
 };
+
+AdvertsCard.propTypes = {
+  setAmount: PropTypes.func.isRequired,
+};
+
 export default AdvertsCard;

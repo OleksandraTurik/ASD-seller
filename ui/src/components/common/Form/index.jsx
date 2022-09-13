@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
 import { LoaderForm } from './LoaderContainer';
@@ -25,6 +25,15 @@ const Form = ({
 
   const { registrationSuccess, error, loading } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loading === false && error === false) {
+      navigate('/');
+    } else {
+      console.log('error', error);
+    }
+  }, [error, loading]);
 
   const onSubmit = (data) => {
     if (type === 'login') {

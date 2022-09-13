@@ -48,9 +48,13 @@ export const WrapperLink = styled.div`
     border-bottom: 3px solid ${props => props.theme.mainGreenColor};
   }
 `;
-export const ErrorContainer = styled.div``;
+export const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 export const ErrorTitle = styled.p`
   color: red;
+  margin-bottom: 20px;
 `;
 export const Input = styled.input`
   width: 100%;

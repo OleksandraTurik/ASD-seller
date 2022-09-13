@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 // Icons
 import IconSearch from 'assets/icons/MagnifyingGlass';
@@ -49,7 +50,9 @@ const customStyles = {
   },
 };
 
-const Filters = () => (
+const Filters = ({
+  itemsAmount,
+}) => (
   <Wrapper>
     <MainContainer>
       <Container>
@@ -95,9 +98,17 @@ const Filters = () => (
     </MainContainer>
     <span>
       Всього оголошень:
-      {' '}
+      {` ${itemsAmount}`}
     </span>
   </Wrapper>
 );
+
+Filters.propTypes = {
+  itemsAmount: PropTypes.number,
+};
+
+Filters.defaultProps = {
+  itemsAmount: 0,
+};
 
 export default Filters;

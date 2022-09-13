@@ -82,7 +82,7 @@ const AddAdsPage = () => {
       // reset();
       navigate(`/profiles/${user.userDto.id}/adverts`);
     } catch (e) {
-      console.log('error');
+      console.log(e.message);
     }
   };
 
