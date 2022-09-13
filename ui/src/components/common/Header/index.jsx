@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Icons
@@ -24,14 +24,13 @@ const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('tokens');
   const user = JSON.parse(token);
-  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
+  const userId = user ? user.userDto.id : null;
 
-  const logOut = () => {
+  const logout = () => {
     localStorage.clear();
     navigate('/login', { replace: true });
   };
 
-  useEffect(() => console.log(token, userId), [token, userId]);
   return (
     <Container>
       <Nav>
@@ -42,35 +41,33 @@ const Header = () => {
           />
         </NavLinkHeader>
         <Ul>
-          <Li>
-            <A href="*">
-              <Like
-                width="25px"
-                height="25px"
-                fill="#fff"
-              />
-            </A>
-          </Li>
           {token
             ? (
-              <Li>
-                <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
-              </Li>
+              <>
+                <Li>
+                  <A href="*">
+                    <Like
+                      width="25px"
+                      height="25px"
+                      fill="#fff"
+                    />
+                  </A>
+                </Li>
+                <Li>
+                  <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
+                </Li>
+                <Li>
+                  <NavLink to={`/profiles/${userId}/adverts`}>
+                    <User
+                      width="25px"
+                      height="25px"
+                      fill="#fff"
+                    />
+                  </NavLink>
+                </Li>
+              </>
             )
-            : (
-              <Li>
-                <NavLinkAdverts to="/login">Додати оголошення</NavLinkAdverts>
-              </Li>
-            )}
-          <Li>
-            <NavLink to={`/profiles/${userId}/adverts`}>
-              <User
-                width="25px"
-                height="25px"
-                fill="#fff"
-              />
-            </NavLink>
-          </Li>
+            : null}
           {!token
             ? (
               <Li>
@@ -86,7 +83,7 @@ const Header = () => {
             : (
               <Li>
                 <NavLink
-                  onClick={logOut}
+                  onClick={logout}
                   to="/login"
                 >
                   <Logout
