@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Icons
@@ -24,9 +24,9 @@ const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('tokens');
   const user = JSON.parse(token);
-  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
+  const userId = user ?? user?.userDto.id;
 
-  const logOut = () => {
+  const logout = () => {
     localStorage.clear();
     navigate('/login', { replace: true });
   };
@@ -83,7 +83,7 @@ const Header = () => {
             : (
               <Li>
                 <NavLink
-                  onClick={logOut}
+                  onClick={logout}
                   to="/login"
                 >
                   <Logout
