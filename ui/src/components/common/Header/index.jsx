@@ -31,7 +31,6 @@ const Header = () => {
     navigate('/login', { replace: true });
   };
 
-  useEffect(() => console.log(token, userId), [token, userId]);
   return (
     <Container>
       <Nav>
@@ -42,35 +41,33 @@ const Header = () => {
           />
         </NavLinkHeader>
         <Ul>
-          <Li>
-            <A href="*">
-              <Like
-                width="25px"
-                height="25px"
-                fill="#fff"
-              />
-            </A>
-          </Li>
           {token
             ? (
-              <Li>
-                <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
-              </Li>
+              <>
+                <Li>
+                  <A href="*">
+                    <Like
+                      width="25px"
+                      height="25px"
+                      fill="#fff"
+                    />
+                  </A>
+                </Li>
+                <Li>
+                  <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
+                </Li>
+                <Li>
+                  <NavLink to={`/profiles/${userId}/adverts`}>
+                    <User
+                      width="25px"
+                      height="25px"
+                      fill="#fff"
+                    />
+                  </NavLink>
+                </Li>
+              </>
             )
-            : (
-              <Li>
-                <NavLinkAdverts to="/login">Додати оголошення</NavLinkAdverts>
-              </Li>
-            )}
-          <Li>
-            <NavLink to={`/profiles/${userId}/adverts`}>
-              <User
-                width="25px"
-                height="25px"
-                fill="#fff"
-              />
-            </NavLink>
-          </Li>
+            : null}
           {!token
             ? (
               <Li>
