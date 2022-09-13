@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
 import Search from 'components/common/Search';
-import AdvertCard from 'components/common/AdvertCard';
 import {
   Title,
   Wrapper,
-  CategoriesList,
+  CategoriesListStyle,
   AdvertsList,
-  ItemLink,
-  ImgWrap,
   LatestAdsSection,
-  P,
 } from 'pages/MainPage/styled';
 
-import bmw from 'assets/img/bmw.webp';
 import useFetchCategories from 'components/hooks/useFetchCategories';
 import Subcategories from 'components/Main/Subcategories';
-import Loader from 'components/common/Loader';
 import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
-import advertsAdapt from 'helpers/advertsAdapt';
+import AdvertsCard from 'components/Main/AdvertsCard';
+import CategoriesList from 'components/Main/CategoriesList';
 
 const MainPage = () => {
   const [subcategories, setSubcategories] = useState('id');
@@ -42,60 +37,19 @@ const MainPage = () => {
     });
   };
 
-  const categoriesList = () => {
-    if (error) {
-      return 'error';
-    }
-
-    if (loading) {
-      return <Loader />;
-    }
-
-    return data.map((item) => (
-      <ItemLink key={item._id} onClick={() => showSubcategories(item._id)}>
-        <ImgWrap
-          width="88px"
-          height="88px"
-          src={`http://localhost:4000/${item.image}`}
-          alt={item.slug}
-        />
-        <P>{item.name}</P>
-      </ItemLink>
-    ));
-  };
-
-  const advertsCard = () => {
-    if (errorAdvert) {
-      return 'error';
-    }
-
-    if (loadingAdvert) {
-      return <Loader />;
-    }
-
-    return advertsAdapt(advertInfo).map((item) => (
-      <AdvertCard
-        key={item.id}
-        itemId={item.id}
-        img={bmw}
-        name={item.title}
-        location="no data address"
-        date={item.createdAt}
-        price={`${item.price} грн`}
-      />
-    ));
-  };
-
   return (
     <>
       <Search />
       <Wrapper>
         <Title>Головні рубрики</Title>
-        <CategoriesList>
-          {
-            categoriesList()
-          }
-        </CategoriesList>
+        <CategoriesListStyle>
+          <CategoriesList
+            error={error}
+            loading={loading}
+            data={data}
+            showSubcategories={showSubcategories}
+          />
+        </CategoriesListStyle>
       </Wrapper>
       {isOpen && (
         <Subcategories
@@ -107,9 +61,11 @@ const MainPage = () => {
         <Wrapper>
           <Title>Останні оголошення</Title>
           <AdvertsList>
-            {
-              advertsCard()
-            }
+            <AdvertsCard
+              errorAdvert={errorAdvert}
+              loadingAdvert={loadingAdvert}
+              advertInfo={advertInfo}
+            />
           </AdvertsList>
         </Wrapper>
       </LatestAdsSection>
