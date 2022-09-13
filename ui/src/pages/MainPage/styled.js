@@ -10,7 +10,7 @@ export const Title = styled.h3`
 `;
 
 export const Wrapper = styled.div`
-  width: 1238px;
+  max-width: 1238px;
   margin: 0 auto;
   padding-bottom: 45px;
 `;
@@ -20,10 +20,20 @@ export const CategoriesList = styled.div`
   flex-wrap: wrap;
 `;
 
+export const AdvertsList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (max-width: 1250px) {
+    justify-content: center;
+  }
+`;
+
 export const ItemLink = styled.button`
   width: 120px;
   height: 120px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   text-align: center;
   align-items: center;
@@ -36,10 +46,13 @@ export const ItemLink = styled.button`
   margin-bottom: 50px;
   border: none;
   background: none;
+  position: relative;
 
   & p {
     padding: 1px;
     margin-top: 23px;
+    position: absolute;
+    top: 90px;
   }
 
   &:hover p {
@@ -85,7 +98,7 @@ export const ItemLink = styled.button`
 `;
 
 export const ImgWrap = styled.img`
-  width: 88px;
+  max-width: 88px;
   height: 88px;
   border-radius: 50%;
   align-self: center;

@@ -9,7 +9,6 @@ import {
   Nav,
   Ul,
   Li,
-  A,
   Container,
   NavLink,
   NavLinkAdverts,
@@ -27,13 +26,13 @@ const Header = () => (
       </NavLinkHeader>
       <Ul>
         <Li>
-          <A href="*">
+          <NavLink to="/favorites">
             <Like
               width="25px"
               height="25px"
               fill="#fff"
             />
-          </A>
+          </NavLink>
         </Li>
         <Li>
           <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
