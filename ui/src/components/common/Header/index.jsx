@@ -24,12 +24,13 @@ const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('tokens');
   const user = JSON.parse(token);
-  const userId = user ?? user?.userDto.id;
+  const userId = user ? user.userDto.id : null;
 
   const logout = () => {
     localStorage.clear();
     navigate('/login', { replace: true });
   };
+  console.log(userId);
 
   return (
     <Container>
