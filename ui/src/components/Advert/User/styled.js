@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
-  margin: 24px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,12 +11,38 @@ export const Wrapper = styled.div`
   width: 390px;
   border-radius: 5px;
   padding: 24px;
+  margin-bottom: 24px;
+
+  @media screen and (max-width: 768px) {
+    height: 150px;
+    width: 280px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 130px;
+    width: 100%;
+    padding: 10px;
+  }
 
   & h1 {
     align-self: flex-start;
     font-size: 14px;
     text-transform: uppercase;
     color: ${props => props.theme.mainGreenColor};
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 11px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -25,6 +50,10 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 480px) {
+    justify-content: flex-start;
+  }
 `;
 
 export const UserInfo = styled.div`
@@ -32,14 +61,31 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
 
+  @media screen and (max-width: 480px) {
+    margin-left: 15px;
+  }
+
   & h2 {
     font-size: 20px;
     color: ${props => props.theme.mainGreenColor};
+
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 12px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 11px;
+    }
   }
 `;
 
 export const RegistrationDate = styled.div`
   display: flex;
+  align-items: center;
   color: #7F9799;
   font-size: 14px;
 
@@ -48,15 +94,39 @@ export const RegistrationDate = styled.div`
     font-weight: 800;
     color: #5b6f71;
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 9px;
+  }
 `;
 
 export const UserIcon = styled.img`
   width: 45px;
+
+  @media screen and (max-width: 768px) {
+    width: 34px;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 25px;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 20px;
+  }
 `;
 
 export const Button = styled.button`
   width: 165px;
-  min-height: 48px;
+  height: 48px;
   cursor: pointer;
   text-decoration: none;
   font-weight: 700;
@@ -65,8 +135,25 @@ export const Button = styled.button`
   border: 2px solid ${props => props.theme.mainGreenColor};
   border-radius: 4px;
   color: ${props => props.theme.mainGreenColor};
-  margin: 0px 4px 0px 0px;
   padding: 3px 8px;
+
+  @media screen and (max-width: 768px) {
+    width: 130px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 140px;
+    height: 33px;
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 120px;
+    height: 30px;
+    font-size: 10px;
+  }
 
   &:hover {
     background-color: ${props => props.theme.mainGreenColor};
@@ -80,9 +167,20 @@ export const AllAdvertsLink = styled(Link)`
   justify-content: center;
   align-items: center;
   font-size: 14px;
-  line-height: 18px;
   color: ${props => props.theme.mainGreenColor};
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 10px;
+  }
 
   &:hover {
     text-decoration: underline;
