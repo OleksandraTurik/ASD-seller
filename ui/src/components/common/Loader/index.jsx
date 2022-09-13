@@ -9,7 +9,7 @@ const StyledSpinner = styled.div`
   width: ${({ width }) => width || '120px'};
   height: ${({ height }) => height || '120px'};
   animation: spin 2s linear infinite;
-  /* position: relative; */
+  position: relative;
   left: 45%;
   margin: ${({ margin }) => margin || '250px 0'};
 

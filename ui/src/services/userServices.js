@@ -10,6 +10,14 @@ const userServices = {
       throw new ServerException(e.response);
     }
   },
+  fetchInfoExactUser: async (id) => {
+    try {
+      const user = await API.get(`/users/${id}`);
+      return user;
+    } catch (e) {
+      throw new ServerException(e.response);
+    }
+  },
   getAdvertsListUser: async (id) => {
     try {
       const { data: { itemsAmount, results, next } } = await API.get(`/adverts?seller=${id}`);

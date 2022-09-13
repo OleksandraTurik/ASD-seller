@@ -5,6 +5,7 @@ import {
   Title,
   Wrapper,
   CategoriesList,
+  AdvertsList,
   ItemLink,
   ImgWrap,
   LatestAdsSection,
@@ -53,6 +54,8 @@ const MainPage = () => {
     return data.map((item) => (
       <ItemLink key={item._id} onClick={() => showSubcategories(item._id)}>
         <ImgWrap
+          width="88px"
+          height="88px"
           src={`http://localhost:4000/${item.image}`}
           alt={item.slug}
         />
@@ -103,11 +106,11 @@ const MainPage = () => {
       <LatestAdsSection>
         <Wrapper>
           <Title>Останні оголошення</Title>
-          <CategoriesList>
+          <AdvertsList>
             {
               advertsCard()
             }
-          </CategoriesList>
+          </AdvertsList>
         </Wrapper>
       </LatestAdsSection>
     </>
