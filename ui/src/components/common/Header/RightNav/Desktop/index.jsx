@@ -19,42 +19,40 @@ const Desktop = () => {
   const user = JSON.parse(token);
   const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
 
-  const logOut = () => {
+  const logout = () => {
     localStorage.clear();
     navigate('/login', { replace: true });
   };
 
   return (
     <Ul>
-      <Li>
-        <A href="*">
-          <Like
-            width="25px"
-            height="25px"
-            fill="#fff"
-          />
-        </A>
-      </Li>
       {token
         ? (
-          <Li>
-            <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
-          </Li>
+          <>
+            <Li>
+              <NavLink to="/favorites">
+                <Like
+                  width="25px"
+                  height="25px"
+                  fill="#fff"
+                />
+              </NavLink>
+            </Li>
+            <Li>
+              <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
+            </Li>
+            <Li>
+              <NavLink to={`/profiles/${userId}/adverts`}>
+                <User
+                  width="25px"
+                  height="25px"
+                  fill="#fff"
+                />
+              </NavLink>
+            </Li>
+          </>
         )
-        : (
-          <Li>
-            <NavLinkAdverts to="/login">Додати оголошення</NavLinkAdverts>
-          </Li>
-        )}
-      <Li>
-        <NavLink to={`/profiles/${userId}/adverts`}>
-          <User
-            width="25px"
-            height="25px"
-            fill="#fff"
-          />
-        </NavLink>
-      </Li>
+        : null}
       {!token
         ? (
           <Li>
@@ -70,7 +68,7 @@ const Desktop = () => {
         : (
           <Li>
             <NavLink
-              onClick={logOut}
+              onClick={logout}
               to="/login"
             >
               <Logout

@@ -12,12 +12,14 @@ const NotFound = lazy(() => import('pages/NotFound'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
 const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
 const SettingsPage = lazy(() => import('pages/SettingsPage'));
+const AdvertList = lazy(() => import('pages/AdvertList'));
+const FavoritesPage = lazy(() => import('pages/FavoritesPage'));
 
 const MainRoutes = () => (
   <Suspense fallback={<Loader />}>
     <Routes>
       <Route index element={<MainPage />} />
-      <Route path="/adverts" element={<h1>Advert list</h1>} />
+      <Route path="/adverts" element={<AdvertList />} />
       <Route path="/adverts/:id" element={<AdvertPage />} />
       <Route path="/profiles/:id" element={<Profile />}>
         <Route path="adverts" element={<MyAdverts />} />
@@ -33,6 +35,7 @@ const MainRoutes = () => (
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegistrationPage />} />
+      <Route path="/favorites/:id" element={<FavoritesPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </Suspense>
