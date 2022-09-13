@@ -10,10 +10,17 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
   }
 
   a {
     text-decoration: none;
+  }
+  
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
