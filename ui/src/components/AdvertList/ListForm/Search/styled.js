@@ -17,6 +17,9 @@ const Input = css`
   border: none;
   width: calc(100% - 28px);
   font-size: 16px;
+  @media (max-width: 450px) {
+    width: auto;
+  }
 `;
 
 export const SearchInput = styled.input.attrs({

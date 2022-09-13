@@ -5,14 +5,13 @@ import Like from 'assets/icons/Like';
 import {
   Wrapper,
   InfoWrapper,
-  TitlePriceWrapper,
-  AddressButtonWrapper,
   AddressAndTime,
   Title,
   Price,
   ImageContainer,
   Image,
   LikeButton,
+  InfoWrapperSection,
 } from './styled';
 
 const Card = ({ body }) => {
@@ -28,25 +27,25 @@ const Card = ({ body }) => {
         <Image src={`http://localhost:4000/${body.images[0]}`} />
       </ImageContainer>
       <InfoWrapper>
-        <TitlePriceWrapper>
+        <InfoWrapperSection>
           <Title>{body.title}</Title>
-          <Price>
-            {body.price}
-            {' '}
-            грн
-          </Price>
-        </TitlePriceWrapper>
-        <AddressButtonWrapper>
           <AddressAndTime>
             {body.address.city}
             {' '}
             -
             {body.createdAt}
           </AddressAndTime>
+        </InfoWrapperSection>
+        <InfoWrapperSection>
+          <Price>
+            {body.price}
+            {' '}
+            грн
+          </Price>
           <LikeButton>
             <Like />
           </LikeButton>
-        </AddressButtonWrapper>
+        </InfoWrapperSection>
       </InfoWrapper>
     </Wrapper>
   );

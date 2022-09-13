@@ -17,22 +17,18 @@ export const Wrapper = styled.section`
 
 export const InfoWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
+  width: calc(100% - 150px);
+  @media (max-width: 450px) {
+    width: 100%;
+  }
+`;
+
+export const InfoWrapperSection = styled.div`
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
-`;
-
-export const TitlePriceWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  height: 50%;
-`;
-
-export const AddressButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  max-width: calc(50%);
 `;
 
 export const LikeButton = styled.button`
@@ -41,10 +37,12 @@ export const LikeButton = styled.button`
   height: 30px;
   border: none;
   background: transparent;
+  margin-left: auto;
 `;
 
 export const ImageContainer = styled.div`
-  width: 300px;
+  width: 20%;
+  min-width: 150px;
   @media (max-width: 450px) {
     height: 200px;
     width: 100%;
@@ -61,8 +59,10 @@ export const Image = styled.img`
 export const Title = styled.h2`
   font-size: 16px;
   font-weight: normal;
-  width: 100%;
+  max-width: 600px;
+  //width: 50%;
   text-overflow: ellipsis;
+  overflow-wrap: break-word;
   overflow: hidden;
 
   &:hover {
@@ -75,7 +75,14 @@ export const Price = styled.p`
   text-align: right;
   font-weight: bold;
   font-size: 20px;
-  width: 150px;
+  overflow-wrap: normal;
+  //margin-left: auto;
 `;
 
-export const AddressAndTime = styled.p``;
+export const AddressAndTime = styled.p`
+  margin-top: 10px;
+  padding-top: 10px;
+  @media (max-width: 450px) {
+    border-top: 2px solid #cacaca;
+  }
+`;

@@ -10,6 +10,22 @@ const advertServices = {
       throw new ServerException(e.response);
     }
   },
+  getAdvertListWithQueries: async (queryParams) => {
+    try {
+      let params;
+      // eslint-disable-next-line no-restricted-syntax
+      for (const key in queryParams) {
+        if (Object.hasOwnProperty.call(queryParams, key)) {
+          params = `${key}=${queryParams[key]}&`;
+        }
+      }
+
+      const adverts = API.get(`/adverts?${params}`);
+      return adverts;
+    } catch (err) {
+      throw new ServerException(err.response);
+    }
+  },
   getAdverts: async () => {
     try {
       const adverts = API.get('/adverts');
@@ -55,11 +71,7 @@ const advertServices = {
     }
   },
   modifyAdvert: async (id, {
-    title,
-    price,
-    sellerId,
-    description,
-    address,
+    title, price, sellerId, description, address,
   }) => {
     try {
       const body = {

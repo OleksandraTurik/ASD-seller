@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper, Button } from './styled';
+import { Wrapper, Next, Previous } from './styled';
 
 const Pagination = ({ onNextPageClick, onPrevPageClick }) => (
-  <Wrapper>
-    <Button onClick={() => onPrevPageClick?.()}>Попередня сторінка</Button>
-    <Button onClick={() => onNextPageClick?.()}>Наступна сторінка</Button>
+  <Wrapper hasPrev={!!onPrevPageClick} hasNext={!!onNextPageClick}>
+    {!!onPrevPageClick && <Previous onClick={() => onPrevPageClick?.()}>Попередня сторінка</Previous>}
+    {!!onNextPageClick && <Next onClick={() => onNextPageClick?.()}>Наступна сторінка</Next>}
   </Wrapper>
 );
 
 Pagination.propTypes = {
-  onPrevPageClick: PropTypes.oneOfType([PropTypes.func, null]).isRequired,
-  onNextPageClick: PropTypes.oneOfType([PropTypes.func, null]).isRequired,
+  // eslint-disable-next-line react/require-default-props
+  onPrevPageClick: PropTypes.oneOfType([PropTypes.func]),
+  // eslint-disable-next-line react/require-default-props
+  onNextPageClick: PropTypes.oneOfType([PropTypes.func]),
 };
 
 export default Pagination;

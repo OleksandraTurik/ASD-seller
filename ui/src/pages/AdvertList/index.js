@@ -3,28 +3,41 @@ import { useSearchParams } from 'react-router-dom';
 import ListForm from 'components/AdvertList/ListForm';
 import Results from 'components/AdvertList/Results';
 import Pagination from 'components/AdvertList/Pagination';
-import advertServices from 'services/advertServices';
+import useFetchAdvertsQueryParams from 'components/hooks/useFetchAdvertsQueryParams';
 import { Wrapper, Container } from './styled';
 
 const AdvertList = () => {
-  // const [queries, setQueries] = useSearchParams();
-  const [data, setData] = useState({});
+  const [queryParams, setQueryParams] = useState({
+    sort: 'dscDate',
+  });
+  const { data, pending } = useFetchAdvertsQueryParams(queryParams);
+
+  const onNextPageClick = () => {
+    const { next } = data;
+    const re = /page=[0-9]/m;
+    setQueryParams(prev => ({ ...prev, page: next.match(re)[0].split('=')[1] }));
+  };
+  const onPreviousPageClick = () => {
+    const { previous } = data;
+    const re = /page=[0-9]/m;
+    setQueryParams(prev => ({ ...prev, page: previous.match(re)[0].split('=')[1] }));
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await advertServices.getAdverts();
-        setData(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
+    console.log(data);
+  }, [data]);
+
   return (
     <Wrapper>
       <Container>
         <ListForm />
-        <Results data={data.results || []} resultAmount={data.itemsAmount || 0} />
-        {(!!data.next || !!data.previous) && <Pagination onNextPageClick={() => {}} onPrevPageClick={() => {}} />}
+        <Results pending={pending} data={data?.results || []} resultAmount={data?.itemsAmount || 0} />
+        {!pending && (
+          <Pagination
+            onNextPageClick={data?.next && onNextPageClick}
+            onPrevPageClick={data?.previous && onPreviousPageClick}
+          />
+        )}
       </Container>
     </Wrapper>
   );

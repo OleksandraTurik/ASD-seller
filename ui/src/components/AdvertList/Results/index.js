@@ -1,13 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
-import { Wrapper, Title } from './styled';
+import Loader from '../../common/Loader';
+import { Wrapper, Title, LoaderWrapper } from './styled';
 
-const Results = ({ data, resultAmount }) => (
-  <Wrapper>
-    {data.length <= 0 ? (
-      <Title>No items was found</Title>
-    ) : (
+const Results = ({ data, resultAmount, pending }) => {
+  let content;
+
+  if (pending) {
+    content = (
+      <LoaderWrapper>
+        <Loader margin="0" />
+      </LoaderWrapper>
+    );
+  } else if (data.length <= 0) {
+    content = <Title>No items was found</Title>;
+  } else {
+    content = (
       <>
         <Title>
           Ми знайшли
@@ -20,9 +29,11 @@ const Results = ({ data, resultAmount }) => (
           <Card key={e._id} body={e} />
         ))}
       </>
-    )}
-  </Wrapper>
-);
+    );
+  }
+
+  return <Wrapper>{content}</Wrapper>;
+};
 
 Results.propTypes = {
   data: PropTypes.arrayOf(
@@ -37,6 +48,7 @@ Results.propTypes = {
     }),
   ).isRequired,
   resultAmount: PropTypes.number.isRequired,
+  pending: PropTypes.bool.isRequired,
 };
 
 export default Results;
