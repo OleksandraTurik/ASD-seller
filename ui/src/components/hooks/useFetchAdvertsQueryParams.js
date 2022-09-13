@@ -7,10 +7,11 @@ const useFetchAdvertsQueryParams = (queryParams) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     (async () => {
       try {
         setPending(true);
-        const adverts = await advertServices.getAdvertListWithQueries(queryParams);
+        const adverts = await advertServices.getAdvertListWithQueries(queryParams, controller.signal);
         setData(adverts.data);
         setPending(false);
         setError(null);
@@ -20,6 +21,8 @@ const useFetchAdvertsQueryParams = (queryParams) => {
         setData(null);
       }
     })();
+
+    return () => controller.abort();
   }, [queryParams]);
 
   return { data, pending, error };

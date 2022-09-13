@@ -7,30 +7,58 @@ import useFetchAdvertsQueryParams from 'components/hooks/useFetchAdvertsQueryPar
 import { Wrapper, Container } from './styled';
 
 const AdvertList = () => {
+  const [pageQueries, setPageQueries] = useSearchParams();
   const [queryParams, setQueryParams] = useState({
     sort: 'dscDate',
+    limit: '5',
   });
   const { data, pending } = useFetchAdvertsQueryParams(queryParams);
+
+  const updateSearchParams = (update) => {
+    const prevParams = pageQueries
+      .toString()
+      .split('&')
+      .reduce((acc, curr) => (curr ? { ...acc, [curr.split('=')[0]]: curr.split('=')[1] } : acc), {});
+    const updateParams = {};
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in update) {
+      if (Object.hasOwnProperty.call(update, key)) {
+        // console.log(update[key]);
+        if (update[key]) updateParams[key] = update[key];
+        if (!update[key]) delete prevParams[key];
+      }
+    }
+    setPageQueries({ ...prevParams, ...updateParams });
+    setQueryParams(prev => ({ ...prev, ...prevParams, ...update }));
+  };
+
+  useEffect(() => {
+    if (!pageQueries.toString()) return;
+    const params = pageQueries
+      .toString()
+      .split('&')
+      .reduce((acc, curr) => ({ ...acc, [curr.split('=')[0]]: curr.split('=')[1] }), {});
+    setQueryParams((prev) => ({ ...prev, ...params }));
+  }, [pageQueries]);
 
   const onNextPageClick = () => {
     const { next } = data;
     const re = /page=[0-9]/m;
-    setQueryParams(prev => ({ ...prev, page: next.match(re)[0].split('=')[1] }));
+    updateSearchParams({ page: next.match(re)[0].split('=')[1] });
   };
   const onPreviousPageClick = () => {
     const { previous } = data;
     const re = /page=[0-9]/m;
-    setQueryParams(prev => ({ ...prev, page: previous.match(re)[0].split('=')[1] }));
+    updateSearchParams({ page: previous.match(re)[0].split('=')[1] });
   };
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const onQueryUpdate = (updates) => {
+    updateSearchParams({ page: 1, ...updates });
+  };
 
   return (
     <Wrapper>
       <Container>
-        <ListForm />
+        <ListForm onSubmit={onQueryUpdate} />
         <Results pending={pending} data={data?.results || []} resultAmount={data?.itemsAmount || 0} />
         {!pending && (
           <Pagination
