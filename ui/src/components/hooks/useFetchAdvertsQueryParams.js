@@ -11,14 +11,17 @@ const useFetchAdvertsQueryParams = (queryParams) => {
     (async () => {
       try {
         setPending(true);
+        setData(null);
         const adverts = await advertServices.getAdvertListWithQueries(queryParams, controller.signal);
         setData(adverts.data);
         setPending(false);
         setError(null);
       } catch (err) {
-        setError(err);
-        setPending(false);
-        setData(null);
+        if (err.code !== 'ERR_CANCELED') {
+          setError(err);
+          setPending(false);
+          setData(null);
+        }
       }
     })();
 

@@ -18,13 +18,13 @@ const AdvertList = () => {
     const prevParams = pageQueries
       .toString()
       .split('&')
-      .reduce((acc, curr) => (curr ? { ...acc, [curr.split('=')[0]]: curr.split('=')[1] } : acc), {});
+      .reduce((acc, curr) => (curr ? { ...acc, [curr.split('=')[0]]: curr.split('=')[1].split('+').join(' ') } : acc), {});
     const updateParams = {};
     // eslint-disable-next-line no-restricted-syntax
     for (const key in update) {
       if (Object.hasOwnProperty.call(update, key)) {
         // console.log(update[key]);
-        if (update[key]) updateParams[key] = update[key];
+        if (update[key]) updateParams[key] = update[key].split('+').join(' ');
         if (!update[key]) delete prevParams[key];
       }
     }
@@ -52,7 +52,7 @@ const AdvertList = () => {
     updateSearchParams({ page: previous.match(re)[0].split('=')[1] });
   };
   const onQueryUpdate = (updates) => {
-    updateSearchParams({ page: 1, ...updates });
+    updateSearchParams({ page: '', ...updates });
   };
 
   return (

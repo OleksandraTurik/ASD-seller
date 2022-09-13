@@ -8,7 +8,7 @@ import { Form } from './styled';
 
 const ListForm = ({ onSubmit }) => {
   const [pageQueries] = useSearchParams();
-  const [search, setSearch] = useState(pageQueries.get('search'));
+  const [search, setSearch] = useState(pageQueries.get('search') || '');
 
   const submitHandler = (event) => {
     event.preventDefault();
