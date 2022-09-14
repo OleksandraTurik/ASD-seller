@@ -11,9 +11,9 @@ const advertSchema = new Schema(
     images: { type: [String], required: true },
     category: {
       name: { type: String, required: true },
-      _id: { type: mongoose.Types.ObjectId, ref: 'Category' },
+      _id: { type: mongoose.Types.ObjectId, ref: 'Category', required: true },
       child: {
-        name: { type: String, required: true },
+        name: { type: String },
         _id: { type: mongoose.Types.ObjectId, ref: 'Category' },
       },
     },
