@@ -7,10 +7,13 @@ import { useParams } from 'react-router-dom';
 // Icons
 import CatFootprint from 'assets/icons/CatFootprint';
 
-import Loader from '../../../../common/Loader';
-import AdvertCardList from '../AdvertCardList';
-import { useFetchAdverts } from '../../../../hooks/useFetchAdverts';
-import EmptyAdvertsList from '../EmptyAdvertsList';
+// Hooks
+import { useFetchAdverts } from 'components/hooks/useFetchAdverts';
+
+// Components
+import Loader from 'components/common/Loader';
+import AdvertCardList from 'components/Profile/MyAdverts/AdvertsList/AdvertCardList';
+import EmptyAdvertsList from 'components/Profile/MyAdverts/AdvertsList/EmptyAdvertsList';
 
 // Styles
 const Wrapper = styled.div`

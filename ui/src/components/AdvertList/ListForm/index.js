@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
-import Search from './Search';
-import Filters from './Filters';
-import Sort from './Sort';
+import Search from 'components/AdvertList/ListForm/Search';
+import Filters from 'components/AdvertList/ListForm/Filters';
+import Sort from 'components/AdvertList/ListForm/Sort';
 import { Form } from './styled';
 
 const ListForm = ({ onSubmit }) => {

@@ -1,7 +1,11 @@
-import ChooseFile from 'components/common/ChooseFile';
 import React from 'react';
-import MainContainer from '../MainContainer';
-import SubContainer from '../SubContainer';
+
+// Components
+import ChooseFile from 'components/common/ChooseFile';
+import MainContainer from 'components/SettingsPage/MainContainer';
+import SubContainer from 'components/SettingsPage/SubContainer';
+
+// Styles
 import {
   FileContainer,
 } from './styled';

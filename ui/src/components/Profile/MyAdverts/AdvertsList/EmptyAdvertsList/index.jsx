@@ -3,7 +3,7 @@ import React from 'react';
 // Icons
 import IconNotFound from 'assets/icons/NotFoundAdverts';
 
-// Components
+// Styles
 import { Wrapper, AddAdvertLink } from './styled';
 
 const EmptyAdvertsList = () => (

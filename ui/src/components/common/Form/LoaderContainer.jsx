@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from '../Loader';
+import Loader from 'components/common/Loader';
 import { WrapperLoader } from './styled';
 
 export const LoaderForm = () => (
