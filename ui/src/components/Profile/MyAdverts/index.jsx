@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Components
-import AdvertsList from './AdvertsList';
-import Filters from './Filters';
+import AdvertsList from 'components/Profile/MyAdverts/AdvertsList';
+import Filters from 'components/Profile/MyAdverts/Filters';
 
 // Styles
 const Wrapper = styled.div`

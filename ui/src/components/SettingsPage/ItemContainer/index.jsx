@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Components
 import { ArrowButton } from 'components/common/Button/styled';
+
+// Icons
+import ArrowDown from 'assets/icons/ArrowDown';
+import ArrowUp from 'assets/icons/ArrowUp';
+
+// Styles
 import {
   Container,
   Header,
   P,
   ButtonContainer,
 } from './styled';
-import ArrowDown from '../../../assets/icons/ArrowDown';
-import ArrowUp from '../../../assets/icons/ArrowUp';
 
 const ItemContainer = ({
   id,

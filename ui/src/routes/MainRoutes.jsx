@@ -1,7 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+// Components
 import Loader from 'components/common/Loader';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import PrivateRoute from 'PrivateRoute/PrivateRoute';
 
 const MainPage = lazy(() => import('pages/MainPage'));
 const AdvertPage = lazy(() => import('pages/Advert'));

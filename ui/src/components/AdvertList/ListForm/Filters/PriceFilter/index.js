@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FilterController } from '../styled';
+import { FilterController } from 'components/AdvertList/ListForm/Filters/styled';
 import { InputWrapper, MaxPriceInput, MinPriceInput } from './styled';
 
 const PriceFilter = ({

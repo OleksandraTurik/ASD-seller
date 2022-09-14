@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AdvertCard from './AdvertCard';
+
+// Components
+import AdvertCard from 'components/Profile/MyAdverts/AdvertsList/AdvertCard';
 
 const AdvertsList = ({ setAmount }) => (
   <div>
