@@ -80,8 +80,8 @@ class UserController {
       if (address && !(await City.findById(address)))
         throw new StatusError(400, `City with ID: ${address} does not exist`);
       const addressItem = await City.findById(address);
-      const user = await userService.modifyUser(id, { email, password, fullName, address: addressItem, phoneNumber });
-      return res.json(user);
+      await userService.modifyUser(id, { email, password, fullName, address: addressItem, phoneNumber });
+      return res.json(await User.findById(id));
     } catch (e) {
       errorHandler(res, e);
     }
