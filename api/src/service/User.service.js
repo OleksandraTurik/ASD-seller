@@ -80,13 +80,16 @@ class UserService {
   async modifyUser(id, updates) {
     const { email, password, fullName, address, phoneNumber } = updates;
     const hashPassword = password ? await bcrypt.hash(password, 3) : password;
-    const user = await UserModel.updateOne({ _id: id }, {
-      email,
-      password: hashPassword,
-      fullName,
-      address,
-      phoneNumber,
-    });
+    const user = await UserModel.updateOne(
+      { _id: id },
+      {
+        email,
+        password: hashPassword,
+        fullName,
+        address,
+        phoneNumber,
+      },
+    );
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
@@ -95,7 +98,6 @@ class UserService {
     }
     return user;
   }
-
 }
 
 module.exports = new UserService();
