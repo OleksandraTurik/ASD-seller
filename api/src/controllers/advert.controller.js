@@ -53,8 +53,19 @@ async function postAdvert(req, res) {
     const addressItem = await City.findById(address);
     if (!addressItem) throw new StatusError(400, 'City with this ID does not exist');
 
-    const categoryItem = await Category.findById(category);
+    let categoryItem = await Category.findById(category);
     if (categoryItem.children.length !== 0) throw new StatusError(400, "This category can't be added to the advert");
+    if (categoryItem.parentId) {
+      const { name } = await Category.findById(categoryItem.parentId);
+      categoryItem = {
+        name,
+        _id: categoryItem.parentId,
+        child: {
+          _id: categoryItem._id,
+          name: categoryItem.name,
+        },
+      };
+    } else categoryItem = { _id: address, name: categoryItem.name };
 
     const fileObjects = await Promise.all(req.files.map((f) => AWS.uploadPhoto(f)));
     const images = fileObjects.map((e) => `pic/${e.key}`);
