@@ -2,14 +2,17 @@ const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
 
-const citySchema = new Schema({
+const citySchema = new Schema(
+  {
     city: String,
-}, { strict: false });
+  },
+  { strict: false },
+);
 
 citySchema.statics.findFiltered = function (search) {
-    const query = this.find(search ? { $text: { $search: search } } : {});
+  const query = this.find(search ? { $text: { $search: search } } : {});
 
-    return query;
+  return query;
 };
 
 const City = model('City', citySchema, 'cities');

@@ -1,19 +1,24 @@
 const mongoose = require('mongoose');
 
-const categorySchema = new mongoose.Schema({
-  name: {
-    type: String, required: true, trim: true,
+const categorySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    parentId: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Category',
+      default: null,
+    },
+    image: {
+      type: String,
+      default: null,
+    },
   },
-  parentId: {
-    type: mongoose.Types.ObjectId,
-    ref: 'Category',
-    default: null,
-  },
-  image: {
-    type: String,
-    default: null,
-  },
-}, { timestamps:true });
+  { timestamps: true },
+);
 
 categorySchema.add({
   children: {
