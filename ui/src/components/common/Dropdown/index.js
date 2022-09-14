@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ArrowUp from 'assets/icons/ArrowUp';
+import findParentOrChild from 'helpers/find-parent-or-child';
 import AdvancedOption from './AdvancedOption';
 import {
   Select, Value, OptionList, Option,
@@ -8,9 +9,7 @@ import {
 
 const Dropdown = ({ options, onSelect, defaultID }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(
-    options.find((e) => e.id === defaultID || e.children?.find(el => el.id === defaultID)),
-  );
+  const [selected, setSelected] = useState(findParentOrChild(options, defaultID));
   const DropdownRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -26,10 +25,8 @@ const Dropdown = ({ options, onSelect, defaultID }) => {
   }, [DropdownRef.current]);
 
   useLayoutEffect(() => {
-    setSelected(
-      options.find((e) => e.id === defaultID || e.children?.find(el => el.id === defaultID)),
-    );
-  }, [options]);
+    setSelected(findParentOrChild(options, defaultID));
+  }, [options, defaultID]);
 
   const selectHandler = (value) => {
     setIsOpen(false);

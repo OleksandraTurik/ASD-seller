@@ -33,7 +33,7 @@ const Wrapper = styled.div`
 const Sort = ({ value, onSelect }) => (
   <Wrapper>
     <h5>Сортувати за:</h5>
-    <Dropdown defaultID={value || 'dscDate'} onSelect={({ id }) => onSelect(id)} options={sortMethods} />
+    <Dropdown defaultID={value} onSelect={({ id }) => onSelect(id)} options={sortMethods} />
   </Wrapper>
 );
 
