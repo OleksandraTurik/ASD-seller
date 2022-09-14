@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import ArrowUp from 'assets/icons/ArrowUp';
 import AdvancedOption from './AdvancedOption';
 import {
-  Select,
-  Value,
-  OptionList,
-  Option,
+  Select, Value, OptionList, Option,
 } from './styled';
 
-const Dropdown = ({ options, onSelect, defaultIndex }) => {
+const Dropdown = ({ options, onSelect, defaultID }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(options[defaultIndex]);
+  const [selected, setSelected] = useState(
+    options.find((e) => e.id === defaultID || e.children?.find(el => el.id === defaultID)),
+  );
   const DropdownRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -27,7 +26,9 @@ const Dropdown = ({ options, onSelect, defaultIndex }) => {
   }, [DropdownRef.current]);
 
   useLayoutEffect(() => {
-    setSelected(options[defaultIndex]);
+    setSelected(
+      options.find((e) => e.id === defaultID || e.children?.find(el => el.id === defaultID)),
+    );
   }, [options]);
 
   const selectHandler = (value) => {
@@ -65,11 +66,11 @@ const Dropdown = ({ options, onSelect, defaultIndex }) => {
 
 Dropdown.propTypes = {
   options: PropTypes.arrayOf(
-    PropTypes.shape({
+    PropTypes.exact({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       value: PropTypes.string,
       children: PropTypes.arrayOf(
-        PropTypes.shape({
+        PropTypes.exact({
           id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
           value: PropTypes.string,
         }),
@@ -77,7 +78,8 @@ Dropdown.propTypes = {
     }),
   ).isRequired,
   onSelect: PropTypes.func.isRequired,
-  defaultIndex: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  defaultID: PropTypes.string,
 };
 
 export default Dropdown;

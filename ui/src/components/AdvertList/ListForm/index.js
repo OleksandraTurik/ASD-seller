@@ -14,6 +14,7 @@ const ListForm = ({ onSubmit }) => {
     minPrice: pageQueries.get('minPrice') || '',
     category: pageQueries.get('category') || '',
   });
+  const [sort, setSort] = useState(pageQueries.get('search') || '');
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ const ListForm = ({ onSubmit }) => {
       maxPrice,
       minPrice,
       category,
+      sort,
     });
   };
 
@@ -40,7 +42,7 @@ const ListForm = ({ onSubmit }) => {
     <Form onSubmit={submitHandler}>
       <Search value={search || ''} onSearch={searchHandler} />
       <Filters maxPriceValue={maxPrice} minPriceValue={minPrice} categoryValue={category} onFilter={filterHandler} />
-      <Sort />
+      <Sort value={sort} onSelect={(value) => setSort(value)} />
     </Form>
   );
 };
