@@ -63,7 +63,7 @@ const Header = () => {
               </Li>
             )}
           <Li>
-            <NavLink to={`/profiles/${userId}/adverts`}>
+            <NavLink to={`/profiles/${userId}/settings`}>
               <User
                 width="25px"
                 height="25px"
