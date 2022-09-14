@@ -4,6 +4,7 @@ import getAdvertReducer from './slice/getAdvert';
 import categoryReducer from './slice/getCategories';
 import userAdvertInfoReducer from './slice/getAdvertInfo';
 import getAdvertsReducer from './slice/getAdverts';
+import exactUserInfoSlice from './slice/getInfoExactUser';
 
 // create store
 export const store = configureStore({
@@ -13,5 +14,6 @@ export const store = configureStore({
     userReducer,
     categoryReducer,
     userAdvertInfoReducer,
+    exactUserInfoSlice,
   },
 });
