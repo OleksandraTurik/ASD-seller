@@ -48,13 +48,39 @@ export const Wrapper = styled.div`
 `;
 
 export const LocationWrap = styled.div`
-  width: 100%;
+  width: 60%;
   display: flex;
   align-self: flex-start;
   justify-content: space-evenly;
 
   @media screen and (max-width: 480px) {
     width: 40%;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 60%;
+  }
+
+  & svg {
+    @media screen and (max-width: 1280px) {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media screen and (max-width: 320px) {
+      width: 13px;
+      height: 13px;
+    }
   }
 `;
 

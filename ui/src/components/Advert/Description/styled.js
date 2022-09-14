@@ -131,6 +131,26 @@ export const FavoriteBtn = styled.button`
 
   & svg {
     opacity: 0.4;
+
+    @media screen and (max-width: 1280px) {
+      width: 22px;
+      height: 22px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media screen and (max-width: 320px) {
+      width: 13px;
+      height: 13px;
+    }
   }
 
   &:hover svg {
