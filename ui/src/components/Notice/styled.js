@@ -1,6 +1,6 @@
 import { type } from '@testing-library/user-event/dist/type';
 import styled from 'styled-components';
-import { noticeColor } from './helper';
+import { noticeColor } from 'components/Notice/helper';
 
 export const WrapperNotice = styled.div`
     color: ${({ type }) => noticeColor[type].primaryColor};

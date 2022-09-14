@@ -1,4 +1,4 @@
-import API from '../API';
+import API from 'API';
 
 const categoriesServices = {
   getCategories: async () => {

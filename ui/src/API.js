@@ -1,7 +1,9 @@
 import axios from 'axios';
-import apiUserService from 'services/authServices';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+
+// Services
+import apiUserService from 'services/authServices';
 import { tokenService } from 'services/tokenService';
 
 export const API_URL = 'http://localhost:4000/api';

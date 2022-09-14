@@ -1,9 +1,13 @@
+import React, { useState } from 'react';
+
+// Components
 import ChangeContacts from 'components/SettingsPage/ChangeContacts';
 import ChangeEmail from 'components/SettingsPage/ChangeEmail';
 import ChangeNumber from 'components/SettingsPage/ChangeNumber';
 import ItemContainer from 'components/SettingsPage/ItemContainer';
 import ChangePhoto from 'components/SettingsPage/ChangePhoto';
-import React, { useState } from 'react';
+
+// Styles
 import { Container } from './styled';
 
 const initialData = [

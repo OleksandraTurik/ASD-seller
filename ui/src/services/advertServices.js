@@ -1,5 +1,5 @@
-import API from '../API';
-import ServerException from '../exceptions/serverException';
+import API from 'API';
+import ServerException from 'exceptions/serverException';
 
 const advertServices = {
   getAdvertsList: async (id, page) => {

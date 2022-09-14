@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import CategoryFilter from './CategoryFilter';
-import PriceFilter from './PriceFilter';
+import CategoryFilter from 'components/AdvertList/ListForm/Filters/CategoryFilter';
+import PriceFilter from 'components/AdvertList/ListForm/Filters/PriceFilter';
 import { FilterWrapper, Wrapper } from './styled';
 
 const Filters = () => {
