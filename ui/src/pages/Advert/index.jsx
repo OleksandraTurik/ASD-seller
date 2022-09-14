@@ -48,6 +48,7 @@ const AdvertPage = () => {
     address,
     contactName,
     contactPhone,
+    sellerId,
   } = advert.advertInfo;
 
   const { id } = useParams();
@@ -56,8 +57,6 @@ const AdvertPage = () => {
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
-  const user = JSON.parse(token);
-  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
@@ -91,7 +90,7 @@ const AdvertPage = () => {
           <User
             name={contactName}
             date={updatedAt}
-            link={`/profiles/${userId}/adverts`}
+            link={`/adverts?seller=${sellerId}`}
             phone={token ? phone : '(XXX) XXX XXXX'}
           />
           <Location
