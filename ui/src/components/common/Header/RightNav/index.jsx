@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Burger from './Burger';
 import Desktop from './Desktop';
 
-const RightNav = ({ setActive, active }) => {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  return (
-    <>
-      <Desktop />
-      <Burger setActive={setActive} active={active} />
-    </>
-  );
-};
+const RightNav = ({ setActive, active }) => (
+  <>
+    <Desktop />
+    <Burger setActive={setActive} active={active} />
+  </>
+);
 
 RightNav.propTypes = {
   setActive: PropTypes.func.isRequired,

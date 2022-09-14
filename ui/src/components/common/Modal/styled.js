@@ -1,23 +1,24 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 108vh;
-  width: 100vw;
-  position: absolute;
+  width: 100%;
+  background-color: rgba(0,0,0,0.4);
+  position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   display: flex;
-  /* align-items: center; */
   justify-content: end;
   opacity: ${props => props.active ? 1 : 0};
   pointer-events: ${props => props.active ? 'all' : 'none'};
   transition: 0.5s;
 `;
 export const Content = styled.div`
-  margin-top: 68px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   padding: 20px;
-  /* transform: ${props => props.active ? 'scale(1)' : 'scale(0.5)'}; */
+  transform: scale(1);
   transition: 0.4s transform;
-  z-index: 1;
   background: ${props => props.theme.mainGreenColor};
 `;
