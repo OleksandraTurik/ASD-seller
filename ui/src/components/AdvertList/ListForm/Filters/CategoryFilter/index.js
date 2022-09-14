@@ -26,7 +26,7 @@ const CategoryFilter = ({ onSelect }) => {
   return (
     <FilterController>
       <h5>Категорія</h5>
-      <Dropdown onSelect={onSelect} options={categories} defaultIndex={0} />
+      <Dropdown onSelect={({ id }) => onSelect(id)} options={categories} defaultIndex={0} />
     </FilterController>
   );
 };
