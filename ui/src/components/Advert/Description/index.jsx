@@ -9,7 +9,6 @@ import {
   Wrapper,
   Container,
   Line,
-  Span,
   FavoriteBtn,
 } from './styled';
 
@@ -30,7 +29,7 @@ const Description = ({
         />
       </FavoriteBtn>
     </Container>
-    <Span primary>{title}</Span>
+    <span>{title}</span>
     <h2>{price}</h2>
     <h3>Опис</h3>
     <div>{description}</div>

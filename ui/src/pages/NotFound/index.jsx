@@ -16,7 +16,6 @@ const NotFound = () => (
     <Container>
       <Icon src={cat} alt="cat icon" />
       <h1>Сторінку не знайдено</h1>
-      <p>Сторінку не знайдено</p>
       <GoHomeLink to="/">На головну</GoHomeLink>
     </Container>
   </Wrapper>
