@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Components
 import Form from 'components/common/Form';
 
 const RegistrationPage = () => (

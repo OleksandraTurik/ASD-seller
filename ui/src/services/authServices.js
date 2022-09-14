@@ -1,5 +1,5 @@
-import API from '../API';
-import { tokenService } from './tokenService';
+import API from 'API';
+import { tokenService } from 'services/tokenService';
 
 export const apiUserService = {
   login: async (userData) => {

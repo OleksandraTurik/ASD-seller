@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
+
+// Components
 import Search from 'components/common/Search';
+import useFetchCategories from 'components/hooks/useFetchCategories';
+import Subcategories from 'components/Main/Subcategories';
+import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
+import AdvertsCard from 'components/Main/AdvertsCard';
+import CategoriesList from 'components/Main/CategoriesList';
+
+// Styles
 import {
   Title,
   Wrapper,
@@ -7,12 +16,6 @@ import {
   AdvertsList,
   LatestAdsSection,
 } from 'pages/MainPage/styled';
-
-import useFetchCategories from 'components/hooks/useFetchCategories';
-import Subcategories from 'components/Main/Subcategories';
-import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
-import AdvertsCard from 'components/Main/AdvertsCard';
-import CategoriesList from 'components/Main/CategoriesList';
 
 const MainPage = () => {
   const [subcategories, setSubcategories] = useState('id');

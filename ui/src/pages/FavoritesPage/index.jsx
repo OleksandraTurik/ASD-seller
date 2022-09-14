@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import DontHaveFavoritesAdvImg from 'assets/img/DontHaveFavoritesAdv.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 
+// Images
+import DontHaveFavoritesAdvImg from 'assets/img/DontHaveFavoritesAdv.jsx';
+
+// Styles
 import {
   Wrapper,
   TitleArea,

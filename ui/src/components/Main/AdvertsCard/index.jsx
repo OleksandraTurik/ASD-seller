@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import advertsAdapt from 'helpers/advertsAdapt';
+
+// components
 import AdvertCard from 'components/common/AdvertCard';
 import Loader from 'components/common/Loader';
-import bmw from 'assets/img/bmw.webp';
+
+// pages
 import NotFound from 'pages/NotFound';
+
+// helpers
+import advertsAdapt from 'helpers/advertsAdapt';
+
+// assets
+import bmw from 'assets/img/bmw.webp';
 
 const AdvertsCard = ({ errorAdvert, loadingAdvert, advertInfo }) => {
   if (errorAdvert) {

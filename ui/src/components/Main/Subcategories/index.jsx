@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+// Hooks
 import usePrevious from 'components/hooks/usePrevious';
+
+// Icons
+import ArrowRight from 'assets/icons/ArrowRight';
+
+// Styles
 import { SubCategoryButton } from 'components/common/Button/styled';
 import {
   Container,
@@ -10,7 +17,6 @@ import {
   P,
   LinkName,
 } from './styled';
-import ArrowRight from '../../../assets/icons/ArrowRight';
 
 const Subcategories = ({ childrenCategory, childrenId }) => {
   const [subcategory, setSubcategory] = useState(false);

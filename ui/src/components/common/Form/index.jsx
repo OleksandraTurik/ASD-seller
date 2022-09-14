@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
-import { LoaderForm } from './LoaderContainer';
-import { noticeMessages } from './helper';
+import { LoaderForm } from 'components/common/Form/LoaderContainer';
+import { noticeMessages } from 'components/common/Form/helper';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
 } from './styled';

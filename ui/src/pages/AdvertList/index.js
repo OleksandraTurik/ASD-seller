@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
+// Components
 import ListForm from 'components/AdvertList/ListForm';
 import Results from 'components/AdvertList/Results';
 import Pagination from 'components/AdvertList/Pagination';
 import useFetchAdvertsQueryParams from 'components/hooks/useFetchAdvertsQueryParams';
+
+// Styles
 import { Wrapper, Container } from './styled';
 
 const AdvertList = () => {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import advertServices from '../../services/advertServices';
+import advertServices from 'services/advertServices';
 
 export const useFetchAdverts = (id) => {
   const [list, setList] = useState([]);
