@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 
 // Styles for slider
 import 'slick-carousel/slick/slick.css';
@@ -17,25 +16,7 @@ import { getAdvertThunk } from 'redux/slice/getAdvert';
 import NotFound from 'pages/NotFound';
 
 // Styles
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: ${props => props.theme.greyBackground};
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-right: 24px;
-`;
-
-const SliderWrap = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  margin: 24px 24px 0 24px;
-`;
+import { Wrapper, Container, SliderWrap } from './styled';
 
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
