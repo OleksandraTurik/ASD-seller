@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+
+// Icons
+import Close from 'assets/icons/Close';
+
+// Styles
 import { Overlay, Wrapper, Button } from './styled';
-import Close from '../../assets/icons/Close';
 
 const Modal = ({ open, children, onClose }) => {
   if (!open) return null;

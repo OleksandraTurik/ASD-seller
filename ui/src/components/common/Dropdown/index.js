@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ArrowUp from 'assets/icons/ArrowUp';
-import AdvancedOption from './AdvancedOption';
+import AdvancedOption from 'components/common/Dropdown/AdvancedOption';
 import {
   Select,
   Value,

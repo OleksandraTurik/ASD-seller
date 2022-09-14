@@ -1,4 +1,4 @@
-import { USER_EXCEPTION } from './types';
+import { USER_EXCEPTION } from 'exceptions/types';
 
 function UserException(message, type = USER_EXCEPTION) {
   this.type = type;

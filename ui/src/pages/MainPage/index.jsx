@@ -1,6 +1,20 @@
 import React, { useState } from 'react';
+
+// Helpers
+import advertsAdapt from 'helpers/advertsAdapt';
+
+// Images
+import bmw from 'assets/img/bmw.webp';
+
+// Components
 import Search from 'components/common/Search';
 import AdvertCard from 'components/common/AdvertCard';
+import useFetchCategories from 'components/hooks/useFetchCategories';
+import Subcategories from 'components/Main/Subcategories';
+import Loader from 'components/common/Loader';
+import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
+
+// Styles
 import {
   Title,
   Wrapper,
@@ -10,14 +24,7 @@ import {
   ImgWrap,
   LatestAdsSection,
   P,
-} from 'pages/MainPage/styled';
-
-import bmw from 'assets/img/bmw.webp';
-import useFetchCategories from 'components/hooks/useFetchCategories';
-import Subcategories from 'components/Main/Subcategories';
-import Loader from 'components/common/Loader';
-import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
-import advertsAdapt from 'helpers/advertsAdapt';
+} from './styled';
 
 const MainPage = () => {
   const [subcategories, setSubcategories] = useState('id');

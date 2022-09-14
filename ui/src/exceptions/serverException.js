@@ -1,4 +1,4 @@
-import { SERVER_EXCEPTION } from './types';
+import { SERVER_EXCEPTION } from 'exceptions/types';
 
 function ServerException({ data, status }, key = 'message') {
   this.type = SERVER_EXCEPTION;

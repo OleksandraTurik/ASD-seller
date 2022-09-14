@@ -15,7 +15,7 @@ export const Card = styled.article`
   margin-right: 7px;
   margin-top: 20px;
 
-  @media (max-width: 1250px) { {
+  @media (max-width: 1250px) {
     width: 310px;
   }
 `;

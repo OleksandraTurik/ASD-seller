@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from 'components/common/Dropdown';
 import categoriesServices from 'services/categoriesServices';
-import { FilterController } from '../styled';
+import { FilterController } from 'components/AdvertList/ListForm/Filters/styled';
 
 const CategoryFilter = ({ onSelect }) => {
   const [categories, setCategories] = useState([]);
