@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   Card,
   ImgInCard,
@@ -14,7 +13,6 @@ import {
 import Like from 'assets/icons/Like';
 
 import { useNavigate } from 'react-router-dom';
-import { getAdvertThunk } from 'redux/slice/getAdvert';
 import { ButtonAdvertCard } from '../Button/styled';
 
 const AdvertCard = ({

@@ -71,9 +71,13 @@ const Form = ({
                 value: 3,
                 message: 'Error! Must be more than 3 symbols',
               },
+              pattern: {
+                value: /[A-Za-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                message: 'Неправильний формат email',
+              },
             })}
           />
-          <ErrorContainer>{errors.Email && <ErrorTitle>{errors.Email.message || 'Error! Must be more than 8 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>{errors.email && <ErrorTitle>{errors.email.message || 'Error! Must be more than 8 symbols'}</ErrorTitle>}</ErrorContainer>
           <Input
             type="password"
             placeholder={passwordField}
@@ -83,9 +87,13 @@ const Form = ({
                 value: 8,
                 message: 'Error! Must be more than 8 symbols',
               },
+              pattern: {
+                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                message: 'Пароль має містити хоча б одне число, літеру з великої та маленької букви, мати довжину мінімум у 8 літер',
+              },
             })}
           />
-          <ErrorContainer>{errors.Password && <ErrorTitle>{errors.Password.message || 'Error! Must be more than 3 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>{errors.password && <ErrorTitle>{errors.password.message || 'Error! Must be more than 3 symbols'}</ErrorTitle>}</ErrorContainer>
           <Button type="submit">{textButton}</Button>
         </FormWrapper>
       </Wrapper>
