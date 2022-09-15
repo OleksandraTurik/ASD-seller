@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { settingsComponentMap } from 'components/SettingsPage';
 // Components
 import ChangeContacts from 'components/SettingsPage/ChangeContacts';
 import ChangeEmail from 'components/SettingsPage/ChangeEmail';
@@ -10,43 +10,14 @@ import ChangePhoto from 'components/SettingsPage/ChangePhoto';
 // Styles
 import { Container } from './styled';
 
-const initialData = [
-  {
-    id: 1,
-    name: 'Змінити контактні дані',
-    isOpen: false,
-    Component: ChangeContacts,
-  },
-  {
-    id: 2,
-    name: 'Змінити номер',
-    isOpen: false,
-    Component: ChangeNumber,
-  },
-  {
-    id: 3,
-    name: 'Змінити email-адресу',
-    isOpen: false,
-    Component: ChangeEmail,
-  },
-  {
-    id: 4,
-    name: 'Змінити фото профілю',
-    isOpen: false,
-    Component: ChangePhoto,
-  },
-];
-
 const SettingsPage = () => {
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState(settingsComponentMap);
 
   const handleOpen = (id) => {
-    const newData = data.map((item) => {
-      if (id === item.id) {
-        return { ...item, isOpen: !item.isOpen };
-      }
-      return { ...item, isOpen: false };
-    });
+    const newData = data.map((item) => ({
+      ...item,
+      isOpen: id === item.id ? !item.isOpen : false,
+    }));
     setData(newData);
   };
 

@@ -1,11 +1,7 @@
 import React from 'react';
 
-const CategoryModal = () => {
-  return (
-    <div>
-
-    </div>
-  );
-};
+const CategoryModal = () => (
+  <div />
+);
 
 export default CategoryModal;
