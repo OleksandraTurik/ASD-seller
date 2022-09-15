@@ -35,7 +35,7 @@ const SettingsPage = () => {
             isOpen={item.isOpen}
             Component={item.Component}
             handleOpen={handleOpen}
-            emailOfUser={typeof data.email === 'string' ? data.email : 'no email'}
+            emailOfUser={data.email}
           />
         ))
       }

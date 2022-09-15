@@ -34,8 +34,6 @@ const userServices = {
 
   updateUser: async (userData) => {
     const userId = tokenService.getUserInfo();
-    console.log('userData', userData);
-    console.log('userId', userId);
     const { data } = await API.patch(`/users/${userId.id}`, userData);
     return data;
   },
