@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
-
 // Icons
 import IconSearch from 'assets/icons/MagnifyingGlass';
 import IconArrowDown from 'assets/icons/ArrowDown';
-import PropTypes from 'prop-types';
+
 // Styles
 import {
   Wrapper,
