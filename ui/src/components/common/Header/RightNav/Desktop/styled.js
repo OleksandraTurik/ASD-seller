@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Ul = styled.ul`
-  width: 25%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
   @media screen and (max-width: 864px) {
     display: none;
   }

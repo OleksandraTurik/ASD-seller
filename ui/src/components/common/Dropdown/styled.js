@@ -29,12 +29,13 @@ export const OptionList = styled.div`
   background: white;
   width: 100%;
   max-height: 500px;
-  overflow-y: scroll;
+  //overflow: scroll;
   z-index: 10;
 `;
 
 export const Option = styled.div`
   padding: 10px;
+  background: white;
 
   &:hover {
     background: #002f34;

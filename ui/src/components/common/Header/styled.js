@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.header`
-  width: 100%;
+  width: calc(100% - 40px);
+  padding: 0 20px;
   background: ${props => props.theme.mainGreenColor};
 `;
 
@@ -19,4 +20,7 @@ export const NavLinkHeader = styled(Link)`
   text-decoration: none;
   display: flex;
   align-items: center;
+  //width: 200px;
+  overflow: hidden;
+  object-position: center;
 `;
