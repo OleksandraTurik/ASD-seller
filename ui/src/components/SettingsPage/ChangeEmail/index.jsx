@@ -25,9 +25,7 @@ const ChangeEmail = ({ email }) => {
 
   const onSubmit = async (data) => {
     const updateEmail = await userServices.updateUser(data);
-    useEffect(() => {
-      reset(email);
-    }, [email]);
+    reset(updateEmail);
   };
 
   return (
