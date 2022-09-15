@@ -13,7 +13,6 @@ const Profile = () => (
     <Tabs list={[
       { title: 'Оголошення', link: 'adverts' },
       { title: 'Налаштування', link: 'settings' },
-      { title: 'Додати', link: 'add' },
     ]}
     />
     <Outlet />

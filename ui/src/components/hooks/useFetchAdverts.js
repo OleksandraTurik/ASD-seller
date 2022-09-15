@@ -1,54 +1,41 @@
-import { useCallback, useEffect, useState } from 'react';
-import advertServices from 'services/advertServices';
+import { useEffect, useState } from 'react';
+import advertServices from '../../services/advertServices';
 
 export const useFetchAdverts = (id) => {
-  const [list, setList] = useState([]);
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [list, setList] = useState([]);
   const [error, setError] = useState(false);
-  const [hasMore, setMore] = useState(true);
+  const [prevPage, setPrevPage] = useState(null);
+  const [itemsAmount, setItemsAmount] = useState(0);
 
-  const getData = useCallback(
-    async () => {
-      try {
-        const adverts = await advertServices.getAdvertsList(id, page);
-        setList(adverts.data.results);
-        setLoading(false);
-        setPage(prevState => prevState + 1);
-        if (!adverts.data.next) {
-          setMore(false);
-        }
-      } catch (e) {
-        setError(e.error);
-      }
-    },
-    [],
-  );
+  const [filters, setFilters] = useState({
+    sort: 'ascTitle',
+    search: '',
+    page: 1,
+  });
 
-  useEffect(() => {
-    window.scroll({
-      top: 0,
-      behavior: 'smooth',
-    });
-    getData();
-    return () => {};
-  }, []);
-
-  const fetchData = async () => {
-    if (list.length < 10) {
-      return;
-    }
-    const adverts = await advertServices.getAdvertsList(id, page);
-    if (!adverts.data.next) {
-      setMore(false);
-    }
-    setList((prevState) => [...prevState, ...adverts.data.results]);
+  const changeFilters = (name, value) => {
+    setFilters(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
+  const getData = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const adverts = await advertServices.getAdvertsList(id, filters);
+      setList(adverts.data.results);
+      setItemsAmount(adverts.data.itemsAmount);
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, [filters]);
+
   return {
-    list,
-    loading,
-    error,
-    fetchData,
-    hasMore,
+    loading, list, changeFilters, itemsAmount, setFilters, filters,
   };
 };

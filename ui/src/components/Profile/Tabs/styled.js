@@ -42,6 +42,18 @@ export const Link = styled(NavLink)`
   padding: 8px 14px;
   text-decoration: none;
   color: #7F9799;
+
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 10px;
+  }
   
   &:hover,
   &.active {

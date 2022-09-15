@@ -11,7 +11,7 @@ export const Container = styled.div`
   padding: 15px;
   background: #fff;
   border-radius: 4px;
-  margin: 5px 0;
+  margin: 10px 0;
 `;
 
 export const EditLink = styled(Link)`
@@ -30,20 +30,20 @@ export const EditLink = styled(Link)`
   color: #102e33;
   padding: 6px 22px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1280px) {
     height: 35px;
     font-size: 12px;
     padding: 6px 20px;
   }
 
-  @media screen and (max-width: 600px) {
-    height: 30px;
+  @media screen and (max-width: 768px) {
     font-size: 11px;
-    padding: 6px 18px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
+    height: 30px;
     font-size: 10px;
+    padding: 6px 18px;
   }
 
   @media screen and (max-width: 320px) {
@@ -61,7 +61,7 @@ export const TopWrap = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
   flex-direction: column;
   }
 `;
@@ -79,21 +79,21 @@ export const ListWrap = styled.div`
     font-size: 14px;
     color: #406367;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1280px) {
       font-size: 12px;
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 768px) {
       font-size: 11px;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       font-size: 10px;
-      flex-direction: column;
     }
 
     @media screen and (max-width: 320px) {
       font-size: 9px;
+      flex-direction: column;
     }
 
     & li {
@@ -126,15 +126,15 @@ export const LocationWrap = styled.div`
     font-size: 14px;
     color: #406367;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1280px) {
       font-size: 12px;
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 768px) {
       font-size: 11px;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       font-size: 10px;
     }
 
@@ -144,12 +144,12 @@ export const LocationWrap = styled.div`
   }
 
   & svg {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1280px) {
       width: 14px;
       height: 14px;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 768px) {
       width: 12px;
       height: 12px;
     }
@@ -170,15 +170,15 @@ export const DataWrap = styled.div`
     font-size: 14px;
     color: #406367;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1280px) {
       font-size: 12px;
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 768px) {
       font-size: 11px;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       font-size: 10px;
     }
 
@@ -188,12 +188,12 @@ export const DataWrap = styled.div`
   }
 
   & svg {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1280px) {
       width: 14px;
       height: 14px;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 768px) {
       width: 12px;
       height: 12px;
     }
@@ -214,15 +214,11 @@ export const AdvertBodyWrap = styled.div`
   align-items: flex-start;
   margin-bottom: 10px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1280px) {
     height: 60px;
   }
 
-  @media screen and (max-width: 480px) {
-    height: 50px;
-  }
-
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 600px) {
     height: 55px;
   }
 `;
@@ -241,48 +237,49 @@ export const AdvertHeaderWrap = styled.div`
     margin: 0px 8px 0px 0px;
     white-space: nowrap;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1280px) {
       font-size: 14px;
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 768px) {
       font-size: 12px;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       font-size: 11px;
       margin-top: 5px;
     }
 
-    @media screen and (max-width: 320px) {
+    @media screen and (max-width: 480px) {
       font-size: 10px;
     }
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     flex-direction: column;
   }
 `;
 
 export const AdvertTitleLink = styled(Link)`
-  width: 80%;
+  width: 85%;
   font-size: 20px;
   font-weight: 700;
   color: #002f34;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1280px) {
     font-size: 14px;
+    width: 80%;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     font-size: 12px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     font-size: 11px;
   }
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 480px) {
     font-size: 10px;
   }
 
@@ -293,7 +290,7 @@ export const AdvertTitleLink = styled(Link)`
 
 export const AdvertInfoWrap = styled.div`
   width: 100%;
-  height: 165px;
+  height: 175px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -301,20 +298,25 @@ export const AdvertInfoWrap = styled.div`
   border-bottom: 1px solid #d8dfe0;
   margin-left: 16px;
 
+  @media screen and (max-width: 1280px) {
+    height: 180px;
+  }
+
   @media screen and (max-width: 768px) {
-    height: 155px;
+    height: 175px;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 150px;
   }
 
   @media screen and (max-width: 480px) {
-    height: 140px;
-  }
-
-  @media screen and (max-width: 320px) {
     height: 170px;
   }
 `;
 
 export const ImgInCard = styled.img`
   height: 156px;
+  max-width: 100%;
   object-fit: cover;
 `;
