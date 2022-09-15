@@ -1,14 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-
-// Icons
-import Like from 'assets/icons/Like';
-
-import { useNavigate } from 'react-router-dom';
-import { getAdvertThunk } from 'redux/slice/getAdvert';
-import { ButtonAdvertCard } from 'components/common/Button/styled';
-
 import {
   Card,
   ImgInCard,
@@ -16,7 +7,13 @@ import {
   Info,
   Price,
   ToFavoriteButton,
-} from './styled';
+} from 'components/common/AdvertCard/styled';
+
+// Icons
+import Like from 'assets/icons/Like';
+
+import { useNavigate } from 'react-router-dom';
+import { ButtonAdvertCard } from '../Button/styled';
 
 const AdvertCard = ({
   itemId,
