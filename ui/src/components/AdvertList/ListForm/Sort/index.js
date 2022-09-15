@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   gap: 10px;
   align-items: center;
   flex-wrap: wrap;
-  
+
   @media (max-width: 450px) {
     flex-direction: column;
     align-items: normal;
