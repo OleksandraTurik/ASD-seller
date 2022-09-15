@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// components
+// Components
 import AdvertCard from 'components/common/AdvertCard';
 import Loader from 'components/common/Loader';
 
-// pages
+// Pages
 import NotFound from 'pages/NotFound';
 
-// helpers
+// Helpers
 import advertsAdapt from 'helpers/advertsAdapt';
-
-// assets
-import bmw from 'assets/img/bmw.webp';
 
 const AdvertsCard = ({ errorAdvert, loadingAdvert, advertInfo }) => {
   if (errorAdvert) {
@@ -27,9 +24,9 @@ const AdvertsCard = ({ errorAdvert, loadingAdvert, advertInfo }) => {
     <AdvertCard
       key={item.id}
       itemId={item.id}
-      img={bmw}
+      img={`http://localhost:4000/${item.images[0]}`}
       name={item.title}
-      location="no data address"
+      location={`${item.address.city}, ${item.address.admin_name}`}
       date={item.createdAt}
       price={`${item.price} грн`}
     />

@@ -1,5 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+// Icons
+import Like from 'assets/icons/Like';
+
+// Styles
+import { ButtonAdvertCard } from 'components/common/Button/styled';
 import {
   Card,
   ImgInCard,
@@ -7,13 +14,7 @@ import {
   Info,
   Price,
   ToFavoriteButton,
-} from 'components/common/AdvertCard/styled';
-
-// Icons
-import Like from 'assets/icons/Like';
-
-import { useNavigate } from 'react-router-dom';
-import { ButtonAdvertCard } from '../Button/styled';
+} from './styled';
 
 const AdvertCard = ({
   itemId,

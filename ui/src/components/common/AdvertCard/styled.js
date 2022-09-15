@@ -70,9 +70,8 @@ export const ToFavoriteButton = styled.button`
   bottom: 12px;
   right: 20px;
   cursor: pointer;
-  opacity: 0.4;
 
-  &:hover {
-    opacity: 1;
+  &:hover svg {
+    fill: #002f34;
   }
 `;
