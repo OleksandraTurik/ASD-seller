@@ -1,22 +1,5 @@
 import styled from 'styled-components';
 
-export const ScrollbarWrapper = styled.div`
-  &::-webkit-scrollbar-track
-  {
-    background-color: rgb(242, 244, 245);
-  }
-
-  &::-webkit-scrollbar
-  {
-    width: 2px;
-  }
-
-  &::-webkit-scrollbar-thumb
-  {
-    background-color: ${props => props.theme.mainGreenColor};
-  }
-`;
-
 export const Main = styled.main`
   background-color: ${props => props.theme.greyBackground};
   width: 100%;
@@ -314,18 +297,11 @@ export const CategoryContent = styled.ul`
   grid-template-columns: repeat(3, 1fr);
   gap: 8px 16px;
 
-  /* @media ( max-width: 1100px) {
-    grid-template-columns: repeat(2, 1fr);
-    overflow: scroll;
-  } */
-
   @media ( max-width: 1100px) {
     display: flex;
     flex-direction: column;
     overflow: scroll;
   }
-
-
 `;
 export const PickCategory = styled.button`
   display: flex;
