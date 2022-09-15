@@ -98,6 +98,7 @@ export const ListWrap = styled.div`
 
     & li {
       margin-left: 25px;
+      list-style: disc;
 
       @media screen and (max-width: 320px) {
         margin-left: 12px;
@@ -277,6 +278,7 @@ export const AdvertTitleLink = styled(Link)`
 
   @media screen and (max-width: 600px) {
     font-size: 11px;
+    width: 100%;
   }
 
   @media screen and (max-width: 480px) {
@@ -290,7 +292,7 @@ export const AdvertTitleLink = styled(Link)`
 
 export const AdvertInfoWrap = styled.div`
   width: 100%;
-  height: 175px;
+  height: 170px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -298,20 +300,12 @@ export const AdvertInfoWrap = styled.div`
   border-bottom: 1px solid #d8dfe0;
   margin-left: 16px;
 
-  @media screen and (max-width: 1280px) {
-    height: 180px;
-  }
-
   @media screen and (max-width: 768px) {
-    height: 175px;
+    height: 160px;
   }
 
   @media screen and (max-width: 600px) {
-    height: 150px;
-  }
-
-  @media screen and (max-width: 480px) {
-    height: 170px;
+    height: 140px;
   }
 `;
 

@@ -42,6 +42,10 @@ export const IconContainer = styled.div`
   position: absolute;
   top: 12px;
   left: 15px;
+
+  @media screen and (max-width: 768px) {
+    left: 10px;
+  }
 `;
 
 export const SearchInput = styled.input`
