@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Loader from 'components/common/Loader';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
+import NotFound from 'pages/NotFound';
 
 // Styles
 const Wrapper = styled.div`
@@ -46,10 +47,17 @@ const AdvertPage = () => {
     _id,
     address,
     contactName,
+    contactPhone,
   } = advert.advertInfo;
 
   const { id } = useParams();
   const dispatch = useDispatch();
+  const phone = contactPhone ?? 'no number phone';
+  const city = address?.city ?? 'no city';
+  const region = address?.admin_name ?? 'no region';
+  const token = localStorage.getItem('tokens');
+  const user = JSON.parse(token);
+  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
@@ -59,7 +67,7 @@ const AdvertPage = () => {
 
   const advertPage = () => {
     if (error) {
-      return 'error';
+      return <NotFound />;
     }
 
     if (loading) {
@@ -76,20 +84,19 @@ const AdvertPage = () => {
             title={title}
             date={updatedAt}
             price={`${price} грн.`}
-            state="Стан: Б/в"
             description={description}
-            id={_id}
           />
         </SliderWrap>
         <Container>
           <User
             name={contactName}
             date={updatedAt}
-            link="/"
+            link={`/profiles/${userId}/adverts`}
+            phone={token ? phone : '(XXX) XXX XXXX'}
           />
           <Location
-            city="city"
-            region="no region in data"
+            city={city}
+            region={region}
           />
         </Container>
       </Wrapper>

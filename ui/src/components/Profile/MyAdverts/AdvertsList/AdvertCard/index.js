@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
+
 import AdvertCardList from '../AdvertCardList';
 import EmptyAdvertsList from '../EmptyAdvertsList';
 
@@ -34,6 +35,7 @@ const AdvertsCard = ({
     </div>
   );
 };
+
 AdvertsCard.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape),
   itemsAmount: PropTypes.number,

@@ -15,15 +15,20 @@ const advertSchema = new Schema({
     contactPhone: { type: String, required: true },
 }, { timestamps: true });
 
+advertSchema.index({ title: 'text' });
+
 advertSchema
   .statics
   .findWithFilterAndSort = function (search, maxPrice, minPrice, sellerId, sort, category) {
+
     let query = this.find({
       title: {
         $regex: search,
         $options: 'gmi',
       },
     });
+
+
     if (sellerId) query = query.find({ sellerId });
     if (maxPrice) query = query.where('price').lte(maxPrice);
     if (minPrice) query = query.where('price').gte(minPrice);

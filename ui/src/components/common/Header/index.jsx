@@ -1,10 +1,13 @@
-import React from 'react';
-import apiUserService from 'services/authServices';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 // Icons
 import Logo from 'assets/icons/Logo';
 import Like from 'assets/icons/Like';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from 'redux/slice/authUser';
+import Login from 'assets/icons/Login';
+import Logout from 'assets/icons/Logout';
+import User from 'assets/icons/User';
+
 // Styles
 import {
   Nav,
@@ -18,8 +21,17 @@ import {
 } from './styled';
 
 const Header = () => {
-  const activated = useSelector(state => state.userReducer.user.id);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = localStorage.getItem('tokens');
+  const user = JSON.parse(token);
+  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
+
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/login', { replace: true });
+  };
+
+  useEffect(() => console.log(token, userId), [token, userId]);
   return (
     <Container>
       <Nav>
@@ -39,12 +51,52 @@ const Header = () => {
               />
             </A>
           </Li>
+          {token
+            ? (
+              <Li>
+                <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
+              </Li>
+            )
+            : (
+              <Li>
+                <NavLinkAdverts to="/login">Додати оголошення</NavLinkAdverts>
+              </Li>
+            )}
           <Li>
-            <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
+            <NavLink to={`/profiles/${userId}/adverts`}>
+              <User
+                width="25px"
+                height="25px"
+                fill="#fff"
+              />
+            </NavLink>
           </Li>
-          <Li>
-            {activated ? <NavLink to="/login" onClick={() => dispatch(logout())}>Logout</NavLink> : <NavLink to="/login">Login</NavLink>}
-          </Li>
+          {!token
+            ? (
+              <Li>
+                <NavLink to="/login">
+                  <Login
+                    width="25px"
+                    height="25px"
+                    fill="#fff"
+                  />
+                </NavLink>
+              </Li>
+            )
+            : (
+              <Li>
+                <NavLink
+                  onClick={logOut}
+                  to="/login"
+                >
+                  <Logout
+                    width="25px"
+                    height="25px"
+                    fill="#fff"
+                  />
+                </NavLink>
+              </Li>
+            )}
         </Ul>
       </Nav>
     </Container>
