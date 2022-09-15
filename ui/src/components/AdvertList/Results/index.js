@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'components/common/Loader';
-import Card from './Card';
-// import Loader from '../../common/Loader';
+import Card from 'components/AdvertList/Results/Card';
 import { Wrapper, Title } from './styled';
 
 const Results = ({ data, resultAmount, pending }) => {

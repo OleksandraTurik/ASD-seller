@@ -1,6 +1,8 @@
 const express = require('express');
 
-const { picController: { getAdvertImg, getCategoryImg } } = require('../controllers');
+const {
+  picController: { getAdvertImg, getCategoryImg },
+} = require('../controllers');
 
 const picRouter = express.Router();
 

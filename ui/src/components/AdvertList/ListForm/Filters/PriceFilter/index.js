@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FilterController } from '../styled';
+import { FilterController } from 'components/AdvertList/ListForm/Filters/styled';
 import { InputWrapper, MaxPriceInput, MinPriceInput } from './styled';
 
-const PriceFilter = ({ onMaxPriceChange, onMinPriceChange }) => (
+const PriceFilter = ({
+  onMaxPriceChange, onMinPriceChange, maxPriceValue, minPriceValue,
+}) => (
   <FilterController>
     <h5>Ціна</h5>
     <InputWrapper>
-      <MinPriceInput onChange={(event) => onMinPriceChange(event.target.valueAsNumber)} />
-      <MaxPriceInput onChange={(event) => onMaxPriceChange(event.target.valueAsNumber)} />
+      <MinPriceInput value={minPriceValue} onChange={(event) => onMinPriceChange(event.target.value)} />
+      <MaxPriceInput value={maxPriceValue} onChange={(event) => onMaxPriceChange(event.target.value)} />
     </InputWrapper>
   </FilterController>
 );
@@ -16,6 +18,8 @@ const PriceFilter = ({ onMaxPriceChange, onMinPriceChange }) => (
 PriceFilter.propTypes = {
   onMaxPriceChange: PropTypes.func.isRequired,
   onMinPriceChange: PropTypes.func.isRequired,
+  maxPriceValue: PropTypes.string.isRequired,
+  minPriceValue: PropTypes.string.isRequired,
 };
 
 export default PriceFilter;

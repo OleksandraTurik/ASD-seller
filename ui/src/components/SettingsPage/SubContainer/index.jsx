@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Styles
 import { SubContainerStyle } from './styled';
 
 const SubContainer = ({ children }) => (

@@ -1,5 +1,6 @@
 import API from 'API';
-import ServerException from '../exceptions/serverException';
+import ServerException from 'exceptions/serverException';
+import { tokenService } from './tokenService';
 
 const userServices = {
   fetchUsers: async (filters) => {
@@ -29,6 +30,17 @@ const userServices = {
     } catch (e) {
       throw new ServerException(e.response);
     }
+  },
+
+  updateUser: async (userData) => {
+    const userId = tokenService.getUserInfo().id;
+    const { data } = await API.patch('/users/631f93936e8939b3cfd22fbf', userData);
+    return data;
+  },
+  updateUserPhoto: async (userDataPhoto) => {
+    const userId = tokenService.getUserInfo().id;
+    const { data } = await API.patch(`/users/${userId}/avatar`, userDataPhoto);
+    return data;
   },
 };
 

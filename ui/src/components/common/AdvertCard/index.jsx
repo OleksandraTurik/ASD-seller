@@ -1,6 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+
+// Icons
+import Like from 'assets/icons/Like';
+
+// Styles
+import { ButtonAdvertCard } from 'components/common/Button/styled';
 import {
   Card,
   ImgInCard,
@@ -8,18 +14,10 @@ import {
   Info,
   Price,
   ToFavoriteButton,
-} from 'components/common/AdvertCard/styled';
-
-// Icons
-import Like from 'assets/icons/Like';
-
-import { useNavigate } from 'react-router-dom';
-import { getAdvertThunk } from 'redux/slice/getAdvert';
-import { ButtonAdvertCard } from '../Button/styled';
+} from './styled';
 
 const AdvertCard = ({
   itemId,
-  link,
   img,
   name,
   location,
@@ -58,7 +56,6 @@ const AdvertCard = ({
 
 AdvertCard.propTypes = {
   itemId: PropTypes.string,
-  link: PropTypes.string,
   img: PropTypes.string,
   name: PropTypes.string,
   location: PropTypes.string,
@@ -68,7 +65,6 @@ AdvertCard.propTypes = {
 
 AdvertCard.defaultProps = {
   itemId: '',
-  link: '',
   img: '',
   name: '',
   location: '',

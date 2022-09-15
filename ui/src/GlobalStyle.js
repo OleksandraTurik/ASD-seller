@@ -12,6 +12,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
   }
+  
+  li {
+    list-style: none;
+  }
 
   a {
     text-decoration: none;

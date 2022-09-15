@@ -23,6 +23,7 @@ export const tokenService = {
   },
   getUserInfo: () => {
     const tokens = tokenService.getTokens();
+    console.log(tokens);
     return tokens?.userDto ?? {
       email: '',
       id: '',

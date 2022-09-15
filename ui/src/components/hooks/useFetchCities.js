@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable prefer-template */
 import { useCallback, useEffect, useState } from 'react';
-import citiesServices from '../../services/citiesServices';
+import citiesServices from 'services/citiesServices';
 
 export const useFetchCities = () => {
   const [cities, setCities] = useState();

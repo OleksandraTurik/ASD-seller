@@ -1,18 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Dropdown from 'components/common/Dropdown';
 
 const sortMethods = [
   {
-    id: 0,
+    id: 'dscPrice',
     value: 'Найдорожчі',
   },
   {
-    id: 1,
+    id: 'ascPrice',
     value: 'Найдешевші',
   },
   {
-    id: 2,
+    id: 'dscDate',
     value: 'Найновіші',
   },
 ];
@@ -23,17 +24,31 @@ const Wrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
 
+  @media (max-width: 450px) {
+    flex-direction: column;
+    align-items: normal;
+  }
+
   h5 {
     font-size: 18px;
     font-weight: normal;
   }
 `;
 
-const Sort = () => (
+const SortDropdown = styled(Dropdown)`
+  width: 100%;
+`;
+
+const Sort = ({ value, onSelect }) => (
   <Wrapper>
     <h5>Сортувати за:</h5>
-    <Dropdown defaultIndex={2} onSelect={() => {}} options={sortMethods} />
+    <SortDropdown defaultID={value} onSelect={({ id }) => onSelect(id)} options={sortMethods} />
   </Wrapper>
 );
+
+Sort.propTypes = {
+  value: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
 
 export default Sort;

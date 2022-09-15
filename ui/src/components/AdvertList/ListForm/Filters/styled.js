@@ -8,8 +8,12 @@ export const FilterController = styled.div`
   display: flex;
   flex-direction: column;
   gap: 7px;
-  
-  h5 {
+
+  @media (max-width: 450px) {
+    width: 100%;
+  }
+
+    h5 {
     font-size: 18px;
     font-weight: normal;
   }

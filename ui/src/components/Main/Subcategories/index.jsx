@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+// Hooks
 import usePrevious from 'components/hooks/usePrevious';
+
+// Icons
+import ArrowRight from 'assets/icons/ArrowRight';
+
+// Styles
 import { SubCategoryButton } from 'components/common/Button/styled';
 import {
   Container,
@@ -10,7 +17,6 @@ import {
   P,
   LinkName,
 } from './styled';
-import ArrowRight from '../../../assets/icons/ArrowRight';
 
 const Subcategories = ({ childrenCategory, childrenId }) => {
   const [subcategory, setSubcategory] = useState(false);
@@ -37,7 +43,7 @@ const Subcategories = ({ childrenCategory, childrenId }) => {
   };
 
   return (
-    <div>
+    <>
       <Container>
         {
           childrenCategory.map((item) => (
@@ -68,12 +74,16 @@ const Subcategories = ({ childrenCategory, childrenId }) => {
           ? <Subcategories childrenCategory={childrenSubcategory} />
           : null
       }
-    </div>
+    </>
   );
 };
 
 Subcategories.propTypes = {
-  childrenCategory: PropTypes.arrayOf(PropTypes.Object),
+  childrenCategory: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    children: PropTypes.arrayOf(PropTypes.shape({})),
+  })),
   childrenId: PropTypes.string,
 };
 

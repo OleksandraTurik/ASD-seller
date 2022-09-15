@@ -1,17 +1,17 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ArrowUp from 'assets/icons/ArrowUp';
+import findParentOrChild from 'helpers/find-parent-or-child';
 import AdvancedOption from './AdvancedOption';
 import {
-  Select,
-  Value,
-  OptionList,
-  Option,
+  Select, Value, OptionList, Option,
 } from './styled';
 
-const Dropdown = ({ options, onSelect, defaultIndex }) => {
+const Dropdown = ({
+  options, onSelect, defaultID, isMobile,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(options[defaultIndex]);
+  const [selected, setSelected] = useState(findParentOrChild(options, defaultID));
   const DropdownRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -27,8 +27,8 @@ const Dropdown = ({ options, onSelect, defaultIndex }) => {
   }, [DropdownRef.current]);
 
   useLayoutEffect(() => {
-    setSelected(options[defaultIndex]);
-  }, [options]);
+    setSelected(findParentOrChild(options, defaultID));
+  }, [options, defaultID]);
 
   const selectHandler = (value) => {
     setIsOpen(false);
@@ -40,7 +40,7 @@ const Dropdown = ({ options, onSelect, defaultIndex }) => {
     <Select ref={DropdownRef} onClick={() => setIsOpen((prev) => !prev)}>
       <Value>{selected?.value}</Value>
       {isOpen && (
-        <OptionList>
+        <OptionList isMobile={isMobile}>
           {options.map((e) => !e.children?.length ? (
             <Option
               onClick={() => {
@@ -52,7 +52,7 @@ const Dropdown = ({ options, onSelect, defaultIndex }) => {
               {e.value}
             </Option>
           ) : (
-            <AdvancedOption onSelect={selectHandler} value={e} key={e.id} subOptions={e.children}>
+            <AdvancedOption isMobile={isMobile} onSelect={selectHandler} value={e} key={e.id} subOptions={e.children}>
               {e.value}
             </AdvancedOption>
           ))}
@@ -65,11 +65,11 @@ const Dropdown = ({ options, onSelect, defaultIndex }) => {
 
 Dropdown.propTypes = {
   options: PropTypes.arrayOf(
-    PropTypes.shape({
+    PropTypes.exact({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       value: PropTypes.string,
       children: PropTypes.arrayOf(
-        PropTypes.shape({
+        PropTypes.exact({
           id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
           value: PropTypes.string,
         }),
@@ -77,7 +77,13 @@ Dropdown.propTypes = {
     }),
   ).isRequired,
   onSelect: PropTypes.func.isRequired,
-  defaultIndex: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  defaultID: PropTypes.string,
+  isMobile: PropTypes.bool,
+};
+
+Dropdown.defaultProps = {
+  isMobile: false,
 };
 
 export default Dropdown;

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Styles
 import { ButtonContainerStyle } from './styled';
 
 const ButtonContainer = ({ children }) => (

@@ -24,6 +24,9 @@ export const AddInfo = styled.p`
   padding-bottom: 20px;
   width: 30%;
   font-size: 13px;
+  @media (max-width: 856px) {
+    width: 80%;
+  }
 `;
 
 export const Copy = styled.p`
