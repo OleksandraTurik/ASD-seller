@@ -24,8 +24,12 @@ const AdvancedOption = ({
   return (
     <Option
       isSelected={isChildrenShow}
-      onMouseEnter={() => !isMobile && setIsChildrenShow(true)}
-      onMouseLeave={() => !isMobile && setIsChildrenShow(false)}
+      onMouseEnter={() => {
+        if (!isMobile) setIsChildrenShow(true);
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) setIsChildrenShow(false);
+      }}
       onClick={parentClickHandler(value)}
       isMobile={isMobile}
     >
@@ -59,7 +63,7 @@ AdvancedOption.propTypes = {
   }).isRequired,
   children: PropTypes.node.isRequired,
   onSelect: PropTypes.func.isRequired,
-  isMobile: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default AdvancedOption;
