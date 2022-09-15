@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable prefer-template */
 import { useCallback, useEffect, useState } from 'react';
 import citiesServices from 'services/citiesServices';
 
@@ -9,9 +11,9 @@ export const useFetchCities = () => {
   const getCities = useCallback(async () => {
     try {
       const city = await citiesServices.getCities();
-      const citiesOptions = city.data.results.map(({ _id, city }) => (
+      const citiesOptions = city.data.results.map(({ _id, city, admin_name }) => (
         {
-          label: city,
+          label: city + ', ' + admin_name,
           value: _id,
         }
       ));
