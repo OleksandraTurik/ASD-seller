@@ -5,11 +5,11 @@ export const Select = styled.div`
   padding: 19px 15px;
   border: none;
   font-size: 16px;
-  width: 230px;
   position: relative;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
 `;
 
@@ -28,6 +28,8 @@ export const OptionList = styled.div`
   left: 0;
   background: white;
   width: 100%;
+  max-height: 500px;
+  overflow-y: scroll;
   z-index: 10;
 `;
 
