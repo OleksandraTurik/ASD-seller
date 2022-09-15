@@ -1,12 +1,13 @@
 import React from 'react';
+import userServices from 'services/userServices';
+// Components
 import { useForm } from 'react-hook-form';
 import Button from 'components/common/Button';
 import Input from 'components/common/Input';
-import userServices from 'services/userServices';
-import ButtonContainer from '../ButtonContainer';
-import MainContainer from '../MainContainer';
-import SubContainer from '../SubContainer';
-import SubText from '../SubText';
+import ButtonContainer from 'components/SettingsPage/ButtonContainer';
+import MainContainer from 'components/SettingsPage/MainContainer';
+import SubContainer from 'components/SettingsPage/SubContainer';
+import SubText from 'components/SettingsPage/SubText';
 
 const ChangeNumber = () => {
   const { handleSubmit, reset, register } = useForm({

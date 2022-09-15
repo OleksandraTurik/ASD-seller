@@ -37,7 +37,7 @@ const Search = () => {
             />
           </SearchIconWrap>
           <StyledInput
-            width="675px"
+            maxWidth="675px"
             type="search"
             placeholder="Що шукаєте?"
             value={searchValue}
@@ -51,14 +51,14 @@ const Search = () => {
             />
           </LocationIconWrap>
           <StyledInput
-            width="295px"
+            maxWidth="295px"
             type="search"
             placeholder="Вся Україна"
             value={regionValue}
             onChange={regionValueHandler}
           />
           <SubmitSearchButton type="submit">
-            Пошук
+            Пошук&nbsp;&nbsp;&nbsp;
             <IconSearch
               width="25px"
               height="25px"

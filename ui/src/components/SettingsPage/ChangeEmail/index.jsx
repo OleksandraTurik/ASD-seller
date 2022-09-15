@@ -1,12 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import userServices from 'services/userServices';
+// Components
 import Button from 'components/common/Button';
 import Input from 'components/common/Input';
-import userServices from 'services/userServices';
-import ButtonContainer from '../ButtonContainer';
-import MainContainer from '../MainContainer';
-import SubContainer from '../SubContainer';
-import SubText from '../SubText';
+import ButtonContainer from 'components/SettingsPage/ButtonContainer';
+import MainContainer from 'components/SettingsPage/MainContainer';
+import SubContainer from 'components/SettingsPage/SubContainer';
+import SubText from 'components/SettingsPage/SubText';
 
 const ChangeEmail = () => {
   const { handleSubmit, reset, register } = useForm({

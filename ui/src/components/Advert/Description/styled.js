@@ -10,16 +10,67 @@ export const Wrapper = styled.div`
   margin: 24px 0;
   padding: 24px;
 
+  & span {
+    font-size: 32px;
+    color: #002f34;
+
+    @media screen and (max-width: 768px) {
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 1280px) {
+    margin: 15px 0;
+    padding: 15px;
+  }
+
+  @media screen and (max-width: 480px) {
+    margin: 15px 0 0 0;
+  }
+
   & h2 {
+    margin-top: 10px;
     font-size: 40px;
     color: ${props => props.theme.mainGreenColor};
+
+    @media screen and (max-width: 768px) {
+      font-size: 28px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 16px;
+    }
   }
 
   & h3 {
     color: ${props => props.theme.mainGreenColor};
     text-transform: uppercase;
     font-size: 24px;
-    margin: 16px 0 4px 0;
+    margin: 12px 0 4px 0;
+
+    @media screen and (max-width: 768px) {
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 11px;
+    }
   }
 
   & div {
@@ -27,12 +78,19 @@ export const Wrapper = styled.div`
     overflow-wrap: break-word;
     font-size: 16px;
     color: ${props => props.theme.mainGreenColor};
-  }
-`;
 
-export const Span = styled.span`
-  font-size: ${({ primary }) => primary ? '32px' : '12px'};
-  color: ${({ primary }) => primary ? '#002f34' : '#406367'};
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 11px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 9px;
+    }
+  }
 `;
 
 export const Container = styled.div`
@@ -42,10 +100,20 @@ export const Container = styled.div`
   margin-bottom: 10px;
 
   & span {
-    display: block;
-    font-size: 12px;
     font-size: 12px;
     color: #406367;
+
+    @media screen and (max-width: 768px) {
+      font-size: 11px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 10px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 8px;
+    }
   }
 `;
 
@@ -63,6 +131,26 @@ export const FavoriteBtn = styled.button`
 
   & svg {
     opacity: 0.4;
+
+    @media screen and (max-width: 1280px) {
+      width: 22px;
+      height: 22px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media screen and (max-width: 320px) {
+      width: 13px;
+      height: 13px;
+    }
   }
 
   &:hover svg {

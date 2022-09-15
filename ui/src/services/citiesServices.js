@@ -1,5 +1,5 @@
 import API from 'API';
-import ServerException from '../exceptions/serverException';
+import ServerException from 'exceptions/serverException';
 
 const citiesServices = {
   getCities: async () => {

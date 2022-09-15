@@ -1,10 +1,15 @@
 import React from 'react';
+
+// Components
 import { useForm } from 'react-hook-form';
 import Button from 'components/common/Button';
 import userServices from 'services/userServices';
-import MainContainer from '../MainContainer';
-import SubContainer from '../SubContainer';
+import MainContainer from 'components/SettingsPage/MainContainer';
+import SubContainer from 'components/SettingsPage/SubContainer';
+
+// Styles
 import { ChooseFileStyle, FileContainer } from './styled';
+import ButtonContainer from '../ButtonContainer';
 
 const ChangePhoto = () => {
   const { handleSubmit, reset, register } = useForm({
@@ -27,14 +32,16 @@ const ChangePhoto = () => {
             <ChooseFileStyle
               id="images"
               name="images"
-              type="file"
               accept="image/heic, image/png, image/jpeg, image/webp"
               multiple
-              {...register('images')}
+              type="file"
+              {...register('file')}
             />
           </FileContainer>
         </SubContainer>
-        <Button type="submit" />
+        <ButtonContainer>
+          <Button type="submit">Зберегти</Button>
+        </ButtonContainer>
       </form>
     </MainContainer>
   );

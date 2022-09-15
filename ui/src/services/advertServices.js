@@ -1,5 +1,5 @@
-import API from '../API';
-import ServerException from '../exceptions/serverException';
+import API from 'API';
+import ServerException from 'exceptions/serverException';
 
 const advertServices = {
   getAdvertsList: async (id, page) => {
@@ -8,6 +8,21 @@ const advertServices = {
       return adverts;
     } catch (e) {
       throw new ServerException(e.response);
+    }
+  },
+  getAdvertListWithQueries: async (queryParams, signal) => {
+    try {
+      let params = '';
+      // eslint-disable-next-line no-restricted-syntax
+      for (const key in queryParams) {
+        if (Object.hasOwnProperty.call(queryParams, key)) {
+          params += `${key}=${queryParams[key]}&`;
+        }
+      }
+      const adverts = API.get(`/adverts?${params}`, { signal });
+      return adverts;
+    } catch (err) {
+      throw new ServerException(err.response);
     }
   },
   getAdverts: async () => {
@@ -55,11 +70,7 @@ const advertServices = {
     }
   },
   modifyAdvert: async (id, {
-    title,
-    price,
-    sellerId,
-    description,
-    address,
+    title, price, sellerId, description, address,
   }) => {
     try {
       const body = {

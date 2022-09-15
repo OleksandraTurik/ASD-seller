@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+
+// Styles for slider
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -9,31 +11,12 @@ import User from 'components/Advert/User';
 import Location from 'components/Advert/Location';
 import Description from 'components/Advert/Description';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import Loader from 'components/common/Loader';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
 import NotFound from 'pages/NotFound';
 
 // Styles
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: ${props => props.theme.greyBackground};
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-right: 24px;
-`;
-
-const SliderWrap = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  margin: 24px 24px 0 24px;
-`;
+import { Wrapper, Container, SliderWrap } from './styled';
 
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
@@ -48,6 +31,7 @@ const AdvertPage = () => {
     address,
     contactName,
     contactPhone,
+    sellerId,
   } = advert.advertInfo;
 
   const { id } = useParams();
@@ -56,8 +40,6 @@ const AdvertPage = () => {
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
-  const user = JSON.parse(token);
-  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
@@ -91,7 +73,7 @@ const AdvertPage = () => {
           <User
             name={contactName}
             date={updatedAt}
-            link={`/profiles/${userId}/adverts`}
+            link={`/adverts?seller=${sellerId}`}
             phone={token ? phone : '(XXX) XXX XXXX'}
           />
           <Location

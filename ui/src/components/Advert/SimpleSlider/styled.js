@@ -18,9 +18,23 @@ export const Wrapper = styled(Slider)`
     z-index: 999;
     bottom: 2px;
 
+    @media screen and (max-width: 480px) {
+      bottom: 0;
+    }
+
     li.slick-active button:before {
       color: #003034;
     }
+  }
+
+  .slick-dots li button:before {
+    @media screen and (max-width: 768px) {
+      font-size: 5px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    padding: 0 10px;
   }
 `;
 
@@ -36,10 +50,37 @@ export const ArrowNext = styled.div`
     right: 5px;
     border: 21px solid transparent;
     border-left: 15px solid #003034;
+
+    @media screen and (max-width: 768px) {
+      border: 18px solid transparent;
+      border-left: 12px solid #003034;
+    }
+
+    @media screen and (max-width: 480px) {
+      border: 16px solid transparent;
+      border-left: 11px solid #003034;
+    }
+
+    @media screen and (max-width: 320px) {
+      border: 12px solid transparent;
+      border-left: 10px solid #003034;
+    }
   }
 
   &:hover::after {
     border-left: 15px solid #d5f6ee;
+
+    @media screen and (max-width: 768px) {
+      border-left: 12px solid #003034;
+    }
+
+    @media screen and (max-width: 480px) {
+      border-left: 11px solid #003034;
+    }
+
+    @media screen and (max-width: 320px) {
+      border-left: 10px solid #003034;
+    }
   }
 `;
 
@@ -57,15 +98,42 @@ export const ArrowPrev = styled.div`
     transform: rotate(180deg);
     border: 21px solid transparent;
     border-left: 15px solid #003034;
+
+    @media screen and (max-width: 768px) {
+      border: 18px solid transparent;
+      border-left: 12px solid #003034;
+    }
+
+    @media screen and (max-width: 480px) {
+      border: 16px solid transparent;
+      border-left: 11px solid #003034;
+    }
+
+    @media screen and (max-width: 320px) {
+      border: 12px solid transparent;
+      border-left: 10px solid #003034;
+    }
   }
 
   &:hover::after {
     border-left: 15px solid #d5f6ee;
+
+    @media screen and (max-width: 768px) {
+      border-left: 12px solid #003034;
+    }
+
+    @media screen and (max-width: 480px) {
+      border-left: 11px solid #003034;
+    }
+
+    @media screen and (max-width: 320px) {
+      border-left: 10px solid #003034;
+    }
   }
 `;
 
 export const Image = styled.img`
   max-height: 580px;
-  max-width: 100%;
+  max-width: 99%;
   margin: auto;
 `;

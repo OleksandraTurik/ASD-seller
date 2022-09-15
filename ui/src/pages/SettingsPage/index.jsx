@@ -1,6 +1,13 @@
-import { settingsComponentMap } from 'components/SettingsPage';
-import ItemContainer from 'components/SettingsPage/ItemContainer';
 import React, { useState } from 'react';
+import { settingsComponentMap } from 'components/SettingsPage';
+// Components
+import ChangeContacts from 'components/SettingsPage/ChangeContacts';
+import ChangeEmail from 'components/SettingsPage/ChangeEmail';
+import ChangeNumber from 'components/SettingsPage/ChangeNumber';
+import ItemContainer from 'components/SettingsPage/ItemContainer';
+import ChangePhoto from 'components/SettingsPage/ChangePhoto';
+
+// Styles
 import { Container } from './styled';
 
 const SettingsPage = () => {

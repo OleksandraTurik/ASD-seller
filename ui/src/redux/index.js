@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './slice/authUser';
-import getAdvertReducer from './slice/getAdvert';
-import categoryReducer from './slice/getCategories';
-import userAdvertInfoReducer from './slice/getAdvertInfo';
-import getAdvertsReducer from './slice/getAdverts';
+
+// Reducers
+import userReducer from 'redux/slice/authUser';
+import getAdvertReducer from 'redux/slice/getAdvert';
+import categoryReducer from 'redux/slice/getCategories';
+import userAdvertInfoReducer from 'redux/slice/getAdvertInfo';
+import getAdvertsReducer from 'redux/slice/getAdverts';
+import exactUserInfoSlice from 'redux/slice/getInfoExactUser';
 
 // create store
 export const store = configureStore({
@@ -13,5 +16,6 @@ export const store = configureStore({
     userReducer,
     categoryReducer,
     userAdvertInfoReducer,
+    exactUserInfoSlice,
   },
 });

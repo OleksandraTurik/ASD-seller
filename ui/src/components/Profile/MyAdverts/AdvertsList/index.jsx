@@ -1,9 +1,17 @@
 import React from 'react';
-import AdvertCard from './AdvertCard';
+import PropTypes from 'prop-types';
 
-const AdvertsList = () => (
+// Components
+import AdvertCard from 'components/Profile/MyAdverts/AdvertsList/AdvertCard';
+
+const AdvertsList = ({ setAmount }) => (
   <div>
-    <AdvertCard />
+    <AdvertCard setAmount={setAmount} />
   </div>
 );
+
+AdvertsList.propTypes = {
+  setAmount: PropTypes.func.isRequired,
+};
+
 export default AdvertsList;

@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WrapperNotice } from './styled';
+
+// Styles
+import { WrapperNotice, Span } from './styled';
 
 const Notice = ({ type, messages }) => {
   const message = messages[type];
   if (!message) return null;
   return (
     <WrapperNotice type={type}>
-      <span>{message}</span>
+      <Span>{message}</Span>
     </WrapperNotice>
   );
 };
