@@ -44,10 +44,10 @@ const ChangeContacts = ({ fullName, address }) => {
           <Controller
             control={control}
             name="address"
-            render={({ field: { onChange, value = address, ref } }) => (
+            render={({ field: { onChange, value, ref } }) => (
               <Select
                 inputRef={ref}
-                value={cities?.find((c) => c.label === value)}
+                value={cities?.find((c) => c.valuе === value)}
                 onChange={(val) => onChange(val)}
                 options={cities}
               />
@@ -76,12 +76,12 @@ const ChangeContacts = ({ fullName, address }) => {
 
 ChangeContacts.propTypes = {
   fullName: PropTypes.string,
-  address: PropTypes.string,
+  address: PropTypes.shape({}),
 };
 
 ChangeContacts.defaultProps = {
   fullName: '',
-  address: '',
+  address: {},
 };
 
 export default ChangeContacts;

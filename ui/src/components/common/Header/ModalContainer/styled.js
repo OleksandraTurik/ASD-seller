@@ -44,7 +44,8 @@ export const NavLink = styled(Link)`
 export const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 44%;
+  width: 220px;
+  }
 `;
 
 export const P = styled.p`

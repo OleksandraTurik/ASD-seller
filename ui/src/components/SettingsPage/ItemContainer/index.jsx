@@ -50,13 +50,13 @@ ItemContainer.propTypes = {
   handleOpen: PropTypes.func.isRequired,
   emailOfUser: PropTypes.string,
   fullName: PropTypes.string,
-  address: PropTypes.string,
+  address: PropTypes.shape({}),
 };
 
 ItemContainer.defaultProps = {
   emailOfUser: '',
   fullName: '',
-  address: '',
+  address: {},
 };
 
 export default ItemContainer;

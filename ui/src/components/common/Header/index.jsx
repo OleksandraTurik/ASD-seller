@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Modal from 'components/common/Modal';
+import React, { useState } from 'react';
 
 // Icons
 import Logo from 'assets/icons/Logo';

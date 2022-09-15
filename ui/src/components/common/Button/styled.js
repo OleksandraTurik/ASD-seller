@@ -44,4 +44,7 @@ export const CloseButton = styled.button`
   &:hover {
     background: #fff;
   }
+  &:hover svg {
+    fill: ${props => props.theme.mainGreenColor};
+  }
 `;
