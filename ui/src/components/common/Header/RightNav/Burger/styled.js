@@ -7,5 +7,4 @@ export const BurgerButton = styled.button`
 
   background: none;
   border: none;
-  margin-right: 40px;
 `;

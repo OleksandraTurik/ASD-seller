@@ -25,7 +25,7 @@ const Header = () => {
             fill="#fff"
           />
         </NavLinkHeader>
-        <RightNav setActive={setActive} active={active} />
+        <RightNav setActive={setActive} />
       </Nav>
       <ModalContainer active={active} setActive={setActive} />
     </Container>

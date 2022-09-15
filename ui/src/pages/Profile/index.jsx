@@ -9,6 +9,7 @@ import Tabs from 'components/Profile/Tabs';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1 1 auto;
 
   & h1 {
     font-size: 32px;

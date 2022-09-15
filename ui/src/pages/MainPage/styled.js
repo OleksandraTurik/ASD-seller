@@ -18,15 +18,16 @@ export const Wrapper = styled.div`
 export const CategoriesListStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 `;
 
 export const AdvertsList = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  @media (max-width: 1250px) {
-    justify-content: center;
-  }
+  max-width: 1250px;
+  justify-content: center;
+  gap: 16px;
 `;
 
 export const LatestAdsSection = styled.section`
