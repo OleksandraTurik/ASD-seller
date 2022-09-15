@@ -2,11 +2,11 @@ const express = require('express');
 const { body } = require('express-validator');
 const userController = require('../controllers/user.controller');
 const {
-    authMiddleware,
-    userFilterSortMiddleware,
-    paginationMiddleware,
-    idValidationMiddleware,
-    singleUploadMiddleware,
+  authMiddleware,
+  userFilterSortMiddleware,
+  paginationMiddleware,
+  idValidationMiddleware,
+  singleUploadMiddleware,
 } = require('../middlewares');
 
 const router = express.Router();
@@ -30,7 +30,7 @@ router.get('/', userFilterSortMiddleware, paginationMiddleware, userController.g
 router.patch('/:id', express.json(), idValidationMiddleware, userController.modifyUser);
 router.patch('/:id/favorites', express.json(), idValidationMiddleware, userController.modifyFavorites);
 router.get('/:id', idValidationMiddleware, userController.getUser);
-router.delete('/:id', idValidationMiddleware, userController.deleteUser );
+router.delete('/:id', idValidationMiddleware, userController.deleteUser);
 
 /// verify message
 
