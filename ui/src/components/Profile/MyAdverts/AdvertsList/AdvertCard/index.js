@@ -3,9 +3,10 @@ import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import AdvertCardList from '../AdvertCardList';
 import EmptyAdvertsList from '../EmptyAdvertsList';
+import './style.css';
 
 const AdvertsCard = ({
-  list = [], itemsAmount, changeFilters,
+  list = [], itemsAmount, changeFilters, error,
 }) => {
   const handlePageChange = ({ selected }) => {
     changeFilters('page', selected + 1);
@@ -15,7 +16,7 @@ const AdvertsCard = ({
   return (
     <div>
       <div>
-        {list.length ? list?.map((item) => (
+        {!error && list.length ? list?.map((item) => (
           <AdvertCardList
             key={item._id}
             link="/"
@@ -29,7 +30,19 @@ const AdvertsCard = ({
         )) : <EmptyAdvertsList /> }
       </div>
       {itemsAmount && (
-        <ReactPaginate pageCount={pageCount} onPageChange={handlePageChange} />
+        <div>
+          <ReactPaginate
+            pageCount={pageCount}
+            onPageChange={handlePageChange}
+            previousLabel="← Previous"
+            extLabel="Next →"
+            activeClassName="pagination__link--active"
+            containerClassName="pagination"
+            previousLinkClassName="pagination__link"
+            nextLinkClassName="pagination__link"
+            disabledClassName="pagination__link--disabled"
+          />
+        </div>
       )}
     </div>
   );
@@ -39,12 +52,14 @@ AdvertsCard.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape),
   itemsAmount: PropTypes.number,
   changeFilters: PropTypes.func,
+  error: PropTypes.bool,
 };
 
 AdvertsCard.defaultProps = {
   itemsAmount: 0,
   list: [],
   changeFilters: () => {},
+  error: false,
 };
 
 export default AdvertsCard;

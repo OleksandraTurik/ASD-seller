@@ -10,6 +10,7 @@ export const useFetchAdverts = (id) => {
 
   const [filters, setFilters] = useState({
     sort: 'ascTitle',
+    category: '',
     search: '',
     page: 1,
   });
@@ -37,6 +38,6 @@ export const useFetchAdverts = (id) => {
   }, [filters]);
 
   return {
-    loading, list, changeFilters, itemsAmount, setFilters, filters,
+    loading, list, changeFilters, itemsAmount, setFilters, filters, error,
   };
 };

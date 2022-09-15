@@ -17,6 +17,7 @@ import {
   IconContainer,
   Test,
 } from './styled';
+import CategoryFilter from '../../../AdvertList/ListForm/Filters/CategoryFilter';
 
 const customStyles = {
   menu: (provided, state) => ({
@@ -42,7 +43,7 @@ const customStyles = {
   },
 };
 
-const Filters = ({ onSelected, onSearch }) => {
+const Filters = ({ onSelected, onSearch, categorySelected }) => {
   const options = [
     { value: 'ascTitle', label: 'Заголовок: А-Я' },
     { value: 'dscTitle', label: 'Заголовок: Я-А' },
@@ -68,14 +69,7 @@ const Filters = ({ onSelected, onSearch }) => {
           />
         </Container>
         <Container>
-          <Button type="button">
-            Будь-яка категорія
-          </Button>
-          <DropDownBtn>
-            <IconWrap>
-              <IconArrowDown />
-            </IconWrap>
-          </DropDownBtn>
+          <CategoryFilter onSelect={(category) => categorySelected(category)} />
         </Container>
         <Container>
           <Test>
