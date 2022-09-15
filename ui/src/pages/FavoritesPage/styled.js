@@ -5,7 +5,7 @@ export const TitleArea = styled.header`
 `;
 
 export const Wrapper = styled.div`
-  width: 1238px;
+  max-width: 1238px;
   margin: 0 auto;
 `;
 
@@ -18,6 +18,7 @@ export const Title = styled.h2`
     font-weight: 600;
     line-height: 1.06;
     color: ${props => props.theme.mainGreenColor};
+    margin-left: 20px;
 `;
 
 export const AdvertsArea = styled.div`
@@ -46,4 +47,5 @@ export const DontHaveFavoritesAdvText = styled.p`
   font-size: 17px;
   line-height: 1.25;
   color: #406367;
+  text-align: center;
 `;

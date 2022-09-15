@@ -30,7 +30,7 @@ const advertsAdapt = (data) => {
     images: images || [],
     price: price || '',
     sellerId: sellerId || '',
-    updatedAt: updatedAt || '',
+    updatedAt: moment(createdAt).format('MM-DD-YYYY') || '',
   }));
 };
 

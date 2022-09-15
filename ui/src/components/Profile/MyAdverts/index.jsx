@@ -1,17 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+
+// Hooks
+import { useFetchAdverts } from 'components/hooks/useFetchAdverts';
 
 // Components
 import AdvertsList from './AdvertsList';
 import Filters from './Filters';
-import { useFetchAdverts } from '../../hooks/useFetchAdverts';
 
 // Styles
-const Wrapper = styled.div`
-  background-color: ${props => props.theme.greyBackground};
-  padding: 35px 125px 0 125px;
-`;
+import { Wrapper } from './styled';
 
 const MyAdverts = () => {
   const { id } = useParams();

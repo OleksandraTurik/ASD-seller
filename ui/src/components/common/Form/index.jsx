@@ -69,8 +69,8 @@ const Form = ({
             {...register('email', {
               required: "email поле обов'язково має бути заповненим",
               minLength: {
-                value: 3,
-                message: 'Помилка! Має бути більше трьох символів',
+                value: 6,
+                message: 'Помилка! Має бути більше шести символів',
               },
               pattern: {
                 value: validation.email,
@@ -83,7 +83,7 @@ const Form = ({
             type="password"
             placeholder={passwordField}
             {...register('password', {
-              required: "email поле обов'язково має бути заповненим",
+              required: "password поле обов'язково має бути заповненим",
               minLength: {
                 value: 8,
                 message: 'Помилка! Має бути більше восьми символів',

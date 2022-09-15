@@ -17,7 +17,7 @@ const Desktop = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('tokens');
   const user = JSON.parse(token);
-  const userId = user && user.length !== 0 ? user?.userDto?.id : 'guest';
+  const userId = user ? user?.userDto?.id : null;
 
   const logout = () => {
     localStorage.clear();

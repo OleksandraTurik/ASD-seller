@@ -22,6 +22,7 @@ const ItemContainer = ({
   isOpen,
   Component,
   handleOpen,
+  emailOfUser,
 }) => {
   const openContainer = isOpen ? <ArrowUp /> : <ArrowDown width="25px" height="25px" />;
   const email = name === 'Змінити email-адресу';
@@ -34,7 +35,7 @@ const ItemContainer = ({
           <ArrowButton onClick={() => handleOpen(id)}>{openContainer}</ArrowButton>
         </ButtonContainer>
       </Header>
-      {isOpen && <Component />}
+      {isOpen && <Component email={emailOfUser} />}
     </Container>
   );
 };
@@ -45,6 +46,7 @@ ItemContainer.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   Component: PropTypes.func.isRequired,
   handleOpen: PropTypes.func.isRequired,
+  emailOfUser: PropTypes.string.isRequired,
 };
 
 export default ItemContainer;

@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
 // Icons
 import IconSearch from 'assets/icons/MagnifyingGlass';
-import IconArrowDown from 'assets/icons/ArrowDown';
+
 // Styles
 import {
   Wrapper,
   MainContainer,
-  IconWrap,
   Container,
   SearchInput,
-  DropDownBtn,
-  Button,
   IconContainer,
-  Test,
+  WrapSelect,
 } from './styled';
 import CategoryFilter from '../../../AdvertList/ListForm/Filters/CategoryFilter';
 
@@ -24,6 +21,7 @@ const customStyles = {
     ...provided,
     color: state.selectProps.menuColor ? '' : '#002F34',
     padding: 5,
+    fontSize: '13px',
   }),
 
   control: (base, state) => ({
@@ -73,6 +71,7 @@ const Filters = ({ onSelected, onSearch, categorySelected }) => {
         </Container>
         <Container>
           <Test>
+          <WrapSelect>
             <Select
               styles={customStyles}
               options={options}
@@ -87,7 +86,7 @@ const Filters = ({ onSelected, onSearch, categorySelected }) => {
                 },
               })}
             />
-          </Test>
+          </WrapSelect>
         </Container>
       </MainContainer>
       <span>
