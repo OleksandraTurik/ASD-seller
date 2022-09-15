@@ -25,11 +25,11 @@ advertRouter.get('/:id', idValidationMiddleware, getAdvertItem);
 advertRouter.get('/:id/:prop', idValidationMiddleware, getAdvertItemProperty);
 advertRouter.delete('/:id', idValidationMiddleware, deleteAdvertItem);
 advertRouter.patch(
-    '/:id',
-    bodyParser.urlencoded({ extended: true }),
-    multipleUploadMiddleware('images', 10),
-    idValidationMiddleware,
-    patchAdvertItem,
+  '/:id',
+  bodyParser.urlencoded({ extended: true }),
+  multipleUploadMiddleware('images', 10),
+  idValidationMiddleware,
+  patchAdvertItem,
 );
 
 module.exports = advertRouter;
