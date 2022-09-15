@@ -24,6 +24,7 @@ const paginationMiddleware = (req, res, next) => {
       results.next = queryLinkWithPagesMaker(req, page + 1);
     }
     results.results = items.slice(startIndex, endIndex);
+    results.page = page;
 
     req.paginatedResults = results;
     next();

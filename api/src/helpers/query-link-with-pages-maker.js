@@ -1,5 +1,5 @@
 const queryLinkWithPagesMaker = (req, page) => {
-  const regex = /page=[0-9]/gm;
+  const regex = /page=[\d+]/gm;
   const originalUrl = req.originalUrl.match(regex)
     ? req.originalUrl.replace(regex, `page=${page}`)
     : `${req.originalUrl}?page=${page}`;

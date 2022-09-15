@@ -20,7 +20,7 @@ advertSchema
   .findWithFilterAndSort = function (search, maxPrice, minPrice, sellerId, sort, category) {
     let query = this.find({
       title: {
-        $regex: search ? `\\b${search.replaceAll(' ', '|')}\\b` : '.*',
+        $regex: search,
         $options: 'gmi',
       },
     });
