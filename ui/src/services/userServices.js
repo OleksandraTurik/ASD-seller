@@ -33,13 +33,16 @@ const userServices = {
   },
 
   updateUser: async (userData) => {
-    const userId = tokenService.getUserInfo().id;
-    const { data } = await API.patch('/users/631f93936e8939b3cfd22fbf', userData);
+    const userId = tokenService.getUserInfo();
+    const { data } = await API.patch(`/users/${userId.id}`, userData);
     return data;
   },
   updateUserPhoto: async (userDataPhoto) => {
-    const userId = tokenService.getUserInfo().id;
-    const { data } = await API.patch(`/users/${userId}/avatar`, userDataPhoto);
+    const userId = tokenService.getUserInfo();
+    const formData = new FormData();
+    formData.append('avatar', userDataPhoto.avatar[0]);
+    const settings = { headers: { 'Content-Type': 'multipart/form-data' } };
+    const { data } = await API.patch(`/users/${userId.id}/avatar`, userDataPhoto, settings);
     return data;
   },
 };
