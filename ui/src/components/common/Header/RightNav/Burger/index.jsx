@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BurgerButton } from './styled';
 
-const Burger = ({ setActive, active }) => {
+const Burger = ({ setActive }) => {
   const handleOpen = () => {
-    setActive(!active);
+    setActive(prev => !prev);
   };
 
   return (
@@ -17,7 +17,6 @@ const Burger = ({ setActive, active }) => {
 
 Burger.propTypes = {
   setActive: PropTypes.func.isRequired,
-  active: PropTypes.bool.isRequired,
 };
 
 export default Burger;

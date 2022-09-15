@@ -40,8 +40,8 @@ const ModalContainer = ({ active, setActive }) => {
     <Modal active={active} setActive={setActive}>
       <Container>
         <ButtonContainer>
-          <CloseButton onClick={() => setActive(!active)}>
-            <Close width="20px" height="20px" fill="#fff" />
+          <CloseButton onClick={() => setActive(prev => !prev)}>
+            <Close width="40px" height="40px" fill="#fff" />
           </CloseButton>
         </ButtonContainer>
         <Ul>

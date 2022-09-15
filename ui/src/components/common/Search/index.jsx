@@ -1,69 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Icons
 import IconSearch from 'assets/icons/MagnifyingGlass';
-import IconLocation from 'assets/icons/Location';
 
 // Styles
 import {
-  StyledForm,
-  StyledInput,
-  SearchDiv,
-  SearchIconWrap,
-  LocationIconWrap,
-  SubmitSearchButton,
+  StyledForm, StyledInput, SearchDropdown, SearchDiv, SearchIconWrap, SubmitSearchButton,
 } from './styled';
+import citiesServices from '../../../services/citiesServices';
 
 const Search = () => {
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
-  const [regionValue, setRegionValue] = useState('');
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    (async () => {
+      const cities = await citiesServices.getCities(controller.signal);
+      const citiesOptions = cities.data.results.map((e) => ({ value: e.city, id: e._id, children: [] }));
+      setOptions([{ id: '', value: 'Уся Україна', children: [] }, ...citiesOptions]);
+    })();
+
+    return () => controller.abort();
+  }, []);
 
   const searchValueHandler = (e) => {
     setSearchValue(e.target.value);
   };
-  const regionValueHandler = (e) => {
-    setRegionValue(e.target.value);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    navigate(searchValue ? `/adverts?search=${searchValue.split(' ').join('+')}` : '/adverts');
   };
 
   return (
     <section>
-      <StyledForm>
+      <StyledForm onSubmit={submitHandler}>
         <SearchDiv>
           <SearchIconWrap>
-            <IconSearch
-              width="25px"
-              height="25px"
-              fill="#002f34"
-            />
+            <IconSearch width="25px" height="25px" fill="#002f34" />
           </SearchIconWrap>
-          <StyledInput
-            maxWidth="675px"
-            type="search"
-            placeholder="Що шукаєте?"
-            value={searchValue}
-            onChange={searchValueHandler}
-          />
-          <LocationIconWrap>
-            <IconLocation
-              width="25px"
-              height="25px"
-              fill="#002f34"
-            />
-          </LocationIconWrap>
-          <StyledInput
-            maxWidth="295px"
-            type="search"
-            placeholder="Вся Україна"
-            value={regionValue}
-            onChange={regionValueHandler}
-          />
+          <StyledInput type="search" placeholder="Що шукаєте?" value={searchValue} onChange={searchValueHandler} />
+          <SearchDropdown isMobile options={options} onSelect={() => {}} />
           <SubmitSearchButton type="submit">
             Пошук&nbsp;&nbsp;&nbsp;
-            <IconSearch
-              width="25px"
-              height="25px"
-              fill="#002f34"
-            />
+            <IconSearch width="25px" height="25px" fill="#002f34" />
           </SubmitSearchButton>
         </SearchDiv>
       </StyledForm>

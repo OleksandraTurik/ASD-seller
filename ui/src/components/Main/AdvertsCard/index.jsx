@@ -39,7 +39,7 @@ const AdvertsCard = ({ errorAdvert, loadingAdvert, advertInfo }) => {
 AdvertsCard.propTypes = {
   errorAdvert: PropTypes.bool,
   loadingAdvert: PropTypes.bool,
-  advertInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
+  advertInfo: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 AdvertsCard.defaultProps = {

@@ -7,7 +7,9 @@ import {
   Select, Value, OptionList, Option,
 } from './styled';
 
-const Dropdown = ({ options, onSelect, defaultID }) => {
+const Dropdown = ({
+  options, onSelect, defaultID, isMobile,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(findParentOrChild(options, defaultID));
   const DropdownRef = useRef(null);
@@ -38,7 +40,7 @@ const Dropdown = ({ options, onSelect, defaultID }) => {
     <Select ref={DropdownRef} onClick={() => setIsOpen((prev) => !prev)}>
       <Value>{selected?.value}</Value>
       {isOpen && (
-        <OptionList>
+        <OptionList isMobile={isMobile}>
           {options.map((e) => !e.children?.length ? (
             <Option
               onClick={() => {
@@ -50,7 +52,7 @@ const Dropdown = ({ options, onSelect, defaultID }) => {
               {e.value}
             </Option>
           ) : (
-            <AdvancedOption onSelect={selectHandler} value={e} key={e.id} subOptions={e.children}>
+            <AdvancedOption isMobile={isMobile} onSelect={selectHandler} value={e} key={e.id} subOptions={e.children}>
               {e.value}
             </AdvancedOption>
           ))}
@@ -77,6 +79,11 @@ Dropdown.propTypes = {
   onSelect: PropTypes.func.isRequired,
   // eslint-disable-next-line react/require-default-props
   defaultID: PropTypes.string,
+  isMobile: PropTypes.bool,
+};
+
+Dropdown.defaultProps = {
+  isMobile: false,
 };
 
 export default Dropdown;
