@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const ItemLink = styled.button`
-  width: 120px;
-  height: 120px;
   display: flex;
+  gap: 23px;
   flex-wrap: wrap;
   flex-direction: column;
   text-align: center;
@@ -13,17 +12,12 @@ export const ItemLink = styled.button`
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  margin-left: 16px;
-  margin-bottom: 50px;
   border: none;
   background: none;
-  position: relative;
 
   & p {
     padding: 1px;
-    margin-top: 23px;
-    position: absolute;
-    top: 90px;
+    width: 120px;
   }
 
   &:hover p {

@@ -17,7 +17,6 @@ import { ButtonAdvertCard } from '../Button/styled';
 
 const AdvertCard = ({
   itemId,
-  link,
   img,
   name,
   location,
@@ -56,7 +55,6 @@ const AdvertCard = ({
 
 AdvertCard.propTypes = {
   itemId: PropTypes.string,
-  link: PropTypes.string,
   img: PropTypes.string,
   name: PropTypes.string,
   location: PropTypes.string,
@@ -66,7 +64,6 @@ AdvertCard.propTypes = {
 
 AdvertCard.defaultProps = {
   itemId: '',
-  link: '',
   img: '',
   name: '',
   location: '',

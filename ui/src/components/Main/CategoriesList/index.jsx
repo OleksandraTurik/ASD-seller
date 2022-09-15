@@ -24,7 +24,7 @@ const CategoriesList = ({
         width="88px"
         height="88px"
         src={`http://localhost:4000/${item.image}`}
-        alt={item.slug}
+        alt={item.name}
       />
       <p>{item.name}</p>
     </ItemLink>
@@ -34,7 +34,11 @@ const CategoriesList = ({
 CategoriesList.propTypes = {
   error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    _id: PropTypes.string,
+    image: PropTypes.string,
+  })).isRequired,
   showSubcategories: PropTypes.func.isRequired,
 };
 
