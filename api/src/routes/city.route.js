@@ -1,5 +1,7 @@
 const express = require('express');
-const { cityController: { getCities, getCityById } } = require('../controllers');
+const {
+  cityController: { getCities, getCityById },
+} = require('../controllers');
 const { cityFilterSortMiddleware, paginationMiddleware, idValidationMiddleware } = require('../middlewares');
 
 const cityRouter = express.Router();

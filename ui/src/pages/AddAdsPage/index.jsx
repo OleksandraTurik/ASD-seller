@@ -1,14 +1,32 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+
+// Libraries
 import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
-import ArrowDownIcon from 'assets/icons/ArrowDown';
-import Modal from 'components/Modal/Modal';
+
+// Slices
 import { getCategories } from 'redux/slice/getCategories';
-import { useDispatch, useSelector } from 'react-redux';
-import avtoImg from 'assets/img/rubryky/avto.png';
+
+// Services
+import advertServices from 'services/advertServices';
+
+// Hooks
+import { useFetchCities } from 'components/hooks/useFetchCities';
+
+// Components
+import Modal from 'components/Modal/Modal';
+
+// Icons
+import ArrowDownIcon from 'assets/icons/ArrowDown';
 import ThinArrowRight from 'assets/icons/ThinArrowRight';
+
+// Images
+import avtoImg from 'assets/img/rubryky/avto.png';
+
+// Styles
 import {
   Main,
   Wrapper,
@@ -29,8 +47,6 @@ import {
   CategoryListItem, CategoryList,
   ImgCirle,
 } from './styled';
-import advertServices from '../../services/advertServices';
-import { useFetchCities } from '../../components/hooks/useFetchCities';
 
 // eslint-disable-next-line react/prop-types
 const AddAdsPage = () => {
@@ -82,7 +98,7 @@ const AddAdsPage = () => {
       // reset();
       navigate(`/profiles/${user.userDto.id}/adverts`);
     } catch (e) {
-      console.log('error');
+      console.log(e.message);
     }
   };
 

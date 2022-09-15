@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// eslint-disable-next-line import/prefer-default-export
 
 export const Wrapper = styled.div`
   max-width: 400px;
@@ -7,6 +6,7 @@ export const Wrapper = styled.div`
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 `;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,12 +17,14 @@ export const Container = styled.div`
   justify-content: center;
   position: relative;
 `;
+
 export const FormWrapper = styled.form`
   background-color: white;
   padding: 37px 32px 46px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 `;
+
 export const WrapperLink = styled.div`
   display: flex;
   justify-content: space-between;
@@ -48,10 +50,17 @@ export const WrapperLink = styled.div`
     border-bottom: 3px solid ${props => props.theme.mainGreenColor};
   }
 `;
-export const ErrorContainer = styled.div``;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const ErrorTitle = styled.p`
   color: red;
+  margin-bottom: 20px;
 `;
+
 export const Input = styled.input`
   width: 100%;
   box-sizing: border-box;

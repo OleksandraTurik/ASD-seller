@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1238px;
+  flex-wrap: wrap;
+  max-width: 1238px;
   margin: 0 auto;
   border: 1px solid #efefef;
   color: #003034;

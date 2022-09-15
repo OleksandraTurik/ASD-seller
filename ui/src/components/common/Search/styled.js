@@ -2,17 +2,21 @@ import styled from 'styled-components';
 import closeIcon from 'assets/icons/closeIcon.svg';
 
 export const StyledForm = styled.form`
-  padding: 40px 0;
+  padding: 40px 20px;
   background-color: ${props => props.theme.greyBackground};
 `;
 
 export const SearchDiv = styled.div`
   display: flex;
-  width: 1250px;
+  max-width: 1250px;
   background-color: white;
   position: relative;
   margin: 0 auto;
   border-radius: 2px 0 0 2px;
+
+  @media (max-width: 780px) {
+    flex-direction: column;
+  }
 `;
 
 export const SearchIconWrap = styled.div`
@@ -22,15 +26,18 @@ export const SearchIconWrap = styled.div`
 `;
 
 export const LocationIconWrap = styled.div`
-  position: absolute;
-  left: 765px;
-  top: 20px;
+  position: relative;
+
+  & svg {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+  }
 `;
 
 export const StyledInput = styled.input`
   border: none;
   outline: none;
-  width: ${({ width }) => width};
   padding-left: 0;
   padding-right: 0;
   line-height: 56px;
@@ -41,6 +48,20 @@ export const StyledInput = styled.input`
   color: ${props => props.theme.mainGreenColor};
   font-family: inherit;
   border-right: 1px solid ${props => props.theme.greyBackground};
+  width: ${({ maxWidth }) => maxWidth};
+
+  @media (max-width: 780px) {
+    border-bottom: 1px solid ${props => props.theme.greyBackground};
+    width: inherit;
+  }
+
+  /* &:nth-child(1) {
+    max-width: 675px;
+  }
+
+  &:nth-child(2) {
+    max-width: 295px;
+  } */
 
   &::placeholder {
     font-weight: 400;
@@ -66,16 +87,22 @@ export const StyledInput = styled.input`
 
 export const SubmitSearchButton = styled.button`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   font-size: 16px;
   font-weight: 600;
   width: 150px;
+  padding: 10px;
   height: 70px;
   border: none;
   color: ${props => props.theme.mainGreenColor};
   cursor: pointer;
   background-color: #fff;
+  
+
+  @media (max-width: 780px) {
+    width: 100%;
+  }
 
   &:hover {
     background-color: ${props => props.theme.mainGreenColor};

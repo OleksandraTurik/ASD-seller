@@ -9,13 +9,13 @@ const singleUploadMiddleware = require('./single-upload.middleware');
 const cityFilterSortMiddleware = require('./city-filter-sort.middleware');
 
 module.exports = {
-    paginationMiddleware,
-    advertFilterSortMiddleware,
-    userFilterSortMiddleware,
-    authMiddleware,
-    errorHandlerMiddleWare,
-    idValidationMiddleware,
-    multipleUploadMiddleware,
-    singleUploadMiddleware,
-    cityFilterSortMiddleware,
+  paginationMiddleware,
+  advertFilterSortMiddleware,
+  userFilterSortMiddleware,
+  authMiddleware,
+  errorHandlerMiddleWare,
+  idValidationMiddleware,
+  multipleUploadMiddleware,
+  singleUploadMiddleware,
+  cityFilterSortMiddleware,
 };

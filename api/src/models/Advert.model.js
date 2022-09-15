@@ -1,19 +1,28 @@
 const mongoose = require('mongoose');
 const City = require('./City.model');
-const Category = require('./Category.model');
 const { Schema, model } = mongoose;
 
-const advertSchema = new Schema({
+const advertSchema = new Schema(
+  {
     title: { type: String, required: true },
     sellerId: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     images: { type: [String], required: true },
-    category: { type: Category.schema, required: true },
+    category: {
+      name: { type: String, required: true },
+      _id: { type: mongoose.Types.ObjectId, ref: 'Category', required: true },
+      child: {
+        name: { type: String },
+        _id: { type: mongoose.Types.ObjectId, ref: 'Category' },
+      },
+    },
     address: { type: City.schema, required: true },
-    contactName: { type:String, required: true },
+    contactName: { type: String, required: true },
     contactPhone: { type: String, required: true },
-}, { timestamps: true });
+  },
+  { timestamps: true },
+);
 
 advertSchema.index({ title: 'text' });
 
@@ -43,6 +52,7 @@ advertSchema
 
     return query;
   };
+
 
 const Advert = model('Advert', advertSchema);
 

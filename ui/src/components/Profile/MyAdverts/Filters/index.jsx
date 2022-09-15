@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 // Icons
 import IconSearch from 'assets/icons/MagnifyingGlass';

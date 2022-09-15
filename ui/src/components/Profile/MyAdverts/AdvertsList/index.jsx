@@ -20,4 +20,5 @@ AdvertsList.defaultProps = {
   list: [],
   changeFilters: () => {},
 };
+
 export default AdvertsList;

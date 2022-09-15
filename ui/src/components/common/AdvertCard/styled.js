@@ -11,8 +11,13 @@ export const Card = styled.article`
   border-radius: 4px;
   width: calc(25% - 15px);
   float: left;
-  margin-left: 15px;
+  margin-left: 8px;
+  margin-right: 7px;
   margin-top: 20px;
+
+  @media (max-width: 1250px) {
+    width: 310px;
+  }
 `;
 
 export const ImgInCard = styled.img`

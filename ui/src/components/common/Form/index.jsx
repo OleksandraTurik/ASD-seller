@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
-import { LoaderForm } from './LoaderContainer';
-import { noticeMessages } from './helper';
+import { LoaderForm } from 'components/common/Form/LoaderContainer';
+import validation from 'helpers/validation';
+import { noticeMessages } from 'components/common/Form/helper';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
 } from './styled';
@@ -25,10 +26,22 @@ const Form = ({
 
   const { registrationSuccess, error, loading } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isNavigate, setIsNavigate] = useState(false);
+
+  useEffect(() => {
+    if (loading === false && error === false && isNavigate) {
+      navigate('/', { replace: true });
+      setIsNavigate(false);
+    } else {
+      console.log('error', error);
+    }
+  }, [error, loading]);
 
   const onSubmit = (data) => {
     if (type === 'login') {
       dispatch(login(data));
+      setIsNavigate(true);
     } else {
       dispatch(registration(data));
     }
@@ -54,26 +67,34 @@ const Form = ({
             type="email"
             placeholder={emailField}
             {...register('email', {
-              required: 'This field is required',
+              required: "email поле обов'язково має бути заповненим",
               minLength: {
                 value: 3,
-                message: 'Error! Must be more than 3 symbols',
+                message: 'Помилка! Має бути більше трьох символів',
+              },
+              pattern: {
+                value: validation.email,
+                message: 'Неправильний формат email',
               },
             })}
           />
-          <ErrorContainer>{errors.Email && <ErrorTitle>{errors.Email.message || 'Error! Must be more than 8 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>{errors.email && <ErrorTitle>{errors.email.message || 'Error! Must be more than 8 symbols'}</ErrorTitle>}</ErrorContainer>
           <Input
             type="password"
             placeholder={passwordField}
             {...register('password', {
-              required: 'This field is required',
+              required: "email поле обов'язково має бути заповненим",
               minLength: {
                 value: 8,
-                message: 'Error! Must be more than 8 symbols',
+                message: 'Помилка! Має бути більше восьми символів',
+              },
+              pattern: {
+                value: validation.password,
+                message: 'Пароль має містити хоча б одне число, літеру з великої та маленької букви, мати довжину мінімум у 8 літер',
               },
             })}
           />
-          <ErrorContainer>{errors.Password && <ErrorTitle>{errors.Password.message || 'Error! Must be more than 3 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>{errors.password && <ErrorTitle>{errors.password.message || 'Error! Must be more than 3 symbols'}</ErrorTitle>}</ErrorContainer>
           <Button type="submit">{textButton}</Button>
         </FormWrapper>
       </Wrapper>

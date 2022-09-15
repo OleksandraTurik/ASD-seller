@@ -1,9 +1,19 @@
+
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
-
 import AdvertCardList from '../AdvertCardList';
 import EmptyAdvertsList from '../EmptyAdvertsList';
+// Icons
+import CatFootprint from 'assets/icons/CatFootprint';
+
+// Hooks
+import { useFetchAdverts } from 'components/hooks/useFetchAdverts';
+
+// Components
+import Loader from 'components/common/Loader';
+import AdvertCardList from 'components/Profile/MyAdverts/AdvertsList/AdvertCardList';
+import EmptyAdvertsList from 'components/Profile/MyAdverts/AdvertsList/EmptyAdvertsList';
 
 const AdvertsCard = ({
   list = [], itemsAmount, changeFilters,
