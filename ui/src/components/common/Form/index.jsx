@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
 import { LoaderForm } from 'components/common/Form/LoaderContainer';
+import validation from 'helpers/validation';
 import { noticeMessages } from 'components/common/Form/helper';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
@@ -72,7 +73,7 @@ const Form = ({
                 message: 'Error! Must be more than 3 symbols',
               },
               pattern: {
-                value: /[A-Za-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                value: validation.email,
                 message: 'Неправильний формат email',
               },
             })}
@@ -88,7 +89,7 @@ const Form = ({
                 message: 'Error! Must be more than 8 symbols',
               },
               pattern: {
-                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                value: validation.password,
                 message: 'Пароль має містити хоча б одне число, літеру з великої та маленької букви, мати довжину мінімум у 8 літер',
               },
             })}
