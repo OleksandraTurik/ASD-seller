@@ -5,7 +5,6 @@ export const useFetchAdverts = (id) => {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
   const [error, setError] = useState(false);
-  const [prevPage, setPrevPage] = useState(null);
   const [itemsAmount, setItemsAmount] = useState(0);
 
   const [filters, setFilters] = useState({
@@ -21,7 +20,6 @@ export const useFetchAdverts = (id) => {
       [name]: value,
     }));
   };
-  console.log(filters);
   const getData = async () => {
     setLoading(true);
     setError(false);
