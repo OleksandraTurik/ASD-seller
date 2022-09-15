@@ -29,7 +29,7 @@ import {
 const ModalContainer = ({ active, setActive }) => {
   const token = localStorage.getItem('tokens');
   const user = JSON.parse(token);
-  const userId = user && user.length !== 0 ? user?.userDto.id : 'guest';
+  const userId = user && user.length !== 0 ? user?.id : 'guest';
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
