@@ -26,8 +26,20 @@ const MyAdverts = () => {
   const onSearch = onChange;
   return (
     <Wrapper>
-      <Filters onSearch={onSearch} onSelected={({ value }) => changeFilters('sort', value)} />
-      <AdvertsList filters={filters} setFilters={setFilters} list={list} error={error} fetchData={fetchData} changeFilters={changeFilters} itemsAmount={itemsAmount} />
+      <Filters
+        onSearch={onSearch}
+        onSelected={({ value }) => changeFilters('sort', value)}
+        categorySelected={(value) => changeFilters('category', value)}
+      />
+      <AdvertsList
+        filters={filters}
+        setFilters={setFilters}
+        list={list}
+        error={error}
+        fetchData={fetchData}
+        changeFilters={changeFilters}
+        itemsAmount={itemsAmount}
+      />
     </Wrapper>
   );
 };

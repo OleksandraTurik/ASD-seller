@@ -14,6 +14,7 @@ import {
   IconContainer,
   WrapSelect,
 } from './styled';
+import CategoryFilter from '../../../AdvertList/ListForm/Filters/CategoryFilter';
 
 const customStyles = {
   menu: (provided, state) => ({
@@ -40,7 +41,7 @@ const customStyles = {
   },
 };
 
-const Filters = ({ onSelected, onSearch }) => {
+const Filters = ({ onSelected, onSearch, categorySelected }) => {
   const options = [
     { value: 'ascTitle', label: 'Заголовок: А-Я' },
     { value: 'dscTitle', label: 'Заголовок: Я-А' },
@@ -66,6 +67,10 @@ const Filters = ({ onSelected, onSearch }) => {
           />
         </Container>
         <Container>
+          <CategoryFilter onSelect={(category) => categorySelected(category)} />
+        </Container>
+        <Container>
+          <Test>
           <WrapSelect>
             <Select
               styles={customStyles}
