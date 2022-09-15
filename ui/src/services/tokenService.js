@@ -22,7 +22,7 @@ export const tokenService = {
     localStorage.removeItem(TOKENS_LS_NAME);
   },
   getUserInfo: () => {
-    const tokens = tokenService.getTokens();
+    const tokens = JSON.parse(tokenService.getTokens());
     console.log(tokens);
     return tokens?.userDto ?? {
       email: '',

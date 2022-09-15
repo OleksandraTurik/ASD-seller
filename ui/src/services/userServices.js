@@ -33,8 +33,10 @@ const userServices = {
   },
 
   updateUser: async (userData) => {
-    const userId = tokenService.getUserInfo().id;
-    const { data } = await API.patch('/users/631f93936e8939b3cfd22fbf', userData);
+    const userId = tokenService.getUserInfo();
+    console.log('userData', userData);
+    console.log('userId', userId);
+    const { data } = await API.patch(`/users/${userId.id}`, userData);
     return data;
   },
   updateUserPhoto: async (userDataPhoto) => {
