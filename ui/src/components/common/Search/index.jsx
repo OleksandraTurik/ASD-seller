@@ -44,7 +44,7 @@ const Search = () => {
             <IconSearch width="25px" height="25px" fill="#002f34" />
           </SearchIconWrap>
           <StyledInput type="search" placeholder="Що шукаєте?" value={searchValue} onChange={searchValueHandler} />
-          <SearchDropdown options={options} onSelect={() => {}} />
+          <SearchDropdown isMobile options={options} onSelect={() => {}} />
           <SubmitSearchButton type="submit">
             Пошук&nbsp;&nbsp;&nbsp;
             <IconSearch width="25px" height="25px" fill="#002f34" />

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ArrowUp from 'assets/icons/ArrowUp';
-import { Option, ChildrenWrapper, Child } from './styled';
+import {
+  Option, ChildrenWrapper, Child, Container,
+} from './styled';
 
-const AdvancedOption = ({ children, value, onSelect }) => {
+const AdvancedOption = ({
+  children, value, onSelect, isMobile,
+}) => {
   const [isChildrenShow, setIsChildrenShow] = useState(false);
 
   const clickHandler = (value) => (event) => {
@@ -20,14 +24,17 @@ const AdvancedOption = ({ children, value, onSelect }) => {
   return (
     <Option
       isSelected={isChildrenShow}
-      onMouseEnter={() => setIsChildrenShow(true)}
-      onMouseLeave={() => setIsChildrenShow(false)}
+      onMouseEnter={() => !isMobile && setIsChildrenShow(true)}
+      onMouseLeave={() => !isMobile && setIsChildrenShow(false)}
       onClick={parentClickHandler(value)}
+      isMobile={isMobile}
     >
-      <p>{children}</p>
-      <ArrowUp width={20} height={20} />
+      <Container>
+        <p>{children}</p>
+        <ArrowUp width={20} height={20} />
+      </Container>
       {isChildrenShow && (
-        <ChildrenWrapper onMouseLeave={() => setIsChildrenShow(false)}>
+        <ChildrenWrapper isMobile={isMobile} onMouseLeave={() => setIsChildrenShow(false)}>
           {value.children.map((e) => (
             <Child key={e.id} onClick={clickHandler(e)}>
               {e.value}
@@ -52,6 +59,7 @@ AdvancedOption.propTypes = {
   }).isRequired,
   children: PropTypes.node.isRequired,
   onSelect: PropTypes.func.isRequired,
+  isMobile: PropTypes.func.isRequired,
 };
 
 export default AdvancedOption;

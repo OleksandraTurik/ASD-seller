@@ -13,6 +13,15 @@ const StyledDropdown = styled(Dropdown)`
 
 const CategoryFilter = ({ onSelect, value }) => {
   const [categories, setCategories] = useState([]);
+  const [isMobileMedia, setIsMobileMedia] = useState(window.matchMedia('(max-width: 450px)'));
+
+  useEffect(() => {
+    const changeHandler = () => {
+      setIsMobileMedia(window.matchMedia('(max-width: 450px)'));
+    };
+    isMobileMedia.addEventListener('change', changeHandler);
+    return () => isMobileMedia.removeEventListener('change', changeHandler);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -36,6 +45,7 @@ const CategoryFilter = ({ onSelect, value }) => {
         onSelect={({ id }) => onSelect(id)}
         options={categories}
         defaultID={value}
+        isMobile={isMobileMedia.matches}
       />
     </FilterController>
   );

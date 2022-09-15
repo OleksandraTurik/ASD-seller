@@ -11,6 +11,7 @@ export const Select = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  min-width: 200px;
 `;
 
 export const Value = styled.p`
@@ -20,7 +21,7 @@ export const Value = styled.p`
   width: 100%;
 `;
 
-export const OptionList = styled.div`
+export const OptionList = styled.ul`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -28,12 +29,11 @@ export const OptionList = styled.div`
   left: 0;
   background: white;
   width: 100%;
-  max-height: 500px;
-  //overflow: scroll;
   z-index: 10;
+  ${props => props.isMobile && 'overflow-y: scroll;max-height: 300px;'}
 `;
 
-export const Option = styled.div`
+export const Option = styled.li`
   padding: 10px;
   background: white;
 
