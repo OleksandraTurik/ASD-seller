@@ -1,12 +1,29 @@
 import styled from 'styled-components';
 
+export const ScrollbarWrapper = styled.div`
+  &::-webkit-scrollbar-track
+  {
+    background-color: rgb(242, 244, 245);
+  }
+
+  &::-webkit-scrollbar
+  {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    background-color: ${props => props.theme.mainGreenColor};
+  }
+`;
+
 export const Main = styled.main`
   background-color: ${props => props.theme.greyBackground};
   width: 100%;
 `;
 
 export const Wrapper = styled.div`
-  width: 1238px;
+  max-width: 1238px;
   margin: 0 auto;
   padding-bottom: 80px;
 `;
@@ -17,19 +34,37 @@ export const Title = styled.h2`
   font-weight: 700;
   color: ${props => props.theme.mainGreenColor};
   padding: 48px 0px 30px;
+  margin-left: 10px;
 
   &:nth-child(2) {
     padding: 0;
     margin: 0;
     margin-bottom: 30px;
   }
+
+  @media (max-width: 1240px) {
+    position: relative;
+    left: 15px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 23px;
+  }
+
 `;
 
 export const WhiteBlock = styled.div`
   background-color: white;
   border-radius: 4px;
+  margin: 10px;
   margin-bottom: 10px;
   padding: 32px;
+
+
+  @media (max-width: 380px) {
+    padding-left: 15px;
+    padding-top: 25px;
+  }
 
   &:nth-child(5) {
     height: 50px;
@@ -81,6 +116,7 @@ export const TitleTextArea = styled.textarea`
   padding: 16px 48px 16px 16px;
   resize: none;
   width: 100%;
+  max-width: 80%;
 
   &:focus {
     border-bottom-color: ${props => props.theme.mainGreenColor};
@@ -115,6 +151,11 @@ export const CategoryItems = styled.button`
   font-size: 16px;
   text-decoration: none;
   transition: background 0.3s ease 0s;
+  text-align: left;
+
+  @media ( max-width: 1100px) {
+    margin: 0 20px;
+  }
 
   &:hover {
     font-weight: 700;
@@ -219,6 +260,11 @@ export const CategoryList = styled.ul`
   overflow-y: auto;
   padding-right: 8px;
 
+  @media ( max-width: 1100px) {
+    display: flex;
+    flex-direction: column;
+  }
+
   &:nth-child(2) {
     margin-left: 20px;
   }
@@ -256,6 +302,10 @@ export const CategoryListItem = styled.li`
   &:hover {
     background-color: #ceddff;
   }
+
+  @media ( max-width: 1100px) {
+    max-width: 100%;
+  }
 `;
 export const CategoryContent = styled.ul`
   padding-left: 0px;
@@ -263,6 +313,19 @@ export const CategoryContent = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px 16px;
+
+  /* @media ( max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+    overflow: scroll;
+  } */
+
+  @media ( max-width: 1100px) {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+  }
+
+
 `;
 export const PickCategory = styled.button`
   display: flex;
@@ -275,6 +338,7 @@ export const PickCategory = styled.button`
   border: none;
   text-align: center;
   align-items: center;
+  max-width: 100%;
 `;
 
 export const PInPickCategory = styled.p`
@@ -301,6 +365,7 @@ export const ContactInput = styled.input`
     outline: 0px;
     padding: 14px 48px 14px 16px;
     width: 100%;
+    max-width: 80%;
 
     &:focus {
     border-bottom-color: ${props => props.theme.mainGreenColor};
@@ -319,6 +384,11 @@ export const PublishButton = styled.button`
     color: rgb(255, 255, 255);
     padding: 10px 30px 8px;
     transition: all 0.1s ease;
+    float: right;
+
+    @media (max-width: 480px) {
+      padding: 8px 13px;
+    }
 
     &:hover {
       color: ${props => props.theme.mainGreenColor};
@@ -329,7 +399,7 @@ export const PublishButton = styled.button`
 export const InputFile = styled.input`
     color: #878787;
 
-  &::-webkit-file-upload-button {
+   &::-webkit-file-upload-button {
     text-decoration: none;
     cursor: pointer;
     font-weight: 700;

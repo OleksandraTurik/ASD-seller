@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import DontHaveFavoritesAdvImg from 'assets/img/DontHaveFavoritesAdv.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import Loader from 'components/common/Loader';
 import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 
@@ -16,17 +15,17 @@ import {
 } from './styled';
 
 const FavoritesPage = () => {
+  const user = JSON.parse(localStorage.getItem('tokens'));
+  const { id } = user.userDto;
   const exactUserInfo = useSelector(state => state.exactUserInfoSlice);
   const {
     favorites,
   } = exactUserInfo.data;
 
-  const { id } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getExactUserInfoThunk(id));
-    console.log(exactUserInfo.data);
   }, [id]);
   return (
     <>
@@ -38,10 +37,10 @@ const FavoritesPage = () => {
       <AdvertsArea>
         <Wrapper>
           <DontHaveFavoritesAdvBlock>
+            {favorites}
             <DontHaveFavoritesAdvImg />
             <DontHaveFavoritesAdvTitle>
               Немає обраних оголошень
-              {favorites}
             </DontHaveFavoritesAdvTitle>
             <DontHaveFavoritesAdvText>
               Додати в обране можна зі сторінки оголошення або зі сторінки списку оголошень

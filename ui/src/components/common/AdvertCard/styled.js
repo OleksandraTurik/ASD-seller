@@ -15,7 +15,7 @@ export const Card = styled.article`
   margin-right: 7px;
   margin-top: 20px;
 
-  @media (max-width: 1250px) { {
+  @media (max-width: 1250px) {
     width: 310px;
   }
 `;
@@ -38,6 +38,7 @@ export const NameOfProduct = styled.h4`
   text-overflow: ellipsis;
   overflow: hidden;
   cursor: pointer;
+  text-align: left;
 
   &:hover {
     background-color: ${props => props.theme.mainGreenColor};

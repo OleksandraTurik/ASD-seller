@@ -57,7 +57,7 @@ const MainPage = () => {
           width="88px"
           height="88px"
           src={`http://localhost:4000/${item.image}`}
-          alt={item.slug}
+          alt={item.name}
         />
         <P>{item.name}</P>
       </ItemLink>

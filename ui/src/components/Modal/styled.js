@@ -10,12 +10,28 @@ export const Wrapper = styled.div`
   z-index: 1000;
   max-width: 1000px;
   width: 100%;
+  overflow: scroll;
+  /* overflow: hidden; */
+
+  @media (max-width: 1100px) {
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+  }
+
+  &::-webkit-scrollbar {
+  display: none;
+  }
 `;
 
 export const Button = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  z-index: 1;
+  position: relative;
+  top: 25px;
+  right: 15px;
 `;
 export const Overlay = styled.div`
   position: fixed;

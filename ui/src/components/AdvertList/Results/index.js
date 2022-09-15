@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Loader from 'components/common/Loader';
 import Card from './Card';
-import Loader from '../../common/Loader';
-import { Wrapper, Title, LoaderWrapper } from './styled';
+// import Loader from '../../common/Loader';
+import { Wrapper, Title } from './styled';
 
 const Results = ({ data, resultAmount, pending }) => {
   let content;
 
   if (pending) {
     content = (
-      <LoaderWrapper>
-        <Loader margin="0" />
-      </LoaderWrapper>
+      <Loader />
     );
   } else if (data.length <= 0) {
     content = <Title>No items was found</Title>;

@@ -35,7 +35,7 @@ const MainRoutes = () => (
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegistrationPage />} />
-      <Route path="/favorites/:id" element={<FavoritesPage />} />
+      <Route path="/favorites" element={<FavoritesPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </Suspense>
