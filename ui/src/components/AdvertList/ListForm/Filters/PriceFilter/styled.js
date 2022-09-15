@@ -11,6 +11,9 @@ const Input = css`
   border: none;
   font-size: 16px;
   width: 100px;
+  @media (max-width: 450px) {
+    width: calc(50% - 43px);
+  }
 `;
 
 export const MinPriceInput = styled.input.attrs({
