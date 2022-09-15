@@ -145,9 +145,11 @@ export const FavoriteBtn = styled.button`
   right: 20px;
   cursor: pointer;
 
-  & svg {
-    opacity: 0.4;
+  &:hover svg { 
+    fill: #002f34; 
+  } 
 
+  & svg {
     @media screen and (max-width: 1280px) {
       width: 22px;
       height: 22px;
@@ -167,9 +169,5 @@ export const FavoriteBtn = styled.button`
       width: 13px;
       height: 13px;
     }
-  }
-
-  &:hover svg {
-    opacity: 1;
   }
 `;
