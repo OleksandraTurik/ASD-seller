@@ -6,7 +6,7 @@ export const Wrapper = styled(Slider)`
   background-color: #fff;
   border-radius: 5px;
   cursor: grabbing;
-  padding: 0 20px;
+  padding: 10px 20px 0 20px;
 
   .slick-track {
     display: flex;
@@ -18,7 +18,7 @@ export const Wrapper = styled(Slider)`
     z-index: 999;
     bottom: 2px;
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       bottom: 0;
     }
 
@@ -56,7 +56,7 @@ export const ArrowNext = styled.div`
       border-left: 12px solid #003034;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       border: 16px solid transparent;
       border-left: 11px solid #003034;
     }
@@ -74,7 +74,7 @@ export const ArrowNext = styled.div`
       border-left: 12px solid #003034;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       border-left: 11px solid #003034;
     }
 
@@ -104,7 +104,7 @@ export const ArrowPrev = styled.div`
       border-left: 12px solid #003034;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       border: 16px solid transparent;
       border-left: 11px solid #003034;
     }
@@ -122,7 +122,7 @@ export const ArrowPrev = styled.div`
       border-left: 12px solid #003034;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       border-left: 11px solid #003034;
     }
 

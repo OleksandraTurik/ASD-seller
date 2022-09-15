@@ -11,13 +11,18 @@ export const Wrapper = styled.div`
   border-radius: 5px;
   padding: 24px;
 
-  @media screen and (max-width: 768px) {
-    height: 130px;
-    width: 280px;
+  @media screen and (max-width: 1280px) {
+    height: 135px;
+    width: 345px;
     padding: 15px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
+    height: 120px;
+    width: 280px;
+  }
+
+  @media screen and (max-width: 600px) {
     height: 110px;
     width: 100%;
     padding: 10px;
@@ -53,8 +58,8 @@ export const LocationWrap = styled.div`
   align-self: flex-start;
   justify-content: space-evenly;
 
-  @media screen and (max-width: 480px) {
-    width: 40%;
+  @media screen and (max-width: 1280px) {
+    width: 65%;
   }
 
   @media screen and (max-width: 320px) {
@@ -95,6 +100,10 @@ export const LocationInfo = styled.div`
     margin: 0;
     font-weight: 700;
 
+    @media screen and (max-width: 1280px) {
+      font-size: 14px;
+    }
+
     @media screen and (max-width: 768px) {
       font-size: 12px;
     }
@@ -111,6 +120,10 @@ export const LocationInfo = styled.div`
   & span {
     color: #000;
     font-size: 16px;
+
+    @media screen and (max-width: 1280px) {
+      font-size: 14px;
+    }
 
     @media screen and (max-width: 768px) {
       font-size: 12px;
@@ -130,6 +143,11 @@ export const MapImage = styled.img`
   width: 145px;
   height: 105px;
   border-radius: 10px;
+
+  @media screen and (max-width: 1280px) {
+    width: 120px;
+    height: 85px;
+  }
 
   @media screen and (max-width: 768px) {
     width: 115px;

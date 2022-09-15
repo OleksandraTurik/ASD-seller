@@ -14,6 +14,10 @@ export const Wrapper = styled.div`
     font-size: 32px;
     color: #002f34;
 
+    @media screen and (max-width: 1280px) {
+      font-size: 24px;
+    }
+
     @media screen and (max-width: 768px) {
       font-size: 18px;
     }
@@ -32,7 +36,7 @@ export const Wrapper = styled.div`
     padding: 15px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     margin: 15px 0 0 0;
   }
 
@@ -40,6 +44,10 @@ export const Wrapper = styled.div`
     margin-top: 10px;
     font-size: 40px;
     color: ${props => props.theme.mainGreenColor};
+
+    @media screen and (max-width: 1280px) {
+      font-size: 32px;
+    }
 
     @media screen and (max-width: 768px) {
       font-size: 28px;
@@ -60,6 +68,10 @@ export const Wrapper = styled.div`
     font-size: 24px;
     margin: 12px 0 4px 0;
 
+    @media screen and (max-width: 1280px) {
+      font-size: 20px;
+    }
+
     @media screen and (max-width: 768px) {
       font-size: 18px;
     }
@@ -78,6 +90,10 @@ export const Wrapper = styled.div`
     overflow-wrap: break-word;
     font-size: 16px;
     color: ${props => props.theme.mainGreenColor};
+
+    @media screen and (max-width: 1280px) {
+      font-size: 14px;
+    }
 
     @media screen and (max-width: 768px) {
       font-size: 12px;
