@@ -79,7 +79,7 @@ const Subcategories = ({ childrenCategory, childrenId }) => {
 };
 
 Subcategories.propTypes = {
-  childrenCategory: PropTypes.arrayOf(PropTypes.Object),
+  childrenCategory: PropTypes.arrayOf(PropTypes.object),
   childrenId: PropTypes.string,
 };
 
