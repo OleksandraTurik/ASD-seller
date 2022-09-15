@@ -26,23 +26,33 @@ const advertSchema = new Schema(
 
 advertSchema.index({ title: 'text' });
 
-advertSchema.statics.findWithFilterAndSort = function (search, maxPrice, minPrice, sellerId, sort, category) {
-  let query = this.find(search ? { $text: { $search: search } } : {});
+advertSchema
+  .statics
+  .findWithFilterAndSort = function (search, maxPrice, minPrice, sellerId, sort, category) {
 
-  if (sellerId) query = query.find({ sellerId });
-  if (maxPrice) query = query.where('price').lte(maxPrice);
-  if (minPrice) query = query.where('price').gte(minPrice);
-  if (category) query = query.find({ $or: [{ 'category._id': category }, { 'category.child._id': category }] });
+    let query = this.find({
+      title: {
+        $regex: search,
+        $options: 'gmi',
+      },
+    });
 
-  if (sort === 'asсDate') return query.sort('createdAt');
-  if (sort === 'dscDate') return query.sort('-createdAt');
-  if (sort === 'ascTitle') return query.sort('title');
-  if (sort === 'dscTitle') return query.sort('-title');
-  if (sort === 'ascPrice') return query.sort('price');
-  if (sort === 'dscPrice') return query.sort('-price');
 
-  return query;
-};
+    if (sellerId) query = query.find({ sellerId });
+    if (maxPrice) query = query.where('price').lte(maxPrice);
+    if (minPrice) query = query.where('price').gte(minPrice);
+    if (category) query = query.find({ 'category._id': category });
+
+    if (sort === 'asсDate') return query.sort('createdAt');
+    if (sort === 'dscDate') return query.sort('-createdAt');
+    if (sort === 'ascTitle') return query.sort('title');
+    if (sort === 'dscTitle') return query.sort('-title');
+    if (sort === 'ascPrice') return query.sort('price');
+    if (sort === 'dscPrice') return query.sort('-price');
+
+    return query;
+  };
+
 
 const Advert = model('Advert', advertSchema);
 

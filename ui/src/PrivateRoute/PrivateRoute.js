@@ -5,7 +5,7 @@ const PrivateRoute = ({ children }) => {
   const navigate = useNavigate();
   const activated = JSON.parse(localStorage.getItem('tokens'))?.userDto.isActivated;
   console.log(activated);
-  return activated ? children : navigate('/');
+  return true ? children : navigate('/');
 };
 
 export default PrivateRoute;

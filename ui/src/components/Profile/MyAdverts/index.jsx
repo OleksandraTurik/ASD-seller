@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { debounce } from '../../../helpers/debounce';
 
 // Components
-import AdvertsList from 'components/Profile/MyAdverts/AdvertsList';
-import Filters from 'components/Profile/MyAdverts/Filters';
+import AdvertsList from './AdvertsList';
+import Filters from './Filters';
+import { useFetchAdverts } from '../../hooks/useFetchAdverts';
 
 // Styles
 const Wrapper = styled.div`
@@ -12,12 +15,22 @@ const Wrapper = styled.div`
 `;
 
 const MyAdverts = () => {
-  const [amount, setAmount] = useState(0);
-
+  const { id } = useParams();
+  const {
+    list,
+    error,
+    fetchData,
+    changeFilters,
+    setFilters,
+    itemsAmount,
+    filters,
+  } = useFetchAdverts(id);
+  const onChange = ({ target: { value } }) => changeFilters('search', value);
+  const onSearch = debounce(onChange, 500);
   return (
     <Wrapper>
-      <Filters itemsAmount={amount} />
-      <AdvertsList setAmount={setAmount} />
+      <Filters onSearch={onSearch} onSelected={({ value }) => changeFilters('sort', value)} />
+      <AdvertsList filters={filters} setFilters={setFilters} list={list} error={error} fetchData={fetchData} changeFilters={changeFilters} itemsAmount={itemsAmount} />
     </Wrapper>
   );
 };

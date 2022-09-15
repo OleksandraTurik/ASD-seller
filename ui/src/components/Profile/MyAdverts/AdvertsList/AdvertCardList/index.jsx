@@ -45,7 +45,6 @@ const AdvertCardList = ({
             <ListWrap>
               <ul>
                 <li>{category}</li>
-                <li>{subcategory}</li>
               </ul>
             </ListWrap>
             <LocationWrap>
