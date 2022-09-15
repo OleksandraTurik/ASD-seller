@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
+
+// Helpers
+import advertsAdapt from 'helpers/advertsAdapt';
+
 import AdvertCardList from '../AdvertCardList';
 import EmptyAdvertsList from '../EmptyAdvertsList';
 
@@ -15,16 +19,17 @@ const AdvertsCard = ({
   return (
     <div>
       <div>
-        {list.length ? list?.map((item) => (
+        {list.length ? advertsAdapt(list).map((item) => (
           <AdvertCardList
             key={item._id}
             link="/"
             img={item.images[0]}
             name={item.title}
-            location={item.address.city}
+            location={`${item.address.city}, ${item.address.admin_name}`}
             date={item.createdAt}
             price={`${item.price} грн.`}
             category={item.category.name}
+            subcategory={item.category.child.name}
           />
         )) : <EmptyAdvertsList /> }
       </div>
