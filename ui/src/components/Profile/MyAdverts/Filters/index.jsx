@@ -1,21 +1,18 @@
 import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
+
 // Icons
 import IconSearch from 'assets/icons/MagnifyingGlass';
-import IconArrowDown from 'assets/icons/ArrowDown';
 
 // Styles
 import {
   Wrapper,
   MainContainer,
-  IconWrap,
   Container,
   SearchInput,
-  DropDownBtn,
-  Button,
   IconContainer,
-  Test,
+  WrapSelect,
 } from './styled';
 
 const customStyles = {
@@ -23,6 +20,7 @@ const customStyles = {
     ...provided,
     color: state.selectProps.menuColor ? '' : '#002F34',
     padding: 5,
+    fontSize: '13px',
   }),
 
   control: (base, state) => ({
@@ -68,17 +66,7 @@ const Filters = ({ onSelected, onSearch }) => {
           />
         </Container>
         <Container>
-          <Button type="button">
-            Будь-яка категорія
-          </Button>
-          <DropDownBtn>
-            <IconWrap>
-              <IconArrowDown />
-            </IconWrap>
-          </DropDownBtn>
-        </Container>
-        <Container>
-          <Test>
+          <WrapSelect>
             <Select
               styles={customStyles}
               options={options}
@@ -93,7 +81,7 @@ const Filters = ({ onSelected, onSearch }) => {
                 },
               })}
             />
-          </Test>
+          </WrapSelect>
         </Container>
       </MainContainer>
       <span>

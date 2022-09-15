@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
-import AdvertCardList from '../AdvertCardList';
-import EmptyAdvertsList from '../EmptyAdvertsList';
+
+// Helpers
+import advertsAdapt from 'helpers/advertsAdapt';
+
+// Components
+import AdvertCardList from 'components/Profile/MyAdverts/AdvertsList/AdvertCardList';
+import EmptyAdvertsList from 'components/Profile/MyAdverts/AdvertsList/EmptyAdvertsList';
 
 const AdvertsCard = ({
   list = [], itemsAmount, changeFilters,
@@ -13,9 +18,9 @@ const AdvertsCard = ({
   const pageCount = Math.ceil(itemsAmount / 10);
 
   return (
-    <div>
+    <>
       <div>
-        {list.length ? list?.map((item) => (
+        {list.length ? advertsAdapt(list).map((item) => (
           <AdvertCardList
             key={item._id}
             link="/"
@@ -32,7 +37,7 @@ const AdvertsCard = ({
       {itemsAmount && (
         <ReactPaginate pageCount={pageCount} onPageChange={handlePageChange} />
       )}
-    </div>
+    </>
   );
 };
 
