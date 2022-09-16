@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import userServices from 'services/userServices';
 import PropTypes from 'prop-types';
@@ -25,6 +25,7 @@ const ChangeEmail = ({ email }) => {
 
   const onSubmit = async (data) => {
     const updateEmail = await userServices.updateUser(data);
+    console.log('updateEmail', updateEmail);
     reset(updateEmail);
   };
 
@@ -56,7 +57,11 @@ const ChangeEmail = ({ email }) => {
 };
 
 ChangeEmail.propTypes = {
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string,
+};
+
+ChangeEmail.defaultProps = {
+  email: '',
 };
 
 export default ChangeEmail;

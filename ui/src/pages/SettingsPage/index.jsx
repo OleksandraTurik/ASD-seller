@@ -36,6 +36,8 @@ const SettingsPage = () => {
             Component={item.Component}
             handleOpen={handleOpen}
             emailOfUser={data.email}
+            fullName={data.fullName}
+            address={data.address}
           />
         ))
       }
