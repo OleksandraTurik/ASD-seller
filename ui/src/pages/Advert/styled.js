@@ -2,15 +2,14 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: flex-start;
   background-color: ${props => props.theme.greyBackground};
-  padding: 24px;
+  padding: 15px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     align-items: center;
     flex-direction: column;
-    padding: 15px;
   }
 `;
 
@@ -19,26 +18,24 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-left: 24px;
+  width: 32%;
 
   @media screen and (max-width: 768px) {
-    margin-left: 15px;
+    width: 96%;
   }
 
   @media screen and (max-width: 600px) {
     margin-top: 15px;
-    margin-left: 0;
-    width: 85%;
   }
 `;
 
 export const SliderWrap = styled.div`
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  @media screen and (max-width: 600px) {
-    width: 90%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
   }
 `;

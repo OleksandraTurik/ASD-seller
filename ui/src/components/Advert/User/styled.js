@@ -7,27 +7,30 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  height: 215px;
-  width: 390px;
+  height: 175px;
+  width: 100%;
   border-radius: 5px;
   padding: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
 
   @media screen and (max-width: 1280px) {
     height: 150px;
-    width: 345px;
+    width: 100%;
     padding: 15px;
   }
 
   @media screen and (max-width: 768px) {
-    width: 280px;
-    margin-bottom: 15px;
+    width: 100%;
   }
 
   @media screen and (max-width: 600px) {
-    height: 130px;
-    width: 100%;
-    padding: 10px;
+    height: 140px;
+    width: 98%;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 125px;
+    width: 95%;
   }
 
   & h1 {
@@ -40,12 +43,8 @@ export const Wrapper = styled.div`
       font-size: 12px;
     }
 
-    @media screen and (max-width: 480px) {
-      font-size: 11px;
-    }
-
     @media screen and (max-width: 320px) {
-      font-size: 10px;
+      font-size: 11px;
     }
   }
 `;
@@ -55,7 +54,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     justify-content: flex-start;
   }
 `;
@@ -64,8 +63,9 @@ export const UserInfo = styled.div`
   width: 80%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     margin-left: 15px;
   }
 
@@ -74,19 +74,19 @@ export const UserInfo = styled.div`
     color: ${props => props.theme.mainGreenColor};
 
     @media screen and (max-width: 1280px) {
-      font-size: 16px;
+      font-size: 18px;
     }
 
     @media screen and (max-width: 768px) {
-      font-size: 14px;
+      font-size: 16px;
     }
 
     @media screen and (max-width: 600px) {
-      font-size: 12px;
+      font-size: 14px;
     }
 
     @media screen and (max-width: 320px) {
-      font-size: 11px;
+      font-size: 12px;
     }
   }
 `;
@@ -103,20 +103,16 @@ export const RegistrationDate = styled.div`
     color: #5b6f71;
   }
 
-  @media screen and (max-width: 1280px) {
+  @media screen and (max-width: 768px) {
     font-size: 12px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 480px) {
     font-size: 11px;
   }
 
-  @media screen and (max-width: 600px) {
-    font-size: 10px;
-  }
-
   @media screen and (max-width: 320px) {
-    font-size: 9px;
+    font-size: 10px;
   }
 `;
 
@@ -124,19 +120,19 @@ export const UserIcon = styled.img`
   width: 45px;
 
   @media screen and (max-width: 1280px) {
-    width: 40px;
+    width: 42px;
   }
 
   @media screen and (max-width: 768px) {
-    width: 34px;
+    width: 38px;
   }
 
   @media screen and (max-width: 600px) {
-    width: 29px;
+    width: 34px;
   }
 
   @media screen and (max-width: 320px) {
-    width: 25px;
+    width: 30px;
   }
 `;
 
@@ -161,14 +157,12 @@ export const Button = styled.button`
 
   @media screen and (max-width: 480px) {
     width: 140px;
-    height: 33px;
+    height: 34px;
     font-size: 11px;
   }
 
   @media screen and (max-width: 320px) {
-    width: 120px;
-    height: 30px;
-    font-size: 10px;
+    width: 125px;
   }
 
   &:hover {
@@ -219,8 +213,8 @@ export const AllAdvertsLink = styled(Link)`
     }
 
     @media screen and (max-width: 320px) {
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
     }
   }
 `;

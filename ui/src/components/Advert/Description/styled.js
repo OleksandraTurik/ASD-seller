@@ -7,33 +7,24 @@ export const Wrapper = styled.div`
   background-color: #fff;
   max-height: 800px;
   border-radius: 5px;
-  margin: 24px 0;
-  padding: 24px;
+  margin: 15px 0;
+  padding: 15px;
 
   & span {
     font-size: 32px;
     color: #002f34;
 
-    @media screen and (max-width: 1280px) {
-      font-size: 24px;
-    }
-
     @media screen and (max-width: 768px) {
-      font-size: 18px;
+      font-size: 26px;
     }
 
     @media screen and (max-width: 480px) {
-      font-size: 14px;
+      font-size: 21px;
     }
 
     @media screen and (max-width: 320px) {
-      font-size: 12px;
+      font-size: 16px;
     }
-  }
-
-  @media screen and (max-width: 1280px) {
-    margin: 15px 0;
-    padding: 15px;
   }
 
   @media screen and (max-width: 600px) {
@@ -46,7 +37,7 @@ export const Wrapper = styled.div`
     color: ${props => props.theme.mainGreenColor};
 
     @media screen and (max-width: 1280px) {
-      font-size: 32px;
+      font-size: 34px;
     }
 
     @media screen and (max-width: 768px) {
@@ -54,11 +45,11 @@ export const Wrapper = styled.div`
     }
 
     @media screen and (max-width: 480px) {
-      font-size: 20px;
+      font-size: 24px;
     }
 
     @media screen and (max-width: 320px) {
-      font-size: 16px;
+      font-size: 19px;
     }
   }
 
@@ -66,22 +57,18 @@ export const Wrapper = styled.div`
     color: ${props => props.theme.mainGreenColor};
     text-transform: uppercase;
     font-size: 24px;
-    margin: 12px 0 4px 0;
-
-    @media screen and (max-width: 1280px) {
-      font-size: 20px;
-    }
+    margin: 12px 0 8px 0;
 
     @media screen and (max-width: 768px) {
-      font-size: 18px;
+      font-size: 21px;
     }
 
     @media screen and (max-width: 480px) {
-      font-size: 14px;
+      font-size: 18px;
     }
 
     @media screen and (max-width: 320px) {
-      font-size: 11px;
+      font-size: 16px;
     }
   }
 
@@ -91,20 +78,12 @@ export const Wrapper = styled.div`
     font-size: 16px;
     color: ${props => props.theme.mainGreenColor};
 
-    @media screen and (max-width: 1280px) {
+    @media screen and (max-width: 768px) {
       font-size: 14px;
     }
 
-    @media screen and (max-width: 768px) {
-      font-size: 12px;
-    }
-
     @media screen and (max-width: 480px) {
-      font-size: 11px;
-    }
-
-    @media screen and (max-width: 320px) {
-      font-size: 9px;
+      font-size: 13px;
     }
   }
 `;
@@ -128,7 +107,7 @@ export const Container = styled.div`
     }
 
     @media screen and (max-width: 320px) {
-      font-size: 8px;
+      font-size: 9px;
     }
   }
 `;
@@ -166,8 +145,8 @@ export const FavoriteBtn = styled.button`
     }
 
     @media screen and (max-width: 320px) {
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
     }
   }
 `;
