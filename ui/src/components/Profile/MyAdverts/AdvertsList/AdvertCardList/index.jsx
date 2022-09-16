@@ -20,6 +20,7 @@ import {
   DataWrap,
   BottomWrap,
   EditLink,
+  ImageWrap,
 } from './styled';
 
 const AdvertCardList = ({
@@ -35,7 +36,9 @@ const AdvertCardList = ({
   <Wrapper>
     <Container>
       <TopWrap>
-        <ImgInCard src={`http://localhost:4000/${img}`} alt="bmw car" />
+        <ImageWrap>
+          <ImgInCard src={`http://localhost:4000/${img}`} alt="advert image" />
+        </ImageWrap>
         <AdvertInfoWrap>
           <AdvertHeaderWrap>
             <AdvertTitleLink to={link}>{name}</AdvertTitleLink>

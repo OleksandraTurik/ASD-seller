@@ -5,10 +5,13 @@ import PropTypes from 'prop-types';
 // Helpers
 import advertsAdapt from 'helpers/advertsAdapt';
 
+// Components
+import Loader from 'components/common/Loader';
 import AdvertCardList from '../AdvertCardList';
 import EmptyAdvertsList from '../EmptyAdvertsList';
+
+// Styles
 import './style.css';
-import Loader from '../../../../common/Loader';
 
 const AdvertsCard = ({
   list = [],
@@ -27,7 +30,7 @@ const AdvertsCard = ({
   return (
     <div>
       <div>
-        {!error && list.length ? list?.map((item) => (
+        {!error && list.length ? advertsAdapt(list)?.map((item) => (
           <AdvertCardList
             key={item._id}
             link="/"

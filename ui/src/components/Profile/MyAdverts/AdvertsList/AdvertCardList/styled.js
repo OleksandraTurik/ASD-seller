@@ -14,6 +14,20 @@ export const Container = styled.div`
   margin: 10px 0;
 `;
 
+export const ImageWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  width: 20%;
+  min-width: 150px;
+
+  @media (max-width: 450px) {
+    height: 200px;
+    width: 100%;
+  }
+`;
+
 export const EditLink = styled(Link)`
   display: flex;
   justify-content: center;
@@ -311,7 +325,11 @@ export const AdvertInfoWrap = styled.div`
 `;
 
 export const ImgInCard = styled.img`
-  height: 156px;
+  height: 100%;
+  max-height: 156px;
   max-width: 100%;
-  object-fit: cover;
+
+  @media screen and (max-width: 480px) {
+    max-height: 240px;
+  }
 `;
