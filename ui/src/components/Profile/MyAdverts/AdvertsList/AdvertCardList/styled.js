@@ -107,6 +107,7 @@ export const AdvertBodyWrap = styled.div`
 export const AdvertHeaderWrap = styled.div`
   width: 100%;
   display: flex;
+  width: 100%;
   align-items: flex-start;
   justify-content: space-between;
   margin: 6px 0 8px 0;
