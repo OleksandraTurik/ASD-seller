@@ -62,7 +62,7 @@ const Subcategories = ({ childrenCategory, childrenId }) => {
               )
               : (
                 <SubContainer key={item._id}>
-                  <LinkName to="/">{item.name}</LinkName>
+                  <LinkName to={`/adverts?category=${item._id}`}>{item.name}</LinkName>
                 </SubContainer>
               )
           ))
