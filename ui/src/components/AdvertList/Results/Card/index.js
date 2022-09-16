@@ -16,9 +16,8 @@ import {
 
 const Card = ({ body }) => {
   const navigate = useNavigate();
-
   const clickHandler = () => {
-    navigate(`/adverts/${body._id}`);
+    navigate(`/adverts/${body.id}`);
   };
 
   return (
@@ -60,7 +59,7 @@ const Card = ({ body }) => {
 
 Card.propTypes = {
   body: PropTypes.shape({
-    _id: PropTypes.string,
+    id: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
     images: PropTypes.arrayOf(PropTypes.string),
