@@ -2,9 +2,9 @@ import API from 'API';
 import ServerException from 'exceptions/serverException';
 
 const citiesServices = {
-  getCities: async () => {
+  getCities: async (signal) => {
     try {
-      const cities = await API.get('/cities?limit=2000');
+      const cities = await API.get('/cities?limit=2000', { signal });
       return cities;
     } catch (e) {
       throw new ServerException(e.response);

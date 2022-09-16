@@ -47,45 +47,43 @@ const AdvertPage = () => {
 
   const { loading, error } = advert;
 
-  const advertPage = () => {
-    if (error) {
-      return <NotFound />;
-    }
-
-    if (loading) {
-      return <Loader />;
-    }
-
-    return (
+  return (
+    <>
+      {loading && <Loader />}
       <Wrapper>
-        <SliderWrap>
-          <SimpleSlider
-            images={images}
-          />
-          <Description
-            title={title}
-            date={updatedAt}
-            price={`${price} грн.`}
-            description={description}
-          />
-        </SliderWrap>
-        <Container>
-          <User
-            name={contactName}
-            date={updatedAt}
-            link={`/adverts?seller=${sellerId}`}
-            phone={token ? phone : '(XXX) XXX XXXX'}
-          />
-          <Location
-            city={city}
-            region={region}
-          />
-        </Container>
+        {error && <NotFound />}
+        {!error
+          && !loading
+          && (
+            <>
+              <SliderWrap>
+                <SimpleSlider
+                  images={images}
+                />
+                <Description
+                  title={title}
+                  date={updatedAt}
+                  price={`${price} грн.`}
+                  description={description}
+                />
+              </SliderWrap>
+              <Container>
+                <User
+                  name={contactName}
+                  date={updatedAt}
+                  link={`/adverts?seller=${sellerId}`}
+                  phone={token ? phone : '(XXX) XXX XXXX'}
+                />
+                <Location
+                  city={city}
+                  region={region}
+                />
+              </Container>
+            </>
+          )}
       </Wrapper>
-    );
-  };
-
-  return (advertPage());
+    </>
+  );
 };
 
 export default AdvertPage;

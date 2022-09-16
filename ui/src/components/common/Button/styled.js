@@ -36,3 +36,15 @@ export const ArrowButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+export const CloseButton = styled.button`
+  background: none;
+  border: none;
+  border-radius: 50%;
+  &:hover {
+    background: #fff;
+  }
+  &:hover svg {
+    fill: ${props => props.theme.mainGreenColor};
+  }
+`;

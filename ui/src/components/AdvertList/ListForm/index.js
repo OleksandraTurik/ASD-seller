@@ -14,7 +14,7 @@ const ListForm = ({ onSubmit }) => {
     minPrice: pageQueries.get('minPrice') || '',
     category: pageQueries.get('category') || '',
   });
-  const [sort, setSort] = useState(pageQueries.get('search') || 'dscDate');
+  const [sort, setSort] = useState(pageQueries.get('sort') || 'dscDate');
 
   const submitHandler = (event) => {
     event.preventDefault();

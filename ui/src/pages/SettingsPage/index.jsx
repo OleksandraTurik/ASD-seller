@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
 import { settingsComponentMap } from 'components/SettingsPage';
+import { useParams } from 'react-router-dom';
+
 // Components
-import ChangeContacts from 'components/SettingsPage/ChangeContacts';
-import ChangeEmail from 'components/SettingsPage/ChangeEmail';
-import ChangeNumber from 'components/SettingsPage/ChangeNumber';
 import ItemContainer from 'components/SettingsPage/ItemContainer';
-import ChangePhoto from 'components/SettingsPage/ChangePhoto';
+
+// hooks
+import { useGetInfoExactUser } from 'components/hooks/useGetInfoExactUser';
 
 // Styles
 import { Container } from './styled';
 
 const SettingsPage = () => {
-  const [data, setData] = useState(settingsComponentMap);
+  const { id } = useParams();
+  const { data, error, loading } = useGetInfoExactUser(id);
+  const [dataComponent, setDataComponent] = useState(settingsComponentMap);
 
   const handleOpen = (id) => {
-    const newData = data.map((item) => ({
+    const newData = dataComponent.map((item) => ({
       ...item,
       isOpen: id === item.id ? !item.isOpen : false,
     }));
-    setData(newData);
+    setDataComponent(newData);
   };
 
   return (
     <Container>
       {
-        data.map((item) => (
+        dataComponent.map((item) => (
           <ItemContainer
             key={item.id}
             id={item.id}
@@ -32,6 +35,9 @@ const SettingsPage = () => {
             isOpen={item.isOpen}
             Component={item.Component}
             handleOpen={handleOpen}
+            emailOfUser={data.email}
+            fullName={data.fullName}
+            address={data.address}
           />
         ))
       }

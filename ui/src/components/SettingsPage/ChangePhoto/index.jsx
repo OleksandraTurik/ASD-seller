@@ -20,8 +20,7 @@ const ChangePhoto = () => {
     },
   });
   const onSubmit = async (data) => {
-    const updatePhoto = await userServices.updateUserPhoto(data);
-    console.log(data);
+    await userServices.updateUserPhoto({ avatar: data.file });
   };
 
   return (

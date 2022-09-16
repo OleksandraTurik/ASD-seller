@@ -13,14 +13,18 @@ export const Wrapper = styled.div`
   padding: 24px;
   margin-bottom: 24px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1280px) {
     height: 150px;
-    width: 280px;
+    width: 345px;
     padding: 15px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 280px;
     margin-bottom: 15px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     height: 130px;
     width: 100%;
     padding: 10px;
@@ -51,7 +55,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     justify-content: flex-start;
   }
 `;
@@ -61,7 +65,7 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     margin-left: 15px;
   }
 
@@ -69,11 +73,15 @@ export const UserInfo = styled.div`
     font-size: 20px;
     color: ${props => props.theme.mainGreenColor};
 
+    @media screen and (max-width: 1280px) {
+      font-size: 16px;
+    }
+
     @media screen and (max-width: 768px) {
       font-size: 14px;
     }
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       font-size: 12px;
     }
 
@@ -95,11 +103,15 @@ export const RegistrationDate = styled.div`
     color: #5b6f71;
   }
 
+  @media screen and (max-width: 1280px) {
+    font-size: 12px;
+  }
+
   @media screen and (max-width: 768px) {
     font-size: 11px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     font-size: 10px;
   }
 
@@ -111,11 +123,15 @@ export const RegistrationDate = styled.div`
 export const UserIcon = styled.img`
   width: 45px;
 
+  @media screen and (max-width: 1280px) {
+    width: 40px;
+  }
+
   @media screen and (max-width: 768px) {
     width: 34px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     width: 29px;
   }
 
@@ -137,7 +153,7 @@ export const Button = styled.button`
   color: ${props => props.theme.mainGreenColor};
   padding: 3px 8px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1280px) {
     width: 130px;
     height: 36px;
     font-size: 12px;

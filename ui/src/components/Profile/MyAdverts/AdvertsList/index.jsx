@@ -1,17 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AdvertCard from './AdvertCard';
 
-// Components
-import AdvertCard from 'components/Profile/MyAdverts/AdvertsList/AdvertCard';
-
-const AdvertsList = ({ setAmount }) => (
+const AdvertsList = ({
+  list = [], changeFilters, itemsAmount, error, loading,
+}) => (
   <div>
-    <AdvertCard setAmount={setAmount} />
+    <AdvertCard
+      list={list}
+      itemsAmount={itemsAmount}
+      changeFilters={changeFilters}
+      error={error}
+      loading={loading}
+    />
   </div>
 );
-
 AdvertsList.propTypes = {
-  setAmount: PropTypes.func.isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape),
+  itemsAmount: PropTypes.number,
+  changeFilters: PropTypes.func,
+  error: PropTypes.bool,
+  loading: PropTypes.bool,
+};
+
+AdvertsList.defaultProps = {
+  itemsAmount: 0,
+  list: [],
+  changeFilters: () => {},
+  error: false,
+  loading: true,
 };
 
 export default AdvertsList;

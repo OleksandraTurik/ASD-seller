@@ -4,33 +4,24 @@ import PropTypes from 'prop-types';
 
 // Icons
 import IconSearch from 'assets/icons/MagnifyingGlass';
-import IconArrowDown from 'assets/icons/ArrowDown';
 
 // Styles
 import {
   Wrapper,
   MainContainer,
-  IconWrap,
   Container,
   SearchInput,
-  DropDownBtn,
-  Button,
   IconContainer,
-  Test,
+  WrapSelect,
 } from './styled';
-
-const options = [
-  { value: 'заголовок: а-я', label: 'Заголовок: А-Я' },
-  { value: 'заголовок: я-а', label: 'Заголовок: Я-А' },
-  { value: 'ціна: найнижча', label: 'Ціна: Найнижча' },
-  { value: 'ціна: найвища', label: 'Ціна: Найвища' },
-];
+import CategoryFilter from '../../../AdvertList/ListForm/Filters/CategoryFilter';
 
 const customStyles = {
   menu: (provided, state) => ({
     ...provided,
     color: state.selectProps.menuColor ? '' : '#002F34',
     padding: 5,
+    fontSize: '13px',
   }),
 
   control: (base, state) => ({
@@ -50,65 +41,70 @@ const customStyles = {
   },
 };
 
-const Filters = ({
-  itemsAmount,
-}) => (
-  <Wrapper>
-    <MainContainer>
-      <Container>
-        <IconContainer>
-          <IconSearch
-            width="20px"
-            height="20px"
-            fill="#002F34"
+const Filters = ({ onSelected, onSearch, categorySelected }) => {
+  const options = [
+    { value: 'ascTitle', label: 'Заголовок: А-Я' },
+    { value: 'dscTitle', label: 'Заголовок: Я-А' },
+    { value: 'ascPrice', label: 'Ціна: Найнижча' },
+    { value: 'dscPrice', label: 'Ціна: Найвища' },
+  ];
+
+  return (
+    <Wrapper>
+      <MainContainer>
+        <Container>
+          <IconContainer>
+            <IconSearch
+              width="20px"
+              height="20px"
+              fill="#002F34"
+            />
+          </IconContainer>
+          <SearchInput
+            onChange={onSearch}
+            type="text"
+            placeholder="Заголовок"
           />
-        </IconContainer>
-        <SearchInput
-          type="text"
-          placeholder="Заголовок"
-        />
-      </Container>
-      <Container>
-        <Button type="button">
-          Будь-яка категорія
-        </Button>
-        <DropDownBtn>
-          <IconWrap>
-            <IconArrowDown />
-          </IconWrap>
-        </DropDownBtn>
-      </Container>
-      <Container>
-        <Test>
-          <Select
-            styles={customStyles}
-            options={options}
-            placeholder="Сортувати"
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                primary25: '#cbf7ee',
-                primary: '#002F34',
-              },
-            })}
-          />
-        </Test>
-      </Container>
-    </MainContainer>
-    <span>
-      Всього оголошень:
-      {` ${itemsAmount}`}
-    </span>
-  </Wrapper>
-);
+        </Container>
+        <Container>
+          <CategoryFilter onSelect={(category) => categorySelected(category)} />
+        </Container>
+        <Container>
+          <WrapSelect>
+            <Select
+              styles={customStyles}
+              options={options}
+              onChange={onSelected}
+              placeholder="Сортувати"
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary25: '#cbf7ee',
+                  primary: '#002F34',
+                },
+              })}
+            />
+          </WrapSelect>
+        </Container>
+      </MainContainer>
+      <span>
+        Всього оголошень:
+        {' '}
+      </span>
+    </Wrapper>
+  );
+};
 
 Filters.propTypes = {
-  itemsAmount: PropTypes.number,
+  onSelected: PropTypes.func,
+  onSearch: PropTypes.func,
+  categorySelected: PropTypes.func,
 };
 
 Filters.defaultProps = {
-  itemsAmount: 0,
+  onSelected: () => {},
+  onSearch: () => {},
+  categorySelected: () => {},
 };
-
 export default Filters;

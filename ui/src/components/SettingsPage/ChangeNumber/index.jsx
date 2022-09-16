@@ -26,7 +26,7 @@ const ChangeNumber = () => {
         <SubContainer>
           <SubText>Новий телефон</SubText>
           <Input
-            {...register('number', {
+            {...register('phoneNumber', {
               required: 'This field is required',
               minLength: {
                 value: 8,

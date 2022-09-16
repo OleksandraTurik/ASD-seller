@@ -43,7 +43,7 @@ const Subcategories = ({ childrenCategory, childrenId }) => {
   };
 
   return (
-    <div>
+    <>
       <Container>
         {
           childrenCategory.map((item) => (
@@ -74,12 +74,16 @@ const Subcategories = ({ childrenCategory, childrenId }) => {
           ? <Subcategories childrenCategory={childrenSubcategory} />
           : null
       }
-    </div>
+    </>
   );
 };
 
 Subcategories.propTypes = {
-  childrenCategory: PropTypes.arrayOf(PropTypes.Object),
+  childrenCategory: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    children: PropTypes.arrayOf(PropTypes.shape({})),
+  })),
   childrenId: PropTypes.string,
 };
 

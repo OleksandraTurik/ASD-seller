@@ -5,19 +5,21 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   max-width: 1238px;
   margin: 0 auto;
   border: 1px solid #efefef;
   color: #003034;
+  padding: 20px; 
+  gap: 30px;
 `;
 
 export const SubContainer = styled.div`
-  margin: 20px 0 20px 30px;
   font-size: 18px;
 `;
 
 export const ButtonContainer = styled.div`
-  margin: 20px 0px 20px 20px;
+  margin: 20px 0 20px 20px;
 `;
 
 export const NameButtonContainer = styled.div`

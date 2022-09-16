@@ -1,35 +1,19 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 // Icons
 import Logo from 'assets/icons/Logo';
-import Like from 'assets/icons/Like';
-import Login from 'assets/icons/Login';
-import Logout from 'assets/icons/Logout';
-import User from 'assets/icons/User';
 
 // Styles
 import {
   Nav,
-  Ul,
-  Li,
   Container,
-  NavLink,
-  NavLinkAdverts,
   NavLinkHeader,
 } from './styled';
+import RightNav from './RightNav';
+import ModalContainer from './ModalContainer';
 
 const Header = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem('tokens');
-  const user = JSON.parse(token);
-  const userId = user ? user.userDto.id : null;
-
-  const logout = () => {
-    localStorage.clear();
-    navigate('/login', { replace: true });
-  };
-
+  const [active, setActive] = useState(false);
   return (
     <Container>
       <Nav>
@@ -39,62 +23,9 @@ const Header = () => {
             fill="#fff"
           />
         </NavLinkHeader>
-        <Ul>
-          {token
-            ? (
-              <>
-                <Li>
-                  <NavLink to="/favorites">
-                    <Like
-                      width="25px"
-                      height="25px"
-                      fill="#fff"
-                    />
-                  </NavLink>
-                </Li>
-                <Li>
-                  <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
-                </Li>
-                <Li>
-                  <NavLink to={`/profiles/${userId}/adverts`}>
-                    <User
-                      width="25px"
-                      height="25px"
-                      fill="#fff"
-                    />
-                  </NavLink>
-                </Li>
-              </>
-            )
-            : null}
-          {!token
-            ? (
-              <Li>
-                <NavLink to="/login">
-                  <Login
-                    width="25px"
-                    height="25px"
-                    fill="#fff"
-                  />
-                </NavLink>
-              </Li>
-            )
-            : (
-              <Li>
-                <NavLink
-                  onClick={logout}
-                  to="/login"
-                >
-                  <Logout
-                    width="25px"
-                    height="25px"
-                    fill="#fff"
-                  />
-                </NavLink>
-              </Li>
-            )}
-        </Ul>
+        <RightNav setActive={setActive} />
       </Nav>
+      <ModalContainer active={active} setActive={setActive} />
     </Container>
   );
 };

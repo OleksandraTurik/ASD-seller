@@ -23,8 +23,8 @@ import Modal from 'components/Modal/Modal';
 import ArrowDownIcon from 'assets/icons/ArrowDown';
 import ThinArrowRight from 'assets/icons/ThinArrowRight';
 
-// Images
-import avtoImg from 'assets/img/rubryky/avto.png';
+import DropdownIndicator from 'helpers/DropdownIndicator';
+import stylesForReactSelect from 'helpers/stylesForReactSelect';
 
 // Styles
 import {
@@ -58,19 +58,19 @@ const AddAdsPage = () => {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
   const user = JSON.parse(localStorage.getItem('tokens'));
-  const { cities, loading, error } = useFetchCities();
+  const { cities } = useFetchCities();
   const {
     register, handleSubmit, control, reset, formState: { errors },
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      title: 'I love donezk and luganskI love donezk and lugansk',
-      description: 'I love donezk and luganskI love donezk and lugansk',
-      price: '200',
+      title: '',
+      description: '',
+      price: '',
       sellerId: user.userDto.id,
-      contactName: 'НАДЯ ТУРИК',
-      contactPhone: '3809123123123',
-      address: 'I love donezk and luganskI love donezk and lugansk',
+      contactName: '',
+      contactPhone: '+380',
+      address: '',
       images: '',
       category: '',
     },
@@ -178,7 +178,7 @@ const AddAdsPage = () => {
                       key={item._id}
                       onClick={handleClick(item)}
                     >
-                      <ImgCirle src={avtoImg} alt="category picture" />
+                      <ImgCirle src={`http://localhost:4000/${item.image}`} alt={`Категорія ${item.name}`} />
                       {item.name}
                     </CategoryItems>
                   )) : (
@@ -264,10 +264,13 @@ const AddAdsPage = () => {
                 name="address"
                 render={({ field: { onChange, value, ref } }) => (
                   <Select
+                    placeholder="Ваш населений пункт"
                     inputRef={ref}
                     value={cities?.find((c) => c.value === value)}
                     onChange={(val) => onChange(val.value)}
                     options={cities}
+                    styles={stylesForReactSelect}
+                    components={{ DropdownIndicator }}
                   />
                 )}
               />
@@ -310,7 +313,7 @@ const AddAdsPage = () => {
             </CategoryWidthEquation>
           </WhiteBlock>
           <WhiteBlock>
-            <PublishButton type="submit" value="Опублікувати" style={{ float: 'right' }}>Опублікувати</PublishButton>
+            <PublishButton type="submit" value="Опублікувати">Опублікувати</PublishButton>
           </WhiteBlock>
         </form>
       </Wrapper>

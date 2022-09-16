@@ -24,16 +24,25 @@ const Wrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
 
+  @media (max-width: 450px) {
+    flex-direction: column;
+    align-items: normal;
+  }
+
   h5 {
     font-size: 18px;
     font-weight: normal;
   }
 `;
 
+const SortDropdown = styled(Dropdown)`
+  width: 100%;
+`;
+
 const Sort = ({ value, onSelect }) => (
   <Wrapper>
     <h5>Сортувати за:</h5>
-    <Dropdown defaultID={value} onSelect={({ id }) => onSelect(id)} options={sortMethods} />
+    <SortDropdown defaultID={value} onSelect={({ id }) => onSelect(id)} options={sortMethods} />
   </Wrapper>
 );
 

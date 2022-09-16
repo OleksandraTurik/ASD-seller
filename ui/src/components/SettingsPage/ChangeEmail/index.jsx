@@ -1,6 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import userServices from 'services/userServices';
+import PropTypes from 'prop-types';
+
 // Components
 import Button from 'components/common/Button';
 import Input from 'components/common/Input';
@@ -9,15 +11,22 @@ import MainContainer from 'components/SettingsPage/MainContainer';
 import SubContainer from 'components/SettingsPage/SubContainer';
 import SubText from 'components/SettingsPage/SubText';
 
-const ChangeEmail = () => {
+// helpers
+import validation from 'helpers/validation';
+
+const ChangeEmail = ({ email }) => {
   const { handleSubmit, reset, register } = useForm({
     mode: 'onChange',
+
+    defaultValues: {
+      email,
+    },
   });
 
   const onSubmit = async (data) => {
     const updateEmail = await userServices.updateUser(data);
-    console.log(data);
-    reset();
+    console.log('updateEmail', updateEmail);
+    reset(updateEmail);
   };
 
   return (
@@ -27,10 +36,14 @@ const ChangeEmail = () => {
           <SubText>Новий email</SubText>
           <Input
             {...register('email', {
-              required: 'This field is required',
+              required: "email поле обов'язкове",
               minLength: {
                 value: 6,
-                message: 'Error! Must be more than 6 symbols',
+                message: 'Помилка! Має бути більше шести символів',
+              },
+              pattern: {
+                value: validation.email,
+                message: 'Неправильний формат email',
               },
             })}
           />
@@ -41,6 +54,14 @@ const ChangeEmail = () => {
       </form>
     </MainContainer>
   );
+};
+
+ChangeEmail.propTypes = {
+  email: PropTypes.string,
+};
+
+ChangeEmail.defaultProps = {
+  email: '',
 };
 
 export default ChangeEmail;

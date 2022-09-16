@@ -33,11 +33,13 @@ export const InfoWrapperSection = styled.div`
 
 export const LikeButton = styled.button`
   cursor: pointer;
-  width: 30px;
-  height: 30px;
   border: none;
   background: transparent;
   margin-left: auto;
+
+  &:hover svg { 
+    fill: #002f34; 
+  } 
 `;
 
 export const ImageContainer = styled.div`

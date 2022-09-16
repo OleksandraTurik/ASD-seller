@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from 'components/AdvertList/Results/Card';
 import Loader from 'components/common/Loader';
-import { Wrapper, Title, LoaderWrapper } from './styled';
+import Card from 'components/AdvertList/Results/Card';
+import advertsAdapt from 'helpers/advertsAdapt';
+import { Wrapper, Title } from './styled';
 
 const Results = ({ data, resultAmount, pending }) => {
   let content;
 
   if (pending) {
     content = (
-      <LoaderWrapper>
-        <Loader margin="0" />
-      </LoaderWrapper>
+      <Loader />
     );
   } else if (data.length <= 0) {
     content = <Title>No items was found</Title>;
@@ -25,7 +24,7 @@ const Results = ({ data, resultAmount, pending }) => {
           {' '}
           оголошень
         </Title>
-        {data.map((e) => (
+        {advertsAdapt(data).map((e) => (
           <Card key={e._id} body={e} />
         ))}
       </>

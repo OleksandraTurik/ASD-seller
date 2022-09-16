@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   background-color: ${props => props.theme.greyBackground};
   padding: 24px;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     align-items: center;
     flex-direction: column;
     padding: 15px;
@@ -25,7 +25,7 @@ export const Container = styled.div`
     margin-left: 15px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     margin-top: 15px;
     margin-left: 0;
     width: 85%;
@@ -38,7 +38,7 @@ export const SliderWrap = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 600px) {
     width: 90%;
   }
 `;
