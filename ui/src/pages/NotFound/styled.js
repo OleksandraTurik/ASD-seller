@@ -5,6 +5,11 @@ export const Wrapper = styled.div`
   height: 90vh;
   padding: 16px;
 `;
+export const Title = styled.h1`
+  height: 90vh;
+  padding: 16px;
+  margin-top: 20px;
+`;
 
 export const Container = styled.div`
   height: 100%;

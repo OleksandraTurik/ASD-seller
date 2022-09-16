@@ -70,7 +70,6 @@ const Filters = ({ onSelected, onSearch, categorySelected }) => {
           <CategoryFilter onSelect={(category) => categorySelected(category)} />
         </Container>
         <Container>
-          <Test>
           <WrapSelect>
             <Select
               styles={customStyles}
@@ -100,10 +99,12 @@ const Filters = ({ onSelected, onSearch, categorySelected }) => {
 Filters.propTypes = {
   onSelected: PropTypes.func,
   onSearch: PropTypes.func,
+  categorySelected: PropTypes.func,
 };
 
 Filters.defaultProps = {
   onSelected: () => {},
   onSearch: () => {},
+  categorySelected: () => {},
 };
 export default Filters;

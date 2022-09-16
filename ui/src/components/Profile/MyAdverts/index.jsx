@@ -15,6 +15,7 @@ const MyAdverts = () => {
   const { id } = useParams();
   const {
     list,
+    loading,
     error,
     fetchData,
     changeFilters,
@@ -39,6 +40,7 @@ const MyAdverts = () => {
         fetchData={fetchData}
         changeFilters={changeFilters}
         itemsAmount={itemsAmount}
+        loading={loading}
       />
     </Wrapper>
   );

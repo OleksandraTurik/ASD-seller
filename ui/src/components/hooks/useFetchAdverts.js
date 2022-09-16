@@ -27,8 +27,10 @@ export const useFetchAdverts = (id) => {
       const adverts = await advertServices.getAdvertsList(id, filters);
       setList(adverts.data.results);
       setItemsAmount(adverts.data.itemsAmount);
+      setLoading(false);
     } catch (e) {
       setError(e.message);
+      setLoading(false);
     }
   };
   useEffect(() => {
