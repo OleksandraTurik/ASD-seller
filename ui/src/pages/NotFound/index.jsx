@@ -10,6 +10,7 @@ import {
   Icon,
   GoHomeLink,
   Container,
+  Title,
 } from './styled';
 import NotFoundAdverts from '../../assets/icons/NotFoundAdverts';
 
@@ -17,7 +18,7 @@ const NotFound = ({ activeEmail }) => (
   <Wrapper>
     <Container>
       {activeEmail ? <NotFoundAdverts width={200} /> : <Icon src={cat} alt="cat icon" />}
-      <h1>{activeEmail ? 'Активуйте ваш профіль, лінк з активацією надіслано Вам на почту' : 'Сторінку не знайдено'}</h1>
+      <Title>{activeEmail ? 'Активуйте ваш профіль, лінк з активацією надіслано Вам на почту' : 'Сторінку не знайдено'}</Title>
       <GoHomeLink to="/">На головну</GoHomeLink>
     </Container>
   </Wrapper>

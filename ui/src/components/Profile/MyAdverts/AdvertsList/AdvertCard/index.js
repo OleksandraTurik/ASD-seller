@@ -8,15 +8,22 @@ import advertsAdapt from 'helpers/advertsAdapt';
 import AdvertCardList from '../AdvertCardList';
 import EmptyAdvertsList from '../EmptyAdvertsList';
 import './style.css';
+import Loader from '../../../../common/Loader';
 
 const AdvertsCard = ({
-  list = [], itemsAmount, changeFilters, error,
+  list = [],
+  itemsAmount,
+  changeFilters,
+  error,
+  loading,
 }) => {
   const handlePageChange = ({ selected }) => {
     changeFilters('page', selected + 1);
   };
   const pageCount = Math.ceil(itemsAmount / 10);
-
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div>
       <div>
@@ -58,6 +65,7 @@ AdvertsCard.propTypes = {
   itemsAmount: PropTypes.number,
   changeFilters: PropTypes.func,
   error: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 AdvertsCard.defaultProps = {
@@ -65,6 +73,7 @@ AdvertsCard.defaultProps = {
   list: [],
   changeFilters: () => {},
   error: false,
+  loading: true,
 };
 
 export default AdvertsCard;
