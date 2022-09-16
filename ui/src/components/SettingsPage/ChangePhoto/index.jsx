@@ -16,7 +16,7 @@ const ChangePhoto = () => {
     mode: 'onChange',
 
     defaultValues: {
-      images: '',
+      avatar: '',
     },
   });
   const onSubmit = async (data) => {
@@ -29,8 +29,8 @@ const ChangePhoto = () => {
         <SubContainer>
           <FileContainer>
             <ChooseFileStyle
-              id="images"
-              name="images"
+              id="avatar"
+              name="avatar"
               accept="image/heic, image/png, image/jpeg, image/webp"
               multiple
               type="file"

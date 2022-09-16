@@ -7,12 +7,14 @@ const PrivateRoute = ({ children }) => {
   const navigate = useNavigate();
   const activated = JSON.parse(localStorage.getItem('tokens'))?.userDto.isActivated;
   console.log(activated);
-  return activated ? children : <NotFound activeEmail />;
+  return true ? children : <NotFound activeEmail />;
 };
+
 PrivateRoute.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
 };
+
 export default PrivateRoute;
