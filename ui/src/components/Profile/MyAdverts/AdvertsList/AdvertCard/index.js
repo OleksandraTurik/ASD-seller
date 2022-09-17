@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
-
-// Helpers
-import advertsAdapt from 'helpers/advertsAdapt';
+import moment from 'moment';
 
 // Components
 import Loader from 'components/common/Loader';
@@ -30,14 +28,14 @@ const AdvertsCard = ({
   return (
     <div>
       <div>
-        {!error && list.length ? advertsAdapt(list)?.map((item) => (
+        {!error && list.length ? list?.map((item) => (
           <AdvertCardList
             key={item._id}
             link="/"
             img={item.images[0]}
             name={item.title}
             location={`${item.address.city}, ${item.address.admin_name}`}
-            date={item.createdAt}
+            date={moment(item.createdAt).format('MM-DD-YYYY')}
             price={`${item.price} грн.`}
             category={item.category.name}
             subcategory={item.category.child.name}
