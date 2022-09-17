@@ -1,13 +1,13 @@
 import styled from 'styled-components';
+import Select from 'react-select';
 import closeIcon from 'assets/icons/closeIcon.svg';
-import Dropdown from '../Dropdown';
 
-export const StyledForm = styled.form`
+export const Section = styled.section`
   padding: 40px 20px;
-  background-color: ${props => props.theme.greyBackground};
+  background-color: ${props => props.theme.greyBackground}
 `;
 
-export const SearchDiv = styled.div`
+export const Form = styled.form`
   display: flex;
   max-width: 1250px;
   background-color: white;
@@ -15,54 +15,46 @@ export const SearchDiv = styled.div`
   margin: 0 auto;
   border-radius: 2px 0 0 2px;
 
-  @media (max-width: 580px) {
+  @media (max-width: 700px) {
     flex-direction: column;
   }
 `;
 
-export const SearchIconWrap = styled.div`
-  position: absolute;
-  left: 22px;
-  top: 20px;
-`;
+export const SearchController = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-height: 70px;
 
-export const LocationIconWrap = styled.div`
-  position: relative;
+  svg {
+    padding: 0 20px;
+    min-width: 25px;
+  }
 
-  & svg {
-    position: absolute;
-    left: 20px;
-    top: 20px;
+  @media (max-width: 700px) {
+    border-bottom: 3px solid ${props => props.theme.greyBackground};
   }
 `;
 
-export const StyledInput = styled.input`
+export const DropdownController = styled(SearchController)`
+  flex: 0 0 0;
+  border-left: 3px solid ${props => props.theme.greyBackground};
+  min-width: 30%;
+  
+  @media (max-width: 700px) {
+    border-left: none;
+  }
+`;
+
+export const SearchInput = styled.input`
   border: none;
-  outline: none;
-  padding-left: 0;
-  padding-right: 0;
   line-height: 56px;
-  height: 70px;
-  margin: 0 0 0 65px;
   font-size: 16px;
   font-weight: 600;
   color: ${props => props.theme.mainGreenColor};
-  font-family: inherit;
-  border-right: 1px solid ${props => props.theme.greyBackground};
+  height: 100%;
   flex: 1 1 auto;
-  
-  @media (max-width: 580px) {
-    border-bottom: 1px solid ${props => props.theme.greyBackground};
-    width: inherit;
-  }
-
-  /* &:nth-child(1) {
-    max-width: 675px;
-  }
-
-  &:nth-child(2) {
-    max-width: 295px;
-  } */
+  min-width: 10px;
 
   &::placeholder {
     font-weight: 400;
@@ -86,28 +78,35 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const SearchDropdown = styled(Dropdown)`
-  border: none;
-  outline: none;
-  padding-left: 0;
-  padding-right: 0;
-  line-height: 56px;
-  height: 70px;
-  margin: 0 0 0 65px;
+export const SearchDropdown = styled(Select).attrs({
+  placeholder: 'Вся Україна',
+  styles: {
+    control: (prev) => ({
+      ...prev,
+      border: 'none',
+      padding: '0',
+      borderRadius: 'none',
+      height: '100%',
+      width: '100%',
+    }),
+    dropdownIndicator: prev => ({
+      ...prev,
+      padding: '0',
+      border: 'none',
+    }),
+    valueContainer: prev => ({
+      ...prev,
+      padding: '0',
+    }),
+  },
+})`
   font-size: 16px;
-  font-weight: 600;
   color: ${props => props.theme.mainGreenColor};
-  font-family: inherit;
-  border-right: 1px solid ${props => props.theme.greyBackground};
-  width: 300px;
-  
-  @media (max-width: 580px) {
-    border-bottom: 1px solid ${props => props.theme.greyBackground};
-    width: inherit;
-  }
+  width: 40%;
+  flex: 1 1 auto;
 `;
 
-export const SubmitSearchButton = styled.button`
+export const Submit = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,9 +119,8 @@ export const SubmitSearchButton = styled.button`
   color: ${props => props.theme.mainGreenColor};
   cursor: pointer;
   background-color: #fff;
-  
 
-  @media (max-width: 580px) {
+  @media (max-width: 700px) {
     width: 100%;
   }
 
