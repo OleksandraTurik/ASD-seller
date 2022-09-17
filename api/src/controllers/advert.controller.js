@@ -46,8 +46,8 @@ async function postAdvert(req, res) {
     if (!(await Category.findById(category)))
       throw new StatusError(400, `Category with ID: ${category} does not exist`);
     if (title.length < 16 || title.length > 200) throw new StatusError(400, 'Title must have 16-200 symbols');
-    if (description.length < 80 || description.length > 9000)
-      throw new StatusError(400, 'Description must have 80-9000 symbols');
+    if (description.length < 20 || description.length > 9000)
+      throw new StatusError(400, 'Description must have 20-9000 symbols');
     if (price <= 0) throw new StatusError(400, 'Price must be larger than 0');
 
     const addressItem = await City.findById(address);
@@ -114,8 +114,8 @@ async function patchAdvertItem(req, res) {
       throw new StatusError(400, `Category with ID: ${category} does not exist`);
     if (title && (title.length < 16 || title.length > 200))
       throw new StatusError(400, 'Title must have 16-200 symbols');
-    if (description && (description.length < 80 || description.length > 9000))
-      throw new StatusError(400, 'Description must have 80-9000 symbols');
+    if (description && (description.length < 20 || description.length > 9000))
+      throw new StatusError(400, 'Description must have 20-9000 symbols');
     if (price && +price <= 0) throw new StatusError(400, 'Price must be > 0');
     if (address && !(await City.findById(address)))
       throw new StatusError(400, `City with ID: ${address} does not exist`);
