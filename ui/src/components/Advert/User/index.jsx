@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Icons
@@ -22,7 +22,10 @@ const User = ({
   link,
   phone,
 }) => {
-  const [value, setValue] = useState('Показати телефон');
+  const [value, setValue] = useState('');
+  const [show, setShow] = useState(false);
+
+  useEffect(() => show ? setValue(phone) : setValue('Показати телефон'), [show]);
 
   return (
     <Wrapper>
@@ -37,7 +40,9 @@ const User = ({
           </RegistrationDate>
         </UserInfo>
       </Container>
-      <Button onClick={() => setValue(phone)}>{value}</Button>
+      <Button onClick={() => setShow(!show)}>
+        {value}
+      </Button>
       <AllAdvertsLink to={link}>
         Усі оголошення автора
         <IconArrowRight
