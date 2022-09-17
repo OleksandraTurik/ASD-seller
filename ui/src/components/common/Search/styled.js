@@ -109,6 +109,7 @@ export const SearchDropdown = styled(Select).attrs({
 export const Submit = styled.button`
   display: flex;
   justify-content: center;
+  gap: 10px;
   align-items: center;
   font-size: 16px;
   font-weight: 600;

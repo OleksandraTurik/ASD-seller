@@ -49,7 +49,7 @@ const Search = () => {
           <SearchDropdown options={options} />
         </DropdownController>
         <Submit type="submit">
-          Пошук&nbsp;&nbsp;&nbsp;
+          Пошук
           <IconSearch width="25px" height="25px" fill="#002f34" />
         </Submit>
       </Form>
