@@ -28,12 +28,8 @@ export const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 480px) {
-    height: 105px;
+    height: 140px;
     width: 95%;
-  }
-
-  @media screen and (max-width: 320px) {
-    height: 90px;
   }
 
   & h1 {
@@ -59,11 +55,7 @@ export const LocationWrap = styled.div`
   justify-content: space-evenly;
 
   @media screen and (max-width: 1280px) {
-    width: 50%;
-  }
-
-  @media screen and (max-width: 320px) {
-    width: 60%;
+    width: 65%;
   }
 
   & svg {
@@ -139,9 +131,9 @@ export const MapImage = styled.img`
     border-radius: 8px;
   }
 
-  @media screen and (max-width: 320px) {
-    width: 90px;
-    height: 55px;
+  @media screen and (max-width: 480px) {
+    width: 120px;
+    height: 65px;
     border-radius: 5px;
   }
 `;
@@ -151,4 +143,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 480px) {
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
 `;

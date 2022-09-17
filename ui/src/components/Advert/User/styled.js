@@ -150,15 +150,15 @@ export const Button = styled.button`
   padding: 3px 8px;
 
   @media screen and (max-width: 1280px) {
-    width: 130px;
-    height: 36px;
-    font-size: 12px;
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
   }
 
   @media screen and (max-width: 480px) {
     width: 140px;
-    height: 34px;
-    font-size: 11px;
+    height: 36px;
+    font-size: 12px;
   }
 
   @media screen and (max-width: 320px) {
