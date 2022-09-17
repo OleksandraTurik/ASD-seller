@@ -20,7 +20,7 @@ const Description = ({
 }) => (
   <Wrapper>
     <Container>
-      <span>{date}</span>
+      <span>{`Опубліковано ${date}`}</span>
       <FavoriteBtn>
         <Like
           width="25px"

@@ -59,7 +59,7 @@ export const LocationWrap = styled.div`
   justify-content: space-evenly;
 
   @media screen and (max-width: 1280px) {
-    width: 35%;
+    width: 50%;
   }
 
   @media screen and (max-width: 320px) {
