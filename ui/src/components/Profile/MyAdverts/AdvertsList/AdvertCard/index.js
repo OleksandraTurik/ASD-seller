@@ -25,13 +25,14 @@ const AdvertsCard = ({
   if (loading) {
     return <Loader />;
   }
+
   return (
     <div>
       <div>
         {!error && list.length ? list?.map((item) => (
           <AdvertCardList
             key={item._id}
-            link="/"
+            link={`/adverts/${item._id}`}
             img={item.images[0]}
             name={item.title}
             location={`${item.address.city}, ${item.address.admin_name}`}
