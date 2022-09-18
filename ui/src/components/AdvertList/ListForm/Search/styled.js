@@ -6,7 +6,7 @@ export const FormController = styled.div`
   height: 55px;
   gap: 10px;
 
-  @media (max-width: 450px) {
+  @media (max-width: 550px) {
     flex-direction: column;
     height: auto;
   }
@@ -21,20 +21,43 @@ export const SearchInput = styled.input.attrs({
   border: none;
   width: calc(100% - 28px);
   font-size: 16px;
-  @media (max-width: 450px) {
+  background: white;
+  @media (max-width: 550px) {
     width: auto;
   }
 `;
 
 export const CityDropdown = styled(Select).attrs({
   placeholder: 'Уся Україна',
+  styles: {
+    control: (prev) => ({
+      ...prev,
+      height: '100%',
+      borderRadius: 'none',
+      border: 'none',
+    }),
+    input: (prev) => ({
+      ...prev,
+      margin: '0',
+      padding: '0',
+      width: '100%',
+
+    }),
+    valueContainer: (prev) => ({
+      ...prev,
+      padding: '14px',
+    }),
+    dropdownIndicator: (prev) => ({
+      ...prev,
+      padding: '10px',
+    }),
+  },
 })`
-  padding: 14px;
   line-height: 20px;
   border: none;
   width: calc(100% - 28px);
   font-size: 16px;
-  @media (max-width: 450px) {
+  @media (max-width: 550px) {
     width: auto;
   }
 `;
