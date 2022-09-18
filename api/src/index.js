@@ -13,7 +13,7 @@ const { PORT } = process.env || 4000;
 const app = express();
 
 const corsOptions = {
-  origin: [process.env.CORS_ORIGIN || '', 'http://localhost:3000'],
+  origin: [process.env.IP ? `http://${process.env.IP}:3000` : '', 'http://localhost:3000'],
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
