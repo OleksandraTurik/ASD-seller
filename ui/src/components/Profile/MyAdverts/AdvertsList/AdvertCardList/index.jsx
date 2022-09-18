@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { URL } from 'API';
 
 // Icons
 import IconLocation from 'assets/icons/Location';
@@ -35,7 +36,7 @@ const AdvertCardList = ({
   <Wrapper>
     <Container>
       <TopWrap>
-        <ImgInCard src={`http://localhost:4000/${img}`} alt="bmw car" />
+        <ImgInCard src={`${URL}/${img}`} alt="bmw car" />
         <AdvertInfoWrap>
           <AdvertHeaderWrap>
             <AdvertTitleLink to={link}>{name}</AdvertTitleLink>

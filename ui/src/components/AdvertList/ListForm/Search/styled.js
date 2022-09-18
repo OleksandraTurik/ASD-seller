@@ -1,24 +1,14 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import Select from 'react-select';
 
 export const FormController = styled.div`
   display: flex;
   height: 55px;
   gap: 10px;
 
-  @media (max-width: 450px) {
+  @media (max-width: 550px) {
     flex-direction: column;
     height: auto;
-  }
-`;
-
-const Input = css`
-  padding: 14px;
-  line-height: 20px;
-  border: none;
-  width: calc(100% - 28px);
-  font-size: 16px;
-  @media (max-width: 450px) {
-    width: auto;
   }
 `;
 
@@ -26,14 +16,49 @@ export const SearchInput = styled.input.attrs({
   type: 'search',
   placeholder: 'Що шукаєте?',
 })`
-  ${Input};
+  padding: 14px;
+  line-height: 20px;
+  border: none;
+  width: calc(100% - 28px);
+  font-size: 16px;
+  background: white;
+  @media (max-width: 550px) {
+    width: auto;
+  }
 `;
 
-export const CityInput = styled.input.attrs({
-  type: 'text',
-  placeholder: 'Уся Україна',
+export const CityDropdown = styled(Select).attrs({
+  styles: {
+    control: (prev) => ({
+      ...prev,
+      height: '100%',
+      borderRadius: 'none',
+      border: 'none',
+    }),
+    input: (prev) => ({
+      ...prev,
+      margin: '0',
+      padding: '0',
+      width: '100%',
+
+    }),
+    valueContainer: (prev) => ({
+      ...prev,
+      padding: '14px',
+    }),
+    dropdownIndicator: (prev) => ({
+      ...prev,
+      padding: '10px',
+    }),
+  },
 })`
-  ${Input}
+  line-height: 20px;
+  border: none;
+  width: calc(100% - 28px);
+  font-size: 16px;
+  @media (max-width: 550px) {
+    width: auto;
+  }
 `;
 
 export const SubmitButton = styled.button.attrs({

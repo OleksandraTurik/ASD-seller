@@ -26,13 +26,14 @@ const advertSchema = new Schema(
 
 advertSchema.index({ title: 'text' });
 
-advertSchema.statics.findWithFilterAndSort = function (search, maxPrice, minPrice, sellerId, sort, category) {
+advertSchema.statics.findWithFilterAndSort = function (search, maxPrice, minPrice, sellerId, sort, category, city) {
   let query = this.find(search ? { $text: { $search: search } } : {});
 
   if (sellerId) query = query.find({ sellerId });
   if (maxPrice) query = query.where('price').lte(maxPrice);
   if (minPrice) query = query.where('price').gte(minPrice);
   if (category) query = query.find({ $or: [{ 'category._id': category }, { 'category.child._id': category }] });
+  if (city) query = query.find({ 'address._id': city });
 
   if (sort === 'asсDate') return query.sort('createdAt');
   if (sort === 'dscDate') return query.sort('-createdAt');

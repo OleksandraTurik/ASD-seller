@@ -14,7 +14,7 @@ const AdvertList = () => {
   const [pageQueries, setPageQueries] = useSearchParams();
   const [queryParams, setQueryParams] = useState({
     sort: 'dscDate',
-    limit: '5',
+    limit: '10',
   });
   const { data, pending } = useFetchAdvertsQueryParams(queryParams);
 
