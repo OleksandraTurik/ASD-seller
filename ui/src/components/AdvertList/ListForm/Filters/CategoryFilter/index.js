@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Dropdown from 'components/common/Dropdown';
-import categoriesServices from 'services/categoriesServices';
 import { FilterController } from 'components/AdvertList/ListForm/Filters/styled';
 import useFetchCategories from 'components/hooks/useFetchCategories';
 

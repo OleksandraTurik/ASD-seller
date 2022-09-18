@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Icons
@@ -9,7 +9,6 @@ import Location from 'assets/icons/Location';
 import {
   Section, Form, SearchController, DropdownController, SearchInput, SearchDropdown, Submit,
 } from './styled';
-import citiesServices from '../../../services/citiesServices';
 import { useFetchCities } from '../../hooks/useFetchCities';
 
 const Search = () => {
