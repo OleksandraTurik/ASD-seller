@@ -28,7 +28,6 @@ export const SearchInput = styled.input.attrs({
 `;
 
 export const CityDropdown = styled(Select).attrs({
-  placeholder: 'Уся Україна',
   styles: {
     control: (prev) => ({
       ...prev,

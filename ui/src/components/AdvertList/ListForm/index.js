@@ -9,10 +9,13 @@ import { Form } from './styled';
 const ListForm = ({ onSubmit }) => {
   const [pageQueries] = useSearchParams();
   const [search, setSearch] = useState(pageQueries.get('search') || '');
-  const [{ maxPrice, minPrice, category }, setFilters] = useState({
+  const [{
+    maxPrice, minPrice, category, city,
+  }, setFilters] = useState({
     maxPrice: pageQueries.get('maxPrice') || '',
     minPrice: pageQueries.get('minPrice') || '',
     category: pageQueries.get('category') || '',
+    city: pageQueries.get('city') || '',
   });
   const [sort, setSort] = useState(pageQueries.get('sort') || 'dscDate');
 
@@ -24,6 +27,7 @@ const ListForm = ({ onSubmit }) => {
       minPrice,
       category,
       sort,
+      city,
     });
   };
 
@@ -37,10 +41,13 @@ const ListForm = ({ onSubmit }) => {
     if (category !== undefined) newValues.category = category;
     setFilters(prev => ({ ...prev, ...newValues }));
   };
+  const citySelectHandler = (city) => {
+    setFilters(prev => ({ ...prev, city: city || '' }));
+  };
 
   return (
     <Form onSubmit={submitHandler}>
-      <Search value={search || ''} onSearch={searchHandler} />
+      <Search searchValue={search || ''} selectValue={city} onSearch={searchHandler} onCitySelect={citySelectHandler} />
       <Filters maxPriceValue={maxPrice} minPriceValue={minPrice} categoryValue={category} onFilter={filterHandler} />
       <Sort value={sort} onSelect={(value) => setSort(value)} />
     </Form>

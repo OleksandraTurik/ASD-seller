@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Dropdown from 'components/common/Dropdown';
@@ -15,11 +15,11 @@ const CategoryFilter = ({ onSelect, value }) => {
   const { data } = useFetchCategories();
   const [isMobileMedia, setIsMobileMedia] = useState(window.matchMedia('(max-width: 450px)'));
 
-  const categories = [{ id: '', value: 'Будь-яка категорія', children: [] }, ...data?.map((el) => ({
+  const categories = useMemo(() => [{ id: '', value: 'Будь-яка категорія', children: [] }, ...data?.map((el) => ({
     id: el._id,
     value: el.name,
     children: el.children.map((e) => ({ id: e._id, value: e.name })),
-  })) || []];
+  })) || []], [data]);
 
   useEffect(() => {
     const changeHandler = () => {
