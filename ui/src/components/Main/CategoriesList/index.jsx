@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'components/common/Loader';
 import NotFound from 'pages/NotFound';
+import { URL } from 'API';
 import { ItemLink, ImgWrap } from './styled';
 
 const CategoriesList = ({
@@ -23,7 +24,7 @@ const CategoriesList = ({
       <ImgWrap
         width="88px"
         height="88px"
-        src={`http://localhost:4000/${item.image}`}
+        src={`${URL}/${item.image}`}
         alt={item.name}
       />
       <p>{item.name}</p>

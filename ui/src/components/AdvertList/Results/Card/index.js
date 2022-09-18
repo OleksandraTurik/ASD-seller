@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { URL } from 'API';
 import { useNavigate } from 'react-router-dom';
 import Like from 'assets/icons/Like';
 import {
@@ -23,7 +24,7 @@ const Card = ({ body }) => {
   return (
     <Wrapper onClick={clickHandler}>
       <ImageContainer>
-        <Image src={`http://localhost:4000/${body.images[0]}`} />
+        <Image src={`${URL}/${body.images[0]}`} />
       </ImageContainer>
       <InfoWrapper>
         <InfoWrapperSection>

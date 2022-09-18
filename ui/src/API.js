@@ -6,7 +6,9 @@ import jwt_decode from 'jwt-decode';
 import apiUserService from 'services/authServices';
 import { tokenService } from 'services/tokenService';
 
-export const API_URL = 'http://localhost:4000/api';
+export const API_URL = `${process.env.REACT_APP_API_URL}/api` || 'http://localhost:4000/api';
+export const URL = `${process.env.REACT_APP_API_URL}` || 'http://localhost:4000';
+console.log(API_URL);
 
 const API = axios.create({
   withCredentials: true,
