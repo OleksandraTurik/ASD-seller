@@ -13,16 +13,20 @@ import { useFetchCities } from '../../hooks/useFetchCities';
 
 const Search = () => {
   const navigate = useNavigate();
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState({ search: '', city: '' });
   const { cities, loading } = useFetchCities();
 
   const searchValueHandler = (e) => {
-    setSearchValue(e.target.value);
+    setSearchValue(prev => ({ ...prev, search: e.target.value }));
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    navigate(searchValue ? `/adverts?search=${searchValue.split(' ').join('+')}` : '/adverts');
+    const params = [];
+    if (searchValue.search) params.push(`search=${searchValue.search.split(' ').join('+')}`);
+    if (searchValue.city) params.push(`city=${searchValue.city}`);
+    const queries = params.length > 0 ? `?${params.join('&')}` : '';
+    navigate(`/adverts${queries}`);
   };
 
   return (
@@ -30,11 +34,15 @@ const Search = () => {
       <Form onSubmit={submitHandler}>
         <SearchController>
           <IconSearch width={25} height={25} />
-          <SearchInput type="search" placeholder="Що шукаєте?" value={searchValue} onChange={searchValueHandler} />
+          <SearchInput type="search" placeholder="Що шукаєте?" value={searchValue.search} onChange={searchValueHandler} />
         </SearchController>
         <DropdownController>
           <Location width={25} height={25} />
-          <SearchDropdown options={cities || []} isLoading={loading} />
+          <SearchDropdown
+            onChange={({ value }) => setSearchValue(prev => ({ ...prev, city: value }))}
+            options={cities || []}
+            isLoading={loading}
+          />
         </DropdownController>
         <Submit type="submit">
           Пошук
