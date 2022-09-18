@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import Select from 'react-select';
 
 export const FormController = styled.div`
   display: flex;
@@ -11,7 +12,10 @@ export const FormController = styled.div`
   }
 `;
 
-const Input = css`
+export const SearchInput = styled.input.attrs({
+  type: 'search',
+  placeholder: 'Що шукаєте?',
+})`
   padding: 14px;
   line-height: 20px;
   border: none;
@@ -22,18 +26,17 @@ const Input = css`
   }
 `;
 
-export const SearchInput = styled.input.attrs({
-  type: 'search',
-  placeholder: 'Що шукаєте?',
-})`
-  ${Input};
-`;
-
-export const CityInput = styled.input.attrs({
-  type: 'text',
+export const CityDropdown = styled(Select).attrs({
   placeholder: 'Уся Україна',
 })`
-  ${Input}
+  padding: 14px;
+  line-height: 20px;
+  border: none;
+  width: calc(100% - 28px);
+  font-size: 16px;
+  @media (max-width: 450px) {
+    width: auto;
+  }
 `;
 
 export const SubmitButton = styled.button.attrs({

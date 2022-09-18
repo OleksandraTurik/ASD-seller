@@ -1,8 +1,8 @@
 import API from 'API';
 
 const categoriesServices = {
-  getCategories: async () => {
-    const categories = await API.get('/categories');
+  getCategories: async (signal) => {
+    const categories = await API.get('/categories', { signal });
     return categories;
   },
 };

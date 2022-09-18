@@ -10,23 +10,12 @@ import {
   Section, Form, SearchController, DropdownController, SearchInput, SearchDropdown, Submit,
 } from './styled';
 import citiesServices from '../../../services/citiesServices';
+import { useFetchCities } from '../../hooks/useFetchCities';
 
 const Search = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
-  const [options, setOptions] = useState([]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    (async () => {
-      const cities = await citiesServices.getCities(controller.signal);
-      const citiesOptions = cities.data.results.map((e) => ({ label: `${e.city}, ${e.admin_name}`, value: e._id }));
-      setOptions(citiesOptions);
-    })();
-
-    return () => controller.abort();
-  }, []);
+  const { cities, loading } = useFetchCities();
 
   const searchValueHandler = (e) => {
     setSearchValue(e.target.value);
@@ -46,7 +35,7 @@ const Search = () => {
         </SearchController>
         <DropdownController>
           <Location width={25} height={25} />
-          <SearchDropdown options={options} />
+          <SearchDropdown options={cities || []} isLoading={loading} />
         </DropdownController>
         <Submit type="submit">
           Пошук

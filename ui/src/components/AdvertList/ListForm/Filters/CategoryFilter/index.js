@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Dropdown from 'components/common/Dropdown';
 import categoriesServices from 'services/categoriesServices';
 import { FilterController } from 'components/AdvertList/ListForm/Filters/styled';
+import useFetchCategories from 'components/hooks/useFetchCategories';
 
 const StyledDropdown = styled(Dropdown)`
   @media (max-width: 450px) {
@@ -12,8 +13,14 @@ const StyledDropdown = styled(Dropdown)`
 `;
 
 const CategoryFilter = ({ onSelect, value }) => {
-  const [categories, setCategories] = useState([]);
+  const { data } = useFetchCategories();
   const [isMobileMedia, setIsMobileMedia] = useState(window.matchMedia('(max-width: 450px)'));
+
+  const categories = [{ id: '', value: 'Будь-яка категорія', children: [] }, ...data?.map((el) => ({
+    id: el._id,
+    value: el.name,
+    children: el.children.map((e) => ({ id: e._id, value: e.name })),
+  })) || []];
 
   useEffect(() => {
     const changeHandler = () => {
@@ -23,21 +30,6 @@ const CategoryFilter = ({ onSelect, value }) => {
     return () => isMobileMedia.removeEventListener('change', changeHandler);
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await categoriesServices.getCategories();
-        const mapped = res.data.map((el) => ({
-          id: el._id,
-          value: el.name,
-          children: el.children.map((e) => ({ id: e._id, value: e.name })),
-        }));
-        setCategories([{ id: '', value: 'Будь-яка категорія', children: [] }, ...mapped]);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
   return (
     <FilterController>
       <h5>Категорія</h5>

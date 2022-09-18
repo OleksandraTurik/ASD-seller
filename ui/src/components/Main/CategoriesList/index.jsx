@@ -18,7 +18,7 @@ const CategoriesList = ({
     return <Loader />;
   }
 
-  return data.map((item) => (
+  return data?.map((item) => (
     <ItemLink key={item._id} onClick={() => showSubcategories(item._id, data)}>
       <ImgWrap
         width="88px"
@@ -32,14 +32,18 @@ const CategoriesList = ({
 };
 
 CategoriesList.propTypes = {
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.shape({}),
   loading: PropTypes.bool.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     _id: PropTypes.string,
     image: PropTypes.string,
-  })).isRequired,
+  })),
   showSubcategories: PropTypes.func.isRequired,
+};
+CategoriesList.defaultProps = {
+  error: null,
+  data: null,
 };
 
 export default CategoriesList;
