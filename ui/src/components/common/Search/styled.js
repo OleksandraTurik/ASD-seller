@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Select from 'react-select';
+import Select, { createFilter } from 'react-select';
 import closeIcon from 'assets/icons/closeIcon.svg';
+import Option from 'components/common/Option';
 
 export const Section = styled.section`
   padding: 40px 20px;
@@ -99,6 +100,10 @@ export const SearchDropdown = styled(Select).attrs({
       padding: '0',
     }),
   },
+  components: {
+    Option,
+  },
+  filterOption: createFilter({ ignoreAccents: false }),
 })`
   font-size: 16px;
   color: ${props => props.theme.mainGreenColor};
