@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import ListForm from 'components/AdvertList/ListForm';
 import Results from 'components/AdvertList/Results';
 import Pagination from 'components/AdvertList/Pagination';
-import useFetchAdvertsQueryParams from 'components/hooks/useFetchAdvertsQueryParams';
+import useFetchAdverts from 'components/hooks/useFetchAdverts';
 
 // Styles
 import { Wrapper, Container } from './styled';
@@ -16,7 +16,7 @@ const AdvertList = () => {
     sort: 'dscDate',
     limit: '10',
   });
-  const { data, pending } = useFetchAdvertsQueryParams(queryParams);
+  const { data, pending } = useFetchAdverts(queryParams);
 
   const updateSearchParams = (update) => {
     const prevParams = pageQueries
