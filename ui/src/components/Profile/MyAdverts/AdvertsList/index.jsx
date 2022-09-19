@@ -3,29 +3,27 @@ import PropTypes from 'prop-types';
 import AdvertCard from './AdvertCard';
 
 const AdvertsList = ({
-  list = [], changeFilters, itemsAmount, error,
+  list = [], itemsAmount, error, loading,
 }) => (
-  <div>
-    <AdvertCard
-      list={list}
-      itemsAmount={itemsAmount}
-      changeFilters={changeFilters}
-      error={error}
-    />
-  </div>
+  <AdvertCard
+    list={list}
+    itemsAmount={itemsAmount}
+    error={error}
+    loading={loading}
+  />
 );
 AdvertsList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape),
   itemsAmount: PropTypes.number,
-  changeFilters: PropTypes.func,
   error: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 AdvertsList.defaultProps = {
   itemsAmount: 0,
   list: [],
-  changeFilters: () => {},
   error: false,
+  loading: true,
 };
 
 export default AdvertsList;
