@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import moment from 'moment/moment';
 
 // Styles for slider
 import 'slick-carousel/slick/slick.css';
@@ -40,6 +41,7 @@ const AdvertPage = () => {
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
+  const date = moment(createdAt).format('MM-DD-YYYY');
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
@@ -62,7 +64,7 @@ const AdvertPage = () => {
                 />
                 <Description
                   title={title}
-                  date={updatedAt}
+                  date={date}
                   price={`${price} грн.`}
                   description={description}
                 />
@@ -70,7 +72,7 @@ const AdvertPage = () => {
               <Container>
                 <User
                   name={contactName}
-                  date={updatedAt}
+                  date={date}
                   link={`/adverts?seller=${sellerId}`}
                   phone={token ? phone : '(XXX) XXX XXXX'}
                 />

@@ -6,30 +6,30 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  height: 160px;
-  width: 390px;
+  height: 150px;
+  width: 100%;
   border-radius: 5px;
   padding: 24px;
 
   @media screen and (max-width: 1280px) {
     height: 135px;
-    width: 345px;
+    width: 100%;
     padding: 15px;
   }
 
   @media screen and (max-width: 768px) {
     height: 120px;
-    width: 280px;
+    width: 100%;
   }
 
   @media screen and (max-width: 600px) {
     height: 110px;
-    width: 100%;
-    padding: 10px;
+    width: 98%;
   }
 
-  @media screen and (max-width: 320px) {
-    height: 90px;
+  @media screen and (max-width: 480px) {
+    height: 140px;
+    width: 95%;
   }
 
   & h1 {
@@ -42,12 +42,8 @@ export const Wrapper = styled.div`
       font-size: 12px;
     }
 
-    @media screen and (max-width: 480px) {
-      font-size: 11px;
-    }
-
     @media screen and (max-width: 320px) {
-      font-size: 10px;
+      font-size: 11px;
     }
   }
 `;
@@ -60,10 +56,6 @@ export const LocationWrap = styled.div`
 
   @media screen and (max-width: 1280px) {
     width: 65%;
-  }
-
-  @media screen and (max-width: 320px) {
-    width: 60%;
   }
 
   & svg {
@@ -83,8 +75,8 @@ export const LocationWrap = styled.div`
     }
 
     @media screen and (max-width: 320px) {
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
     }
   }
 `;
@@ -99,21 +91,13 @@ export const LocationInfo = styled.div`
     color: ${props => props.theme.mainGreenColor};
     margin: 0;
     font-weight: 700;
-
-    @media screen and (max-width: 1280px) {
+    
+    @media screen and (max-width: 768px) {
       font-size: 14px;
     }
 
-    @media screen and (max-width: 768px) {
-      font-size: 12px;
-    }
-
-    @media screen and (max-width: 480px) {
-      font-size: 11px;
-    }
-
     @media screen and (max-width: 320px) {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 
@@ -121,20 +105,12 @@ export const LocationInfo = styled.div`
     color: #000;
     font-size: 16px;
 
-    @media screen and (max-width: 1280px) {
+    @media screen and (max-width: 768px) {
       font-size: 14px;
     }
 
-    @media screen and (max-width: 768px) {
-      font-size: 12px;
-    }
-
-    @media screen and (max-width: 480px) {
-      font-size: 11px;
-    }
-
     @media screen and (max-width: 320px) {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 `;
@@ -155,9 +131,9 @@ export const MapImage = styled.img`
     border-radius: 8px;
   }
 
-  @media screen and (max-width: 320px) {
-    width: 90px;
-    height: 55px;
+  @media screen and (max-width: 480px) {
+    width: 120px;
+    height: 65px;
     border-radius: 5px;
   }
 `;
@@ -167,4 +143,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 480px) {
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
 `;
