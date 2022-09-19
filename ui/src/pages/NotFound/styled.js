@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   height: 90vh;
   padding: 16px;
 `;
+
 export const Title = styled.h1`
   height: 90vh;
   padding: 16px;
@@ -19,7 +20,6 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: #fff;
 
   & h1 {
     height: 48px;

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'components/common/Loader';
 import NotFound from 'pages/NotFound';
+import { URL } from 'API';
 import { ItemLink, ImgWrap } from './styled';
 
 const CategoriesList = ({
@@ -18,12 +19,12 @@ const CategoriesList = ({
     return <Loader />;
   }
 
-  return data.map((item) => (
+  return data?.map((item) => (
     <ItemLink key={item._id} onClick={() => showSubcategories(item._id, data)}>
       <ImgWrap
         width="88px"
         height="88px"
-        src={`http://localhost:4000/${item.image}`}
+        src={`${URL}/${item.image}`}
         alt={item.name}
       />
       <p>{item.name}</p>
@@ -32,14 +33,18 @@ const CategoriesList = ({
 };
 
 CategoriesList.propTypes = {
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.shape({}),
   loading: PropTypes.bool.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     _id: PropTypes.string,
     image: PropTypes.string,
-  })).isRequired,
+  })),
   showSubcategories: PropTypes.func.isRequired,
+};
+CategoriesList.defaultProps = {
+  error: null,
+  data: null,
 };
 
 export default CategoriesList;

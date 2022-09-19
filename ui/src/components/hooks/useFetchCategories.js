@@ -1,16 +1,30 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCategories } from 'redux/slice/getCategories';
+import { useState, useEffect } from 'react';
+import categoriesServices from 'services/categoriesServices';
 
 const useFetchCategories = () => {
-  const categories = useSelector(state => state.categoryReducer);
-  const dispatch = useDispatch();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
+    const controller = new AbortController();
+    setLoading(true);
+    (async () => {
+      try {
+        const categories = await categoriesServices.getCategories(controller.signal);
+        setData(categories.data);
+        setLoading(false);
+        setError(null);
+      } catch (e) {
+        setError(e);
+        setLoading(false);
+        setData(null);
+      }
+    })();
+    return () => controller.abort();
+  }, []);
 
-  return { ...categories };
+  return { data, loading, error };
 };
 
 export default useFetchCategories;

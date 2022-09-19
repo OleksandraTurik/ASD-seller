@@ -25,7 +25,7 @@ const Results = ({ data, resultAmount, pending }) => {
           оголошень
         </Title>
         {advertsAdapt(data).map((e) => (
-          <Card key={e._id} body={e} />
+          <Card key={e.id} body={e} />
         ))}
       </>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { URL } from 'API';
 
 // Components
 import AdvertCard from 'components/common/AdvertCard';
@@ -24,7 +25,7 @@ const AdvertsCard = ({ errorAdvert, loadingAdvert, advertInfo }) => {
     <AdvertCard
       key={item.id}
       itemId={item.id}
-      img={`http://localhost:4000/${item.images[0]}`}
+      img={`${URL}/${item.images[0]}`}
       name={item.title}
       location={`${item.address.city}, ${item.address.admin_name}`}
       date={item.createdAt}

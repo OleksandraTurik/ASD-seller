@@ -2,6 +2,8 @@
 import React from 'react';
 import Slider from 'react-slick';
 
+import { URL } from 'API';
+
 // Styles
 import {
   ArrowNext,
@@ -48,7 +50,7 @@ const SimpleSlider = ({ images }) => {
           {images
             ? images.map((img) => (
               <div key={img}>
-                <Image src={`http://localhost:4000/${img}`} />
+                <Image src={`${URL}/${img}`} />
               </div>
             ))
             : ''}

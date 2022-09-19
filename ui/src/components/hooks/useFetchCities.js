@@ -1,32 +1,31 @@
 /* eslint-disable camelcase */
 /* eslint-disable prefer-template */
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import citiesServices from 'services/citiesServices';
 
 export const useFetchCities = () => {
-  const [cities, setCities] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  const getCities = useCallback(async () => {
-    try {
-      const city = await citiesServices.getCities();
-      const citiesOptions = city.data.results.map(({ _id, city, admin_name }) => (
-        {
-          label: city + ', ' + admin_name,
-          value: _id,
-        }
-      ));
-      setCities(citiesOptions);
-      setLoading(false);
-    } catch (e) {
-      setError(e);
-      setLoading(false);
-    }
-  }, []);
+  const [cities, setCities] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getCities();
+    const controller = new AbortController();
+    setLoading(true);
+    (async () => {
+      try {
+        const cities = await citiesServices.getCities(controller.signal);
+        const citiesOptions = cities.data.results.map((e) => ({ label: `${e.city}, ${e.admin_name}`, value: e._id }));
+        setCities(citiesOptions);
+        setLoading(false);
+        setError(null);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+        setCities(null);
+      }
+    })();
+
+    return () => controller.abort();
   }, []);
 
   return {
