@@ -37,8 +37,6 @@ const ChangeContacts = ({ fullName, address }) => {
 
   const { city, admin_name } = address;
 
-  console.log(address);
-
   return (
     <MainContainer>
       <form onSubmit={handleSubmit(onSubmit)}>

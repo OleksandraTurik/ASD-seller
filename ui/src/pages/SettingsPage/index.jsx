@@ -16,9 +16,6 @@ const SettingsPage = () => {
   const { data, error, loading } = useGetInfoExactUser(id);
   const [dataComponent, setDataComponent] = useState(settingsComponentMap);
 
-  console.log('data', data);
-  console.log('phoneNumber', data.phoneNumber);
-
   const handleOpen = (id) => {
     const newData = dataComponent.map((item) => ({
       ...item,

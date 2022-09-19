@@ -15,6 +15,9 @@ import Loader from 'components/common/Loader';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
 import NotFound from 'pages/NotFound';
 
+// hooks
+import { useGetInfoExactUser } from 'components/hooks/useGetInfoExactUser';
+
 // Styles
 import { Wrapper, Container, SliderWrap } from './styled';
 
@@ -34,12 +37,18 @@ const AdvertPage = () => {
     sellerId,
   } = advert.advertInfo;
 
+  console.log(advert);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const phone = contactPhone ?? 'no number phone';
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
+
+  const { data } = useGetInfoExactUser(sellerId);
+
+  console.log(data);
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
