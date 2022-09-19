@@ -5,11 +5,11 @@ export const useFetchAdverts = (id) => {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
   const [error, setError] = useState(false);
-  const [prevPage, setPrevPage] = useState(null);
   const [itemsAmount, setItemsAmount] = useState(0);
 
   const [filters, setFilters] = useState({
     sort: 'ascTitle',
+    category: '',
     search: '',
     page: 1,
   });
@@ -20,7 +20,6 @@ export const useFetchAdverts = (id) => {
       [name]: value,
     }));
   };
-  console.log(filters);
   const getData = async () => {
     setLoading(true);
     setError(false);
@@ -28,8 +27,10 @@ export const useFetchAdverts = (id) => {
       const adverts = await advertServices.getAdvertsList(id, filters);
       setList(adverts.data.results);
       setItemsAmount(adverts.data.itemsAmount);
+      setLoading(false);
     } catch (e) {
       setError(e.message);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -37,6 +38,6 @@ export const useFetchAdverts = (id) => {
   }, [filters]);
 
   return {
-    loading, list, changeFilters, itemsAmount, setFilters, filters,
+    loading, list, changeFilters, itemsAmount, setFilters, filters, error,
   };
 };

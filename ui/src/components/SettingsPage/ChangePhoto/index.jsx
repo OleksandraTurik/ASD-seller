@@ -16,12 +16,11 @@ const ChangePhoto = () => {
     mode: 'onChange',
 
     defaultValues: {
-      images: '',
+      avatar: '',
     },
   });
   const onSubmit = async (data) => {
-    const updatePhoto = await userServices.updateUserPhoto(data);
-    console.log(data);
+    await userServices.updateUserPhoto({ avatar: data.file });
   };
 
   return (
@@ -30,8 +29,8 @@ const ChangePhoto = () => {
         <SubContainer>
           <FileContainer>
             <ChooseFileStyle
-              id="images"
-              name="images"
+              id="avatar"
+              name="avatar"
               accept="image/heic, image/png, image/jpeg, image/webp"
               multiple
               type="file"

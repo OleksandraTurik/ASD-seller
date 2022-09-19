@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'components/common/Loader';
 import Card from 'components/AdvertList/Results/Card';
+import advertsAdapt from 'helpers/advertsAdapt';
 import { Wrapper, Title } from './styled';
 
 const Results = ({ data, resultAmount, pending }) => {
@@ -23,7 +24,7 @@ const Results = ({ data, resultAmount, pending }) => {
           {' '}
           оголошень
         </Title>
-        {data.map((e) => (
+        {advertsAdapt(data).map((e) => (
           <Card key={e._id} body={e} />
         ))}
       </>

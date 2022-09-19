@@ -31,8 +31,11 @@ const Card = ({ body }) => {
           <Title>{body.title}</Title>
           <AddressAndTime>
             {body.address.city}
+            {', '}
+            {body.address.admin_name}
             {' '}
             -
+            {' '}
             {body.createdAt}
           </AddressAndTime>
         </InfoWrapperSection>
@@ -43,7 +46,11 @@ const Card = ({ body }) => {
             грн
           </Price>
           <LikeButton>
-            <Like />
+            <Like
+              width="25px"
+              height="25px"
+              fill="#c6c6c6"
+            />
           </LikeButton>
         </InfoWrapperSection>
       </InfoWrapper>
@@ -59,6 +66,7 @@ Card.propTypes = {
     images: PropTypes.arrayOf(PropTypes.string),
     address: PropTypes.shape({
       city: PropTypes.string,
+      admin_name: PropTypes.string,
     }),
     createdAt: PropTypes.string,
   }).isRequired,
