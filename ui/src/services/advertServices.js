@@ -17,15 +17,8 @@ const advertServices = {
   },
   getAdvertListWithQueries: async (queryParams, signal) => {
     try {
-      let params = '';
-      // eslint-disable-next-line no-restricted-syntax
-      for (const key in queryParams) {
-        if (Object.hasOwnProperty.call(queryParams, key)) {
-          params += `${key}=${queryParams[key]}&`;
-        }
-      }
-      const adverts = API.get(`/adverts?${params}`, { signal });
-      return adverts;
+      const params = qs.stringify(queryParams);
+      return await API.get(`/adverts?${params}`, { signal });
     } catch (err) {
       throw new ServerException(err.response);
     }
