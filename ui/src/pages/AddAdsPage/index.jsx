@@ -11,6 +11,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { getCategories } from 'redux/slice/getCategories';
 
 // Services
+import { URL } from 'API';
 import advertServices from 'services/advertServices';
 
 // Hooks
@@ -178,7 +179,7 @@ const AddAdsPage = () => {
                       key={item._id}
                       onClick={handleClick(item)}
                     >
-                      <ImgCirle src={`http://localhost:4000/${item.image}`} alt={`Категорія ${item.name}`} />
+                      <ImgCirle src={`${URL}/${item.image}`} alt={`Категорія ${item.name}`} />
                       {item.name}
                     </CategoryItems>
                   )) : (
