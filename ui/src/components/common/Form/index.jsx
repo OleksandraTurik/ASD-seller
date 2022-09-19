@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
 import { LoaderForm } from 'components/common/Form/LoaderContainer';
 import validation from 'helpers/validation';
 import { noticeMessages } from 'components/common/Form/helper';
 import {
-  Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
+  Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button, P,
 } from './styled';
 
 const Form = ({
@@ -28,6 +28,8 @@ const Form = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isNavigate, setIsNavigate] = useState(false);
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (loading === false && error === false && isNavigate) {
@@ -67,14 +69,14 @@ const Form = ({
             type="email"
             placeholder={emailField}
             {...register('email', {
-              required: "email поле обов'язково має бути заповненим",
+              required: <P>email поле обов&apos;язково має бути заповненим</P>,
               minLength: {
                 value: 6,
-                message: 'Помилка! Має бути більше шести символів',
+                message: <P>Помилка! Має бути більше шести символів</P>,
               },
               pattern: {
                 value: validation.email,
-                message: 'Неправильний формат email',
+                message: <P>Неправильний формат email</P>,
               },
             })}
           />
@@ -83,14 +85,14 @@ const Form = ({
             type="password"
             placeholder={passwordField}
             {...register('password', {
-              required: "password поле обов'язково має бути заповненим",
+              required: <P>password поле обов&apos;язково має бути заповненим</P>,
               minLength: {
                 value: 8,
-                message: 'Помилка! Має бути більше восьми символів',
+                message: <P>Помилка! Має бути більше восьми символів</P>,
               },
               pattern: {
-                value: validation.password,
-                message: 'Пароль має містити хоча б одне число, літеру з великої та маленької букви, мати довжину мінімум у 8 літер',
+                value: pathname === '/register' && validation.password,
+                message: <P>Пароль має містити хоча б одне число, літеру з великої та маленької букви, мати довжину мінімум у 8 літер</P>,
               },
             })}
           />

@@ -25,7 +25,6 @@ const ChangeEmail = ({ email }) => {
 
   const onSubmit = async (data) => {
     const updateEmail = await userServices.updateUser(data);
-    console.log('updateEmail', updateEmail);
     reset(updateEmail);
   };
 
