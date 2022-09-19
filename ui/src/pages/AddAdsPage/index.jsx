@@ -46,7 +46,7 @@ import {
   PublishButton,
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
-  ImgCirle,
+  ImgCirle, Image,
 } from './styled';
 
 // eslint-disable-next-line react/prop-types
@@ -59,6 +59,10 @@ const AddAdsPage = () => {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
   const user = JSON.parse(localStorage.getItem('tokens'));
+  const [selectedFile, setSelectedFile] = useState();
+  const [img, setImg] = useState([]);
+  const [preview, setPreview] = useState([]);
+  const [maxUploadsImages, setMaxUploadsImages] = useState(false);
   const { cities } = useFetchCities();
   const {
     register, handleSubmit, control, reset, formState: { errors },
@@ -89,7 +93,7 @@ const AddAdsPage = () => {
         contactName: v.contactName,
         contactPhone: v.contactPhone,
         address: v.address,
-        images: v.images,
+        images: img,
         category: selected._id,
       });
       navigate(`/profiles/${user.userDto.id}/adverts`);
@@ -124,8 +128,32 @@ const AddAdsPage = () => {
       setModalOpen(false);
     }
   };
-  const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
 
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview([]);
+      return;
+    }
+
+    const objectUrl = window.URL.createObjectURL(selectedFile);
+    setPreview(prevState => [...prevState, objectUrl]);
+
+    // eslint-disable-next-line consistent-return
+    return () => window.URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = e => {
+    if (img.length >= 6) {
+      setMaxUploadsImages(true);
+    }
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+    setSelectedFile(e.target.files[0]);
+    setImg(prevState => [...prevState, e.target.files[0]]);
+  };
+  const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
   return (
     <Main>
       <Wrapper>
@@ -222,15 +250,19 @@ const AddAdsPage = () => {
           <WhiteBlock>
             <WidthEquation>
               <WhiteBlockTitle>Фото</WhiteBlockTitle>
-              <InputFile
-                id="images"
-                name="images"
-                type="file"
-                accept="image/heic, image/png, image/jpeg, image/webp"
-                multiple
-                {...register('images')}
-              />
+              {!maxUploadsImages ? (
+                <InputFile
+                  id="images"
+                  name="images"
+                  type="file"
+                  accept="image/heic, image/png, image/jpeg, image/webp"
+                  {...register('images', {
+                    onChange: onSelectFile,
+                  })}
+                />
+              ) : 'Done'}
             </WidthEquation>
+            {selectedFile && preview.map(i => <Image src={i} alt="preview" />)}
           </WhiteBlock>
           <WhiteBlock>
             <WidthEquation>

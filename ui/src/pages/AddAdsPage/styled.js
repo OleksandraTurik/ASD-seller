@@ -372,6 +372,11 @@ export const PublishButton = styled.button`
     }
 `;
 
+export const Image = styled.img`
+width: 200px;
+height: 200px;  
+`;
+
 export const InputFile = styled.input`
     color: #878787;
 
