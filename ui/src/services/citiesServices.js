@@ -4,8 +4,7 @@ import ServerException from 'exceptions/serverException';
 const citiesServices = {
   getCities: async (signal) => {
     try {
-      const cities = await API.get('/cities?limit=2000', { signal });
-      return cities;
+      return await API.get('/cities?limit=2000', { signal });
     } catch (e) {
       throw new ServerException(e.response);
     }

@@ -19,9 +19,11 @@ export const useFetchCities = () => {
         setLoading(false);
         setError(null);
       } catch (err) {
-        setError(err);
-        setLoading(false);
-        setCities(null);
+        if (err.code !== 'ERR_CANCELED') {
+          setError(err);
+          setLoading(false);
+          setCities(null);
+        }
       }
     })();
 
