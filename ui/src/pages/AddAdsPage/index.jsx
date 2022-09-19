@@ -25,7 +25,7 @@ import ArrowDownIcon from 'assets/icons/ArrowDown';
 import ThinArrowRight from 'assets/icons/ThinArrowRight';
 
 import DropdownIndicator from 'helpers/DropdownIndicator';
-import stylesForReactSelect from 'helpers/stylesForReactSelect';
+import { stylesReactSelectForAddAdsPage } from 'helpers/stylesForReactSelect';
 
 // Styles
 import {
@@ -270,7 +270,7 @@ const AddAdsPage = () => {
                     value={cities?.find((c) => c.value === value)}
                     onChange={(val) => onChange(val.value)}
                     options={cities}
-                    styles={stylesForReactSelect}
+                    styles={stylesReactSelectForAddAdsPage}
                     components={{ DropdownIndicator }}
                   />
                 )}

@@ -49,3 +49,14 @@ export const DontHaveFavoritesAdvText = styled.p`
   color: #406367;
   text-align: center;
 `;
+
+export const AdvertsList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1250px;
+  gap: 16px;
+`;
+
+export const Wrapper2 = styled.div`
+  margin: 0 auto;
+`;
