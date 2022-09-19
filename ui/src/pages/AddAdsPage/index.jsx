@@ -80,10 +80,6 @@ const AddAdsPage = () => {
     color: selected ? 'black' : 'red',
   };
   const onSubmit = async (v) => {
-    console.log(v);
-    // if (!selected) {
-    //   alert('Введіть категорію');
-    // }
     try {
       const send = await advertServices.createAdverts({
         title: v.title,
@@ -96,7 +92,6 @@ const AddAdsPage = () => {
         images: v.images,
         category: selected._id,
       });
-      // reset();
       navigate(`/profiles/${user.userDto.id}/adverts`);
     } catch (e) {
       console.log(e.message);
@@ -139,7 +134,7 @@ const AddAdsPage = () => {
           <WhiteBlock>
             <WidthEquation>
               <WhiteBlockTitle>Опишіть у подробицях</WhiteBlockTitle>
-              <LabelForInut for="title">Вкажіть назву*</LabelForInut>
+              <LabelForInut htmlFor="title">Вкажіть назву*</LabelForInut>
               <TitleTextArea
                 id="title"
                 name="title"
@@ -205,6 +200,7 @@ const AddAdsPage = () => {
                         <CategoryList>
                           {subcategory.children.map((item) => (
                             <CategoryListItem
+                              key={item._id}
                               selected={item._id === subcategory?._id}
                               onClick={handleClick(item)}
                             >
@@ -238,7 +234,7 @@ const AddAdsPage = () => {
           </WhiteBlock>
           <WhiteBlock>
             <WidthEquation>
-              <LabelForInut for="description">Опис*</LabelForInut>
+              <LabelForInut htmlFor="description">Опис*</LabelForInut>
               <TitleTextArea
                 id="description"
                 name="description"
@@ -259,7 +255,7 @@ const AddAdsPage = () => {
           <WhiteBlock>
             <CategoryWidthEquation>
               <WhiteBlockTitle>Ваші контактні дані</WhiteBlockTitle>
-              <LabelForInut for="address">Місцезнаходження*</LabelForInut>
+              <LabelForInut htmlFor="address">Місцезнаходження*</LabelForInut>
               <Controller
                 control={control}
                 name="address"
@@ -276,7 +272,7 @@ const AddAdsPage = () => {
                 )}
               />
               <div>{errors.Location && <ErrorTitle>{errors.Location.message || 'Невірне місцезнаходження'}</ErrorTitle>}</div>
-              <LabelForInut for="contactName">Контактна особа*</LabelForInut>
+              <LabelForInut htmlFor="contactName">Контактна особа*</LabelForInut>
               <ContactInput
                 id="contactName"
                 name="contactName"
@@ -291,7 +287,7 @@ const AddAdsPage = () => {
                 })}
               />
               <div>{errors.Author && <ErrorTitle>{errors.Author.message || "Ім'я контактної особи повинно складатись як мінімум з 3 символів"}</ErrorTitle>}</div>
-              <LabelForInut for="price">Ціна оголошення</LabelForInut>
+              <LabelForInut htmlFor="price">Ціна оголошення</LabelForInut>
               <ContactInput
                 id="price"
                 name="price"
@@ -302,7 +298,7 @@ const AddAdsPage = () => {
                 })}
               />
               <div>{errors.price && <ErrorTitle>{errors.price.message}</ErrorTitle>}</div>
-              <LabelForInut for="contactPhone">Номер телефону</LabelForInut>
+              <LabelForInut htmlFor="contactPhone">Номер телефону</LabelForInut>
               <ContactInput
                 id="contactPhone"
                 name="contactPhone"
