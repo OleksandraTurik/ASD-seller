@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment/moment';
 
@@ -47,14 +47,25 @@ const AdvertPage = () => {
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
   const date = moment(createdAt).format('MM-DD-YYYY');
+  const [selId, setSelId] = useState('');
 
-  const { data } = useGetInfoExactUser(sellerId);
-
-  console.log(data);
+  console.log('sellerId', sellerId);
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
   }, [id]);
+
+  const { data } = useGetInfoExactUser(sellerId);
+
+  console.log('sellerId', sellerId);
+
+  useEffect(() => {
+    setSelId(sellerId);
+  }, [sellerId]);
+
+  console.log('data', data);
+  console.log('avatar', data.avatar);
+  console.log('selId', selId);
 
   const { loading, error } = advert;
 
@@ -84,6 +95,7 @@ const AdvertPage = () => {
                   date={date}
                   link={`/adverts?seller=${sellerId}`}
                   phone={token ? phone : '(XXX) XXX XXXX'}
+                  avatarOfUser={data.avatar}
                 />
                 <Location
                   city={city}

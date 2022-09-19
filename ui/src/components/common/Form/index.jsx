@@ -69,14 +69,14 @@ const Form = ({
             type="email"
             placeholder={emailField}
             {...register('email', {
-              required: <P>email поле обов&apos;язково має бути заповненим</P>,
+              required: "email поле обов'язково має бути заповненим",
               minLength: {
                 value: 6,
-                message: <P>Помилка! Має бути більше шести символів</P>,
+                message: 'Помилка! Має бути більше шести символів',
               },
               pattern: {
                 value: validation.email,
-                message: <P>Неправильний формат email</P>,
+                message: 'Неправильний формат email',
               },
             })}
           />
@@ -85,14 +85,14 @@ const Form = ({
             type="password"
             placeholder={passwordField}
             {...register('password', {
-              required: <P>password поле обов&apos;язково має бути заповненим</P>,
+              required: "password поле обов'язково має бути заповненим",
               minLength: {
                 value: 8,
-                message: <P>Помилка! Має бути більше восьми символів</P>,
+                message: 'Помилка! Має бути більше восьми символів',
               },
               pattern: {
                 value: pathname === '/register' && validation.password,
-                message: <P>Пароль має містити хоча б одне число, літеру з великої та маленької букви, мати довжину мінімум у 8 літер</P>,
+                message: 'Пароль має містити хоча б одне число, літеру з великої та маленької букви, мати довжину мінімум у 8 літер',
               },
             })}
           />
