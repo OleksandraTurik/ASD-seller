@@ -10,7 +10,7 @@ const useFetchExactAdvert = (arrayOfId) => {
     (async () => {
       try {
         setLoading(true);
-        const results = await Promise.all(arrayOfId.map((id) => advertServices.getAdvert(id)));
+        const results = await Promise.all(arrayOfId.map((id) => advertServices.getAdvertById(id)));
         setData(results.map(el => el.data));
         setLoading(false);
       } catch (e) {

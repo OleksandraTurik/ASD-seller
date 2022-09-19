@@ -12,7 +12,7 @@ const useFetchAdverts = (queryParams = {}) => {
       try {
         setPending(true);
         setData(null);
-        const adverts = await advertServices.getAdvertListWithQueries(queryParams, controller.signal);
+        const adverts = await advertServices.getAdvertList(queryParams, controller.signal);
         setData(adverts.data);
         setPending(false);
         setError(null);
