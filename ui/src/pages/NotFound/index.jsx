@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 // Icons
 import cat from 'assets/icons/cat.svg';
+import NotFoundAdverts from 'assets/icons/NotFoundAdverts';
 
 // Styles
 import PropTypes from 'prop-types';
@@ -12,7 +14,6 @@ import {
   Container,
   Title,
 } from './styled';
-import NotFoundAdverts from '../../assets/icons/NotFoundAdverts';
 
 const NotFound = ({ activeEmail }) => (
   <Wrapper>
