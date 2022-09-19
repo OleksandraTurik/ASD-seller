@@ -1,5 +1,4 @@
-import React from 'react';
-import Select from 'react-select';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 // Icons
@@ -8,103 +7,82 @@ import IconSearch from 'assets/icons/MagnifyingGlass';
 // Styles
 import {
   Wrapper,
-  MainContainer,
-  Container,
+  Form,
+  SearchContainer,
   SearchInput,
-  IconContainer,
-  WrapSelect,
+  CategoryDropdown,
+  SortDropdown,
 } from './styled';
-import CategoryFilter from '../../../AdvertList/ListForm/Filters/CategoryFilter';
+import useFetchCategories from '../../../hooks/useFetchCategories';
 
-const customStyles = {
-  menu: (provided, state) => ({
-    ...provided,
-    color: state.selectProps.menuColor ? '' : '#002F34',
-    padding: 5,
-    fontSize: '13px',
-  }),
+const sortOptions = [
+  { id: 'dscDate', value: 'Найновіші', children: [] },
+  { id: 'ascTitle', value: 'Заголовок: А-Я', children: [] },
+  { id: 'dscTitle', value: 'Заголовок: Я-А', children: [] },
+  { id: 'ascPrice', value: 'Ціна: Найнижча', children: [] },
+  { id: 'dscPrice', value: 'Ціна: Найвища', children: [] },
+];
 
-  control: (base, state) => ({
-    ...base,
-    border: state.isFocused ? 0 : 0,
-    boxShadow: state.isFocused ? 0 : 0,
-    '&:hover': {
-      border: state.isFocused ? 0 : 0,
-    },
-  }),
+const Filters = ({ onFilter, onSearch, itemsAmount }) => {
+  const { data } = useFetchCategories();
 
-  singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = 'opacity 300ms';
+  const categoryOptions = useMemo(() => [{ id: '', value: 'Будь-яка категорія', children: [] }, ...data?.map((el) => ({
+    id: el._id,
+    value: el.name,
+    children: el.children.map((e) => ({ id: e._id, value: e.name })),
+  })) || []], [data]);
 
-    return { ...provided, opacity, transition };
-  },
-};
-
-const Filters = ({ onSelected, onSearch, categorySelected }) => {
-  const options = [
-    { value: 'ascTitle', label: 'Заголовок: А-Я' },
-    { value: 'dscTitle', label: 'Заголовок: Я-А' },
-    { value: 'ascPrice', label: 'Ціна: Найнижча' },
-    { value: 'dscPrice', label: 'Ціна: Найвища' },
-  ];
+  const searchHandler = (event) => {
+    onSearch(event.target.value);
+  };
+  const categoryHandler = ({ id }) => {
+    onFilter({ category: id });
+  };
+  const sortHandler = ({ id }) => {
+    onFilter({ sort: id });
+  };
 
   return (
     <Wrapper>
-      <MainContainer>
-        <Container>
-          <IconContainer>
-            <IconSearch
-              width="20px"
-              height="20px"
-              fill="#002F34"
-            />
-          </IconContainer>
+      <Form>
+        <SearchContainer>
+          <IconSearch
+            width="20px"
+            height="20px"
+            fill="#002F34"
+          />
           <SearchInput
-            onChange={onSearch}
+            onChange={searchHandler}
             type="text"
             placeholder="Заголовок"
           />
-        </Container>
-        <Container>
-          <CategoryFilter onSelect={(category) => categorySelected(category)} />
-        </Container>
-        <Container>
-          <WrapSelect>
-            <Select
-              styles={customStyles}
-              options={options}
-              onChange={onSelected}
-              placeholder="Сортувати"
-              theme={(theme) => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#cbf7ee',
-                  primary: '#002F34',
-                },
-              })}
-            />
-          </WrapSelect>
-        </Container>
-      </MainContainer>
+        </SearchContainer>
+        <CategoryDropdown
+          options={categoryOptions}
+          onSelect={categoryHandler}
+        />
+        <SortDropdown
+          options={sortOptions}
+          onSelect={sortHandler}
+        />
+      </Form>
       <span>
         Всього оголошень:
         {' '}
+        {itemsAmount}
       </span>
     </Wrapper>
   );
 };
 
 Filters.propTypes = {
-  onSelected: PropTypes.func,
-  onSearch: PropTypes.func,
-  categorySelected: PropTypes.func,
+  onFilter: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  itemsAmount: PropTypes.number,
 };
 
 Filters.defaultProps = {
-  onSelected: () => {},
-  onSearch: () => {},
-  categorySelected: () => {},
+  itemsAmount: 0,
 };
+
 export default Filters;

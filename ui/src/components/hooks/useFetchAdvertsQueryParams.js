@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import advertServices from 'services/advertServices';
 
-const useFetchAdvertsQueryParams = (queryParams) => {
+const useFetchAdvertsQueryParams = (queryParams = {}) => {
   const [data, setData] = useState(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);

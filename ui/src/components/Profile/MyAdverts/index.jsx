@@ -1,46 +1,43 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 // Hooks
-import { useFetchAdverts } from 'components/hooks/useFetchAdverts';
+import useFetchAdvertsQueryParams from '../../hooks/useFetchAdvertsQueryParams';
 
 // Components
 import AdvertsList from './AdvertsList';
-import Filters from './Filters';
 
+import Filters from './Filters';
 // Styles
 import { Wrapper } from './styled';
+import searchFilter from '../../../helpers/search-filter';
 
 const MyAdverts = () => {
   const { id } = useParams();
-  const {
-    list,
-    loading,
-    error,
-    fetchData,
-    changeFilters,
-    setFilters,
-    itemsAmount,
-    filters,
-  } = useFetchAdverts(id);
-  const onChange = ({ target: { value } }) => changeFilters('search', value);
-  const onSearch = onChange;
+  const [queryParams, setQueryParams] = useState({ seller: id, sort: 'dscDate', limit: '1000' });
+  const { data, pending, error } = useFetchAdvertsQueryParams(queryParams);
+  const [searchValue, setSearchValue] = useState('');
+
+  const filterHandler = (updates = {}) => {
+    setQueryParams(prev => ({ ...prev, ...updates }));
+  };
+  const searchHandler = (str) => {
+    setSearchValue(str);
+  };
+  const adverts = useMemo(() => searchFilter(searchValue, data?.results), [data, searchValue]);
+
   return (
     <Wrapper>
       <Filters
-        onSearch={onSearch}
-        onSelected={({ value }) => changeFilters('sort', value)}
-        categorySelected={(value) => changeFilters('category', value)}
+        onFilter={filterHandler}
+        onSearch={searchHandler}
+        itemsAmount={adverts.length}
       />
       <AdvertsList
-        filters={filters}
-        setFilters={setFilters}
-        list={list}
+        itemsAmount={adverts.length}
+        list={adverts}
         error={error}
-        fetchData={fetchData}
-        changeFilters={changeFilters}
-        itemsAmount={itemsAmount}
-        loading={loading}
+        loading={pending}
       />
     </Wrapper>
   );

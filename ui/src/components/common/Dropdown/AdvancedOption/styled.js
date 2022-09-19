@@ -26,7 +26,7 @@ export const Container = styled.div`
 export const ChildrenWrapper = styled.ul`
   display: flex;
   flex-direction: column;
-  background: ${props => props.isMobile ? '#d7d7d7' : 'white'};
+  background: ${props => props.isMobile ? '#f1f1f1' : 'white'};
   margin-top: ${(props) => (props.isMobile ? '20px' : '0')};
 
   ${(props) => (!props.isMobile ? 'position: absolute;left: 100%;top: 0;' : '& > li {width: calc(100% - 20px);}')}
