@@ -16,15 +16,12 @@ const AdvertsCard = ({
   itemsAmount,
   changeFilters,
   error,
-  loading,
 }) => {
   const handlePageChange = ({ selected }) => {
+    console.log(selected);
     changeFilters('page', selected + 1);
   };
   const pageCount = Math.ceil(itemsAmount / 10);
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <div>
@@ -47,7 +44,7 @@ const AdvertsCard = ({
         <div>
           <ReactPaginate
             pageCount={pageCount}
-            onPageChange={handlePageChange}
+            onPageChange={(selected) => handlePageChange(selected)}
             previousLabel="← Previous"
             extLabel="Next →"
             activeClassName="pagination__link--active"
@@ -67,7 +64,6 @@ AdvertsCard.propTypes = {
   itemsAmount: PropTypes.number,
   changeFilters: PropTypes.func,
   error: PropTypes.bool,
-  loading: PropTypes.bool,
 };
 
 AdvertsCard.defaultProps = {
@@ -75,7 +71,6 @@ AdvertsCard.defaultProps = {
   list: [],
   changeFilters: () => {},
   error: false,
-  loading: true,
 };
 
 export default AdvertsCard;
