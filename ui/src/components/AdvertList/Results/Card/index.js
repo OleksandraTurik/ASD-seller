@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { URL } from 'API';
 import { useNavigate } from 'react-router-dom';
-import Like from 'assets/icons/Like';
+import LikeButton from 'components/common/LikeButton';
 import {
   Wrapper,
   InfoWrapper,
@@ -11,7 +11,6 @@ import {
   Price,
   ImageContainer,
   Image,
-  LikeButton,
   InfoWrapperSection,
 } from './styled';
 
@@ -45,13 +44,7 @@ const Card = ({ body }) => {
             {' '}
             грн
           </Price>
-          <LikeButton>
-            <Like
-              width="25px"
-              height="25px"
-              fill="#c6c6c6"
-            />
-          </LikeButton>
+          <LikeButton advertId={body.id} />
         </InfoWrapperSection>
       </InfoWrapper>
     </Wrapper>

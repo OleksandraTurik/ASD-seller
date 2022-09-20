@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import LikeButton from 'components/common/LikeButton';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -117,7 +118,7 @@ export const Line = styled.div`
   border-bottom: 1px solid #7f9799;
 `;
 
-export const FavoriteBtn = styled.button`
+export const FavoriteBtn = styled(LikeButton)`
   background-color: transparent;
   border: none;
   bottom: 12px;
