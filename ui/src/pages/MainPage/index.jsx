@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
+
+// Hooks
+import useFetchCategories from 'components/hooks/useFetchCategories';
+import useFetchAdverts from 'components/hooks/useFetchAdverts';
 
 // Components
 import Search from 'components/common/Search';
-import useFetchCategories from 'components/hooks/useFetchCategories';
 import Subcategories from 'components/Main/Subcategories';
-import useFetchAdvertMainPage from 'components/hooks/useFetchAdvertsMainPage';
 import AdvertsCard from 'components/Main/AdvertsCard';
 import CategoriesList from 'components/Main/CategoriesList';
 
@@ -21,8 +23,9 @@ const MainPage = () => {
   const [subcategories, setSubcategories] = useState('id');
   const [isOpen, setIsOpen] = useState(false);
   const [childrenCategory, setChildrenCategory] = useState([]);
-  const { data, loading, error } = useFetchCategories();
-  const { advertInfo, loadingAdvert, errorAdvert } = useFetchAdvertMainPage();
+  const [params, setParams] = useState({ page: '1', sort: 'dscDate' });
+  const { data: categories, loading: categoriesLoading, error: categoriesError } = useFetchCategories();
+  const { data: adverts, loading: advertsLoading, error: advertsError } = useFetchAdverts(params);
 
   const showSubcategories = (id) => {
     if (id === subcategories) {
@@ -33,7 +36,7 @@ const MainPage = () => {
       setSubcategories(id);
     }
 
-    data.forEach((item) => {
+    categories.forEach((item) => {
       if (item._id === id) {
         setChildrenCategory(item);
       }
@@ -47,9 +50,9 @@ const MainPage = () => {
         <Title>Головні рубрики</Title>
         <CategoriesListStyle>
           <CategoriesList
-            error={error}
-            loading={loading}
-            data={data}
+            error={categoriesError}
+            loading={categoriesLoading}
+            data={categories}
             showSubcategories={showSubcategories}
           />
         </CategoriesListStyle>
@@ -65,9 +68,9 @@ const MainPage = () => {
           <Title>Останні оголошення</Title>
           <AdvertsList>
             <AdvertsCard
-              errorAdvert={errorAdvert}
-              loadingAdvert={loadingAdvert}
-              advertInfo={advertInfo}
+              errorAdvert={advertsError}
+              loadingAdvert={advertsLoading}
+              advertInfo={adverts?.results || []}
             />
           </AdvertsList>
         </Wrapper>
