@@ -374,12 +374,22 @@ export const PublishButton = styled.button`
 `;
 
 export const Image = styled.img`
-width: 200px;
-height: 200px;  
+  height: 156px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
 `;
 
 export const InputFile = styled.input`
     color: #878787;
+    height: 156px;
+    width: 200px;
 
    &::-webkit-file-upload-button {
     text-decoration: none;
@@ -393,6 +403,8 @@ export const InputFile = styled.input`
     color: rgb(255, 255, 255);
     padding: 5px 11px 5px;
     transition: all 0.1s ease;
+    height: 156px;
+    width: 200px;
   }
 
   &::-webkit-file-upload-button:hover {

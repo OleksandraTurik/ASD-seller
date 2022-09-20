@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: ${props => props.theme.mainGreenColor};
+  }
   
   #root {
     min-height: 100vh;

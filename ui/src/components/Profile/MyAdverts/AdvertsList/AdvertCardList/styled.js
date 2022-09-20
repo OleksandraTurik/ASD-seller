@@ -43,6 +43,7 @@ export const EditLink = styled(Link)`
   border-radius: 4px;
   color: #102e33;
   padding: 6px 22px;
+  margin-left: 10px;
 
   @media screen and (max-width: 1280px) {
     height: 35px;
@@ -74,6 +75,25 @@ export const TopWrap = styled.div`
   @media screen and (max-width: 600px) {
   flex-direction: column;
   }
+`;
+
+export const DeleteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 40px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  background-color: transparent;
+  border: 2px solid #102e33;
+  border-radius: 4px;
+  color: #102e33;
+  padding: 6px 22px;
+  margin-left: 10px;
+
 `;
 
 export const BottomWrap = styled.div`
@@ -256,6 +276,7 @@ export const AdvertTitleLink = styled(Link)`
   font-size: 20px;
   font-weight: 600;
   color: #002f34;
+  word-break: break-all;
 
   @media screen and (max-width: 1280px) {
     font-size: 18px;

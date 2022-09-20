@@ -2,9 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-// Icons
-import Like from 'assets/icons/Like';
-
 // Styles
 import { ButtonAdvertCard } from 'components/common/Button/styled';
 import {
@@ -49,12 +46,7 @@ const AdvertCard = ({
           <span>{date}</span>
         </Info>
         <Price>{price}</Price>
-        <ToFavoriteButton>
-          <Like
-            width="29px"
-            fill="#c6c6c6"
-          />
-        </ToFavoriteButton>
+        <ToFavoriteButton advertId={itemId} />
       </Wrap>
     </Card>
   );

@@ -53,7 +53,7 @@ const AdvertPage = () => {
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
-  const date = moment(createdAt).format('MM-DD-YYYY');
+  const date = moment(createdAt).format('DD.MM.YYYY HH:mm');
 
   useEffect(() => {
     dispatch(getAdvertThunk(id));
@@ -81,6 +81,7 @@ const AdvertPage = () => {
                     images={images}
                   />
                   <Description
+                    advertId={id}
                     title={title}
                     date={date}
                     price={`${price} грн.`}

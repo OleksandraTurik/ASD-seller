@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import LikeButton from 'components/common/LikeButton';
 
 export const Card = styled.article`
   height: 370px;
@@ -68,7 +69,7 @@ export const Price = styled.div`
   color: ${props => props.theme.mainGreenColor};
 `;
 
-export const ToFavoriteButton = styled.button`
+export const ToFavoriteButton = styled(LikeButton)`
   background-color: transparent;
   border: none;
   position: absolute;

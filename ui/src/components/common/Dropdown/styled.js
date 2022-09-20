@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Select = styled.div`
-  background: white;
   padding: 19px 15px;
   border: none;
   font-size: 16px;
@@ -12,6 +11,8 @@ export const Select = styled.div`
   align-items: center;
   gap: 10px;
   min-width: 200px;
+  color: ${props => props.theme.mainGreenColor};
+  background-color: white;
 `;
 
 export const Value = styled.p`
@@ -19,6 +20,7 @@ export const Value = styled.p`
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
+  color: ${props => props.theme.mainGreenColor};
 `;
 
 export const OptionList = styled.ul`
@@ -29,6 +31,7 @@ export const OptionList = styled.ul`
   left: 0;
   background: white;
   width: 100%;
+  color: ${props => props.theme.mainGreenColor};
   z-index: 10;
   ${props => props.isMobile && 'overflow-y: scroll;max-height: 300px;'}
 `;
@@ -36,9 +39,10 @@ export const OptionList = styled.ul`
 export const Option = styled.li`
   padding: 10px;
   background: white;
+  color: ${props => props.theme.mainGreenColor};
 
   &:hover {
-    background: #002f34;
+    background: ${props => props.theme.mainGreenColor};
     color: white;
   }
 `;

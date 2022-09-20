@@ -53,7 +53,7 @@ const Filters = ({ onFilter, onSearch, itemsAmount }) => {
           />
           <SearchInput
             onChange={searchHandler}
-            type="text"
+            type="search"
             placeholder="Заголовок"
           />
         </SearchContainer>
