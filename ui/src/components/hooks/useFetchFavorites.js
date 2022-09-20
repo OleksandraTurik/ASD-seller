@@ -13,7 +13,6 @@ const useFetchFavorites = (arrayOfId) => {
         setLoading(true);
         const results = await Promise.all(arrayOfId.map((id) => advertServices.getAdvertById(id, controller.signal)));
         setData(results.map(el => el.data));
-        console.log(results.map(e => e.data));
         setLoading(false);
       } catch (e) {
         setError(e);
