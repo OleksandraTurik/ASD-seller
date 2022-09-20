@@ -14,6 +14,8 @@ import {
   Info,
   Price,
   ToFavoriteButton,
+  ImageWrap,
+  Wrap,
 } from './styled';
 
 const AdvertCard = ({
@@ -32,24 +34,28 @@ const AdvertCard = ({
 
   return (
     <Card>
-      <ImgInCard src={img} />
+      <ImageWrap>
+        <ImgInCard src={img} />
+      </ImageWrap>
       <div>
         <ButtonAdvertCard onClick={handleNavigate}>
           <NameOfProduct>{name}</NameOfProduct>
         </ButtonAdvertCard>
       </div>
-      <Info>
-        <span>{location}</span>
-        <span>&nbsp;-&nbsp;</span>
-        <span>{date}</span>
-      </Info>
-      <Price>{price}</Price>
-      <ToFavoriteButton>
-        <Like
-          width="29px"
-          fill="#c6c6c6"
-        />
-      </ToFavoriteButton>
+      <Wrap>
+        <Info>
+          <span>{location}</span>
+          <span>&nbsp;-&nbsp;</span>
+          <span>{date}</span>
+        </Info>
+        <Price>{price}</Price>
+        <ToFavoriteButton>
+          <Like
+            width="29px"
+            fill="#c6c6c6"
+          />
+        </ToFavoriteButton>
+      </Wrap>
     </Card>
   );
 };

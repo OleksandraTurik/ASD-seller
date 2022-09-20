@@ -15,9 +15,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'components/common/Loader';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
 import NotFound from 'pages/NotFound';
+import Search from 'components/common/Search';
+import AllAdvertsUser from 'components/Advert/AllAdvertsUser';
 
 // Styles
-import { Wrapper, Container, SliderWrap } from './styled';
+import {
+  Wrapper,
+  Container,
+  SliderWrap,
+  MainContainer,
+  InfoWrap,
+  SearchWrap,
+} from './styled';
 
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
@@ -57,31 +66,37 @@ const AdvertPage = () => {
         {!error
           && !loading
           && (
-            <>
-              <SliderWrap>
-                <SimpleSlider
-                  images={images}
-                />
-                <Description
-                  title={title}
-                  date={date}
-                  price={`${price} грн.`}
-                  description={description}
-                />
-              </SliderWrap>
-              <Container>
-                <User
-                  name={contactName}
-                  date={date}
-                  link={`/adverts?seller=${sellerId}`}
-                  phone={token ? phone : '(XXX) XXX XXXX'}
-                />
-                <Location
-                  city={city}
-                  region={region}
-                />
-              </Container>
-            </>
+            <MainContainer>
+              <SearchWrap>
+                <Search />
+              </SearchWrap>
+              <InfoWrap>
+                <SliderWrap>
+                  <SimpleSlider
+                    images={images}
+                  />
+                  <Description
+                    title={title}
+                    date={date}
+                    price={`${price} грн.`}
+                    description={description}
+                  />
+                </SliderWrap>
+                <Container>
+                  <User
+                    name={contactName}
+                    date={date}
+                    link={`/adverts?seller=${sellerId}`}
+                    phone={token ? phone : '(XXX) XXX XXXX'}
+                  />
+                  <Location
+                    city={city}
+                    region={region}
+                  />
+                </Container>
+              </InfoWrap>
+              <AllAdvertsUser />
+            </MainContainer>
           )}
       </Wrapper>
     </>

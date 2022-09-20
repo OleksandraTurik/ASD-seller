@@ -34,7 +34,7 @@ export const Wrapper = styled(Slider)`
   }
 
   @media screen and (max-width: 320px) {
-    padding: 0 10px;
+    padding: 10px;
   }
 `;
 

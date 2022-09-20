@@ -11,6 +11,8 @@ export const Wrapper = styled.div`
   padding: 15px;
 
   & span {
+    display: wrap;
+    overflow-wrap: break-word;
     font-size: 32px;
     color: #002f34;
 
