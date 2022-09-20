@@ -56,6 +56,7 @@ export const SearchInput = styled.input`
   height: 100%;
   flex: 1 1 auto;
   min-width: 10px;
+  outline: none;
 
   &::placeholder {
     font-weight: 400;
@@ -89,11 +90,24 @@ export const SearchDropdown = styled(Select).attrs({
       borderRadius: 'none',
       height: '100%',
       width: '100%',
+      boxShadow: 'none',
     }),
     dropdownIndicator: prev => ({
       ...prev,
       padding: '0',
       border: 'none',
+    }),
+    menuList: (base) => ({
+      ...base,
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: 'rgb(242, 244, 245)',
+      },
+      '&::-webkit-scrollbar': {
+        width: '8px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#002f34',
+      },
     }),
     valueContainer: prev => ({
       ...prev,

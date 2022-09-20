@@ -38,8 +38,7 @@ const FavoritesPage = () => {
     favorites,
   } = exactUserInfo.data;
 
-  const { data, loading } = useFetchFavorites(favorites);
-
+  const { data, loading, zeroFavorites } = useFetchFavorites(favorites);
   return (
     <>
       <TitleArea>
@@ -51,7 +50,7 @@ const FavoritesPage = () => {
         <Wrapper>
           <AdvertsList>
             {loading
-              ? <Loader /> : data.length === 0
+              ? <Loader /> : zeroFavorites === true
                 ? (
                   <Wrapper2>
                     <DontHaveFavoritesAdvBlock>
@@ -71,7 +70,7 @@ const FavoritesPage = () => {
                     img={`${URL}/${el.images[0]}`}
                     name={el.title}
                     location={`${el.address.city}, ${el.address.admin_name}`}
-                    date={moment(el.createdAt).format('MM-DD-YYYY')}
+                    date={moment(el.createdAt).format('DD.MM.YYYY HH:mm')}
                     price={`${el.price} грн`}
                   />
                 ))}
