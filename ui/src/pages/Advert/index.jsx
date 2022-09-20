@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment/moment';
 
@@ -15,12 +15,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'components/common/Loader';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
 import NotFound from 'pages/NotFound';
+import Search from 'components/common/Search';
+import AllAdvertsUser from 'components/Advert/AllAdvertsUser';
 
 // hooks
 import { useGetInfoExactUser } from 'components/hooks/useGetInfoExactUser';
 
 // Styles
-import { Wrapper, Container, SliderWrap } from './styled';
+import {
+  Wrapper,
+  Container,
+  SliderWrap,
+  MainContainer,
+  InfoWrap,
+  SearchWrap,
+} from './styled';
 
 const AdvertPage = () => {
   const advert = useSelector(state => state.getAdvert);
@@ -46,15 +55,11 @@ const AdvertPage = () => {
   const token = localStorage.getItem('tokens');
   const date = moment(createdAt).format('DD.MM.YYYY HH:mm');
 
-  console.log('sellerId', sellerId);
-
   useEffect(() => {
     dispatch(getAdvertThunk(id));
   }, [id]);
 
   const { data } = useGetInfoExactUser(sellerId);
-
-  console.log('sellerId', sellerId);
 
   const { loading, error } = advert;
 
@@ -66,33 +71,39 @@ const AdvertPage = () => {
         {!error
           && !loading
           && (
-            <>
-              <SliderWrap>
-                <SimpleSlider
-                  images={images}
-                />
-                <Description
-                  advertId={id}
-                  title={title}
-                  date={date}
-                  price={`${price} грн.`}
-                  description={description}
-                />
-              </SliderWrap>
-              <Container>
-                <User
-                  name={contactName}
-                  date={date}
-                  link={`/adverts?seller=${sellerId}`}
-                  phone={token ? phone : '(XXX) XXX XXXX'}
-                  avatarOfUser={data.avatar}
-                />
-                <Location
-                  city={city}
-                  region={region}
-                />
-              </Container>
-            </>
+            <MainContainer>
+              <SearchWrap>
+                <Search />
+              </SearchWrap>
+              <InfoWrap>
+                <SliderWrap>
+                  <SimpleSlider
+                    images={images}
+                  />
+                  <Description
+                    advertId={id}
+                    title={title}
+                    date={date}
+                    price={`${price} грн.`}
+                    description={description}
+                  />
+                </SliderWrap>
+                <Container>
+                  <User
+                    name={contactName}
+                    date={date}
+                    link={`/adverts?seller=${sellerId}`}
+                    phone={token ? phone : '(XXX) XXX XXXX'}
+                    avatarOfUser={data.avatar}
+                  />
+                  <Location
+                    city={city}
+                    region={region}
+                  />
+                </Container>
+              </InfoWrap>
+              <AllAdvertsUser />
+            </MainContainer>
           )}
       </Wrapper>
     </>
