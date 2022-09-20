@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import AdvertCard from './AdvertCard';
 
 const AdvertsList = ({
-  list = [], itemsAmount, error, loading,
+  list = [], itemsAmount, error, loading, handleDelete,
 }) => (
   <AdvertCard
     list={list}
     itemsAmount={itemsAmount}
     error={error}
     loading={loading}
+    handleDelete={handleDelete}
   />
 );
 AdvertsList.propTypes = {
@@ -17,6 +18,7 @@ AdvertsList.propTypes = {
   itemsAmount: PropTypes.number,
   error: PropTypes.bool,
   loading: PropTypes.bool,
+  handleDelete: PropTypes.func,
 };
 
 AdvertsList.defaultProps = {
@@ -24,6 +26,7 @@ AdvertsList.defaultProps = {
   list: [],
   error: false,
   loading: true,
+  handleDelete: () => {},
 };
 
 export default AdvertsList;

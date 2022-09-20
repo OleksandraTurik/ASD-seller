@@ -3,36 +3,12 @@ import qs from 'query-string';
 import ServerException from 'exceptions/serverException';
 
 const advertServices = {
-  getAdvertsList: async (id, filters) => {
-    const params = qs.stringify({
-      ...filters,
-      seller: id,
-    });
-    try {
-      const adverts = API.get(`/adverts?${params}`);
-      return adverts;
-    } catch (e) {
-      throw new ServerException(e.response);
-    }
+  getAdvertList: (queryParams, signal) => {
+    const params = qs.stringify(queryParams);
+    return API.get(`/adverts?${params}`, { signal });
   },
-  getAdvertListWithQueries: async (queryParams, signal) => {
-    try {
-      const params = qs.stringify(queryParams);
-      return await API.get(`/adverts?${params}`, { signal });
-    } catch (err) {
-      throw new ServerException(err.response);
-    }
-  },
-  getAdverts: async () => {
-    try {
-      const adverts = API.get('/adverts');
-      return adverts;
-    } catch (e) {
-      throw new ServerException(e.response);
-    }
-  },
+  getAdverts: () => API.get('/adverts'),
   createAdverts: async (advertData) => {
-    console.log(advertData);
     try {
       const formData = new FormData();
       formData.append('title', advertData.title);
@@ -43,7 +19,10 @@ const advertServices = {
       formData.append('contactPhone', advertData.contactPhone);
       formData.append('category', advertData.category);
       formData.append('address', advertData.address);
-      formData.append('images', advertData.images[0]);
+      // eslint-disable-next-line no-restricted-syntax
+      for (const image of advertData.images) {
+        formData.append('images', image);
+      }
       const settings = { headers: { 'Content-Type': 'multipart/form-data' } };
       const createAdverts = await API.post('/adverts', formData, settings);
       return createAdverts;
@@ -51,14 +30,31 @@ const advertServices = {
       throw new ServerException(e.response);
     }
   },
-  getAdvert: async (id) => {
+  editAdverts: async (advertData, id) => {
     try {
-      const advert = await API.get(`/adverts/${id}`);
-      return advert;
+      const formData = new FormData();
+      formData.append('title', advertData.title);
+      formData.append('description', advertData.description);
+      formData.append('price', advertData.price);
+      formData.append('sellerId', advertData.sellerId);
+      formData.append('contactName', advertData.contactName);
+      formData.append('contactPhone', advertData.contactPhone);
+      formData.append('category', advertData.category);
+      formData.append('address', advertData.address);
+      // eslint-disable-next-line no-restricted-syntax
+      for (const image of advertData.images) {
+        formData.append('images', image);
+      }
+      const settings = { headers: { 'Content-Type': 'multipart/form-data' } };
+      const editAdverts = await API.patch(`adverts/${id}`, formData, settings);
+      return editAdverts;
     } catch (e) {
       throw new ServerException(e.response);
     }
   },
+
+  getAdvertById: (id, signal) => API.get(`/adverts/${id}`, { signal }),
+
   deleteAdvert: async (id) => {
     try {
       const advert = await API.delete(`/adverts/${id}`);

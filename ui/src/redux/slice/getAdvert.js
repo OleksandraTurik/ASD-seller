@@ -10,7 +10,7 @@ const initialState = {
 export const getAdvertThunk = createAsyncThunk(
   'getAdvert/getAdvertThunk',
   async (id) => {
-    const result = await advertServices.getAdvert(id);
+    const result = await advertServices.getAdvertById(id);
     return result.data;
   },
 );

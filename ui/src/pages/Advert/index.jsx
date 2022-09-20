@@ -62,6 +62,7 @@ const AdvertPage = () => {
                   images={images}
                 />
                 <Description
+                  advertId={id}
                   title={title}
                   date={date}
                   price={`${price} грн.`}

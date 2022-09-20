@@ -46,6 +46,10 @@ const userServices = {
     const { data } = await API.patch(`/users/${userId.id}/avatar`, formData, settings);
     return data;
   },
+  updateUserFavorites: (userId, method, advertId) => {
+    const body = { method, advertId };
+    return API.patch(`/users/${userId}/favorites`, body);
+  },
 };
 
 export default userServices;

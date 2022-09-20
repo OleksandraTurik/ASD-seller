@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-/* eslint-disable prefer-template */
 import { useEffect, useState } from 'react';
 import citiesServices from 'services/citiesServices';
 

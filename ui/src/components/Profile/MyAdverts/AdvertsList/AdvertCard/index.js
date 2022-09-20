@@ -9,8 +9,7 @@ import EmptyAdvertsList from '../EmptyAdvertsList';
 
 const AdvertsCard = ({
   list = [],
-  error,
-  loading,
+  error, loading, handleDelete,
 }) => {
   if (loading) {
     return <Loader />;
@@ -20,6 +19,7 @@ const AdvertsCard = ({
     !error && list.length ? list?.map((item) => (
       <AdvertCardList
         key={item._id}
+        id={item._id}
         link={`/adverts/${item._id}`}
         img={item.images[0]}
         name={item.title}
@@ -28,6 +28,7 @@ const AdvertsCard = ({
         price={`${item.price} грн.`}
         category={item.category.name}
         subcategory={item.category.child.name}
+        handleDelete={handleDelete}
       />
     )) : <EmptyAdvertsList />
   );
@@ -37,12 +38,14 @@ AdvertsCard.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape({})),
   error: PropTypes.bool,
   loading: PropTypes.bool,
+  handleDelete: PropTypes.func,
 };
 
 AdvertsCard.defaultProps = {
   list: [],
   error: false,
   loading: true,
+  handleDelete: () => {},
 };
 
 export default AdvertsCard;
