@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 // Libraries
 import Select from 'react-select';
@@ -49,9 +50,39 @@ import {
   ImgCirle, Image,
   Flex,
 } from './styled';
+import { getAdvertThunk } from '../../redux/slice/getAdvert';
+import Loader from '../../components/common/Loader';
+
+const adaptToDefaultValues = (data, isEdit) => {
+  console.log(isEdit);
+  if (isEdit) {
+    return ({
+      title: data.title,
+      price: data.price,
+      description: data.description,
+      address: data.address?._id,
+      category: data.category?.child._id,
+      contactName: data.contactName,
+      contactPhone: data.contactPhone,
+      sellerId: data.sellerId,
+    });
+  }
+  return ({
+    title: '',
+    price: '',
+    description: '',
+    address: '',
+    contactName: '',
+    contactPhone: '',
+    sellerId: '',
+  });
+};
 
 // eslint-disable-next-line react/prop-types
 const AddAdsPage = () => {
+  const { id } = useParams();
+  const isEdit = !!id;
+
   const [isOpen, setModalOpen] = useState(false);
   const [subcategory, setSubcategory] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -59,6 +90,7 @@ const AddAdsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
+  const { advertInfo, loading } = useSelector(state => state.getAdvert);
   const user = JSON.parse(localStorage.getItem('tokens'));
   const [selectedFile, setSelectedFile] = useState();
   const [img, setImg] = useState([]);
@@ -66,14 +98,13 @@ const AddAdsPage = () => {
   const [maxUploadsImages, setMaxUploadsImages] = useState(false);
   const { cities } = useFetchCities();
   const {
-    register, handleSubmit, control, reset, formState: { errors },
+    register, handleSubmit, reset, control, formState: { errors },
   } = useForm({
     mode: 'onChange',
     defaultValues: {
       title: '',
       description: '',
-      price: '',
-      sellerId: user.userDto.id,
+      price: 0,
       contactName: '',
       contactPhone: '+380',
       address: '',
@@ -81,23 +112,40 @@ const AddAdsPage = () => {
       category: '',
     },
   });
+
   const colorCategory = {
     color: selected ? 'black' : 'red',
   };
+  console.log(selected);
   const onSubmit = async (v) => {
     try {
-      const send = await advertServices.createAdverts({
-        title: v.title,
-        description: v.description,
-        price: v.price,
-        sellerId: v.sellerId,
-        contactName: v.contactName,
-        contactPhone: v.contactPhone,
-        address: v.address,
-        images: img,
-        category: selected._id,
-      });
-      navigate(`/profiles/${user.userDto.id}/adverts`);
+      if (isEdit) {
+        const send = await advertServices.editAdverts({
+          title: v.title,
+          description: v.description,
+          price: v.price,
+          sellerId: user.userDto.id,
+          contactName: v.contactName,
+          contactPhone: v.contactPhone,
+          address: v.address,
+          images: img,
+          category: selected._id,
+        }, id);
+        navigate(`/profiles/${user.userDto.id}/adverts`);
+      } else {
+        const send = await advertServices.createAdverts({
+          title: v.title,
+          description: v.description,
+          price: v.price,
+          sellerId: user.userDto.id,
+          contactName: v.contactName,
+          contactPhone: v.contactPhone,
+          address: v.address,
+          images: img,
+          category: selected._id,
+        });
+        navigate(`/profiles/${user.userDto.id}/adverts`);
+      }
     } catch (e) {
       console.log(e.message);
     }
@@ -107,12 +155,25 @@ const AddAdsPage = () => {
     e.target.style.height = 'inherit';
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
+
+  useEffect(() => {
+    if (advertInfo && Object.keys(advertInfo).length > 0) {
+      reset(adaptToDefaultValues(advertInfo, isEdit));
+    }
+    if (isEdit) {
+      reset(adaptToDefaultValues(advertInfo, isEdit));
+      setSelected(advertInfo.category?.child);
+    } else {
+      setSelected(null);
+    }
+  }, [advertInfo, isEdit]);
+
   useEffect(() => {
     dispatch(getCategories());
-  }, [dispatch]);
-  if (categories.loading) {
-    return <div>Loading...</div>;
-  }
+    if (isEdit) {
+      dispatch(getAdvertThunk(id));
+    }
+  }, [dispatch, isEdit]);
 
   useEffect(() => {
     setShowInfo(true);
@@ -158,7 +219,7 @@ const AddAdsPage = () => {
   return (
     <Main>
       <Wrapper>
-        <Title>Створити оголошення</Title>
+        <Title>{isEdit ? 'Редагування оголошення' : 'Створити оголошення'}</Title>
         <form onSubmit={handleSubmit(onSubmit)}>
           <WhiteBlock>
             <WidthEquation>

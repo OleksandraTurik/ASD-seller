@@ -1,5 +1,5 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 // Slider
@@ -13,18 +13,25 @@ import MainRoutes from 'routes/MainRoutes';
 import Header from 'components/common/Header';
 import Footer from 'components/common/Footer';
 
-// Store
-import { store } from './redux';
+// Slices
+import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 
-const App = () => (
-  <Provider store={store}>
+const { id } = JSON.parse(localStorage.getItem('tokens')).userDto;
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getExactUserInfoThunk(id));
+  }, []);
+
+  return (
     <BrowserRouter>
       <Header />
       <MainRoutes />
       <Footer />
     </BrowserRouter>
-  </Provider>
-
-);
+  );
+};
 
 export default App;

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
-import useFetchExactAdvert from 'components/hooks/useFetchExactAdvert';
+import useFetchFavorites from 'components/hooks/useFetchFavorites';
 import Loader from 'components/common/Loader';
 import AdvertCard from 'components/common/AdvertCard';
 import { URL } from 'API';
@@ -38,7 +38,7 @@ const FavoritesPage = () => {
     favorites,
   } = exactUserInfo.data;
 
-  const { data, loading, zeroFavorites } = useFetchExactAdvert(favorites);
+  const { data, loading, zeroFavorites } = useFetchFavorites(favorites);
   return (
     <>
       <TitleArea>

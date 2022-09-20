@@ -18,6 +18,14 @@ export const getExactUserInfoThunk = createAsyncThunk(
 const exactUserInfoSlice = createSlice({
   name: 'ExactUserInfo',
   initialState,
+  reducers: {
+    addToFavorites(state, action) {
+      state.data.favorites.unshift(action.payload);
+    },
+    removeFromFavorites(state, action) {
+      state.data.favorites = state.data.favorites.filter(e => e !== action.payload);
+    },
+  },
   extraReducers: {
     [getExactUserInfoThunk.pending]: (state) => {
       state.loading = true;
@@ -32,5 +40,7 @@ const exactUserInfoSlice = createSlice({
     },
   },
 });
+
+export const { addToFavorites, removeFromFavorites } = exactUserInfoSlice.actions;
 
 export default exactUserInfoSlice.reducer;
