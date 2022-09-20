@@ -38,8 +38,6 @@ const AdvertPage = () => {
     sellerId,
   } = advert.advertInfo;
 
-  console.log(advert);
-
   const { id } = useParams();
   const dispatch = useDispatch();
   const phone = contactPhone ?? 'no number phone';
@@ -47,7 +45,6 @@ const AdvertPage = () => {
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
   const date = moment(createdAt).format('MM-DD-YYYY');
-  const [selId, setSelId] = useState('');
 
   console.log('sellerId', sellerId);
 
@@ -58,14 +55,6 @@ const AdvertPage = () => {
   const { data } = useGetInfoExactUser(sellerId);
 
   console.log('sellerId', sellerId);
-
-  useEffect(() => {
-    setSelId(sellerId);
-  }, [sellerId]);
-
-  console.log('data', data);
-  console.log('avatar', data.avatar);
-  console.log('selId', selId);
 
   const { loading, error } = advert;
 
