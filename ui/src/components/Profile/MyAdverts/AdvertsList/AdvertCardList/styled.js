@@ -43,6 +43,7 @@ export const EditLink = styled(Link)`
   border-radius: 4px;
   color: #102e33;
   padding: 6px 22px;
+  margin-left: 10px;
 
   @media screen and (max-width: 1280px) {
     height: 35px;
