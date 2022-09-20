@@ -35,6 +35,14 @@ const MainRoutes = () => (
           </PrivateRoute>
 )}
       />
+      <Route
+        path="/add/:id"
+        element={(
+          <PrivateRoute>
+            <AddAdsPage />
+          </PrivateRoute>
+            )}
+      />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="/favorites" element={<FavoritesPage />} />

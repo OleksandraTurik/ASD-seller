@@ -53,6 +53,28 @@ const advertServices = {
       throw new ServerException(e.response);
     }
   },
+  editAdverts: async (advertData, id) => {
+    try {
+      const formData = new FormData();
+      formData.append('title', advertData.title);
+      formData.append('description', advertData.description);
+      formData.append('price', advertData.price);
+      formData.append('sellerId', advertData.sellerId);
+      formData.append('contactName', advertData.contactName);
+      formData.append('contactPhone', advertData.contactPhone);
+      formData.append('category', advertData.category);
+      formData.append('address', advertData.address);
+      // eslint-disable-next-line no-restricted-syntax
+      for (const image of advertData.images) {
+        formData.append('images', image);
+      }
+      const settings = { headers: { 'Content-Type': 'multipart/form-data' } };
+      const editAdverts = await API.patch(`adverts/${id}`, formData, settings);
+      return editAdverts;
+    } catch (e) {
+      throw new ServerException(e.response);
+    }
+  },
   getAdvert: async (id) => {
     try {
       const advert = await API.get(`/adverts/${id}`);
