@@ -107,3 +107,7 @@ export const WrapperLoader = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
  
 `;
+
+export const P = styled.p`
+  font-size: 12px;
+`;

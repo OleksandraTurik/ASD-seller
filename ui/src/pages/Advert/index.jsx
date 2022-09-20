@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment/moment';
 
@@ -15,6 +15,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'components/common/Loader';
 import { getAdvertThunk } from 'redux/slice/getAdvert';
 import NotFound from 'pages/NotFound';
+
+// hooks
+import { useGetInfoExactUser } from 'components/hooks/useGetInfoExactUser';
 
 // Styles
 import { Wrapper, Container, SliderWrap } from './styled';
@@ -43,9 +46,15 @@ const AdvertPage = () => {
   const token = localStorage.getItem('tokens');
   const date = moment(createdAt).format('MM-DD-YYYY');
 
+  console.log('sellerId', sellerId);
+
   useEffect(() => {
     dispatch(getAdvertThunk(id));
   }, [id]);
+
+  const { data } = useGetInfoExactUser(sellerId);
+
+  console.log('sellerId', sellerId);
 
   const { loading, error } = advert;
 
@@ -75,6 +84,7 @@ const AdvertPage = () => {
                   date={date}
                   link={`/adverts?seller=${sellerId}`}
                   phone={token ? phone : '(XXX) XXX XXXX'}
+                  avatarOfUser={data.avatar}
                 />
                 <Location
                   city={city}
