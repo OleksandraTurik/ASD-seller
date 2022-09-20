@@ -1,7 +1,8 @@
 import React from 'react';
 
-// Styles
 import AdvertSlider from './AdvertSlider';
+
+// Styles
 import { Wrapper, SliderWrap } from './styled';
 
 const AllAdvertsUser = () => (

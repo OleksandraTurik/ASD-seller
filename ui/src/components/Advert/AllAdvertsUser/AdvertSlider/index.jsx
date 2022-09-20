@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import { URL } from 'API';
@@ -32,15 +34,16 @@ const AdvertSlider = () => {
     centerMode: false,
     draggable: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: results?.length < 4 ? results?.length : 4,
+    slidesToScroll: 1,
     dots: true,
+    infinite: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: results?.length < 3 ? results?.length : 3,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
         },
@@ -48,8 +51,8 @@ const AdvertSlider = () => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: results?.length < 2 ? results?.length : 2,
+          slidesToScroll: 1,
           initialSlide: 2,
         },
       },
@@ -70,6 +73,7 @@ const AdvertSlider = () => {
           {!error && !loading && !advertLoading
             && (results?.map((item) => (
               <AdvertCard
+                margin={results.length < 4 ? '0' : 'auto'}
                 key={item?._id}
                 link={`/adverts/${item?._id}`}
                 img={`${URL}/${item?.images[0]}`}

@@ -251,6 +251,7 @@ export const AdvertHeaderWrap = styled.div`
 `;
 
 export const AdvertTitleLink = styled(Link)`
+  word-break: break-all;
   width: 85%;
   font-size: 20px;
   font-weight: 600;

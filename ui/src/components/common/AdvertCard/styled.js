@@ -39,6 +39,7 @@ export const NameOfProduct = styled.h4`
   overflow: hidden;
   cursor: pointer;
   text-align: left;
+  word-break: break-all;
 
   &:hover {
     background-color: ${props => props.theme.mainGreenColor};

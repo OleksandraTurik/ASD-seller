@@ -12,33 +12,11 @@ export const Card = styled.article`
   position: relative;
   box-sizing: border-box;
   border-radius: 4px;
-  width: 97%;
-  margin: auto;
-
-  @media (max-width: 1280px) {
-    width: 95%;
-  }
-
-  @media (max-width: 800px) {
-    height: 380px;
-  }
-
-  @media (max-width: 600px) {
-    width: 90%;
-    height: 370px;
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-  }
-
-  @media (max-width: 400px) {
-    width: 90%;
-  }
+  width: 285px;
+  margin: ${({ margin }) => margin};
 
   @media (max-width: 320px) {
-    height: 400px;
-    width: 100%;
+    width: 95%;
   }
 `;
 
@@ -125,5 +103,6 @@ export const Wrap = styled.div`
 `;
 
 export const LinkAdvertCard = styled(Link)`
+  word-break: break-all;
   list-style: none;
 `;

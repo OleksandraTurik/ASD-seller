@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
 
     @media screen and (max-width: 320px) {
       font-size: 16px;
-      margin: 20px 15px 0 0;
+      margin: 20px 0;
     }
   }
 `;

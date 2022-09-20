@@ -5,43 +5,11 @@ export const Wrapper = styled(Slider)`
   position: relative;
   border-radius: 5px;
   cursor: grabbing;
-  width: 1050px;
-
-  @media screen and (max-width: 1280px) {
-    width: 850px;
-  }
-
-  @media screen and (max-width: 900px) {
-    width: 700px;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 540px;
-  }
-
-  @media screen and (max-width: 600px) {
-    width: 480px;
-  }
-
-  @media screen and (max-width: 550px) {
-    width: 420px;
-  }
-  
-  @media screen and (max-width: 480px) {
-    width: 360px;
-  }
-
-  @media screen and (max-width: 400px) {
-    width: 310px;
-  }
-
-  @media screen and (max-width: 340px) {
-    width: 260px;
-  }
+  width: 90vw;
 
   .slick-track {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
   }
 
   & ul {
@@ -76,7 +44,6 @@ export const Wrapper = styled(Slider)`
     @media screen and (max-width: 320px) {
       height: 460px;
     }
-
   }
 
   .slick-dots li button:before {
@@ -85,11 +52,46 @@ export const Wrapper = styled(Slider)`
     }
   }
 
-  .slick-slide slick-active slick-current {
-    height: 340px;
+  .slick-prev:before, .slick-next:before {
+    color: #003034;
+    font-size: 24px;
+
+    @media screen and (max-width: 600px) {
+      font-size: 18px;
+    }
   }
 
-  @media screen and (max-width: 320px) {
-    padding: 10px;
+  .slick-prev {
+    position: fixed;
+    left: 35px;
+    top: 45%;
+    z-index: 999;
+
+    @media screen and (max-width: 480px) {
+      top: 50%;
+    }
+
+    @media screen and (max-width: 320px) {
+      z-index: -1;
+    }
+  }
+
+  .slick-next {
+    position: fixed;
+    right: 35px;
+    top: 45%;
+    z-index: 999;
+
+    @media screen and (max-width: 480px) {
+      top: 50%;
+    }
+
+    @media screen and (max-width: 320px) {
+      z-index: -1;
+    }
+  }
+
+  .slick-slide slick-active slick-current {
+    height: 340px;
   }
 `;
