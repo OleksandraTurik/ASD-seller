@@ -23,6 +23,7 @@ import {
   BottomWrap,
   EditLink,
   ImageWrap,
+  DeleteButton,
 } from './styled';
 
 const AdvertCardList = ({
@@ -81,7 +82,7 @@ const AdvertCardList = ({
           </AdvertInfoWrap>
         </TopWrap>
         <BottomWrap>
-          <EditLink onClick={deleteItem}>Видалити</EditLink>
+          <DeleteButton onClick={deleteItem}>Видалити</DeleteButton>
           <EditLink to={`/add/${id}`}>Редагувати</EditLink>
         </BottomWrap>
       </Container>
