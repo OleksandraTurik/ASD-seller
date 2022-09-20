@@ -10,7 +10,7 @@ export const useGetInfoExactUser = (id) => {
     dispatch(getExactUserInfoThunk(id));
   }, [dispatch]);
 
-  console.log(user);
+  console.log('user', user);
 
   return { ...user };
 };

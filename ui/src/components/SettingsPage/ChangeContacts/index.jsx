@@ -18,8 +18,10 @@ import { useFetchCities } from 'components/hooks/useFetchCities';
 import DropdownIndicator from 'helpers/DropdownIndicator';
 import { stylesReactSelectForSettingsPage } from 'helpers/stylesForReactSelect';
 
-// Styles
+// services
 import userServices from 'services/userServices';
+
+// Styles
 import { CategoryWidthEquation } from './styled';
 
 const ChangeContacts = ({ fullName, address }) => {

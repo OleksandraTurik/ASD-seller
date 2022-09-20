@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 import PropTypes from 'prop-types';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
@@ -9,7 +10,7 @@ import { LoaderForm } from 'components/common/Form/LoaderContainer';
 import validation from 'helpers/validation';
 import { noticeMessages } from 'components/common/Form/helper';
 import {
-  Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button, P,
+  Container, Wrapper, FormWrapper, WrapperLink, ErrorContainer, Input, Button, P,
 } from './styled';
 
 const Form = ({
@@ -22,6 +23,7 @@ const Form = ({
     reset,
   } = useForm({
     mode: 'onChange',
+    criteriaMode: 'all',
   });
 
   const { registrationSuccess, error, loading } = useSelector((state) => state.userReducer);
@@ -80,7 +82,16 @@ const Form = ({
               },
             })}
           />
-          <ErrorContainer>{errors.email && <ErrorTitle>{errors.email.message || 'Error! Must be more than 8 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ messages }) => messages
+                && Object.entries(messages).map(([type, message]) => (
+                  <P key={type}>{message}</P>
+                ))}
+            />
+          </ErrorContainer>
           <Input
             type="password"
             placeholder={passwordField}
@@ -96,7 +107,16 @@ const Form = ({
               },
             })}
           />
-          <ErrorContainer>{errors.password && <ErrorTitle>{errors.password.message || 'Error! Must be more than 3 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>
+            <ErrorMessage
+              errors={errors}
+              name="password"
+              render={({ messages }) => messages
+                && Object.entries(messages).map(([type, message]) => (
+                  <P key={type}>{message}</P>
+                ))}
+            />
+          </ErrorContainer>
           <Button type="submit">{textButton}</Button>
         </FormWrapper>
       </Wrapper>

@@ -118,6 +118,7 @@ export const RegistrationDate = styled.div`
 
 export const UserIcon = styled.img`
   width: 45px;
+  border-radius: 50%;
 
   @media screen and (max-width: 1280px) {
     width: 42px;
