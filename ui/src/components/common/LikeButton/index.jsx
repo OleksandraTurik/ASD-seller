@@ -11,10 +11,11 @@ import { Button } from './styled';
 const LikeButton = ({ advertId, ...props }) => {
   const dispatch = useDispatch();
   const { favorites, _id: id } = useSelector(state => state.exactUserInfoSlice.data);
-  const [active, setActive] = useState(favorites.includes(advertId));
+  const [active, setActive] = useState(!!favorites?.includes(advertId));
 
   const clickHandler = async (event) => {
     event.stopPropagation();
+    if (!id) return;
     try {
       if (active) {
         await userServices.updateUserFavorites(id, 'REMOVE', advertId);

@@ -16,13 +16,13 @@ import Footer from 'components/common/Footer';
 // Slices
 import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 
-const { id } = JSON.parse(localStorage.getItem('tokens')).userDto;
+const id = JSON.parse(localStorage.getItem('tokens'))?.userDto?.id;
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getExactUserInfoThunk(id));
+    if (id) dispatch(getExactUserInfoThunk(id));
   }, []);
 
   return (
