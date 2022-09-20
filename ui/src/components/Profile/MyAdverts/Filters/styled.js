@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Dropdown from 'components/common/Dropdown';
+import closeIcon from 'assets/icons/closeIcon.svg';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -43,10 +44,28 @@ export const SearchInput = styled.input`
   display: flex;
   align-items: center;
   font-size: 16px;
+  outline: none;
 
   &::placeholder {
     font-size: 16px;
     color: #849698;
+  }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1.9em;
+    width: 1.9em;
+    border-radius: 50em;
+    background: url(${closeIcon}) no-repeat 40%;
+    background-size: contain;
+    pointer-events: none;
+    cursor: pointer;
+    position: relative;
+    left: -10px;
+  }
+
+  &:focus::-webkit-search-cancel-button {
+    pointer-events: all;
   }
 `;
 

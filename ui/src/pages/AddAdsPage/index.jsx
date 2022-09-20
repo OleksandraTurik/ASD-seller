@@ -47,6 +47,7 @@ import {
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
   ImgCirle, Image,
+  Flex,
 } from './styled';
 
 // eslint-disable-next-line react/prop-types
@@ -248,8 +249,8 @@ const AddAdsPage = () => {
             </CategoryWidthEquation>
           </WhiteBlock>
           <WhiteBlock>
-            <WidthEquation>
-              <WhiteBlockTitle>Фото</WhiteBlockTitle>
+            <WhiteBlockTitle>Фото</WhiteBlockTitle>
+            <Flex>
               {!maxUploadsImages ? (
                 <InputFile
                   id="images"
@@ -260,9 +261,9 @@ const AddAdsPage = () => {
                     onChange: onSelectFile,
                   })}
                 />
-              ) : 'Done'}
-            </WidthEquation>
-            {selectedFile && preview.map(i => <Image src={i} alt="preview" />)}
+              ) : ''}
+              {selectedFile && preview.map(i => <Image src={i} alt="preview" />)}
+            </Flex>
           </WhiteBlock>
           <WhiteBlock>
             <WidthEquation>

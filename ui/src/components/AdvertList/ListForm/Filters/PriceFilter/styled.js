@@ -21,6 +21,9 @@ export const MinPriceInput = styled.input.attrs({
   placeholder: 'Від:',
 })`
   ${Input};
+  outline: none;
+  border-radius: 2px;
+  color: ${props => props.theme.mainGreenColor};
 `;
 
 export const MaxPriceInput = styled.input.attrs({
@@ -28,4 +31,7 @@ export const MaxPriceInput = styled.input.attrs({
   placeholder: 'До:',
 })`
   ${Input};
+  outline: none;
+  border-radius: 2px;
+  color: ${props => props.theme.mainGreenColor};
 `;
