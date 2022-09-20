@@ -256,6 +256,7 @@ export const AdvertTitleLink = styled(Link)`
   font-size: 20px;
   font-weight: 600;
   color: #002f34;
+  word-break: break-all;
 
   @media screen and (max-width: 1280px) {
     font-size: 18px;
