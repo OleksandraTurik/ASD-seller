@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-/* eslint-disable prefer-template */
 import { useEffect, useState } from 'react';
 import citiesServices from 'services/citiesServices';
 
@@ -19,9 +17,11 @@ export const useFetchCities = () => {
         setLoading(false);
         setError(null);
       } catch (err) {
-        setError(err);
-        setLoading(false);
-        setCities(null);
+        if (err.code !== 'ERR_CANCELED') {
+          setError(err);
+          setLoading(false);
+          setCities(null);
+        }
       }
     })();
 

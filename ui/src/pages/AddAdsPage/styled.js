@@ -26,12 +26,13 @@ export const Title = styled.h2`
   }
 
   @media (max-width: 1240px) {
-    position: relative;
-    left: 15px;
+    margin-left: 25px;
   }
 
   @media (max-width: 480px) {
     font-size: 23px;
+    margin-left: 18px;
+    padding: 38px 0px 20px;
   }
 
 `;
@@ -370,6 +371,11 @@ export const PublishButton = styled.button`
       color: ${props => props.theme.mainGreenColor};
       background-color: white;
     }
+`;
+
+export const Image = styled.img`
+width: 200px;
+height: 200px;  
 `;
 
 export const InputFile = styled.input`

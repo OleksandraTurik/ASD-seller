@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import Select from 'react-select';
+import Select, { createFilter } from 'react-select';
+import Option from 'components/common/Option';
 
 export const FormController = styled.div`
   display: flex;
@@ -51,6 +52,8 @@ export const CityDropdown = styled(Select).attrs({
       padding: '10px',
     }),
   },
+  components: { Option },
+  filterOption: createFilter({ ignoreAccents: false }),
 })`
   line-height: 20px;
   border: none;

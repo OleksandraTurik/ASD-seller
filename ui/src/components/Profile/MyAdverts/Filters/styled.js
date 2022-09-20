@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Dropdown from 'components/common/Dropdown';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,149 +9,77 @@ export const Wrapper = styled.div`
   justify-content: space-evenly;
 
   & span {
-    font-size: 14px;
-    margin-bottom: 20px;
-
-    @media screen and (max-width: 1280px) {
-      font-size: 13px;
-    }
-
-    @media screen and (max-width: 768px) {
-      font-size: 12px;
-    }
-
-    @media screen and (max-width: 600px) {
-      font-size: 11px;
-      margin-bottom: 10px;
-    }
+    font-size: 16px;
+    margin: 10px 0 20px;
   }
 `;
 
-export const MainContainer = styled.div`
+export const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
+  gap: 20px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+    
+    div {
+      width: calc(100% - 20px);
+    }
+  }
+
+    @media screen and (max-width: 768px) {
     margin-bottom: 10px;
   }
 `;
 
-export const IconContainer = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 15px;
-
-  @media screen and (max-width: 768px) {
-    left: 10px;
-  }
-`;
-
 export const SearchInput = styled.input`
-  border: none;
   background: #fff;
   border: 1px solid #fff;
-  width: 200px;
-  height: 24px;
-  padding: 10px 40px;
-  border-radius: 5px;
   color: #002F34;
-
-  @media screen and (max-width: 1280px) {
-    height: 22px;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 165px;
-    height: 26px;
-    padding: 8px 10px 8px 30px;
-  }
-
-  &::placeholder {
-    padding-left: 10px;
-    font-size: 16px;
-    color: #849698;
-
-    @media screen and (max-width: 1280px) {
-      font-size: 14px;
-    }
-
-    @media screen and (max-width: 768px) {
-      font-size: 12px;
-    }
-  }
-`;
-
-export const Container = styled.div`
-  position: relative;
+  flex: 1 1 auto;
   display: flex;
-  justify-content: space-around;
-  margin: 10px;
-`;
-
-export const DropDownBtn = styled.button`
-  width: 56px;
-  height: 48px;
-  background: #fff;
-  border: 1px solid #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-`;
-
-export const WrapSelect = styled.div`
-  width: 284px;
-  color: #002F34;
+  align-items: center;
   font-size: 16px;
 
-  @media screen and (max-width: 1280px) {
-    width: 254px;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 224px;
-  }
-
-  @media screen and (max-width: 600px) {
-    width: 204px;
-  }
-
-  .css-319lph-ValueContainer {
-    height: 46px;
-
-    @media screen and (max-width: 1280px) {
-      height: 44px;
-    }
-  }
-
-  .css-1s2u09g-control {
-    border-color: transparent;
-  }
-
-  .css-1jwi8f4-singleValue {
-    @media screen and (max-width: 1280px) {
-      font-size: 14px;
-    }
-
-    @media screen and (max-width: 768px) {
-      font-size: 12px;
-    }
-  }
-
-  .css-14el2xx-placeholder {
+  &::placeholder {
+    font-size: 16px;
     color: #849698;
-
-    @media screen and (max-width: 1280px) {
-      font-size: 14px;
-    }
-
-    @media screen and (max-width: 768px) {
-      font-size: 12px;
-    }
-  }
-
-  .css-6j8wv5-Input {
-    color: #002F34;
   }
 `;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  padding: 10px;
+  height: 30px;
+  border-radius: 5px;
+  align-items: center;
+  gap: 5px;
+  background: white;
+`;
+
+export const CategoryDropdown = styled(Dropdown).attrs({
+  isMobile: true,
+  style: {
+    control: {
+      padding: '10px',
+      height: '30px',
+      borderRadius: '5px',
+      fontSize: '16x',
+    },
+  },
+})``;
+
+export const SortDropdown = styled(Dropdown).attrs({
+  isMobile: true,
+  style: {
+    control: {
+      padding: '10px',
+      height: '30px',
+      borderRadius: '5px',
+      fontSize: '16x',
+    },
+  },
+})``;

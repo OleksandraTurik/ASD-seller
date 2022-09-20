@@ -18,6 +18,9 @@ import NotFound from 'pages/NotFound';
 import Search from 'components/common/Search';
 import AllAdvertsUser from 'components/Advert/AllAdvertsUser';
 
+// hooks
+import { useGetInfoExactUser } from 'components/hooks/useGetInfoExactUser';
+
 // Styles
 import {
   Wrapper,
@@ -56,6 +59,8 @@ const AdvertPage = () => {
     dispatch(getAdvertThunk(id));
   }, [id]);
 
+  const { data } = useGetInfoExactUser(sellerId);
+
   const { loading, error } = advert;
 
   return (
@@ -88,6 +93,7 @@ const AdvertPage = () => {
                     date={date}
                     link={`/adverts?seller=${sellerId}`}
                     phone={token ? phone : '(XXX) XXX XXXX'}
+                    avatarOfUser={data.avatar}
                   />
                   <Location
                     city={city}

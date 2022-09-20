@@ -1,15 +1,7 @@
 import API from 'API';
-import ServerException from 'exceptions/serverException';
 
 const citiesServices = {
-  getCities: async (signal) => {
-    try {
-      const cities = await API.get('/cities?limit=2000', { signal });
-      return cities;
-    } catch (e) {
-      throw new ServerException(e.response);
-    }
-  },
+  getCities: (signal) => API.get('/cities?limit=2000', { signal }),
 };
 
 export default citiesServices;

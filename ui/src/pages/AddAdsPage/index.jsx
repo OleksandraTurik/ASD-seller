@@ -25,7 +25,7 @@ import ArrowDownIcon from 'assets/icons/ArrowDown';
 import ThinArrowRight from 'assets/icons/ThinArrowRight';
 
 import DropdownIndicator from 'helpers/DropdownIndicator';
-import stylesForReactSelect from 'helpers/stylesForReactSelect';
+import { stylesReactSelectForAddAdsPage } from 'helpers/stylesForReactSelect';
 
 // Styles
 import {
@@ -46,7 +46,7 @@ import {
   PublishButton,
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
-  ImgCirle,
+  ImgCirle, Image,
 } from './styled';
 
 // eslint-disable-next-line react/prop-types
@@ -59,6 +59,10 @@ const AddAdsPage = () => {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
   const user = JSON.parse(localStorage.getItem('tokens'));
+  const [selectedFile, setSelectedFile] = useState();
+  const [img, setImg] = useState([]);
+  const [preview, setPreview] = useState([]);
+  const [maxUploadsImages, setMaxUploadsImages] = useState(false);
   const { cities } = useFetchCities();
   const {
     register, handleSubmit, control, reset, formState: { errors },
@@ -80,10 +84,6 @@ const AddAdsPage = () => {
     color: selected ? 'black' : 'red',
   };
   const onSubmit = async (v) => {
-    console.log(v);
-    // if (!selected) {
-    //   alert('Введіть категорію');
-    // }
     try {
       const send = await advertServices.createAdverts({
         title: v.title,
@@ -93,10 +93,9 @@ const AddAdsPage = () => {
         contactName: v.contactName,
         contactPhone: v.contactPhone,
         address: v.address,
-        images: v.images,
+        images: img,
         category: selected._id,
       });
-      // reset();
       navigate(`/profiles/${user.userDto.id}/adverts`);
     } catch (e) {
       console.log(e.message);
@@ -129,8 +128,32 @@ const AddAdsPage = () => {
       setModalOpen(false);
     }
   };
-  const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
 
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview([]);
+      return;
+    }
+
+    const objectUrl = window.URL.createObjectURL(selectedFile);
+    setPreview(prevState => [...prevState, objectUrl]);
+
+    // eslint-disable-next-line consistent-return
+    return () => window.URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = e => {
+    if (img.length >= 6) {
+      setMaxUploadsImages(true);
+    }
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+    setSelectedFile(e.target.files[0]);
+    setImg(prevState => [...prevState, e.target.files[0]]);
+  };
+  const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
   return (
     <Main>
       <Wrapper>
@@ -139,7 +162,7 @@ const AddAdsPage = () => {
           <WhiteBlock>
             <WidthEquation>
               <WhiteBlockTitle>Опишіть у подробицях</WhiteBlockTitle>
-              <LabelForInut for="title">Вкажіть назву*</LabelForInut>
+              <LabelForInut htmlFor="title">Вкажіть назву*</LabelForInut>
               <TitleTextArea
                 id="title"
                 name="title"
@@ -205,6 +228,7 @@ const AddAdsPage = () => {
                         <CategoryList>
                           {subcategory.children.map((item) => (
                             <CategoryListItem
+                              key={item._id}
                               selected={item._id === subcategory?._id}
                               onClick={handleClick(item)}
                             >
@@ -226,19 +250,23 @@ const AddAdsPage = () => {
           <WhiteBlock>
             <WidthEquation>
               <WhiteBlockTitle>Фото</WhiteBlockTitle>
-              <InputFile
-                id="images"
-                name="images"
-                type="file"
-                accept="image/heic, image/png, image/jpeg, image/webp"
-                multiple
-                {...register('images')}
-              />
+              {!maxUploadsImages ? (
+                <InputFile
+                  id="images"
+                  name="images"
+                  type="file"
+                  accept="image/heic, image/png, image/jpeg, image/webp"
+                  {...register('images', {
+                    onChange: onSelectFile,
+                  })}
+                />
+              ) : 'Done'}
             </WidthEquation>
+            {selectedFile && preview.map(i => <Image src={i} alt="preview" />)}
           </WhiteBlock>
           <WhiteBlock>
             <WidthEquation>
-              <LabelForInut for="description">Опис*</LabelForInut>
+              <LabelForInut htmlFor="description">Опис*</LabelForInut>
               <TitleTextArea
                 id="description"
                 name="description"
@@ -259,7 +287,7 @@ const AddAdsPage = () => {
           <WhiteBlock>
             <CategoryWidthEquation>
               <WhiteBlockTitle>Ваші контактні дані</WhiteBlockTitle>
-              <LabelForInut for="address">Місцезнаходження*</LabelForInut>
+              <LabelForInut htmlFor="address">Місцезнаходження*</LabelForInut>
               <Controller
                 control={control}
                 name="address"
@@ -270,13 +298,13 @@ const AddAdsPage = () => {
                     value={cities?.find((c) => c.value === value)}
                     onChange={(val) => onChange(val.value)}
                     options={cities}
-                    styles={stylesForReactSelect}
+                    styles={stylesReactSelectForAddAdsPage}
                     components={{ DropdownIndicator }}
                   />
                 )}
               />
               <div>{errors.Location && <ErrorTitle>{errors.Location.message || 'Невірне місцезнаходження'}</ErrorTitle>}</div>
-              <LabelForInut for="contactName">Контактна особа*</LabelForInut>
+              <LabelForInut htmlFor="contactName">Контактна особа*</LabelForInut>
               <ContactInput
                 id="contactName"
                 name="contactName"
@@ -291,7 +319,7 @@ const AddAdsPage = () => {
                 })}
               />
               <div>{errors.Author && <ErrorTitle>{errors.Author.message || "Ім'я контактної особи повинно складатись як мінімум з 3 символів"}</ErrorTitle>}</div>
-              <LabelForInut for="price">Ціна оголошення</LabelForInut>
+              <LabelForInut htmlFor="price">Ціна оголошення</LabelForInut>
               <ContactInput
                 id="price"
                 name="price"
@@ -302,7 +330,7 @@ const AddAdsPage = () => {
                 })}
               />
               <div>{errors.price && <ErrorTitle>{errors.price.message}</ErrorTitle>}</div>
-              <LabelForInut for="contactPhone">Номер телефону</LabelForInut>
+              <LabelForInut htmlFor="contactPhone">Номер телефону</LabelForInut>
               <ContactInput
                 id="contactPhone"
                 name="contactPhone"

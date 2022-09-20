@@ -14,8 +14,13 @@ import SubText from 'components/SettingsPage/SubText';
 // hooks
 import { useFetchCities } from 'components/hooks/useFetchCities';
 
+// helpers
+import DropdownIndicator from 'helpers/DropdownIndicator';
+import { stylesReactSelectForSettingsPage } from 'helpers/stylesForReactSelect';
+
 // Styles
 import userServices from 'services/userServices';
+import { CategoryWidthEquation } from './styled';
 
 const ChangeContacts = ({ fullName, address }) => {
   const {
@@ -32,27 +37,32 @@ const ChangeContacts = ({ fullName, address }) => {
 
   const onSubmit = async (data) => {
     const updateUser = await userServices.updateUser(data);
-    console.log('updateUser', updateUser);
     reset(updateUser);
   };
+
+  const { city, admin_name } = address;
 
   return (
     <MainContainer>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SubContainer>
           <SubText>Вибрати місто</SubText>
-          <Controller
-            control={control}
-            name="address"
-            render={({ field: { onChange, value, ref } }) => (
-              <Select
-                inputRef={ref}
-                value={cities?.find((c) => c.valuе === value)}
-                onChange={(val) => onChange(val)}
-                options={cities}
-              />
-            )}
-          />
+          <CategoryWidthEquation>
+            <Controller
+              control={control}
+              name="address"
+              render={({ field: { onChange, value = `${city}, ${admin_name}`, ref } }) => (
+                <Select
+                  inputRef={ref}
+                  value={cities?.find((c) => c.label === value)}
+                  onChange={(val) => onChange(val.value)}
+                  options={cities}
+                  styles={stylesReactSelectForSettingsPage}
+                  components={{ DropdownIndicator }}
+                />
+              )}
+            />
+          </CategoryWidthEquation>
         </SubContainer>
         <SubContainer>
           <SubText>Контактна особа</SubText>
@@ -76,7 +86,10 @@ const ChangeContacts = ({ fullName, address }) => {
 
 ChangeContacts.propTypes = {
   fullName: PropTypes.string,
-  address: PropTypes.shape({}),
+  address: PropTypes.shape({
+    city: PropTypes.string,
+    admin_name: PropTypes.string,
+  }),
 };
 
 ChangeContacts.defaultProps = {

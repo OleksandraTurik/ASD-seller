@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
 import Notice from 'components/Notice';
 import { LoaderForm } from 'components/common/Form/LoaderContainer';
 import validation from 'helpers/validation';
 import { noticeMessages } from 'components/common/Form/helper';
 import {
-  Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button,
+  Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button, P,
 } from './styled';
 
 const Form = ({
@@ -28,6 +28,8 @@ const Form = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isNavigate, setIsNavigate] = useState(false);
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (loading === false && error === false && isNavigate) {
@@ -89,7 +91,7 @@ const Form = ({
                 message: 'Помилка! Має бути більше восьми символів',
               },
               pattern: {
-                value: validation.password,
+                value: pathname === '/register' && validation.password,
                 message: 'Пароль має містити хоча б одне число, літеру з великої та маленької букви, мати довжину мінімум у 8 літер',
               },
             })}

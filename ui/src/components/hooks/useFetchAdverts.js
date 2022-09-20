@@ -1,43 +1,34 @@
-import { useEffect, useState } from 'react';
-import advertServices from '../../services/advertServices';
+import { useState, useEffect } from 'react';
+import advertServices from 'services/advertServices';
 
-export const useFetchAdverts = (id) => {
-  const [loading, setLoading] = useState(true);
-  const [list, setList] = useState([]);
-  const [error, setError] = useState(false);
-  const [itemsAmount, setItemsAmount] = useState(0);
+const useFetchAdverts = (queryParams = {}) => {
+  const [data, setData] = useState(null);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState(null);
 
-  const [filters, setFilters] = useState({
-    sort: 'ascTitle',
-    category: '',
-    search: '',
-    page: 1,
-  });
-
-  const changeFilters = (name, value) => {
-    setFilters(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-  const getData = async () => {
-    setLoading(true);
-    setError(false);
-    try {
-      const adverts = await advertServices.getAdvertsList(id, filters);
-      setList(adverts.data.results);
-      setItemsAmount(adverts.data.itemsAmount);
-      setLoading(false);
-    } catch (e) {
-      setError(e.message);
-      setLoading(false);
-    }
-  };
   useEffect(() => {
-    getData();
-  }, [filters]);
+    const controller = new AbortController();
+    (async () => {
+      try {
+        setPending(true);
+        setData(null);
+        const adverts = await advertServices.getAdvertList(queryParams, controller.signal);
+        setData(adverts.data);
+        setPending(false);
+        setError(null);
+      } catch (err) {
+        if (err.code !== 'ERR_CANCELED') {
+          setError(err);
+          setPending(false);
+          setData(null);
+        }
+      }
+    })();
 
-  return {
-    loading, list, changeFilters, itemsAmount, setFilters, filters, error,
-  };
+    return () => controller.abort();
+  }, [queryParams]);
+
+  return { data, pending, error };
 };
+
+export default useFetchAdverts;
