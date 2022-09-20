@@ -15,8 +15,10 @@ const useFetchFavorites = (arrayOfId) => {
         setData(results.map(el => el.data));
         setLoading(false);
       } catch (e) {
-        setError(e);
-        setLoading(false);
+        if (e.code !== 'ERR_CANCELED') {
+          setError(e);
+          setLoading(false);
+        }
       }
     })();
     return () => controller.abort();

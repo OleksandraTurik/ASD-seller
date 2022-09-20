@@ -64,6 +64,7 @@ const ModalContainer = ({ active, setActive }) => {
                   <NavLink to="/favorites">
                     <LinkContainer>
                       <Like
+                        active
                         width="25px"
                         height="25px"
                         fill="#fff"
