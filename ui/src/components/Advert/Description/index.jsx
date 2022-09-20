@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Icons
-import Like from 'assets/icons/Like';
-
 // Styles
 import {
   Wrapper,
@@ -13,6 +10,7 @@ import {
 } from './styled';
 
 const Description = ({
+  advertId,
   title,
   date,
   price,
@@ -21,13 +19,7 @@ const Description = ({
   <Wrapper>
     <Container>
       <span>{`Опубліковано ${date}`}</span>
-      <FavoriteBtn>
-        <Like
-          width="25px"
-          height="25px"
-          fill="#c6c6c6"
-        />
-      </FavoriteBtn>
+      <FavoriteBtn advertId={advertId} />
     </Container>
     <span>{title}</span>
     <h2>{price}</h2>
@@ -38,6 +30,7 @@ const Description = ({
 );
 
 Description.propTypes = {
+  advertId: PropTypes.string.isRequired,
   title: PropTypes.string,
   date: PropTypes.string,
   price: PropTypes.string,
