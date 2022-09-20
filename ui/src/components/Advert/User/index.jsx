@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+// api
+import { URL } from 'API';
+
 // Icons
 import avatar from 'assets/icons/avatar.svg';
 import IconArrowRight from 'assets/icons/ArrowRight';
@@ -21,9 +24,12 @@ const User = ({
   date,
   link,
   phone,
+  avatarOfUser,
 }) => {
   const [value, setValue] = useState('');
   const [show, setShow] = useState(false);
+
+  console.log('avatarOfUser', avatarOfUser);
 
   useEffect(() => show ? setValue(phone) : setValue('Показати телефон'), [show]);
 
@@ -60,6 +66,7 @@ User.propTypes = {
   date: PropTypes.string,
   link: PropTypes.string,
   phone: PropTypes.string,
+  avatarOfUser: PropTypes.string,
 };
 
 User.defaultProps = {
@@ -67,6 +74,7 @@ User.defaultProps = {
   date: '',
   link: '',
   phone: '',
+  avatarOfUser: '',
 };
 
 export default User;

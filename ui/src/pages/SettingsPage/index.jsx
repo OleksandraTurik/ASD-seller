@@ -37,7 +37,8 @@ const SettingsPage = () => {
             handleOpen={handleOpen}
             emailOfUser={data.email}
             fullName={data.fullName}
-            address={data.address}
+            address={data.address === null ? {} : data.address}
+            phoneNumber={data.phoneNumber}
           />
         ))
       }
