@@ -28,7 +28,9 @@ const useFetchAdverts = (queryParams = {}) => {
     return () => controller.abort();
   }, [queryParams]);
 
-  return { data, pending, error };
+  return {
+    data, pending, error,
+  };
 };
 
 export default useFetchAdverts;
