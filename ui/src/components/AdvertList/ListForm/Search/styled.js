@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Select, { createFilter } from 'react-select';
 import Option from 'components/common/Option';
+import closeIcon from 'assets/icons/closeIcon.svg';
 
 export const FormController = styled.div`
   display: flex;
@@ -23,6 +24,26 @@ export const SearchInput = styled.input.attrs({
   width: calc(100% - 28px);
   font-size: 16px;
   background: white;
+  outline: none;
+  border-radius: 2px;
+  color: ${props => props.theme.mainGreenColor};
+  
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1.9em;
+    width: 1.9em;
+    border-radius: 50em;
+    background: url(${closeIcon}) no-repeat 50% 50%;
+    background-size: contain;
+    pointer-events: none;
+    cursor: pointer;
+    position: relative;
+    left: -10px;
+  }
+
+  &:focus::-webkit-search-cancel-button {
+    pointer-events: all;
+  }
   @media (max-width: 550px) {
     width: auto;
   }
@@ -33,8 +54,21 @@ export const CityDropdown = styled(Select).attrs({
     control: (prev) => ({
       ...prev,
       height: '100%',
-      borderRadius: 'none',
       border: 'none',
+      boxShadow: 'none',
+      borderRadius: '2px',
+    }),
+    menuList: (base) => ({
+      ...base,
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: 'rgb(242, 244, 245)',
+      },
+      '&::-webkit-scrollbar': {
+        width: '8px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#002f34',
+      },
     }),
     input: (prev) => ({
       ...prev,
@@ -67,7 +101,7 @@ export const CityDropdown = styled(Select).attrs({
 export const SubmitButton = styled.button.attrs({
   type: 'submit',
 })`
-cursor: pointer;
+  cursor: pointer;
   font-size: 16px;
   font-weight: 700;
   border: 5px solid #002F34;

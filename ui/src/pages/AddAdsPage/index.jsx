@@ -48,6 +48,7 @@ import {
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
   ImgCirle, Image,
+  Flex,
 } from './styled';
 import { getAdvertThunk } from '../../redux/slice/getAdvert';
 import Loader from '../../components/common/Loader';
@@ -309,8 +310,8 @@ const AddAdsPage = () => {
             </CategoryWidthEquation>
           </WhiteBlock>
           <WhiteBlock>
-            <WidthEquation>
-              <WhiteBlockTitle>Фото</WhiteBlockTitle>
+            <WhiteBlockTitle>Фото</WhiteBlockTitle>
+            <Flex>
               {!maxUploadsImages ? (
                 <InputFile
                   id="images"
@@ -321,9 +322,9 @@ const AddAdsPage = () => {
                     onChange: onSelectFile,
                   })}
                 />
-              ) : 'Done'}
-            </WidthEquation>
-            {selectedFile && preview.map(i => <Image src={i} alt="preview" />)}
+              ) : ''}
+              {selectedFile && preview.map(i => <Image src={i} alt="preview" />)}
+            </Flex>
           </WhiteBlock>
           <WhiteBlock>
             <WidthEquation>

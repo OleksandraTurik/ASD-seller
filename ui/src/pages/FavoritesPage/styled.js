@@ -55,6 +55,11 @@ export const AdvertsList = styled.div`
   flex-wrap: wrap;
   max-width: 1250px;
   gap: 16px;
+
+  
+  @media (max-width: 1350px) {
+    justify-content: center;
+  }
 `;
 
 export const Wrapper2 = styled.div`

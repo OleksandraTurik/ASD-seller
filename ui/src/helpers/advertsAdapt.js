@@ -25,12 +25,12 @@ const advertsAdapt = (data) => {
     category: category || {},
     contactName: contactName || '',
     contactPhone: contactPhone || '',
-    createdAt: moment(createdAt).format('MM-DD-YYYY') || '',
+    createdAt: moment(createdAt).format('DD.MM.YYYY HH:mm') || '',
     description: description || '',
     images: images || [],
     price: price || '',
     sellerId: sellerId || '',
-    updatedAt: moment(createdAt).format('MM-DD-YYYY') || '',
+    updatedAt: moment(createdAt).format('DD.MM.YYYY HH:mm') || '',
   }));
 };
 
