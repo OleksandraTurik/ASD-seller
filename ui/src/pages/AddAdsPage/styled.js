@@ -87,6 +87,14 @@ export const LabelForInut = styled.label`
   }
 `;
 
+export const ImgSelect = styled.div`
+position: relative;
+  
+  &:hover{
+    opacity: 0.5;
+  }
+`;
+
 export const TitleTextArea = styled.textarea`
   background-clip: padding-box;
   background-color: rgb(242, 244, 245);

@@ -48,10 +48,11 @@ import {
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
   ImgCirle, Image,
-  Flex,
+  Flex, ImgSelect,
 } from './styled';
 import { getAdvertThunk } from '../../redux/slice/getAdvert';
 import Loader from '../../components/common/Loader';
+import DeleteTrash from '../../assets/icons/DeleteTrash';
 
 const adaptToDefaultValues = (data, isEdit) => {
   console.log(isEdit);
@@ -197,11 +198,10 @@ const AddAdsPage = () => {
       return;
     }
 
-    const objectUrl = window.URL.createObjectURL(selectedFile);
-    setPreview(prevState => [...prevState, objectUrl]);
-
-    // eslint-disable-next-line consistent-return
-    return () => window.URL.revokeObjectURL(objectUrl);
+    // eslint-disable-next-line guard-for-in,no-restricted-syntax,no-plusplus
+    for (let i = 0; i < selectedFile.length; i++) {
+      setPreview(prevState => [...prevState, window.URL.createObjectURL(selectedFile[i])]);
+    }
   }, [selectedFile]);
 
   const onSelectFile = e => {
@@ -212,8 +212,15 @@ const AddAdsPage = () => {
       setSelectedFile(undefined);
       return;
     }
-    setSelectedFile(e.target.files[0]);
-    setImg(prevState => [...prevState, e.target.files[0]]);
+    setSelectedFile(e.target.files);
+    setImg(prevState => [...prevState, ...e.target.files]);
+  };
+  const deleteImg = (idx) => {
+    console.log(idx);
+    const newArray = preview.filter((item, index) => index !== idx);
+    const newImg = img.filter((item, index) => index !== idx);
+    setPreview(newArray);
+    setImg(newImg);
   };
   const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
   return (
@@ -317,13 +324,25 @@ const AddAdsPage = () => {
                   id="images"
                   name="images"
                   type="file"
+                  multiple
                   accept="image/heic, image/png, image/jpeg, image/webp"
                   {...register('images', {
                     onChange: onSelectFile,
                   })}
                 />
               ) : ''}
-              {selectedFile && preview.map(i => <Image src={i} alt="preview" />)}
+              {selectedFile
+                  && preview.map((i, index) => (
+                    <ImgSelect
+                      onClick={() => deleteImg(index)}
+                    >
+                      <Image
+                        src={i}
+                        alt="preview"
+                      />
+                      <DeleteTrash />
+                    </ImgSelect>
+                  ))}
             </Flex>
           </WhiteBlock>
           <WhiteBlock>
