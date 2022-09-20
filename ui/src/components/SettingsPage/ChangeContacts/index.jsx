@@ -37,9 +37,10 @@ const ChangeContacts = ({ fullName, address }) => {
 
   const onSubmit = async (data) => {
     const updateUser = await userServices.updateUser(data);
-    console.log('updateUser', updateUser);
     reset(updateUser);
   };
+
+  const { city, admin_name } = address;
 
   return (
     <MainContainer>
@@ -50,11 +51,11 @@ const ChangeContacts = ({ fullName, address }) => {
             <Controller
               control={control}
               name="address"
-              render={({ field: { onChange, value, ref } }) => (
+              render={({ field: { onChange, value = `${city}, ${admin_name}`, ref } }) => (
                 <Select
                   inputRef={ref}
-                  value={cities?.find((c) => c.valuе === value)}
-                  onChange={(val) => onChange(val)}
+                  value={cities?.find((c) => c.label === value)}
+                  onChange={(val) => onChange(val.value)}
                   options={cities}
                   styles={stylesReactSelectForSettingsPage}
                   components={{ DropdownIndicator }}
@@ -85,7 +86,10 @@ const ChangeContacts = ({ fullName, address }) => {
 
 ChangeContacts.propTypes = {
   fullName: PropTypes.string,
-  address: PropTypes.shape({}),
+  address: PropTypes.shape({
+    city: PropTypes.string,
+    admin_name: PropTypes.string,
+  }),
 };
 
 ChangeContacts.defaultProps = {

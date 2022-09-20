@@ -9,7 +9,6 @@ const advertServices = {
   },
   getAdverts: () => API.get('/adverts'),
   createAdverts: async (advertData) => {
-    console.log(advertData);
     try {
       const formData = new FormData();
       formData.append('title', advertData.title);
@@ -20,7 +19,10 @@ const advertServices = {
       formData.append('contactPhone', advertData.contactPhone);
       formData.append('category', advertData.category);
       formData.append('address', advertData.address);
-      formData.append('images', advertData.images[0]);
+      // eslint-disable-next-line no-restricted-syntax
+      for (const image of advertData.images) {
+        formData.append('images', image);
+      }
       const settings = { headers: { 'Content-Type': 'multipart/form-data' } };
       const createAdverts = await API.post('/adverts', formData, settings);
       return createAdverts;
