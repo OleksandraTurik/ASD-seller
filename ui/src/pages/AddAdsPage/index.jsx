@@ -218,7 +218,7 @@ const AddAdsPage = () => {
   return (
     <Main>
       <Wrapper>
-        <Title>Створити оголошення</Title>
+        <Title>{isEdit ? 'Редагування оголошення' : 'Створити оголошення'}</Title>
         <form onSubmit={handleSubmit(onSubmit)}>
           <WhiteBlock>
             <WidthEquation>
