@@ -16,9 +16,11 @@ const useFetchCategories = () => {
         setLoading(false);
         setError(null);
       } catch (e) {
-        setError(e);
-        setLoading(false);
-        setData(null);
+        if (e.code !== 'ERR_CANCELED') {
+          setError(e);
+          setLoading(false);
+          setData(null);
+        }
       }
     })();
     return () => controller.abort();

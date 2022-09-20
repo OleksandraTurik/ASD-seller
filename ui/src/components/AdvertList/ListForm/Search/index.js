@@ -15,7 +15,7 @@ const Search = ({
     <FormController>
       <SearchInput onChange={event => onSearch(event.target.value)} value={searchValue} />
       <CityDropdown
-        placeholder={defaultValue.label}
+        value={defaultValue}
         options={options}
         isLoading={loading}
         onChange={({ value }) => onCitySelect(value)}
