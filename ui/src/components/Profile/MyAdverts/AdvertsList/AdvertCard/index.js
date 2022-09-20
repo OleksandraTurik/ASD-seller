@@ -9,8 +9,7 @@ import EmptyAdvertsList from '../EmptyAdvertsList';
 
 const AdvertsCard = ({
   list = [],
-  error,
-  loading,
+  error, loading,
 }) => {
   if (loading) {
     return <Loader />;
