@@ -19,6 +19,7 @@ const AdvertsCard = ({
     !error && list.length ? list?.map((item) => (
       <AdvertCardList
         key={item._id}
+        id={item._id}
         link={`/adverts/${item._id}`}
         img={item.images[0]}
         name={item.title}

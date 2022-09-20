@@ -25,6 +25,7 @@ import {
 } from './styled';
 
 const AdvertCardList = ({
+  id,
   link,
   img,
   name,
@@ -72,13 +73,14 @@ const AdvertCardList = ({
         </AdvertInfoWrap>
       </TopWrap>
       <BottomWrap>
-        <EditLink to="/adverts">Редагувати</EditLink>
+        <EditLink to={`/add/${id}`}>Редагувати</EditLink>
       </BottomWrap>
     </Container>
   </Wrapper>
 );
 
 AdvertCardList.propTypes = {
+  id: PropTypes.string,
   link: PropTypes.string,
   img: PropTypes.string,
   name: PropTypes.string,
@@ -90,6 +92,7 @@ AdvertCardList.propTypes = {
 };
 
 AdvertCardList.defaultProps = {
+  id: '',
   link: '',
   img: '',
   name: '',
