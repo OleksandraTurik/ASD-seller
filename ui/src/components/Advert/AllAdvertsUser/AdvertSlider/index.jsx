@@ -73,7 +73,6 @@ const AdvertSlider = () => {
           {!error && !loading && !advertLoading
             && (results?.map((item) => (
               <AdvertCard
-                margin={results.length < 4 ? '0' : 'auto'}
                 key={item?._id}
                 link={`/adverts/${item?._id}`}
                 img={`${URL}/${item?.images[0]}`}

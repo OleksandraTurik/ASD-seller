@@ -24,9 +24,8 @@ const AdvertCard = ({
   location,
   date,
   price,
-  margin,
 }) => (
-  <Card margin={margin}>
+  <Card>
     <ImageWrap>
       <ImgInCard src={img} />
     </ImageWrap>
@@ -59,7 +58,6 @@ AdvertCard.propTypes = {
   location: PropTypes.string,
   date: PropTypes.string,
   price: PropTypes.string,
-  margin: PropTypes.string,
 };
 
 AdvertCard.defaultProps = {
@@ -69,7 +67,6 @@ AdvertCard.defaultProps = {
   location: '',
   date: '',
   price: '',
-  margin: '',
 };
 
 export default AdvertCard;

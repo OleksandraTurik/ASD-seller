@@ -13,7 +13,7 @@ export const Card = styled.article`
   box-sizing: border-box;
   border-radius: 4px;
   width: 285px;
-  margin: ${({ margin }) => margin};
+  margin: auto;
 
   @media (max-width: 320px) {
     width: 95%;
