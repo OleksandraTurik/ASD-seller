@@ -98,6 +98,7 @@ async function deleteAdvertItem(req, res) {
 
     const sellerAdverts = await Advert.find({ sellerId: item.sellerId });
     if (sellerAdverts.length === 0) await User.updateOne({ _id: item.sellerId }, { adverts: null });
+    await User.updateMany({ favorites: id }, { $pull: { favorites: id } });
 
     res.json(response);
   } catch (err) {
