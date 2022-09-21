@@ -106,8 +106,6 @@ const AdvertPage = () => {
               </InfoWrap>
               <AllAdvertsUser
                 dataAdvertsList={dataAdvertsList}
-                pendingAdvertsList={pendingAdvertsList}
-                errorAdvertsList={errorAdvertsList}
               />
             </MainContainer>
           )}

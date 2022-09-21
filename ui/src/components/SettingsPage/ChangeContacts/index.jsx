@@ -29,10 +29,14 @@ import { CategoryWidthEquation } from './styled';
 const ChangeContacts = ({ fullName, address }) => {
   const dispatch = useDispatch();
   const {
-    handleSubmit, reset, register, control,
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors },
+    control,
   } = useForm({
     mode: 'onChange',
-
+    criteriaMode: 'all',
     defaultValues: {
       fullName,
     },

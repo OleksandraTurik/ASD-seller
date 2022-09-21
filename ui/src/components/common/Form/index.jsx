@@ -9,6 +9,8 @@ import Notice from 'components/Notice';
 import { LoaderForm } from 'components/common/Form/LoaderContainer';
 import validation from 'helpers/validation';
 import { noticeMessages } from 'components/common/Form/helper';
+import useFetchUsers from 'components/hooks/useFetchUsers';
+import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorContainer, Input, Button, P,
 } from './styled';
@@ -30,8 +32,11 @@ const Form = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isNavigate, setIsNavigate] = useState(false);
+  const [location, setLocation] = useState('');
 
   const { pathname } = useLocation();
+
+  const { dataUsers } = useFetchUsers();
 
   useEffect(() => {
     if (loading === false && error === false && isNavigate) {
@@ -44,12 +49,23 @@ const Form = ({
 
   const onSubmit = (data) => {
     if (type === 'login') {
+      dataUsers.forEach((item) => {
+        if (item.email === data.email) {
+          dispatch(getExactUserInfoThunk(item._id));
+        }
+      });
       dispatch(login(data));
       setIsNavigate(true);
     } else {
       dispatch(registration(data));
     }
-    reset();
+    if (type !== 'login' && !error) {
+      reset();
+    }
+    if (type === 'registration') {
+      reset();
+    }
+    setLocation(pathname);
   };
 
   return (
@@ -65,8 +81,12 @@ const Form = ({
       </WrapperLink>
       <Wrapper>
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-          {error && <Notice type="error" messages={noticeMessages[type]} />}
-          {registrationSuccess && <Notice type="warning" messages={noticeMessages[type]} />}
+          {location === pathname
+            && error
+            && <Notice type="error" messages={noticeMessages[type]} />}
+          {location === pathname
+            && registrationSuccess
+            && <Notice type="warning" messages={noticeMessages[type]} />}
           <Input
             type="email"
             placeholder={emailField}
