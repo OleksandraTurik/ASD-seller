@@ -6,7 +6,12 @@ export const FileContainer = styled.div`
   margin-top: 35px;
   margin-bottom: 35px;
 `;
-
+export const Image = styled.img`
+  height: 156px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+`;
 export const ChooseFileStyle = styled.input`
   width: 190px;
   &::-webkit-file-upload-button {
