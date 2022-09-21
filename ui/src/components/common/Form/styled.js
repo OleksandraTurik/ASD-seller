@@ -54,11 +54,12 @@ export const WrapperLink = styled.div`
 export const ErrorContainer = styled.div`
   display: flex;
   justify-content: center;
-`;
-
-export const ErrorTitle = styled.p`
-  color: red;
-  margin-bottom: 20px;
+  align-items: center;
+  flex-direction: column;
+  background: #bc243c;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  width: 100%;
 `;
 
 export const Input = styled.input`
@@ -109,5 +110,11 @@ export const WrapperLoader = styled.div`
 `;
 
 export const P = styled.p`
-  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 80%;
 `;

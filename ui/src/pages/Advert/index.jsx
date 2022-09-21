@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment/moment';
 
@@ -11,15 +11,15 @@ import SimpleSlider from 'components/Advert/SimpleSlider';
 import User from 'components/Advert/User';
 import Location from 'components/Advert/Location';
 import Description from 'components/Advert/Description';
-import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'components/common/Loader';
-import { getAdvertThunk } from 'redux/slice/getAdvert';
 import NotFound from 'pages/NotFound';
 import Search from 'components/common/Search';
 import AllAdvertsUser from 'components/Advert/AllAdvertsUser';
 
 // hooks
-import { useGetInfoExactUser } from 'components/hooks/useGetInfoExactUser';
+import useFetchAdvertById from 'components/hooks/useFetchAdvertById';
+import useFetchInfoUser from 'components/hooks/useFetchInfoUser';
+import useGetAdvertsListUser from 'components/hooks/useGetAdvertsListUser';
 
 // Styles
 import {
@@ -32,7 +32,10 @@ import {
 } from './styled';
 
 const AdvertPage = () => {
-  const advert = useSelector(state => state.getAdvert);
+  const { id } = useParams();
+
+  const { dataAdvert, pending, error } = useFetchAdvertById(id);
+
   const {
     images,
     title,
@@ -45,31 +48,30 @@ const AdvertPage = () => {
     contactName,
     contactPhone,
     sellerId,
-  } = advert.advertInfo;
+  } = dataAdvert;
 
-  const { id } = useParams();
-  const dispatch = useDispatch();
   const phone = contactPhone ?? 'no number phone';
   const city = address?.city ?? 'no city';
   const region = address?.admin_name ?? 'no region';
   const token = localStorage.getItem('tokens');
   const date = moment(createdAt).format('DD.MM.YYYY HH:mm');
 
-  useEffect(() => {
-    dispatch(getAdvertThunk(id));
-  }, [id]);
-
-  const { data } = useGetInfoExactUser(sellerId);
-
-  const { loading, error } = advert;
+  const { dataUser } = useFetchInfoUser(sellerId);
+  const {
+    dataAdvertsList,
+    pendingAdvertsList,
+    errorAdvertsList,
+  } = useGetAdvertsListUser(sellerId);
 
   return (
     <>
-      {loading && <Loader />}
+      {pending && <Loader />}
       <Wrapper>
         {error && <NotFound />}
         {!error
-          && !loading
+          && !pending
+          && !errorAdvertsList
+          && !pendingAdvertsList
           && (
             <MainContainer>
               <SearchWrap>
@@ -94,7 +96,7 @@ const AdvertPage = () => {
                     date={date}
                     link={`/adverts?seller=${sellerId}`}
                     phone={token ? phone : '(XXX) XXX XXXX'}
-                    avatarOfUser={data.avatar}
+                    avatarOfUser={dataUser.avatar}
                   />
                   <Location
                     city={city}
@@ -102,7 +104,9 @@ const AdvertPage = () => {
                   />
                 </Container>
               </InfoWrap>
-              <AllAdvertsUser />
+              <AllAdvertsUser
+                dataAdvertsList={dataAdvertsList}
+              />
             </MainContainer>
           )}
       </Wrapper>

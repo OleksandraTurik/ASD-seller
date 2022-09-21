@@ -28,6 +28,9 @@ const exactUserInfoSlice = createSlice({
     updateUserInfo(state, action) {
       state.data = { ...state.data, ...action.payload };
     },
+    logoutExactUser(state) {
+      state.data = {};
+    },
   },
   extraReducers: {
     [getExactUserInfoThunk.pending]: (state) => {
@@ -44,6 +47,10 @@ const exactUserInfoSlice = createSlice({
   },
 });
 
-export const { addToFavorites, removeFromFavorites, updateUserInfo } = exactUserInfoSlice.actions;
+export const {
+  addToFavorites,
+  removeFromFavorites, updateUserInfo,
+  logoutExactUser,
+} = exactUserInfoSlice.actions;
 
 export default exactUserInfoSlice.reducer;

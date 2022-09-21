@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 import PropTypes from 'prop-types';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { login, registration } from 'redux/slice/authUser';
@@ -8,8 +9,10 @@ import Notice from 'components/Notice';
 import { LoaderForm } from 'components/common/Form/LoaderContainer';
 import validation from 'helpers/validation';
 import { noticeMessages } from 'components/common/Form/helper';
+import useFetchUsers from 'components/hooks/useFetchUsers';
+import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 import {
-  Container, Wrapper, FormWrapper, WrapperLink, ErrorTitle, ErrorContainer, Input, Button, P,
+  Container, Wrapper, FormWrapper, WrapperLink, ErrorContainer, Input, Button, P,
 } from './styled';
 
 const Form = ({
@@ -22,14 +25,18 @@ const Form = ({
     reset,
   } = useForm({
     mode: 'onChange',
+    criteriaMode: 'all',
   });
 
   const { registrationSuccess, error, loading } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isNavigate, setIsNavigate] = useState(false);
+  const [location, setLocation] = useState('');
 
   const { pathname } = useLocation();
+
+  const { dataUsers } = useFetchUsers();
 
   useEffect(() => {
     if (loading === false && error === false && isNavigate) {
@@ -42,12 +49,23 @@ const Form = ({
 
   const onSubmit = (data) => {
     if (type === 'login') {
+      dataUsers.forEach((item) => {
+        if (item.email === data.email) {
+          dispatch(getExactUserInfoThunk(item._id));
+        }
+      });
       dispatch(login(data));
       setIsNavigate(true);
     } else {
       dispatch(registration(data));
     }
-    reset();
+    if (type !== 'login' && !error) {
+      reset();
+    }
+    if (type === 'registration') {
+      reset();
+    }
+    setLocation(pathname);
   };
 
   return (
@@ -63,8 +81,12 @@ const Form = ({
       </WrapperLink>
       <Wrapper>
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-          {error && <Notice type="error" messages={noticeMessages[type]} />}
-          {registrationSuccess && <Notice type="warning" messages={noticeMessages[type]} />}
+          {location === pathname
+            && error
+            && <Notice type="error" messages={noticeMessages[type]} />}
+          {location === pathname
+            && registrationSuccess
+            && <Notice type="warning" messages={noticeMessages[type]} />}
           <Input
             type="email"
             placeholder={emailField}
@@ -80,7 +102,16 @@ const Form = ({
               },
             })}
           />
-          <ErrorContainer>{errors.email && <ErrorTitle>{errors.email.message || 'Error! Must be more than 8 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ messages }) => messages
+                && Object.entries(messages).map(([type, message]) => (
+                  <P key={type}>{message}</P>
+                ))}
+            />
+          </ErrorContainer>
           <Input
             type="password"
             placeholder={passwordField}
@@ -96,7 +127,16 @@ const Form = ({
               },
             })}
           />
-          <ErrorContainer>{errors.password && <ErrorTitle>{errors.password.message || 'Error! Must be more than 3 symbols'}</ErrorTitle>}</ErrorContainer>
+          <ErrorContainer>
+            <ErrorMessage
+              errors={errors}
+              name="password"
+              render={({ messages }) => messages
+                && Object.entries(messages).map(([type, message]) => (
+                  <P key={type}>{message}</P>
+                ))}
+            />
+          </ErrorContainer>
           <Button type="submit">{textButton}</Button>
         </FormWrapper>
       </Wrapper>

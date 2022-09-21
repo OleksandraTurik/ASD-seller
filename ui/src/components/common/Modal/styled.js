@@ -9,9 +9,10 @@ export const Container = styled.div`
   left: 0;
   display: flex;
   justify-content: end;
-  opacity: ${props => props.active ? 1 : 0};
   pointer-events: ${props => props.active ? 'all' : 'none'};
   transition: 0.5s;
+  transform: ${props => props.active ? 'translateY(0px)' : 'translateY(-500px)'}
+
 `;
 export const Content = styled.div`
   display: flex;
@@ -20,5 +21,6 @@ export const Content = styled.div`
   padding: 20px;
   transform: scale(1);
   transition: 0.4s transform;
-  background: ${props => props.theme.mainGreenColor};
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 47, 52, 0.7);
 `;

@@ -20,7 +20,7 @@ import { useFetchCities } from 'components/hooks/useFetchCities';
 import DropdownIndicator from 'helpers/DropdownIndicator';
 import { stylesReactSelectForSettingsPage } from 'helpers/stylesForReactSelect';
 
-// Styles
+// services
 import userServices from 'services/userServices';
 import { CategoryWidthEquation, Error } from './styled';
 

@@ -30,12 +30,13 @@ const User = ({
   const [show, setShow] = useState(false);
 
   useEffect(() => show ? setValue(phone) : setValue('Показати телефон'), [show]);
+  const userAva = avatarOfUser !== '' ? `${URL}/pic/${avatarOfUser}` : avatar;
 
   return (
     <Wrapper>
       <h1>Користувач</h1>
       <Container>
-        <UserIcon src={avatar} alt="user avatar" />
+        <UserIcon src={userAva} alt="user avatar" />
         <UserInfo>
           <h2>{name}</h2>
           <RegistrationDate>
