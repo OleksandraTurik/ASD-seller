@@ -4,15 +4,11 @@ import PropTypes from 'prop-types';
 // Icons
 import IconLocation from 'assets/icons/Location';
 
-// Images
-import map from 'assets/img/map.webp';
-
 // Styles
 import {
   Wrapper,
   Container,
   LocationInfo,
-  MapImage,
   LocationWrap,
 } from './styled';
 
@@ -34,7 +30,6 @@ const Location = ({
           <span>{region}</span>
         </LocationInfo>
       </LocationWrap>
-      <MapImage src={map} alt="map" />
     </Container>
   </Wrapper>
 );
