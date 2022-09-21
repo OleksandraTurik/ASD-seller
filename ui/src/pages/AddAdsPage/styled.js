@@ -87,6 +87,14 @@ export const LabelForInut = styled.label`
   }
 `;
 
+export const LabelImg = styled.span`
+  position: absolute;
+  z-index: 1000;
+  left: 4%;
+  bottom: 5%;
+  padding: 2px 4px;
+  background: aqua;
+`;
 export const ImgSelect = styled.div`
 position: relative;
   

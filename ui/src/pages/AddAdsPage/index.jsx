@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
@@ -48,7 +48,7 @@ import {
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
   ImgCirle, Image,
-  Flex, ImgSelect,
+  Flex, ImgSelect, LabelImg,
 } from './styled';
 import { getAdvertThunk } from '../../redux/slice/getAdvert';
 import Loader from '../../components/common/Loader';
@@ -105,7 +105,7 @@ const AddAdsPage = () => {
     defaultValues: {
       title: '',
       description: '',
-      price: 0,
+      price: '',
       contactName: '',
       contactPhone: '+380',
       address: '',
@@ -223,6 +223,18 @@ const AddAdsPage = () => {
     setImg(newImg);
   };
   const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
+  const dragItem = useRef(null);
+  const dragOverItem = useRef(null);
+
+  const handleSorted = () => {
+    const newPreview = [...preview];
+    const dragItems = newPreview.splice(dragItem.current, 1)[0];
+
+    newPreview.splice(dragOverItem.current, 0, dragItems);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    setPreview(newPreview);
+  };
   return (
     <Main>
       <Wrapper>
@@ -335,12 +347,19 @@ const AddAdsPage = () => {
                   && preview.map((i, index) => (
                     <ImgSelect
                       onClick={() => deleteImg(index)}
+                        /* eslint-disable-next-line no-return-assign */
+                      onDragStart={() => dragItem.current = index}
+                      /* eslint-disable-next-line no-return-assign */
+                      onDragEnter={() => dragOverItem.current = index}
+                      onDragEnd={handleSorted}
+                      onDragOver={(e) => e.preventDefault()}
+                      draggable
                     >
                       <Image
                         src={i}
                         alt="preview"
                       />
-                      <DeleteTrash />
+                      {index === 0 ? <LabelImg>Головне</LabelImg> : null}
                     </ImgSelect>
                   ))}
             </Flex>
