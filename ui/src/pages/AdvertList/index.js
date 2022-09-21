@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { animateScroll } from 'react-scroll';
+import qs from 'query-string';
 
 // Components
 import ListForm from 'components/AdvertList/ListForm';
@@ -49,11 +51,13 @@ const AdvertList = () => {
     const { next } = data;
     const re = /page=[0-9]/m;
     updateSearchParams({ page: next.match(re)[0].split('=')[1] });
+    animateScroll.scrollToTop({ duration: 100 });
   };
   const onPreviousPageClick = () => {
     const { previous } = data;
     const re = /page=[0-9]/m;
     updateSearchParams({ page: previous.match(re)[0].split('=')[1] });
+    animateScroll.scrollToTop({ duration: 100 });
   };
   const onQueryUpdate = (updates) => {
     updateSearchParams({ page: '', ...updates });
