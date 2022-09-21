@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { updateUserInfo } from 'redux/slice/getInfoExactUser';
 
 // Components
 import { useForm } from 'react-hook-form';
@@ -12,6 +14,7 @@ import { ChooseFileStyle, FileContainer } from './styled';
 import ButtonContainer from '../ButtonContainer';
 
 const ChangePhoto = () => {
+  const dispatch = useDispatch();
   const { handleSubmit, reset, register } = useForm({
     mode: 'onChange',
 
@@ -20,7 +23,12 @@ const ChangePhoto = () => {
     },
   });
   const onSubmit = async (data) => {
-    await userServices.updateUserPhoto({ avatar: data.file });
+    try {
+      const { key } = await userServices.updateUserPhoto({ avatar: data.file });
+      dispatch(updateUserInfo({ avatar: key }));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
