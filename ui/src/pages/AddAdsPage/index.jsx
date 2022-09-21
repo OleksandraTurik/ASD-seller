@@ -227,12 +227,16 @@ const AddAdsPage = () => {
 
   const handleSorted = () => {
     const newPreview = [...preview];
+    const newImg = [...img];
     const dragItems = newPreview.splice(dragItem.current, 1)[0];
+    const dragImg = newImg.splice(dragItem.current, 1)[0];
 
     newPreview.splice(dragOverItem.current, 0, dragItems);
+    newImg.splice(dragOverItem.current, 0, dragImg);
     dragItem.current = null;
     dragOverItem.current = null;
     setPreview(newPreview);
+    setImg(newImg);
   };
   return (
     <Main>
