@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useRef } from 'react';
+import React, { useMemo, useState } from 'react';
 
 // Hooks
 import useFetchCategories from 'components/hooks/useFetchCategories';
@@ -17,16 +17,16 @@ import {
   CategoriesListStyle,
   AdvertsList,
   LatestAdsSection,
+  ShowMoreButton,
 } from 'pages/MainPage/styled';
 
 const MainPage = () => {
   const [subcategories, setSubcategories] = useState('id');
   const [isOpen, setIsOpen] = useState(false);
   const [childrenCategory, setChildrenCategory] = useState([]);
-  const [params, setParams] = useState({ page: '1', sort: 'dscDate', limit: '100' });
+  const params = useMemo(() => ({ sort: 'dscDate', limit: '48' }), []);
   const { data: categories, loading: categoriesLoading, error: categoriesError } = useFetchCategories();
   const { data: adverts, loading: advertsLoading, error: advertsError } = useFetchAdverts(params);
-  const advertSection = useRef(null);
 
   const showSubcategories = (id) => {
     if (id === subcategories) {
@@ -43,18 +43,6 @@ const MainPage = () => {
       }
     });
   };
-
-  // useLayoutEffect(() => {
-  //   const { y, height } = advertSection.current.getBoundingClientRect();
-  //   const scrollHandler = () => {
-  //     const position = window.scrollY;
-  //     console.log({ height, position });
-  //   };
-  //
-  //   window.addEventListener('scroll', scrollHandler);
-  //
-  //   return () => window.removeEventListener('scroll', scrollHandler);
-  // }, [advertSection]);
 
   return (
     <>
@@ -76,7 +64,7 @@ const MainPage = () => {
           childrenCategory={childrenCategory.children}
         />
       )}
-      <LatestAdsSection ref={advertSection}>
+      <LatestAdsSection>
         <Wrapper>
           <Title>Останні оголошення</Title>
           <AdvertsList>
@@ -87,6 +75,11 @@ const MainPage = () => {
             />
           </AdvertsList>
         </Wrapper>
+        {!!adverts?.next && adverts?.results.length === 48 && (
+        <Wrapper>
+          <ShowMoreButton to="/adverts">Показати більше</ShowMoreButton>
+        </Wrapper>
+        )}
       </LatestAdsSection>
     </>
   );

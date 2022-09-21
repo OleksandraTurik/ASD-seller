@@ -1,7 +1,9 @@
 import React from 'react';
 import Select from 'react-select';
+import { useDispatch } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
+import { updateUserInfo } from 'redux/slice/getInfoExactUser';
 
 // Components
 import Button from 'components/common/Button';
@@ -23,6 +25,7 @@ import userServices from 'services/userServices';
 import { CategoryWidthEquation } from './styled';
 
 const ChangeContacts = ({ fullName, address }) => {
+  const dispatch = useDispatch();
   const {
     handleSubmit, reset, register, control,
   } = useForm({
@@ -33,14 +36,18 @@ const ChangeContacts = ({ fullName, address }) => {
     },
   });
 
-  const { cities } = useFetchCities();
+  const { cities, loading } = useFetchCities();
 
   const onSubmit = async (data) => {
-    const updateUser = await userServices.updateUser(data);
-    reset(updateUser);
+    try {
+      const updateUser = await userServices.updateUser(data);
+      reset(updateUser);
+      dispatch(updateUserInfo(updateUser));
+    } catch (err) {
+      console.error(err);
+    }
   };
-
-  const { city, admin_name } = address;
+  const { city, admin_name, _id } = address;
 
   return (
     <MainContainer>
@@ -53,8 +60,9 @@ const ChangeContacts = ({ fullName, address }) => {
               name="address"
               render={({ field: { onChange, value = `${city}, ${admin_name}`, ref } }) => (
                 <Select
+                  isLoading={loading}
                   inputRef={ref}
-                  value={cities?.find((c) => c.label === value)}
+                  value={cities?.find(e => e.value === _id)}
                   onChange={(val) => onChange(val.value)}
                   options={cities}
                   styles={stylesReactSelectForSettingsPage}
@@ -89,6 +97,7 @@ ChangeContacts.propTypes = {
   address: PropTypes.shape({
     city: PropTypes.string,
     admin_name: PropTypes.string,
+    _id: PropTypes.string,
   }),
 };
 
