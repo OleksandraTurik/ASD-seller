@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
 import qs from 'query-string';
@@ -14,7 +13,6 @@ import useFetchAdverts from 'components/hooks/useFetchAdverts';
 import { Wrapper, Container } from './styled';
 
 const AdvertList = () => {
-  const dispatch = useDispatch();
   const [pageQueries, setPageQueries] = useSearchParams();
   const [queryParams, setQueryParams] = useState({
     sort: 'dscDate',
