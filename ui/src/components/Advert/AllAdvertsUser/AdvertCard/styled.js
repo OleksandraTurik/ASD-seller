@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+// Components
+import LikeButton from 'components/common/LikeButton';
+
 export const Card = styled.article`
   height: 370px;
   background-color: #fff;
@@ -69,7 +72,7 @@ export const Price = styled.div`
   color: ${props => props.theme.mainGreenColor};
 `;
 
-export const ToFavoriteButton = styled.button`
+export const ToFavoriteButton = styled(LikeButton)`
   background-color: transparent;
   border: none;
   position: absolute;

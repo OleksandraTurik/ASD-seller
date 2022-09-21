@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment/moment';
 import Slider from 'react-slick';
 import { URL } from 'API';
-import moment from 'moment/moment';
-import { useDispatch, useSelector } from 'react-redux';
+
+// Slices
 import { getAdvertsInfo } from 'redux/slice/getAdvertInfo';
 
 // Components
@@ -74,6 +74,7 @@ const AdvertSlider = () => {
             && (results?.map((item) => (
               <AdvertCard
                 key={item?._id}
+                itemId={item?._id}
                 link={`/adverts/${item?._id}`}
                 img={`${URL}/${item?.images[0]}`}
                 name={item?.title}
