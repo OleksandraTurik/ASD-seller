@@ -7,29 +7,36 @@ export const Wrapper = styled.div`
   align-items: center;
   background-color: #fff;
   height: 150px;
-  width: 100%;
+  width: 390px;
   border-radius: 5px;
   padding: 24px;
 
   @media screen and (max-width: 1280px) {
     height: 135px;
-    width: 100%;
+    width: 388px;
     padding: 15px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1040px) {
+    width: 358px;
+  }
+
+  @media screen and (max-width: 850px) {
     height: 120px;
-    width: 100%;
+    width: 96%;
   }
 
   @media screen and (max-width: 600px) {
     height: 110px;
-    width: 98%;
+    width: 94%;
   }
 
   @media screen and (max-width: 480px) {
     height: 140px;
-    width: 95%;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 88%;
   }
 
   & h1 {

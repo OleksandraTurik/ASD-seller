@@ -1,5 +1,5 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import LikeButton from 'components/common/LikeButton';
 
 export const Card = styled.article`
   height: 370px;
@@ -12,10 +12,11 @@ export const Card = styled.article`
   position: relative;
   box-sizing: border-box;
   border-radius: 4px;
-  width: calc(25% - 15px);
+  width: 285px;
+  margin: auto;
 
-  @media (max-width: 1250px) {
-    width: 310px;
+  @media (max-width: 320px) {
+    width: 95%;
   }
 `;
 
@@ -40,7 +41,6 @@ export const NameOfProduct = styled.h4`
   overflow: hidden;
   cursor: pointer;
   text-align: left;
-  word-break: break-all;
 
   &:hover {
     background-color: ${props => props.theme.mainGreenColor};
@@ -69,7 +69,7 @@ export const Price = styled.div`
   color: ${props => props.theme.mainGreenColor};
 `;
 
-export const ToFavoriteButton = styled(LikeButton)`
+export const ToFavoriteButton = styled.button`
   background-color: transparent;
   border: none;
   position: absolute;
@@ -100,4 +100,9 @@ export const Wrap = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
+`;
+
+export const LinkAdvertCard = styled(Link)`
+  word-break: break-all;
+  list-style: none;
 `;

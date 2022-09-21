@@ -13,13 +13,22 @@ import Location from 'components/Advert/Location';
 import Description from 'components/Advert/Description';
 import Loader from 'components/common/Loader';
 import NotFound from 'pages/NotFound';
+import Search from 'components/common/Search';
+import AllAdvertsUser from 'components/Advert/AllAdvertsUser';
 
 // hooks
 import useFetchAdvertById from 'components/hooks/useFetchAdvertById';
 import useFetchInfoUser from 'components/hooks/useFetchInfoUser';
 
 // Styles
-import { Wrapper, Container, SliderWrap } from './styled';
+import {
+  Wrapper,
+  Container,
+  SliderWrap,
+  MainContainer,
+  InfoWrap,
+  SearchWrap,
+} from './styled';
 
 const AdvertPage = () => {
   const { id } = useParams();
@@ -56,33 +65,39 @@ const AdvertPage = () => {
         {!error
           && !pending
           && (
-            <>
-              <SliderWrap>
-                <SimpleSlider
-                  images={images}
-                />
-                <Description
-                  advertId={id}
-                  title={title}
-                  date={date}
-                  price={`${price} грн.`}
-                  description={description}
-                />
-              </SliderWrap>
-              <Container>
-                <User
-                  name={contactName}
-                  date={date}
-                  link={`/adverts?seller=${sellerId}`}
-                  phone={token ? phone : '(XXX) XXX XXXX'}
-                  avatarOfUser={dataUser.avatar}
-                />
-                <Location
-                  city={city}
-                  region={region}
-                />
-              </Container>
-            </>
+            <MainContainer>
+              <SearchWrap>
+                <Search />
+              </SearchWrap>
+              <InfoWrap>
+                <SliderWrap>
+                  <SimpleSlider
+                    images={images}
+                  />
+                  <Description
+                    advertId={id}
+                    title={title}
+                    date={date}
+                    price={`${price} грн.`}
+                    description={description}
+                  />
+                </SliderWrap>
+                <Container>
+                  <User
+                    name={contactName}
+                    date={date}
+                    link={`/adverts?seller=${sellerId}`}
+                    phone={token ? phone : '(XXX) XXX XXXX'}
+                    avatarOfUser={dataUser.avatar}
+                  />
+                  <Location
+                    city={city}
+                    region={region}
+                  />
+                </Container>
+              </InfoWrap>
+              <AllAdvertsUser />
+            </MainContainer>
           )}
       </Wrapper>
     </>

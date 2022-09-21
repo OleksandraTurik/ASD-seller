@@ -8,29 +8,36 @@ export const Wrapper = styled.div`
   align-items: center;
   background-color: #fff;
   height: 175px;
-  width: 100%;
+  width: 390px;
   border-radius: 5px;
   padding: 24px;
   margin-bottom: 15px;
 
   @media screen and (max-width: 1280px) {
     height: 150px;
-    width: 100%;
+    width: 388px;
     padding: 15px;
   }
 
-  @media screen and (max-width: 768px) {
-    width: 100%;
+  @media screen and (max-width: 1040px) {
+    width: 358px;
+  }
+
+  @media screen and (max-width: 870px) {
+    width: 96%;
   }
 
   @media screen and (max-width: 600px) {
     height: 140px;
-    width: 98%;
+    width: 94%;
   }
 
   @media screen and (max-width: 480px) {
     height: 125px;
-    width: 95%;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 88%;
   }
 
   & h1 {
@@ -52,11 +59,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
-
-  @media screen and (max-width: 768px) {
-    justify-content: flex-start;
-  }
+  justify-content: flex-start;
 `;
 
 export const UserInfo = styled.div`
@@ -64,10 +67,7 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  @media screen and (max-width: 768px) {
-    margin-left: 15px;
-  }
+  margin-left: 15px;
 
   & h2 {
     font-size: 20px;
