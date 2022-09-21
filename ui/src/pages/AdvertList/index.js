@@ -7,7 +7,7 @@ import qs from 'query-string';
 import ListForm from 'components/AdvertList/ListForm';
 import Results from 'components/AdvertList/Results';
 import Pagination from 'components/AdvertList/Pagination';
-import useFetchAdverts from 'components/hooks/useFetchAdverts';
+import useFetchAdverts from 'hooks/useFetchAdverts';
 
 // Styles
 import { Wrapper, Container } from './styled';

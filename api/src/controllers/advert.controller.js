@@ -145,6 +145,7 @@ async function patchAdvertItem(req, res) {
       images = keyObjects.map((e) => `pic/${e.key}`);
     } else {
       const advertItem = await Advert.findById(id);
+      // eslint-disable-next-line prefer-destructuring
       images = advertItem.images;
     }
 

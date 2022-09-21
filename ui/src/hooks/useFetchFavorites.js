@@ -16,7 +16,7 @@ const useFetchFavorites = (arrayOfId) => {
         const results = await Promise.all(arrayOfId.map((id) => advertServices.getAdvertById(id, controller.signal)));
         setData(results.map(el => el.data));
         setLoading(false);
-        await results.length === 0 && setZeroFavorites(true);
+        results.length === 0 && setZeroFavorites(true);
       } catch (e) {
         if (e.code !== 'ERR_CANCELED') {
           setError(e);

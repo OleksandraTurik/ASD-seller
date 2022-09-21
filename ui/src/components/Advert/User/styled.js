@@ -118,22 +118,28 @@ export const RegistrationDate = styled.div`
 
 export const UserIcon = styled.img`
   width: 45px;
+  height: 45px;
   border-radius: 50%;
+  object-fit: cover;
 
   @media screen and (max-width: 1280px) {
     width: 42px;
+    height: 42px;
   }
 
   @media screen and (max-width: 768px) {
     width: 38px;
+    height: 38px;
   }
 
   @media screen and (max-width: 600px) {
     width: 34px;
+    height: 34px;
   }
 
   @media screen and (max-width: 320px) {
     width: 30px;
+    height: 30px;
   }
 `;
 

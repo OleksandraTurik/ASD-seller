@@ -8,6 +8,7 @@ module.exports = function (req, res, next) {
     if (!authHeader) {
       throw new StatusError(401, 'User is unauthorized');
     }
+    // eslint-disable-next-line prefer-destructuring
     const accessToken = authHeader.split(' ')[1];
     if (!accessToken) {
       throw new StatusError(401, 'User is unauthorized');

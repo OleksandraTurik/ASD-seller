@@ -23,7 +23,6 @@ export const tokenService = {
   },
   getUserInfo: () => {
     const tokens = JSON.parse(tokenService.getTokens());
-    console.log(tokens);
     return tokens?.userDto ?? {
       email: '',
       id: '',

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { animateScroll } from 'react-scroll';
 
 // Slider
@@ -17,10 +17,8 @@ import Footer from 'components/common/Footer';
 import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 import { useLocation } from 'react-router-dom';
 
-const id = JSON.parse(localStorage.getItem('tokens'))?.userDto?.id;
-
 const App = () => {
-  const user = useSelector(state => state.exactUserInfoSlice);
+  const id = JSON.parse(localStorage.getItem('tokens'))?.userDto?.id;
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 

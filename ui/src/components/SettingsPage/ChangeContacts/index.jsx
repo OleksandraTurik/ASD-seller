@@ -14,7 +14,7 @@ import SubContainer from 'components/SettingsPage/SubContainer';
 import SubText from 'components/SettingsPage/SubText';
 
 // hooks
-import { useFetchCities } from 'components/hooks/useFetchCities';
+import { useFetchCities } from 'hooks/useFetchCities';
 
 // helpers
 import DropdownIndicator from 'helpers/DropdownIndicator';

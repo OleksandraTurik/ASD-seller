@@ -9,8 +9,6 @@ import Notice from 'components/Notice';
 import { LoaderForm } from 'components/common/Form/LoaderContainer';
 import validation from 'helpers/validation';
 import { noticeMessages } from 'components/common/Form/helper';
-import useFetchUsers from 'components/hooks/useFetchUsers';
-import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 import {
   Container, Wrapper, FormWrapper, WrapperLink, ErrorContainer, Input, Button, P,
 } from './styled';
@@ -36,24 +34,15 @@ const Form = ({
 
   const { pathname } = useLocation();
 
-  const { dataUsers } = useFetchUsers();
-
   useEffect(() => {
     if (loading === false && error === false && isNavigate) {
       navigate('/', { replace: true });
       setIsNavigate(false);
-    } else {
-      console.log('error', error);
     }
   }, [error, loading]);
 
   const onSubmit = (data) => {
     if (type === 'login') {
-      dataUsers.forEach((item) => {
-        if (item.email === data.email) {
-          dispatch(getExactUserInfoThunk(item._id));
-        }
-      });
       dispatch(login(data));
       setIsNavigate(true);
     } else {
@@ -72,10 +61,10 @@ const Form = ({
     <Container>
       {loading && <LoaderForm />}
       <WrapperLink>
-        <NavLink className="link" to="/register" activeClassName="selected">
+        <NavLink className="link" to="/register" activeclassname="selected">
           Зареєструватися
         </NavLink>
-        <NavLink className="link" to="/login" activeClassName="selected">
+        <NavLink className="link" to="/login" activeclassname="selected">
           Увійти
         </NavLink>
       </WrapperLink>

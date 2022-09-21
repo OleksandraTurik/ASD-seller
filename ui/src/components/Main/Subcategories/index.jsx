@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Hooks
-import usePrevious from 'components/hooks/usePrevious';
+import usePrevious from 'hooks/usePrevious';
 
 // Icons
 import ArrowRight from 'assets/icons/ArrowRight';

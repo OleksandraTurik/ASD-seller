@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { useSelector } from 'react-redux';
-import useFetchFavorites from 'components/hooks/useFetchFavorites';
+import useFetchFavorites from 'hooks/useFetchFavorites';
 import Loader from 'components/common/Loader';
 import AdvertCard from 'components/common/AdvertCard';
 import { URL } from 'API';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   SearchInput, FormController, CityDropdown, SubmitButton,
 } from './styled';
-import { useFetchCities } from '../../../hooks/useFetchCities';
+import { useFetchCities } from '../../../../hooks/useFetchCities';
 
 const Search = ({
   onSearch, searchValue, selectValue, onCitySelect,
