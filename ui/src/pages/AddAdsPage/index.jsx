@@ -51,7 +51,6 @@ import {
   Flex, ImgSelect, LabelImg,
 } from './styled';
 import { getAdvertThunk } from '../../redux/slice/getAdvert';
-import Loader from '../../components/common/Loader';
 import DeleteTrash from '../../assets/icons/DeleteTrash';
 
 const adaptToDefaultValues = (data, isEdit) => {
