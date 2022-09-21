@@ -10,7 +10,7 @@ const Results = ({ data, resultAmount, pending }) => {
 
   if (pending) {
     content = (
-      <Loader />
+      <Loader margin="5px 0" left="40%" />
     );
   } else if (data.length <= 0) {
     content = <Title>No items was found</Title>;

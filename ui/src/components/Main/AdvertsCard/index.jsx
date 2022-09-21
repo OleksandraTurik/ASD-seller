@@ -18,7 +18,7 @@ const AdvertsCard = ({ errorAdvert, loadingAdvert, advertInfo }) => {
   }
 
   if (loadingAdvert) {
-    return <Loader />;
+    return <Loader margin="0" left="0%" />;
   }
 
   return advertsAdapt(advertInfo).map((item) => (

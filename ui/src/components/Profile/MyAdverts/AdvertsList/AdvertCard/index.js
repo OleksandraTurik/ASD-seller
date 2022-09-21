@@ -12,7 +12,7 @@ const AdvertsCard = ({
   error, loading, handleDelete,
 }) => {
   if (loading) {
-    return <Loader />;
+    return <Loader margin="10px" />;
   }
 
   return (

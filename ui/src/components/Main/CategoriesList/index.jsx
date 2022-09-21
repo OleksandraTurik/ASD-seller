@@ -16,7 +16,7 @@ const CategoriesList = ({
   }
 
   if (loading) {
-    return <Loader />;
+    return <Loader margin="0" left="0%" />;
   }
 
   return data?.map((item) => (
