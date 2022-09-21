@@ -10,7 +10,7 @@ import { Container } from './styled';
 
 const SettingsPage = () => {
   const {
-    email, fullName, address, phoneNumber,
+    email, fullName, address, phoneNumber, avatar,
   } = useSelector(state => state.exactUserInfoSlice.data);
   const [dataComponent, setDataComponent] = useState(settingsComponentMap);
 
@@ -37,6 +37,7 @@ const SettingsPage = () => {
             fullName={fullName}
             address={address === null ? {} : address}
             phoneNumber={phoneNumber}
+            avatar={avatar}
           />
         ))
       }

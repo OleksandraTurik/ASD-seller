@@ -46,7 +46,7 @@ const Desktop = () => {
               <NavLinkAdverts to="/add">Додати оголошення</NavLinkAdverts>
             </Li>
             <Li>
-              <NavLink to={`/profiles/${userId}/adverts`}>
+              <NavLink to="/profile/adverts">
                 <User
                   width="25px"
                   height="25px"

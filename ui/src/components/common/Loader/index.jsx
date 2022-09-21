@@ -10,8 +10,16 @@ const StyledSpinner = styled.div`
   height: ${({ height }) => height || '120px'};
   animation: spin 2s linear infinite;
   position: relative;
-  left: 45%;
+  left: ${({ left }) => left || '45%'};
   margin: ${({ margin }) => margin || '250px 0'};
+
+  @media (max-width: 650px) {
+    border: ${({ border }) => border || '12px solid #f3f3f3'};
+    border-top: ${({ borderTopSize }) => borderTopSize || '12px'} solid ${props => props.theme.mainGreenColor};
+    width: ${({ width }) => width || '60px'};
+    height: ${({ height }) => height || '60px'};
+    left: ${({ left }) => left || '43%'};
+  }
 
   @keyframes spin {
     0% {
@@ -29,6 +37,7 @@ const Loader = ({
   margin,
   border,
   borderTopSize,
+  left,
 }) => (
   <StyledSpinner
     width={width}
@@ -36,6 +45,7 @@ const Loader = ({
     margin={margin}
     border={border}
     borderTopSize={borderTopSize}
+    left={left}
   />
 );
 

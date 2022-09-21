@@ -91,8 +91,8 @@ const AdvertCardList = ({
           </AdvertInfoWrap>
         </TopWrap>
         <BottomWrap>
-          <DeleteButton onClick={deleteItem}>Видалити</DeleteButton>
           <EditLink to={`/add/${id}`}>Редагувати</EditLink>
+          <DeleteButton onClick={deleteItem}>Видалити</DeleteButton>
         </BottomWrap>
       </Container>
     </Wrapper>

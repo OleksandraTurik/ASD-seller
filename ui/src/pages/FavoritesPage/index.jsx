@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import useFetchFavorites from 'components/hooks/useFetchFavorites';
 import Loader from 'components/common/Loader';
 import AdvertCard from 'components/common/AdvertCard';
@@ -25,19 +24,7 @@ import {
 } from './styled';
 
 const FavoritesPage = () => {
-  const user = JSON.parse(localStorage.getItem('tokens'));
-  const { id } = user.userDto;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getExactUserInfoThunk(id));
-  }, [id]);
-
-  const exactUserInfo = useSelector(state => state.exactUserInfoSlice);
-  const {
-    favorites,
-  } = exactUserInfo.data;
-
+  const { favorites } = useSelector(state => state.exactUserInfoSlice.data);
   const { data, loading, zeroFavorites } = useFetchFavorites(favorites);
   return (
     <>

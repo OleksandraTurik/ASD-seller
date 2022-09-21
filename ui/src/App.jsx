@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { animateScroll } from 'react-scroll';
 
 // Slider
 import 'slick-carousel/slick/slick.css';
@@ -15,25 +15,26 @@ import Footer from 'components/common/Footer';
 
 // Slices
 import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
+import { useLocation } from 'react-router-dom';
 
 const id = JSON.parse(localStorage.getItem('tokens'))?.userDto?.id;
 
 const App = () => {
   const user = useSelector(state => state.exactUserInfoSlice);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   useEffect(() => {
+    animateScroll.scrollToTop({ duration: 100 });
     if (id) dispatch(getExactUserInfoThunk(id));
-  }, [id]);
-
-  console.log('user', user);
+  }, [pathname]);
 
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <MainRoutes />
       <Footer />
-    </BrowserRouter>
+    </>
   );
 };
 

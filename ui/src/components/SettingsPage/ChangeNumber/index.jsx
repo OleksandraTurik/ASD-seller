@@ -13,11 +13,14 @@ import ButtonContainer from 'components/SettingsPage/ButtonContainer';
 import MainContainer from 'components/SettingsPage/MainContainer';
 import SubContainer from 'components/SettingsPage/SubContainer';
 import SubText from 'components/SettingsPage/SubText';
+import { Error } from '../ChangeContacts/styled';
 
 const ChangeNumber = ({ phoneNumber }) => {
   const dispatch = useDispatch();
-  const { handleSubmit, reset, register } = useForm({
-    mode: 'onChange',
+  const {
+    handleSubmit, reset, register, formState: { errors },
+  } = useForm({
+    mode: 'onSubmit',
 
     defaultValues: {
       phoneNumber,
@@ -41,13 +44,14 @@ const ChangeNumber = ({ phoneNumber }) => {
           <SubText>Новий телефон</SubText>
           <Input
             {...register('phoneNumber', {
-              required: 'This field is required',
+              required: "Це поле є обов'язковим",
               minLength: {
-                value: 8,
-                message: 'Error! Must be more than 8 symbols',
+                value: 10,
+                message: 'Поле повинно містити мінімум 10 символів',
               },
             })}
           />
+          <Error>{errors.phoneNumber?.message}</Error>
         </SubContainer>
         <ButtonContainer>
           <Button type="submit">Зберегти</Button>

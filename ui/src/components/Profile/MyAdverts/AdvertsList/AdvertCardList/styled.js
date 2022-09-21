@@ -88,12 +88,32 @@ export const DeleteButton = styled.button`
   font-weight: 700;
   font-size: 14px;
   background-color: transparent;
-  border: 2px solid #102e33;
+  border: 2px solid #ff5636;
   border-radius: 4px;
-  color: #102e33;
+  color: #ff5636;
   padding: 6px 22px;
   margin-left: 10px;
 
+  @media screen and (max-width: 1280px) {
+    height: 35px;
+    font-size: 13px;
+    padding: 6px 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 30px;
+    font-size: 11px;
+    padding: 6px 19px;
+  }
+
+  &:hover {
+    background-color: #ff5636;
+    color: #fff;
+  }
 `;
 
 export const BottomWrap = styled.div`

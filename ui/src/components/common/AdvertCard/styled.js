@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LikeButton from 'components/common/LikeButton';
 
 export const Card = styled.article`
-  height: 370px;
+  height: 340px;
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@ export const ImgInCard = styled.img`
 `;
 
 export const NameOfProduct = styled.h4`
-  margin: 15px 0 auto;
+  margin: 0;
   font-size: 18px;
   font-style: normal;
   line-height: 1.25;

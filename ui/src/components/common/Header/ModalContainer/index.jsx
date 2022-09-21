@@ -92,7 +92,7 @@ const ModalContainer = ({ active, setActive }) => {
                   </NavLink>
                 </Li>
                 <Li>
-                  <NavLink to={`/profiles/${userId}/adverts`}>
+                  <NavLink to="/profile/adverts">
                     <LinkContainer>
                       <User
                         width="25px"
