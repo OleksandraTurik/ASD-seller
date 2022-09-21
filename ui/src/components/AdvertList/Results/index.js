@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import advertsAdapt from 'helpers/advertsAdapt';
+
+// Components
 import Loader from 'components/common/Loader';
 import Card from 'components/AdvertList/Results/Card';
-import advertsAdapt from 'helpers/advertsAdapt';
+import NoAdverts from 'components/common/NoAdverts';
+
+// Styles
 import { Wrapper, Title } from './styled';
 
 const Results = ({ data, resultAmount, pending }) => {
@@ -13,7 +18,7 @@ const Results = ({ data, resultAmount, pending }) => {
       <Loader margin="5px 0" left="40%" />
     );
   } else if (data.length <= 0) {
-    content = <Title>No items was found</Title>;
+    content = <NoAdverts />;
   } else {
     content = (
       <>
