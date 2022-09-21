@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// Icons
-import Logo from 'assets/icons/Logo';
-
 // Styles
 import {
   Nav,
   Container,
   NavLinkHeader,
+  LogoImg,
 } from './styled';
 import RightNav from './RightNav';
 import ModalContainer from './ModalContainer';
@@ -37,10 +35,7 @@ const Header = () => {
     <Container>
       <Nav>
         <NavLinkHeader to="/">
-          <Logo
-            width="250px"
-            fill="#fff"
-          />
+          <LogoImg />
         </NavLinkHeader>
         <RightNav setActive={setActive} />
       </Nav>

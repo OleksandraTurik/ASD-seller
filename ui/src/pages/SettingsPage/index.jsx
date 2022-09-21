@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { settingsComponentMap } from 'components/SettingsPage';
-import { useParams } from 'react-router-dom';
 
 // Components
 import ItemContainer from 'components/SettingsPage/ItemContainer';
-
-// hooks
-import { useGetInfoExactUser } from 'components/hooks/useGetInfoExactUser';
 
 // Styles
 import { Container } from './styled';
 
 const SettingsPage = () => {
-  const { id } = useParams();
-  const { data, error, loading } = useGetInfoExactUser(id);
+  const {
+    email, fullName, address, phoneNumber,
+  } = useSelector(state => state.exactUserInfoSlice.data);
   const [dataComponent, setDataComponent] = useState(settingsComponentMap);
 
   const handleOpen = (id) => {
@@ -35,10 +33,10 @@ const SettingsPage = () => {
             isOpen={item.isOpen}
             Component={item.Component}
             handleOpen={handleOpen}
-            emailOfUser={data.email}
-            fullName={data.fullName}
-            address={data.address === null ? {} : data.address}
-            phoneNumber={data.phoneNumber}
+            emailOfUser={email}
+            fullName={fullName}
+            address={address === null ? {} : address}
+            phoneNumber={phoneNumber}
           />
         ))
       }

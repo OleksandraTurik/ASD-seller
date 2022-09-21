@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
+    transition: all .2s ease-in-out;
   }
 
   body {

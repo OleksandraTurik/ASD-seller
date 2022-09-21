@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { updateUserInfo } from 'redux/slice/getInfoExactUser';
 
 // services
 import userServices from 'services/userServices';
@@ -13,6 +15,7 @@ import SubContainer from 'components/SettingsPage/SubContainer';
 import SubText from 'components/SettingsPage/SubText';
 
 const ChangeNumber = ({ phoneNumber }) => {
+  const dispatch = useDispatch();
   const { handleSubmit, reset, register } = useForm({
     mode: 'onChange',
 
@@ -22,8 +25,13 @@ const ChangeNumber = ({ phoneNumber }) => {
   });
 
   const onSubmit = async (data) => {
-    const updateNumber = await userServices.updateUser(data);
-    reset(updateNumber);
+    try {
+      const updateNumber = await userServices.updateUser(data);
+      reset(updateNumber);
+      dispatch(updateUserInfo(data));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
