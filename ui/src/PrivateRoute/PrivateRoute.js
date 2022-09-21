@@ -6,7 +6,6 @@ import NotFound from '../pages/NotFound';
 const PrivateRoute = ({ children }) => {
   const navigate = useNavigate();
   const activated = JSON.parse(localStorage.getItem('tokens'))?.userDto.isActivated;
-  console.log(activated);
   return true ? children : <NotFound activeEmail />;
 };
 

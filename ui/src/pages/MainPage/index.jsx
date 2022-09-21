@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 // Hooks
 import useFetchCategories from 'components/hooks/useFetchCategories';
@@ -43,18 +43,6 @@ const MainPage = () => {
       }
     });
   };
-
-  // useLayoutEffect(() => {
-  //   const { y, height } = advertSection.current.getBoundingClientRect();
-  //   const scrollHandler = () => {
-  //     const position = window.scrollY;
-  //     console.log({ height, position });
-  //   };
-  //
-  //   window.addEventListener('scroll', scrollHandler);
-  //
-  //   return () => window.removeEventListener('scroll', scrollHandler);
-  // }, [advertSection]);
 
   return (
     <>

@@ -3,7 +3,7 @@ import ServerException from 'exceptions/serverException';
 import { tokenService } from './tokenService';
 
 const userServices = {
-  fetchUsers: async (filters) => {
+  fetchUsers: async () => {
     try {
       const users = await API.get('/users');
       return users;
@@ -38,7 +38,6 @@ const userServices = {
     return data;
   },
   updateUserPhoto: async (userDataPhoto) => {
-    console.log(userDataPhoto.avatar[0]);
     const userId = tokenService.getUserInfo();
     const formData = new FormData();
     formData.append('avatar', userDataPhoto.avatar[0]);

@@ -27,7 +27,6 @@ const AdvertList = () => {
     // eslint-disable-next-line no-restricted-syntax
     for (const key in update) {
       if (Object.hasOwnProperty.call(update, key)) {
-        // console.log(update[key]);
         if (update[key]) updateParams[key] = update[key].split('+').join(' ');
         if (!update[key]) delete prevParams[key];
       }

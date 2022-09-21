@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-
 // Libraries
 import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
@@ -27,6 +26,7 @@ import ThinArrowRight from 'assets/icons/ThinArrowRight';
 
 import DropdownIndicator from 'helpers/DropdownIndicator';
 import { stylesReactSelectForAddAdsPage } from 'helpers/stylesForReactSelect';
+import adaptToDefaultValues from './adaptor';
 
 // Styles
 import {
@@ -51,33 +51,6 @@ import {
   Flex, ImgSelect, LabelImg,
 } from './styled';
 import { getAdvertThunk } from '../../redux/slice/getAdvert';
-import Loader from '../../components/common/Loader';
-import DeleteTrash from '../../assets/icons/DeleteTrash';
-
-const adaptToDefaultValues = (data, isEdit) => {
-  console.log(isEdit);
-  if (isEdit) {
-    return ({
-      title: data.title,
-      price: data.price,
-      description: data.description,
-      address: data.address?._id,
-      category: data.category?.child._id,
-      contactName: data.contactName,
-      contactPhone: data.contactPhone,
-      sellerId: data.sellerId,
-    });
-  }
-  return ({
-    title: '',
-    price: '',
-    description: '',
-    address: '',
-    contactName: '',
-    contactPhone: '',
-    sellerId: '',
-  });
-};
 
 // eslint-disable-next-line react/prop-types
 const AddAdsPage = () => {
@@ -91,7 +64,7 @@ const AddAdsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoryReducer.data);
-  const { advertInfo, loading } = useSelector(state => state.getAdvert);
+  const { advertInfo } = useSelector(state => state.getAdvert);
   const user = JSON.parse(localStorage.getItem('tokens'));
   const [selectedFile, setSelectedFile] = useState();
   const [img, setImg] = useState([]);
@@ -117,7 +90,6 @@ const AddAdsPage = () => {
   const colorCategory = {
     color: selected ? 'black' : 'red',
   };
-  console.log(selected);
   const onSubmit = async (v) => {
     try {
       if (isEdit) {
@@ -216,7 +188,6 @@ const AddAdsPage = () => {
     setImg(prevState => [...prevState, ...e.target.files]);
   };
   const deleteImg = (idx) => {
-    console.log(idx);
     const newArray = preview.filter((item, index) => index !== idx);
     const newImg = img.filter((item, index) => index !== idx);
     setPreview(newArray);
