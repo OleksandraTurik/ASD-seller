@@ -10,7 +10,7 @@ const useFetchAdvertById = (id) => {
     (async () => {
       try {
         setPending(true);
-        const advert = await advertServices.getAdvert(id);
+        const advert = await advertServices.getAdvertById(id);
         setDataAdvert(advert.data);
         setPending(false);
         setError(null);
