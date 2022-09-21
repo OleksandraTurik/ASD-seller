@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 // Slider
@@ -19,11 +19,14 @@ import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
 const id = JSON.parse(localStorage.getItem('tokens'))?.userDto?.id;
 
 const App = () => {
+  const user = useSelector(state => state.exactUserInfoSlice);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (id) dispatch(getExactUserInfoThunk(id));
-  }, []);
+  }, [id]);
+
+  console.log('user', user);
 
   return (
     <BrowserRouter>

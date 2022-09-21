@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment/moment';
 
@@ -19,6 +19,7 @@ import AllAdvertsUser from 'components/Advert/AllAdvertsUser';
 // hooks
 import useFetchAdvertById from 'components/hooks/useFetchAdvertById';
 import useFetchInfoUser from 'components/hooks/useFetchInfoUser';
+import useGetAdvertsListUser from 'components/hooks/useGetAdvertsListUser';
 
 // Styles
 import {
@@ -56,6 +57,11 @@ const AdvertPage = () => {
   const date = moment(createdAt).format('DD.MM.YYYY HH:mm');
 
   const { dataUser } = useFetchInfoUser(sellerId);
+  const {
+    dataAdvertsList,
+    pendingAdvertsList,
+    errorAdvertsList,
+  } = useGetAdvertsListUser(sellerId);
 
   return (
     <>
@@ -64,6 +70,8 @@ const AdvertPage = () => {
         {error && <NotFound />}
         {!error
           && !pending
+          && !errorAdvertsList
+          && !pendingAdvertsList
           && (
             <MainContainer>
               <SearchWrap>
@@ -96,7 +104,11 @@ const AdvertPage = () => {
                   />
                 </Container>
               </InfoWrap>
-              <AllAdvertsUser />
+              <AllAdvertsUser
+                dataAdvertsList={dataAdvertsList}
+                pendingAdvertsList={pendingAdvertsList}
+                errorAdvertsList={errorAdvertsList}
+              />
             </MainContainer>
           )}
       </Wrapper>

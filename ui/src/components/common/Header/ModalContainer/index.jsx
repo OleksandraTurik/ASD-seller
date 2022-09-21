@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 // components
 import Modal from 'components/common/Modal';
+
+// actions
+import { logoutExactUser } from 'redux/slice/getInfoExactUser';
 
 // assets
 import Like from 'assets/icons/Like';
@@ -31,8 +35,10 @@ const ModalContainer = ({ active, setActive }) => {
   const user = JSON.parse(token);
   const userId = user ? user?.userDto?.id : null;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const logout = () => {
     localStorage.clear();
+    dispatch(logoutExactUser());
     navigate('/login', { replace: true });
   };
 
