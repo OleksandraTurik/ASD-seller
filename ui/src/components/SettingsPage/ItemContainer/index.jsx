@@ -26,10 +26,10 @@ const ItemContainer = ({
   fullName,
   address,
   phoneNumber,
+  avatar,
 }) => {
   const openContainer = isOpen ? <ArrowUp /> : <ArrowDown width="25px" height="25px" />;
   const email = name === 'Змінити email-адресу';
-
   return (
     <Container>
       <Header>
@@ -45,6 +45,7 @@ const ItemContainer = ({
             fullName={fullName}
             address={address}
             phoneNumber={phoneNumber}
+            avatar={avatar}
           />
         )}
     </Container>
@@ -61,6 +62,7 @@ ItemContainer.propTypes = {
   fullName: PropTypes.string,
   address: PropTypes.shape({}),
   phoneNumber: PropTypes.string,
+  avatar: PropTypes.string,
 };
 
 ItemContainer.defaultProps = {
@@ -68,6 +70,7 @@ ItemContainer.defaultProps = {
   fullName: '',
   address: {},
   phoneNumber: '',
+  avatar: '',
 };
 
 export default ItemContainer;

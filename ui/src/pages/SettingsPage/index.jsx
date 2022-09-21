@@ -39,6 +39,7 @@ const SettingsPage = () => {
             fullName={data.fullName}
             address={data.address === null ? {} : data.address}
             phoneNumber={data.phoneNumber}
+            avatar={data.avatar}
           />
         ))
       }
