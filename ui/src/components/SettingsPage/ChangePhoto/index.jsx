@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { updateUserInfo } from 'redux/slice/getInfoExactUser';
+
 // Components
 import { useForm } from 'react-hook-form';
 import Button from 'components/common/Button';
@@ -14,7 +17,8 @@ import ButtonContainer from '../ButtonContainer';
 const ChangePhoto = ({ avatar }) => {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
-  const { handleSubmit, register } = useForm({
+  const dispatch = useDispatch();
+  const { handleSubmit, reset, register } = useForm({
     mode: 'onChange',
 
     defaultValues: {
@@ -22,7 +26,12 @@ const ChangePhoto = ({ avatar }) => {
     },
   });
   const onSubmit = async (data) => {
-    await userServices.updateUserPhoto({ avatar: data.file });
+    try {
+      const { key } = await userServices.updateUserPhoto({ avatar: data.file });
+      dispatch(updateUserInfo({ avatar: key }));
+    } catch (err) {
+      console.error(err);
+    }
   };
   useEffect(() => {
     if (!selectedFile) {
