@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { updateUserInfo } from 'redux/slice/getInfoExactUser';
 
 // services
 import userServices from 'services/userServices';
@@ -11,10 +13,14 @@ import ButtonContainer from 'components/SettingsPage/ButtonContainer';
 import MainContainer from 'components/SettingsPage/MainContainer';
 import SubContainer from 'components/SettingsPage/SubContainer';
 import SubText from 'components/SettingsPage/SubText';
+import { Error } from '../ChangeContacts/styled';
 
 const ChangeNumber = ({ phoneNumber }) => {
-  const { handleSubmit, reset, register } = useForm({
-    mode: 'onChange',
+  const dispatch = useDispatch();
+  const {
+    handleSubmit, reset, register, formState: { errors },
+  } = useForm({
+    mode: 'onSubmit',
 
     defaultValues: {
       phoneNumber,
@@ -22,8 +28,13 @@ const ChangeNumber = ({ phoneNumber }) => {
   });
 
   const onSubmit = async (data) => {
-    const updateNumber = await userServices.updateUser(data);
-    reset(updateNumber);
+    try {
+      const updateNumber = await userServices.updateUser(data);
+      reset(updateNumber);
+      dispatch(updateUserInfo(data));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -33,13 +44,14 @@ const ChangeNumber = ({ phoneNumber }) => {
           <SubText>Новий телефон</SubText>
           <Input
             {...register('phoneNumber', {
-              required: 'This field is required',
+              required: "Це поле є обов'язковим",
               minLength: {
-                value: 8,
-                message: 'Error! Must be more than 8 symbols',
+                value: 10,
+                message: 'Поле повинно містити мінімум 10 символів',
               },
             })}
           />
+          <Error>{errors.phoneNumber?.message}</Error>
         </SubContainer>
         <ButtonContainer>
           <Button type="submit">Зберегти</Button>

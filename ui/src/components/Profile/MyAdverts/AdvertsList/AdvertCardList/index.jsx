@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { URL } from 'API';
+import { removeFromFavorites } from 'redux/slice/getInfoExactUser';
 
 // Icons
 import IconLocation from 'assets/icons/Location';
@@ -38,9 +40,16 @@ const AdvertCardList = ({
   subcategory,
   handleDelete,
 }) => {
+  const dispatch = useDispatch();
+
   const deleteItem = async () => {
-    await advertServices.deleteAdvert(id);
-    handleDelete(id);
+    try {
+      await advertServices.deleteAdvert(id);
+      dispatch(removeFromFavorites(id));
+      handleDelete(id);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
