@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
 import qs from 'query-string';
@@ -13,6 +14,7 @@ import useFetchAdverts from 'components/hooks/useFetchAdverts';
 import { Wrapper, Container } from './styled';
 
 const AdvertList = () => {
+  const dispatch = useDispatch();
   const [pageQueries, setPageQueries] = useSearchParams();
   const [queryParams, setQueryParams] = useState({
     sort: 'dscDate',
@@ -21,16 +23,12 @@ const AdvertList = () => {
   const { data, pending } = useFetchAdverts(queryParams);
 
   const updateSearchParams = (update) => {
-    const prevParams = pageQueries
-      .toString()
-      .split('&')
-      .reduce((acc, curr) => (curr ? { ...acc, [curr.split('=')[0]]: curr.split('=')[1].split('+').join(' ') } : acc), {});
+    const prevParams = qs.parse(pageQueries.toString());
     const updateParams = {};
     // eslint-disable-next-line no-restricted-syntax
     for (const key in update) {
       if (Object.hasOwnProperty.call(update, key)) {
-        // console.log(update[key]);
-        if (update[key]) updateParams[key] = update[key].split('+').join(' ');
+        if (update[key]) updateParams[key] = update[key].replace('+', ' ');
         if (!update[key]) delete prevParams[key];
       }
     }
@@ -40,10 +38,7 @@ const AdvertList = () => {
 
   useEffect(() => {
     if (!pageQueries.toString()) return;
-    const params = pageQueries
-      .toString()
-      .split('&')
-      .reduce((acc, curr) => ({ ...acc, [curr.split('=')[0]]: curr.split('=')[1] }), {});
+    const params = qs.parse(pageQueries.toString());
     setQueryParams((prev) => ({ ...prev, ...params }));
   }, [pageQueries]);
 
@@ -61,6 +56,7 @@ const AdvertList = () => {
   };
   const onQueryUpdate = (updates) => {
     updateSearchParams({ page: '', ...updates });
+    animateScroll.scrollToTop({ duration: 100 });
   };
 
   return (
