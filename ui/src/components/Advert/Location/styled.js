@@ -6,13 +6,13 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  height: 150px;
+  height: 120px;
   width: 390px;
   border-radius: 5px;
   padding: 24px;
 
   @media screen and (max-width: 1280px) {
-    height: 135px;
+    height: 115px;
     width: 388px;
     padding: 15px;
   }
@@ -22,21 +22,21 @@ export const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 850px) {
-    height: 120px;
+    height: 110px;
     width: 96%;
   }
 
   @media screen and (max-width: 600px) {
-    height: 110px;
     width: 94%;
   }
 
   @media screen and (max-width: 480px) {
-    height: 140px;
+    height: 90px;
   }
 
   @media screen and (max-width: 320px) {
     width: 88%;
+    height: 75px;
   }
 
   & h1 {
@@ -65,7 +65,12 @@ export const LocationWrap = styled.div`
     width: 65%;
   }
 
+  @media screen and (max-width: 320px) {
+    align-items: center;
+  }
+
   & svg {
+    text-align: center;
     @media screen and (max-width: 1280px) {
       width: 20px;
       height: 20px;
@@ -92,6 +97,7 @@ export const LocationInfo = styled.div`
   width: 80%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 
   & p {
     font-size: 16px;
@@ -122,37 +128,14 @@ export const LocationInfo = styled.div`
   }
 `;
 
-export const MapImage = styled.img`
-  width: 145px;
-  height: 105px;
-  border-radius: 10px;
-
-  @media screen and (max-width: 1280px) {
-    width: 120px;
-    height: 85px;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 115px;
-    height: 75px;
-    border-radius: 8px;
-  }
-
-  @media screen and (max-width: 480px) {
-    width: 120px;
-    height: 65px;
-    border-radius: 5px;
-  }
-`;
-
 export const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
 
   @media screen and (max-width: 480px) {
-    height: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;

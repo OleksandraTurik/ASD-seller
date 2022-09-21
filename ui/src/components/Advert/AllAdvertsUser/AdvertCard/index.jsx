@@ -24,6 +24,7 @@ const AdvertCard = ({
   location,
   date,
   price,
+  itemId,
 }) => (
   <Card>
     <ImageWrap>
@@ -41,17 +42,13 @@ const AdvertCard = ({
         <span>{date}</span>
       </Info>
       <Price>{price}</Price>
-      <ToFavoriteButton>
-        <Like
-          width="29px"
-          fill="#c6c6c6"
-        />
-      </ToFavoriteButton>
+      <ToFavoriteButton advertId={itemId} />
     </Wrap>
   </Card>
 );
 
 AdvertCard.propTypes = {
+  itemId: PropTypes.string,
   link: PropTypes.string,
   img: PropTypes.string,
   name: PropTypes.string,
@@ -61,6 +58,7 @@ AdvertCard.propTypes = {
 };
 
 AdvertCard.defaultProps = {
+  itemId: '',
   link: '',
   img: '',
   name: '',
