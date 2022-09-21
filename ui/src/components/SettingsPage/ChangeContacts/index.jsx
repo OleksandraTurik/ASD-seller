@@ -22,14 +22,14 @@ import { stylesReactSelectForSettingsPage } from 'helpers/stylesForReactSelect';
 
 // Styles
 import userServices from 'services/userServices';
-import { CategoryWidthEquation } from './styled';
+import { CategoryWidthEquation, Error } from './styled';
 
 const ChangeContacts = ({ fullName, address }) => {
   const dispatch = useDispatch();
   const {
-    handleSubmit, reset, register, control,
+    handleSubmit, formState: { errors }, reset, register, control,
   } = useForm({
-    mode: 'onChange',
+    mode: 'onSubmit',
 
     defaultValues: {
       fullName,
@@ -76,13 +76,14 @@ const ChangeContacts = ({ fullName, address }) => {
           <SubText>Контактна особа</SubText>
           <Input
             {...register('fullName', {
-              required: 'This field is required',
+              required: "Це поле є обов'язковим",
               minLength: {
                 value: 3,
-                message: 'Error! Must be more than 3 symbols',
+                message: 'Поле повинно містити мінімум 3 символи',
               },
             })}
           />
+          <Error>{errors.fullName?.message}</Error>
         </SubContainer>
         <ButtonContainer>
           <Button type="submit">Зберегти</Button>
