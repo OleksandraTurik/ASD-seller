@@ -23,7 +23,7 @@ const MainRoutes = () => (
       <Route index element={<MainPage />} />
       <Route path="/adverts" element={<AdvertList />} />
       <Route path="/adverts/:id" element={<AdvertPage />} />
-      <Route path="/profiles/:id" element={<Profile />}>
+      <Route path="/profile" element={<Profile />}>
         <Route path="adverts" element={<MyAdverts />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
