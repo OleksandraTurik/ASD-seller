@@ -19,7 +19,7 @@ const NotFound = ({ activeEmail }) => (
   <Wrapper>
     <Container>
       {activeEmail ? <NotFoundAdverts width={200} /> : <Icon src={cat} alt="cat icon" />}
-      <Title>{activeEmail ? 'Активуйте ваш профіль, лінк з активацією надіслано Вам на почту' : 'Сторінку не знайдено'}</Title>
+      <Title>{activeEmail ? 'Активуйте ваш профіль, лінк з активацією надіслано Вам на пошту' : 'Сторінку не знайдено'}</Title>
       <GoHomeLink to="/">На головну</GoHomeLink>
     </Container>
   </Wrapper>
