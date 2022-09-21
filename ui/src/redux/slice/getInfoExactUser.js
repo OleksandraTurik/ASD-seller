@@ -25,6 +25,9 @@ const exactUserInfoSlice = createSlice({
     removeFromFavorites(state, action) {
       state.data.favorites = state.data.favorites.filter(e => e !== action.payload);
     },
+    updateUserInfo(state, action) {
+      state.data = { ...state.data, ...action.payload };
+    },
     logoutExactUser(state) {
       state.data = {};
     },
@@ -46,7 +49,7 @@ const exactUserInfoSlice = createSlice({
 
 export const {
   addToFavorites,
-  removeFromFavorites,
+  removeFromFavorites, updateUserInfo,
   logoutExactUser,
 } = exactUserInfoSlice.actions;
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import logo from 'assets/img/logo/logo.png';
 
 export const Container = styled.header`
   width: calc(100% - 40px);
@@ -23,4 +24,12 @@ export const NavLinkHeader = styled(Link)`
   //width: 200px;
   overflow: hidden;
   object-position: center;
+`;
+
+export const LogoImg = styled.img.attrs({
+  src: logo,
+  alt: 'логотип',
+  width: 55,
+  height: 55,
+})`
 `;

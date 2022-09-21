@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
@@ -48,10 +48,11 @@ import {
   InputFile, CategoryItems, CategoryContent,
   CategoryListItem, CategoryList,
   ImgCirle, Image,
-  Flex,
+  Flex, ImgSelect, LabelImg,
 } from './styled';
 import { getAdvertThunk } from '../../redux/slice/getAdvert';
 import Loader from '../../components/common/Loader';
+import DeleteTrash from '../../assets/icons/DeleteTrash';
 
 const adaptToDefaultValues = (data, isEdit) => {
   console.log(isEdit);
@@ -104,7 +105,7 @@ const AddAdsPage = () => {
     defaultValues: {
       title: '',
       description: '',
-      price: 0,
+      price: '',
       contactName: '',
       contactPhone: '+380',
       address: '',
@@ -197,11 +198,10 @@ const AddAdsPage = () => {
       return;
     }
 
-    const objectUrl = window.URL.createObjectURL(selectedFile);
-    setPreview(prevState => [...prevState, objectUrl]);
-
-    // eslint-disable-next-line consistent-return
-    return () => window.URL.revokeObjectURL(objectUrl);
+    // eslint-disable-next-line guard-for-in,no-restricted-syntax,no-plusplus
+    for (let i = 0; i < selectedFile.length; i++) {
+      setPreview(prevState => [...prevState, window.URL.createObjectURL(selectedFile[i])]);
+    }
   }, [selectedFile]);
 
   const onSelectFile = e => {
@@ -212,10 +212,29 @@ const AddAdsPage = () => {
       setSelectedFile(undefined);
       return;
     }
-    setSelectedFile(e.target.files[0]);
-    setImg(prevState => [...prevState, e.target.files[0]]);
+    setSelectedFile(e.target.files);
+    setImg(prevState => [...prevState, ...e.target.files]);
+  };
+  const deleteImg = (idx) => {
+    console.log(idx);
+    const newArray = preview.filter((item, index) => index !== idx);
+    const newImg = img.filter((item, index) => index !== idx);
+    setPreview(newArray);
+    setImg(newImg);
   };
   const pickCategoryName = selected ? selected.name : 'Виберіть категорію';
+  const dragItem = useRef(null);
+  const dragOverItem = useRef(null);
+
+  const handleSorted = () => {
+    const newPreview = [...preview];
+    const dragItems = newPreview.splice(dragItem.current, 1)[0];
+
+    newPreview.splice(dragOverItem.current, 0, dragItems);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    setPreview(newPreview);
+  };
   return (
     <Main>
       <Wrapper>
@@ -317,13 +336,32 @@ const AddAdsPage = () => {
                   id="images"
                   name="images"
                   type="file"
+                  multiple
                   accept="image/heic, image/png, image/jpeg, image/webp"
                   {...register('images', {
                     onChange: onSelectFile,
                   })}
                 />
               ) : ''}
-              {selectedFile && preview.map(i => <Image src={i} alt="preview" />)}
+              {selectedFile
+                  && preview.map((i, index) => (
+                    <ImgSelect
+                      onClick={() => deleteImg(index)}
+                        /* eslint-disable-next-line no-return-assign */
+                      onDragStart={() => dragItem.current = index}
+                      /* eslint-disable-next-line no-return-assign */
+                      onDragEnter={() => dragOverItem.current = index}
+                      onDragEnd={handleSorted}
+                      onDragOver={(e) => e.preventDefault()}
+                      draggable
+                    >
+                      <Image
+                        src={i}
+                        alt="preview"
+                      />
+                      {index === 0 ? <LabelImg>Головне</LabelImg> : null}
+                    </ImgSelect>
+                  ))}
             </Flex>
           </WhiteBlock>
           <WhiteBlock>
