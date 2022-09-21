@@ -29,8 +29,6 @@ const User = ({
   const [value, setValue] = useState('');
   const [show, setShow] = useState(false);
 
-  console.log('avatarOfUser', avatarOfUser);
-
   useEffect(() => show ? setValue(phone) : setValue('Показати телефон'), [show]);
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // Hooks
 import useFetchAdverts from '../../hooks/useFetchAdverts';
@@ -13,7 +13,7 @@ import { Wrapper } from './styled';
 import searchFilter from '../../../helpers/search-filter';
 
 const MyAdverts = () => {
-  const { id } = useParams();
+  const { _id: id } = useSelector(state => state.exactUserInfoSlice.data);
   const [list, setList] = useState([]);
   const [queryParams, setQueryParams] = useState({ seller: id, sort: 'dscDate', limit: '1000' });
   const {

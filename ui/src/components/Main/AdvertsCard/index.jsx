@@ -5,20 +5,18 @@ import { URL } from 'API';
 // Components
 import AdvertCard from 'components/common/AdvertCard';
 import Loader from 'components/common/Loader';
-
-// Pages
-import NotFound from 'pages/NotFound';
+import NoAdverts from 'components/common/NoAdverts';
 
 // Helpers
 import advertsAdapt from 'helpers/advertsAdapt';
 
 const AdvertsCard = ({ errorAdvert, loadingAdvert, advertInfo }) => {
   if (errorAdvert) {
-    return <NotFound />;
+    return <NoAdverts />;
   }
 
   if (loadingAdvert) {
-    return <Loader />;
+    return <Loader margin="0" left="0%" />;
   }
 
   return advertsAdapt(advertInfo).map((item) => (

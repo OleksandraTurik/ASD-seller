@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Loader from 'components/common/Loader';
-import NotFound from 'pages/NotFound';
 import { URL } from 'API';
+
+// Components
+import Loader from 'components/common/Loader';
+import NoAdverts from 'components/common/NoAdverts';
+
+// Styles
 import { ItemLink, ImgWrap } from './styled';
 
 const CategoriesList = ({
@@ -12,11 +16,11 @@ const CategoriesList = ({
   showSubcategories,
 }) => {
   if (error) {
-    return <NotFound />;
+    return <NoAdverts />;
   }
 
   if (loading) {
-    return <Loader />;
+    return <Loader margin="0" left="0%" />;
   }
 
   return data?.map((item) => (

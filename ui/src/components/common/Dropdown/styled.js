@@ -13,6 +13,10 @@ export const Select = styled.div`
   min-width: 200px;
   color: ${props => props.theme.mainGreenColor};
   background-color: white;
+  
+  svg {
+    transition: .2s ease-in-out all;
+  }
 `;
 
 export const Value = styled.p`

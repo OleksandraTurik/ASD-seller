@@ -51,7 +51,6 @@ import {
   Flex, ImgSelect, LabelImg,
 } from './styled';
 import { getAdvertThunk } from '../../redux/slice/getAdvert';
-import Loader from '../../components/common/Loader';
 import DeleteTrash from '../../assets/icons/DeleteTrash';
 
 const adaptToDefaultValues = (data, isEdit) => {
@@ -132,7 +131,7 @@ const AddAdsPage = () => {
           images: img,
           category: selected._id,
         }, id);
-        navigate(`/profiles/${user.userDto.id}/adverts`);
+        navigate('/profile/adverts');
       } else {
         const send = await advertServices.createAdverts({
           title: v.title,
@@ -145,7 +144,7 @@ const AddAdsPage = () => {
           images: img,
           category: selected._id,
         });
-        navigate(`/profiles/${user.userDto.id}/adverts`);
+        navigate('/profile/adverts');
       }
     } catch (e) {
       console.log(e.message);
