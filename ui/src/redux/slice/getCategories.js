@@ -34,7 +34,7 @@ const categoriesSlice = createSlice({
       )
       .addCase(
         getCategories.pending,
-        (state, _) => {
+        (state) => {
           state.loading = true;
           state.error = false;
         },

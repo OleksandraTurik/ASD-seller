@@ -9,7 +9,7 @@ import Location from 'assets/icons/Location';
 import {
   Section, Form, SearchController, DropdownController, SearchInput, SearchDropdown, Submit,
 } from './styled';
-import { useFetchCities } from '../../hooks/useFetchCities';
+import { useFetchCities } from '../../../hooks/useFetchCities';
 
 const Search = () => {
   const navigate = useNavigate();

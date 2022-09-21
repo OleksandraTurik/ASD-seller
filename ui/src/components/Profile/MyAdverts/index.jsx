@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 // Hooks
-import useFetchAdverts from '../../hooks/useFetchAdverts';
+import useFetchAdverts from '../../../hooks/useFetchAdverts';
 
 // Components
 import AdvertsList from './AdvertsList';

@@ -17,7 +17,6 @@ const advertsAdapt = (data) => {
     images,
     price,
     sellerId,
-    updatedAt,
   }) => ({
     id: _id,
     title: title || '',

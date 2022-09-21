@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 
@@ -8,26 +8,24 @@ import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 
-// Slices
-import { getCategories } from 'redux/slice/getCategories';
-
 // Services
 import { URL } from 'API';
+
 import advertServices from 'services/advertServices';
-
 // Hooks
-import { useFetchCities } from 'components/hooks/useFetchCities';
-
+import useFetchAdvertById from 'hooks/useFetchAdvertById';
+import { useFetchCities } from 'hooks/useFetchCities';
+import useFetchCategories from 'hooks/useFetchCategories';
 // Components
-import Modal from 'components/Modal/Modal';
 
+import Modal from 'components/Modal/Modal';
 // Icons
 import ArrowDownIcon from 'assets/icons/ArrowDown';
+
 import ThinArrowRight from 'assets/icons/ThinArrowRight';
-
 import DropdownIndicator from 'helpers/DropdownIndicator';
-import { stylesReactSelectForAddAdsPage } from 'helpers/stylesForReactSelect';
 
+import { stylesReactSelectForAddAdsPage } from 'helpers/stylesForReactSelect';
 // Styles
 import {
   Main,
@@ -50,11 +48,8 @@ import {
   ImgCirle, Image,
   Flex, ImgSelect, LabelImg,
 } from './styled';
-import { getAdvertThunk } from '../../redux/slice/getAdvert';
-import DeleteTrash from '../../assets/icons/DeleteTrash';
 
 const adaptToDefaultValues = (data, isEdit) => {
-  console.log(isEdit);
   if (isEdit) {
     return ({
       title: data.title,
@@ -82,15 +77,14 @@ const adaptToDefaultValues = (data, isEdit) => {
 const AddAdsPage = () => {
   const { id } = useParams();
   const isEdit = !!id;
-
+  const { fullName, phoneNumber } = useSelector(state => state.exactUserInfoSlice.data);
   const [isOpen, setModalOpen] = useState(false);
   const [subcategory, setSubcategory] = useState(null);
   const [selected, setSelected] = useState(null);
   const [showInfo, setShowInfo] = useState(true);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const categories = useSelector(state => state.categoryReducer.data);
-  const { advertInfo, loading } = useSelector(state => state.getAdvert);
+  const { data: categories } = useFetchCategories();
+  const { dataAdvert: advertInfo } = useFetchAdvertById(id || '');
   const user = JSON.parse(localStorage.getItem('tokens'));
   const [selectedFile, setSelectedFile] = useState();
   const [img, setImg] = useState([]);
@@ -105,8 +99,8 @@ const AddAdsPage = () => {
       title: '',
       description: '',
       price: '',
-      contactName: '',
-      contactPhone: '+380',
+      contactName: fullName || '',
+      contactPhone: phoneNumber || '+380',
       address: '',
       images: '',
       category: '',
@@ -116,11 +110,10 @@ const AddAdsPage = () => {
   const colorCategory = {
     color: selected ? 'black' : 'red',
   };
-  console.log(selected);
   const onSubmit = async (v) => {
     try {
       if (isEdit) {
-        const send = await advertServices.editAdverts({
+        await advertServices.editAdverts({
           title: v.title,
           description: v.description,
           price: v.price,
@@ -133,7 +126,7 @@ const AddAdsPage = () => {
         }, id);
         navigate('/profile/adverts');
       } else {
-        const send = await advertServices.createAdverts({
+        await advertServices.createAdverts({
           title: v.title,
           description: v.description,
           price: v.price,
@@ -147,7 +140,7 @@ const AddAdsPage = () => {
         navigate('/profile/adverts');
       }
     } catch (e) {
-      console.log(e.message);
+      console.error(e);
     }
   };
 
@@ -167,13 +160,6 @@ const AddAdsPage = () => {
       setSelected(null);
     }
   }, [advertInfo, isEdit]);
-
-  useEffect(() => {
-    dispatch(getCategories());
-    if (isEdit) {
-      dispatch(getAdvertThunk(id));
-    }
-  }, [dispatch, isEdit]);
 
   useEffect(() => {
     setShowInfo(true);
@@ -215,7 +201,6 @@ const AddAdsPage = () => {
     setImg(prevState => [...prevState, ...e.target.files]);
   };
   const deleteImg = (idx) => {
-    console.log(idx);
     const newArray = preview.filter((item, index) => index !== idx);
     const newImg = img.filter((item, index) => index !== idx);
     setPreview(newArray);
@@ -281,7 +266,7 @@ const AddAdsPage = () => {
               <Modal open={isOpen} onClose={toggleModal}>
                 <Title>Виберіть категорію</Title>
                 <CategoryContent>
-                  {showInfo ? categories.map((item) => (
+                  {showInfo ? categories?.map((item) => (
                     <CategoryItems
                       key={item._id}
                       onClick={handleClick(item)}
@@ -349,6 +334,7 @@ const AddAdsPage = () => {
               {selectedFile
                   && preview.map((i, index) => (
                     <ImgSelect
+                      key={i}
                       onClick={() => deleteImg(index)}
                         /* eslint-disable-next-line no-return-assign */
                       onDragStart={() => dragItem.current = index}

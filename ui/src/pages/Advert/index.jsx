@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment/moment';
 
@@ -17,9 +17,9 @@ import Search from 'components/common/Search';
 import AllAdvertsUser from 'components/Advert/AllAdvertsUser';
 
 // hooks
-import useFetchAdvertById from 'components/hooks/useFetchAdvertById';
-import useFetchInfoUser from 'components/hooks/useFetchInfoUser';
-import useGetAdvertsListUser from 'components/hooks/useGetAdvertsListUser';
+import useFetchAdvertById from 'hooks/useFetchAdvertById';
+import useFetchInfoUser from 'hooks/useFetchInfoUser';
+import useGetAdvertsListUser from 'hooks/useGetAdvertsListUser';
 
 // Styles
 import {
@@ -40,10 +40,8 @@ const AdvertPage = () => {
     images,
     title,
     createdAt,
-    updatedAt,
     price,
     description,
-    _id,
     address,
     contactName,
     contactPhone,

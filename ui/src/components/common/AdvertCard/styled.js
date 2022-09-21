@@ -12,10 +12,10 @@ export const Card = styled.article`
   position: relative;
   box-sizing: border-box;
   border-radius: 4px;
-  width: calc(25% - 15px);
-
-  @media (max-width: 1250px) {
-    width: 310px;
+  width: 310px;
+  
+  @media (min-width: 1250px) {
+    width: calc(25% - 32px);
   }
 `;
 
@@ -40,7 +40,7 @@ export const NameOfProduct = styled.h4`
   overflow: hidden;
   cursor: pointer;
   text-align: left;
-  word-break: break-all;
+  word-break: break-word;
 
   &:hover {
     background-color: ${props => props.theme.mainGreenColor};

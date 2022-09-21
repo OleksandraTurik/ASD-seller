@@ -13,7 +13,7 @@ import {
   CategoryDropdown,
   SortDropdown,
 } from './styled';
-import useFetchCategories from '../../../hooks/useFetchCategories';
+import useFetchCategories from '../../../../hooks/useFetchCategories';
 
 const sortOptions = [
   { id: 'dscDate', value: 'Найновіші', children: [] },

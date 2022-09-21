@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Dropdown from 'components/common/Dropdown';
 import { FilterController } from 'components/AdvertList/ListForm/Filters/styled';
-import useFetchCategories from 'components/hooks/useFetchCategories';
+import useFetchCategories from 'hooks/useFetchCategories';
 
 const StyledDropdown = styled(Dropdown)`
   @media (max-width: 450px) {

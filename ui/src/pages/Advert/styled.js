@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   background-color: ${props => props.theme.greyBackground};
   padding: 15px;
+  flex: 1 1 auto;
 
   @media screen and (max-width: 768px) {
     align-items: center;

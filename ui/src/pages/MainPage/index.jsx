@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 
 // Hooks
-import useFetchCategories from 'components/hooks/useFetchCategories';
-import useFetchAdverts from 'components/hooks/useFetchAdverts';
+import useFetchCategories from 'hooks/useFetchCategories';
+import useFetchAdverts from 'hooks/useFetchAdverts';
 
 // Components
 import Search from 'components/common/Search';

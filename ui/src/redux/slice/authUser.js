@@ -24,7 +24,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   `${modulePrefix}/logout`,
-  async (userData) => {
+  async () => {
     await api.logout();
   },
 );
