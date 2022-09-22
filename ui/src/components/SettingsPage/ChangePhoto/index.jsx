@@ -70,8 +70,9 @@ const ChangePhoto = ({ avatar }) => {
                   onChange: onSelectFile,
                 })}
               />
-              {avatar && !preview ? <Image src={`http://localhost:4000/pic/${avatar}`} alt="asd" />
-                : <Image src={preview} alt="asd" />}
+              {/* eslint-disable-next-line no-nested-ternary */}
+              {!avatar && !preview ? null : (avatar && !preview ? <Image src={`http://localhost:4000/pic/${avatar}`} alt="asd" />
+                : <Image src={preview} alt="asd" />)}
             </div>
           </FileContainer>
         </SubContainer>
