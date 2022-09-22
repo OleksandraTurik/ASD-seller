@@ -55,6 +55,7 @@ const AdvertSlider = ({ dataAdvertsList }) => {
         <Slider {...settings}>
           {dataAdvertsList?.map((item) => (
             <AdvertCard
+              itemId={item?._id}
               key={item?._id}
               link={`/adverts/${item?._id}`}
               img={`${URL}/${item?.images[0]}`}
