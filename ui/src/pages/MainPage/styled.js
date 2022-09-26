@@ -1,63 +1,56 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Title = styled.h3`
   font-size: 32px;
   font-weight: 500;
   line-height: 24px;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
   text-align: center;
   padding: 55px 0;
 `;
 
 export const Wrapper = styled.div`
-  width: 1238px;
+  max-width: 1238px;
   margin: 0 auto;
-
-  // height of block for "main categories" section
-  &:nth-child(2) {
-    height: 535px;
-  }
+  padding-bottom: 45px;
 `;
 
-export const CategoriesList = styled.div`
+export const CategoriesListStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 `;
 
-export const ItemLink = styled.a`
-  width: 120px;
-  height: 120px;
+export const AdvertsList = styled.div`
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  color: #002f34;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  margin-left: 16px;
-  margin-bottom: 50px;
-  
-  & p {
-    padding: 1px;
-    margin-top: 23px;
-  }
-
-  &:hover p {
-    background-color: #002f34;
-    color: white;
-  }
-`;
-
-export const ImgWrap = styled.img`
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  align-self: center;
+  flex-wrap: wrap;
+  max-width: 1250px;
+  justify-content: center;
+  gap: 16px;
 `;
 
 export const LatestAdsSection = styled.section`
-  background-color: #f2f4f5;
-  padding-bottom: 100px;
+  background-color: ${props => props.theme.greyBackground};
+  padding-bottom: 55px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ShowMoreButton = styled(Link)`
+  background: ${props => props.theme.mainGreenColor};
+  border-radius: 5px;
+  padding: 15px 25px;
+  border: 5px solid ${props => props.theme.mainGreenColor};
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  
+  &:hover {
+    background: white;
+    color: ${props => props.theme.mainGreenColor};
+  }
 `;

@@ -1,16 +1,39 @@
-import React from 'react';
-import MainRoutes from 'routes/MainRoutes';
-import { BrowserRouter } from 'react-router-dom';
-import Header from './components/common/Header';
-import GlobalStyle from './GlobalStyle';
-import './styles.css';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { animateScroll } from 'react-scroll';
 
-const App = () => (
-  <BrowserRouter>
-    <Header />
-    <GlobalStyle />
-    <MainRoutes />
-  </BrowserRouter>
-);
+// Slider
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+// Routes
+import MainRoutes from 'routes/MainRoutes';
+
+// Components
+import Header from 'components/common/Header';
+import Footer from 'components/common/Footer';
+
+// Slices
+import { getExactUserInfoThunk } from 'redux/slice/getInfoExactUser';
+import { useLocation } from 'react-router-dom';
+
+const App = () => {
+  const id = JSON.parse(localStorage.getItem('tokens'))?.userDto?.id;
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    animateScroll.scrollToTop({ duration: 100 });
+    if (id) dispatch(getExactUserInfoThunk(id));
+  }, [pathname]);
+
+  return (
+    <>
+      <Header />
+      <MainRoutes />
+      <Footer />
+    </>
+  );
+};
 
 export default App;

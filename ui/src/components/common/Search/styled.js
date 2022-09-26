@@ -1,74 +1,155 @@
 import styled from 'styled-components';
-import IconSearch from 'assets/icons/search-icon.svg';
-import IconSearchWhite from 'assets/icons/search-white.png';
+import Select, { createFilter } from 'react-select';
+import closeIcon from 'assets/icons/closeIcon.svg';
+import Option from 'components/common/Option';
 
-export const StyledForm = styled.form`
-  padding: 40px 0;
-  background-color: #f2f4f5;
+export const Section = styled.section`
+  padding: 40px 20px;
+  background-color: ${props => props.theme.greyBackground}
 `;
 
-export const SearchDiv = styled.div`
-  width: 1250px;
+export const Form = styled.form`
+  display: flex;
+  max-width: 1250px;
   background-color: white;
   position: relative;
   margin: 0 auto;
   border-radius: 2px 0 0 2px;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
-export const SearchIcon = styled.img`
-  position: absolute;
-  width: 26px;
-  left: 22px;
-  top: 20px;
+export const SearchController = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-height: 70px;
+
+  svg {
+    padding: 0 20px;
+    min-width: 25px;
+  }
+
+  @media (max-width: 700px) {
+    border-bottom: 3px solid ${props => props.theme.greyBackground};
+  }
 `;
 
-export const LocationIcon = styled.img`
-  position: absolute;
-  width: 25px;
-  left: 765px;
-  top: 20px;
+export const DropdownController = styled(SearchController)`
+  flex: 0 0 0;
+  border-left: 3px solid ${props => props.theme.greyBackground};
+  min-width: 30%;
+  
+  @media (max-width: 700px) {
+    border-left: none;
+  }
 `;
 
-export const StyledInput = styled.input`
+export const SearchInput = styled.input`
   border: none;
-  outline: none;
-  width: ${({ width }) => width};
-  padding-left: 0;
-  padding-right: 0;
   line-height: 56px;
-  height: 70px;
-  margin: 0 0 0 65px;
   font-size: 16px;
   font-weight: 600;
-  color: #002f34;
-  font-family: inherit;
-  border-right: 1px solid #f2f4f5;
+  color: ${props => props.theme.mainGreenColor};
+  height: 100%;
+  flex: 1 1 auto;
+  min-width: 10px;
+  outline: none;
 
   &::placeholder {
     font-weight: 400;
   }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1.9em;
+    width: 1.9em;
+    border-radius: 50em;
+    background: url(${closeIcon}) no-repeat 50% 50%;
+    background-size: contain;
+    pointer-events: none;
+    cursor: pointer;
+    position: relative;
+    left: -10px;
+  }
+
+  &:focus::-webkit-search-cancel-button {
+    pointer-events: all;
+  }
 `;
 
-export const SubmitSearchButton = styled.button`
+export const SearchDropdown = styled(Select).attrs({
+  placeholder: 'Вся Україна',
+  styles: {
+    control: (prev) => ({
+      ...prev,
+      border: 'none',
+      padding: '0',
+      borderRadius: 'none',
+      height: '100%',
+      width: '100%',
+      boxShadow: 'none',
+    }),
+    dropdownIndicator: prev => ({
+      ...prev,
+      padding: '0',
+      border: 'none',
+    }),
+    menuList: (base) => ({
+      ...base,
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: 'rgb(242, 244, 245)',
+      },
+      '&::-webkit-scrollbar': {
+        width: '8px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#002f34',
+      },
+    }),
+    valueContainer: prev => ({
+      ...prev,
+      padding: '0',
+    }),
+  },
+  components: {
+    Option,
+  },
+  filterOption: createFilter({ ignoreAccents: false }),
+})`
+  font-size: 16px;
+  color: ${props => props.theme.mainGreenColor};
+  width: 40%;
+  flex: 1 1 auto;
+`;
+
+export const Submit = styled.button`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
   font-size: 16px;
   font-weight: 600;
-  text-align: start;
   width: 150px;
+  padding: 10px;
   height: 70px;
   border: none;
-  background-color: white;
-  color: #002f34;
+  color: ${props => props.theme.mainGreenColor};
   cursor: pointer;
-  padding-left: 28px;
-  background: no-repeat right/20% url(${IconSearch});
-  background-position: bottom 21px right 30px;
+  background-color: #fff;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 
   &:hover {
-    background-color: #08353a;
-    color: white;
-    transition: 0.3s;
-    background: no-repeat right/30% url(${IconSearchWhite});
-    background-position: bottom 13px right 22px;
-    background-color: #08353a;
+    background-color: ${props => props.theme.mainGreenColor};
+    color: #fff;
+  }
+
+  &:hover svg {
+    fill: #fff;
   }
 `;

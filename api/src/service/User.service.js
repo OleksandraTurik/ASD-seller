@@ -19,11 +19,11 @@ class UserService {
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
+    await mailService.sendActivationMail(email, `${process.env.API_URL}/api/users/activate/${activationLink}`);
 
     return {
       ...tokens,
-      user: UserDto,
+      user:userDto,
     };
   }
 
@@ -78,24 +78,25 @@ class UserService {
   }
 
   async modifyUser(id, updates) {
-    const user = await UserModel.updateOne({ _id: id }, updates);
+    const { email, password, fullName, address, phoneNumber } = updates;
+    const hashPassword = password ? await bcrypt.hash(password, 3) : password;
+    const user = await UserModel.updateOne(
+      { _id: id },
+      {
+        email,
+        password: hashPassword,
+        fullName,
+        address,
+        phoneNumber,
+      },
+    );
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
     if (!user) {
       throw new StatusError(404, 'User not found');
     }
     return user;
-  }
-
-  async getAllUsers() {
-    const users = await UserModel.find();
-    return users;
-  }
-
-  async uploadAvatarUser(id, file) {
-    const user = await UserModel.findById(id);
-    const avatarName = `${uuid.v4()}.jpg`;
-    file.mv('/static');
-    user.avatar = avatarName;
-    await user.save();
   }
 }
 

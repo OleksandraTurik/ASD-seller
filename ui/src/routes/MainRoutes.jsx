@@ -1,20 +1,54 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import MainPage from 'pages/MainPage';
-import AdvertPage from 'pages/Advert';
-import LoginPage from '../pages/LoginPage';
-import RegistrationPage from '../pages/RegistrationPage';
+
+// Components
+import Loader from 'components/common/Loader';
+import PrivateRoute from 'PrivateRoute/PrivateRoute';
+
+const MainPage = lazy(() => import('pages/MainPage'));
+const AdvertPage = lazy(() => import('pages/Advert'));
+const AddAdsPage = lazy(() => import('pages/AddAdsPage'));
+const MyAdverts = lazy(() => import('components/Profile/MyAdverts'));
+const Profile = lazy(() => import('pages/Profile'));
+const NotFound = lazy(() => import('pages/NotFound'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
+const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
+const SettingsPage = lazy(() => import('pages/SettingsPage'));
+const AdvertList = lazy(() => import('pages/AdvertList'));
+const FavoritesPage = lazy(() => import('pages/FavoritesPage'));
 
 const MainRoutes = () => (
-  <Routes>
-    <Route path="/" element={<MainPage />} />
-    <Route path="/adverts" element={<h1>Advert list</h1>} />
-    <Route path="/adverts/:id" element={<AdvertPage />} />
-    <Route path="/profiles/:id" element={<h1>Profile page</h1>} />
-    <Route path="/add" element={<h1>Add new advert form</h1>} />
-    <Route path="/login" element={<LoginPage />} />
-    <Route path="/register" element={<RegistrationPage />} />
-    <Route path="*" element={<h1>404 Not Found</h1>} />
-  </Routes>
+  <Suspense fallback={<Loader />}>
+    <Routes>
+      <Route index element={<MainPage />} />
+      <Route path="/adverts" element={<AdvertList />} />
+      <Route path="/adverts/:id" element={<AdvertPage />} />
+      <Route path="/profile" element={<Profile />}>
+        <Route path="adverts" element={<MyAdverts />} />
+        <Route path="settings" element={<SettingsPage />} />
+      </Route>
+      <Route
+        path="/add"
+        element={(
+          <PrivateRoute>
+            <AddAdsPage />
+          </PrivateRoute>
+)}
+      />
+      <Route
+        path="/add/:id"
+        element={(
+          <PrivateRoute>
+            <AddAdsPage />
+          </PrivateRoute>
+            )}
+      />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegistrationPage />} />
+      <Route path="/favorites" element={<FavoritesPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </Suspense>
 );
+
 export default MainRoutes;

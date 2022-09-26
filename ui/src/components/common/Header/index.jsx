@@ -1,38 +1,46 @@
-import React from 'react';
-import Button from '../Button';
-import Like from './Like';
-import Logo from './Logo';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+// Styles
 import {
   Nav,
-  Ul,
-  Li,
-  A,
   Container,
-  NavLink,
   NavLinkHeader,
+  LogoImg,
 } from './styled';
+import RightNav from './RightNav';
+import ModalContainer from './ModalContainer';
 
-const Header = () => (
-  <Container>
-    <Nav>
-      <NavLinkHeader to="/">
-        <Logo>
-          ASD.seller
-        </Logo>
-      </NavLinkHeader>
-      <Ul>
-        <Li>
-          <A href="*"><Like /></A>
-        </Li>
-        <Li>
-          <Button>Додати оголошення</Button>
-        </Li>
-        <Li>
-          <NavLink to="/login">Login</NavLink>
-        </Li>
-      </Ul>
-    </Nav>
-  </Container>
-);
+const Header = () => {
+  const [active, setActive] = useState(false);
+  const [link, setLink] = useState('');
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    if (link !== pathname) {
+      setLink(pathname);
+      setActive(false);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 864px)').matches) {
+        setActive(false);
+      }
+    });
+  }, []);
+
+  return (
+    <Container>
+      <Nav>
+        <NavLinkHeader to="/">
+          <LogoImg />
+        </NavLinkHeader>
+        <RightNav setActive={setActive} />
+      </Nav>
+      <ModalContainer active={active} setActive={setActive} />
+    </Container>
+  );
+};
 export default Header;

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+// api
+import { URL } from 'API';
 
 // Icons
 import avatar from 'assets/icons/avatar.svg';
-import angleRight from 'assets/icons/angleRight.svg';
+import IconArrowRight from 'assets/icons/ArrowRight';
 
 // Styles
 import {
@@ -11,30 +15,65 @@ import {
   UserIcon,
   UserInfo,
   RegistrationDate,
-  LinkWrap,
-  ArrowIcon,
+  AllAdvertsLink,
   Button,
 } from './styled';
 
-const User = () => (
-  <Wrapper>
-    <h1>Користувач</h1>
-    <Container>
-      <UserIcon src={avatar} alt="user avatar" />
-      <UserInfo>
-        <h2>Руслан</h2>
-        <RegistrationDate>
-          на asd-seller з
-          <p>червень 2012 р.</p>
-        </RegistrationDate>
-      </UserInfo>
-    </Container>
-    <Button type="button">Показати телефон</Button>
-    <LinkWrap>
-      Усі оголошення автора
-      <ArrowIcon src={angleRight} alt="right arrow icon" />
-    </LinkWrap>
-  </Wrapper>
-);
+const User = ({
+  name,
+  date,
+  link,
+  phone,
+  avatarOfUser,
+}) => {
+  const [value, setValue] = useState('');
+  const [show, setShow] = useState(false);
+
+  useEffect(() => show ? setValue(phone) : setValue('Показати телефон'), [show]);
+  const userAva = avatarOfUser !== '' ? `${URL}/pic/${avatarOfUser}` : avatar;
+
+  return (
+    <Wrapper>
+      <h1>Користувач</h1>
+      <Container>
+        <UserIcon src={userAva} alt="user avatar" />
+        <UserInfo>
+          <h2>{name}</h2>
+          <RegistrationDate>
+            на asd-seller з
+            <p>{date}</p>
+          </RegistrationDate>
+        </UserInfo>
+      </Container>
+      <Button onClick={() => setShow(!show)}>
+        {value}
+      </Button>
+      <AllAdvertsLink to={link}>
+        Усі оголошення автора
+        <IconArrowRight
+          width="20px"
+          height="20px"
+          fill="#002F34"
+        />
+      </AllAdvertsLink>
+    </Wrapper>
+  );
+};
+
+User.propTypes = {
+  name: PropTypes.string,
+  date: PropTypes.string,
+  link: PropTypes.string,
+  phone: PropTypes.string,
+  avatarOfUser: PropTypes.string,
+};
+
+User.defaultProps = {
+  name: '',
+  date: '',
+  link: '',
+  phone: '',
+  avatarOfUser: '',
+};
 
 export default User;

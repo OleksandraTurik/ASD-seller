@@ -1,79 +1,155 @@
 import styled from 'styled-components';
+import LikeButton from 'components/common/LikeButton';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #fff;
-  height: 660px;
-  width: 798px;
+  max-height: 800px;
   border-radius: 5px;
-  padding: 24px;
-  margin-bottom: 24px;
+  margin: 15px 0;
+  padding: 15px;
 
-  & h1 {
+  & span {
+    display: wrap;
+    overflow-wrap: break-word;
     font-size: 32px;
+    color: #002f34;
+
+    @media screen and (max-width: 768px) {
+      font-size: 26px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 21px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 15px 0 0 0;
   }
 
   & h2 {
+    margin-top: 10px;
     font-size: 40px;
+    color: ${props => props.theme.mainGreenColor};
+
+    @media screen and (max-width: 1280px) {
+      font-size: 34px;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 28px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 24px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 19px;
+    }
   }
 
   & h3 {
-    color: #002F34;
+    color: ${props => props.theme.mainGreenColor};
     text-transform: uppercase;
     font-size: 24px;
-    margin: 16px 0 4px 0;
+    margin: 12px 0 8px 0;
+
+    @media screen and (max-width: 768px) {
+      font-size: 21px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 16px;
+    }
   }
 
-  & p {
+  & div {
+    display: wrap;
+    overflow-wrap: break-word;
     font-size: 16px;
-    color: #002F34;
-  }
+    color: ${props => props.theme.mainGreenColor};
 
-  & span {
-    font-size: 12px;
-    color: #406367;
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 13px;
+    }
   }
 `;
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 
   & span {
-    display: block;
-    font-size: 12px;
     font-size: 12px;
     color: #406367;
-  }
 
-  & ul {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
+    @media screen and (max-width: 768px) {
+      font-size: 11px;
+    }
 
-    & li {
-      display: flex;
-      align-items: center;
-      padding: 6px 16px;
-      margin: 16px 8px 0 0;
-      border-radius: 4px;
-      border: solid 1px #406367;
+    @media screen and (max-width: 480px) {
+      font-size: 10px;
+    }
 
-      & p, span {
-        font-size: 14px;
-        color: #002F34;
-      }
+    @media screen and (max-width: 320px) {
+      font-size: 9px;
     }
   }
 `;
 
 export const Line = styled.div`
   margin: 15px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #7f9799;
 `;
 
-export const Icon = styled.img`
-  width: 20px;
+export const FavoriteBtn = styled(LikeButton)`
+  background-color: transparent;
+  border: none;
+  bottom: 12px;
+  right: 20px;
+  cursor: pointer;
+
+  &:hover svg { 
+    fill: #002f34; 
+  } 
+
+  & svg {
+    @media screen and (max-width: 1280px) {
+      width: 22px;
+      height: 22px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media screen and (max-width: 320px) {
+      width: 14px;
+      height: 14px;
+    }
+  }
 `;

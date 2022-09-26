@@ -1,6 +1,7 @@
 const queryLinkWithPagesMaker = require('../helpers/query-link-with-pages-maker');
+const StatusError = require('../exceptions/StatusError');
+const errorHandler = require('../helpers/error-handler');
 
-// eslint-disable-next-line consistent-return
 const paginationMiddleware = (req, res, next) => {
   try {
     const page = +req.query.page ? +req.query.page : 1;
@@ -12,7 +13,7 @@ const paginationMiddleware = (req, res, next) => {
     const { items } = req;
     const { length } = items;
 
-    if (startIndex >= length) return res.status(404).json('Did not found');
+    if (startIndex >= length) throw new StatusError(404, 'This item is not found');
 
     const results = { itemsAmount: length };
 
@@ -27,7 +28,7 @@ const paginationMiddleware = (req, res, next) => {
     req.paginatedResults = results;
     next();
   } catch (err) {
-    res.status(500).json(err.message);
+    errorHandler(res, err);
   }
 };
 

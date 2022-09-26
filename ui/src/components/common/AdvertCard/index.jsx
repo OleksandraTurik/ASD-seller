@@ -1,5 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+// Styles
+import { ButtonAdvertCard } from 'components/common/Button/styled';
 import {
   Card,
   ImgInCard,
@@ -7,37 +11,49 @@ import {
   Info,
   Price,
   ToFavoriteButton,
-} from 'components/common/AdvertCard/styled';
-
-import favButtonIcon from 'assets/icons/toFavoriteButton.svg';
+  ImageWrap,
+  Wrap,
+} from './styled';
 
 const AdvertCard = ({
-  link,
+  itemId,
   img,
   name,
   location,
   date,
   price,
-}) => (
-  <Card>
-    <ImgInCard src={img} />
-    <div>
-      <a href={link}>
-        <NameOfProduct>{name}</NameOfProduct>
-      </a>
-    </div>
-    <Info>
-      <span>{location}</span>
-      <span>&nbsp;-&nbsp;</span>
-      <span>{date}</span>
-    </Info>
-    <Price>{price}</Price>
-    <ToFavoriteButton src={favButtonIcon} alt="To Favorite Button" width="29px" />
-  </Card>
-);
+}) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = async () => {
+    navigate(`/adverts/${itemId}`);
+  };
+
+  return (
+    <Card>
+      <ImageWrap>
+        <ImgInCard src={img} />
+      </ImageWrap>
+      <div>
+        <ButtonAdvertCard onClick={handleNavigate}>
+          <NameOfProduct>{name}</NameOfProduct>
+        </ButtonAdvertCard>
+      </div>
+      <Wrap>
+        <Info>
+          <span>{location}</span>
+          <span>&nbsp;-&nbsp;</span>
+          <span>{date}</span>
+        </Info>
+        <Price>{price}</Price>
+        <ToFavoriteButton advertId={itemId} />
+      </Wrap>
+    </Card>
+  );
+};
 
 AdvertCard.propTypes = {
-  link: PropTypes.string,
+  itemId: PropTypes.string,
   img: PropTypes.string,
   name: PropTypes.string,
   location: PropTypes.string,
@@ -46,7 +62,7 @@ AdvertCard.propTypes = {
 };
 
 AdvertCard.defaultProps = {
-  link: '',
+  itemId: '',
   img: '',
   name: '',
   location: '',

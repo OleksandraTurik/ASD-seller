@@ -1,14 +1,14 @@
 const tokenService = require('../service/Token.service');
 const StatusError = require('../exceptions/StatusError');
-const errorHandler = require('../helpers/errorHandler');
+const errorHandler = require('../helpers/error-handler');
 
 module.exports = function (req, res, next) {
   try {
-    console.log(req.headers.authorization);
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       throw new StatusError(401, 'User is unauthorized');
     }
+    // eslint-disable-next-line prefer-destructuring
     const accessToken = authHeader.split(' ')[1];
     if (!accessToken) {
       throw new StatusError(401, 'User is unauthorized');

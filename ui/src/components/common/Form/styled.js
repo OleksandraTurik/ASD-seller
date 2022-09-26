@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// eslint-disable-next-line import/prefer-default-export
 
 export const Wrapper = styled.div`
   max-width: 400px;
@@ -7,6 +6,7 @@ export const Wrapper = styled.div`
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 `;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,13 +15,16 @@ export const Container = styled.div`
   height: 100vh;
   padding: 0;
   justify-content: center;
+  position: relative;
 `;
+
 export const FormWrapper = styled.form`
   background-color: white;
   padding: 37px 32px 46px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 `;
+
 export const WrapperLink = styled.div`
   display: flex;
   justify-content: space-between;
@@ -44,19 +47,27 @@ export const WrapperLink = styled.div`
   }
 
   & .link.active {
-    border-bottom: 3px solid #002f34;
+    border-bottom: 3px solid ${props => props.theme.mainGreenColor};
   }
 `;
-export const ErrorContainer = styled.div``;
-export const ErrorTitle = styled.p`
-  color: red;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #bc243c;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  width: 100%;
 `;
+
 export const Input = styled.input`
   width: 100%;
   box-sizing: border-box;
   padding: 14px 16px;
   border-radius: 4px;
-  background: #f2f4f5;
+  background: ${props => props.theme.greyBackground};
   padding: 14px 16px;
   border-radius: 4px;
   font-size: 16px;
@@ -74,13 +85,13 @@ export const Button = styled.button`
   width: 100%;
   margin-bottom: 10px;
   display: flex;
-  position: relative;
+  /* position: relative; */
   text-align: center;
   color: #fff;
   font-size: 16px;
   font-weight: 500;
-  background: #002f34;
-  box-shadow: 0 0 0 2px #002f34;
+  background: ${props => props.theme.mainGreenColor};
+  box-shadow: 0 0 0 2px ${props => props.theme.mainGreenColor};
   border: none;
   padding: 10px 16px;
   align-items: center;
@@ -88,4 +99,22 @@ export const Button = styled.button`
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
+`;
+
+export const WrapperLoader = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+ 
+`;
+
+export const P = styled.p`
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 80%;
 `;
